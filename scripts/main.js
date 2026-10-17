@@ -4,7 +4,7 @@
 // ======================================================
 
 let profileStats = { demons: 0, moons: 0, diamonds: 0, stars: 0, userCoins: 0, coins: 0 };
-let viewPrefs = { sort: 'custom', dragLocked: true };
+let viewPrefs = { sort: 'custom', dragLocked: false };
 let userLists = [];
 let filterFavoritesOnly = false;
 let profileState = { username: 'Player 1', avatar: '', banner: '', bannerColor: '', country: '' };
