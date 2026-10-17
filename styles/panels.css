@@ -1,0 +1,131 @@
+/* ==============================================
+  1. Paneles generales
+  =============================================== */
+
+.panel { position: relative; width: 100%; overflow: hidden; background-color: var(--panel); }
+
+.complement-panel { flex: 1; position: relative; }
+
+.grid-row { position: relative; display: flex; flex-direction: row; width: 100%; height: 100%; }
+
+.body-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 52vw;
+  overflow: hidden;
+  background-color: var(--panel);
+  border: 1px solid var(--line-1);
+  border-radius: var(--radius-box);
+}
+
+/* -------------------------- 
+  2. banner
+  --------------------------- */
+
+.banner { position: absolute; width: 100%; background-color: var(--panel-banner); }
+.banner img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* -------------------------- 
+  3. avatar
+  --------------------------- */
+
+.avatar-wrapper { position: absolute; bottom: 0; display: flex; justify-content: center; }
+
+.avatar { overflow: hidden; border-radius: 50%; background-color: var(--panel-1); }
+.avatar img { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+
+.avatar-button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--panel-1);
+  color: var(--panel);
+  font-size: 16px;
+}
+.avatar-button:hover { background-color: var(--panel-1-hover); transform: scale(1.04); }
+
+/* ==============================================
+  2. Panel del perfil (vista principal)
+  =============================================== */
+
+.main-panel-stats { display: flex; flex-direction: column; height: 52vh; min-height: 380px; border-bottom: 1px solid var(--line-1); }
+.main-panel-stats .panel { height: 248px; }
+
+.main-panel-stats .banner { height: 180px; box-shadow: 0 0 24px 10px var(--shadow-2); }
+
+.main-panel-stats .avatar-wrapper { left: 32px; z-index: 2; }
+.main-panel-stats .avatar { width: 140px; height: 140px; border: 5px solid var(--panel); }
+
+#btnEditProfile { z-index: 10; width: 40px; height: 40px; border: 5px solid var(--panel); color: var(--mute); }
+
+.main-panel-stats .description {
+  position: absolute;
+  bottom: 8px;
+  left: 188px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 120px;
+  height: 52px;
+  right: 20px;
+}
+
+.profile-country { position: absolute; top: 0; right: 0; display: flex; align-items: center; gap: 6px; max-width: 45%; overflow: hidden; color: var(--mute); font-size: 13px; font-weight: 600; white-space: nowrap; text-overflow: ellipsis; }
+
+/* -------------------------- 
+  stats
+  --------------------------- */
+
+.main-panel-stats .grid-row { gap: 12px; padding: 22px 20px; }
+
+.main-panel-stats .stat {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--panel-2);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  transition: transform 0.2s, background-color 0.2s;
+}
+.main-panel-stats .stat:hover { background-color: var(--panel-1); transform: translateY(-2px); }
+
+.main-panel-stats .stat-img { width: 28px; height: 28px; overflow: visible; object-fit: cover; }
+.main-panel-stats .stat-value { margin-top: 6px; color: var(--text-1); font-size: 15px; font-weight: 700; }
+.main-panel-stats .stat-label { color: var(--mute); font-size: 11px; letter-spacing: 0.5px; }
+
+.stats-info-btn { position: absolute; top: -12px; right: 10px; z-index: 2; width: 26px; height: 26px; }
+.stats-info-btn svg { width: 18px; height: 18px; }
+
+/* ==============================================
+  3. Responsive
+  =============================================== */
+
+@media (max-width: 1000px) {
+  .body-panel { width: 100%; }
+}
+
+@media (max-width: 640px) {
+  .body-panel { border-radius: var(--radius-sm); }  
+
+  .main-panel-stats { height: auto; min-height: 0; }
+  .main-panel-stats .panel { height: 206px; }
+  .main-panel-stats .banner { height: 148px; }
+
+  .main-panel-stats .avatar-wrapper { left: 16px; }
+  .main-panel-stats .avatar { width: 104px; height: 104px; border-width: 4px; }
+  #btnEditProfile { width: 34px; height: 34px; border-width: 4px; }
+  .main-panel-stats .description { left: 132px; bottom: 0px; min-width: 0; right: 10px; }
+  .main-panel-stats .text-a { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  .complement-panel { min-height: 110px; }
+  .stats-info-btn { top: -22px; width: 22px; height: 22px; }
+  .main-panel-stats .grid-row { flex-wrap: wrap; gap: 8px; padding: 12px; height: auto; }
+  .main-panel-stats .stat { flex: 1 1 28%; padding: 10px 4px; }
+}

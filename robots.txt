@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /*?list=
+Disallow: /*?settings=
+
+Sitemap: https://joseph241134-sudo.github.io/geometry-dash-demon-list//sitemap.xml
