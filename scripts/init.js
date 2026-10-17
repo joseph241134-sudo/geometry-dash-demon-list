@@ -27,7 +27,16 @@ function initScrollTop() {
 }
 
 function initGlobalListeners() {
-  window.addEventListener('popstate', renderRoute);
+  window.addEventListener('popstate', () => {
+    if (skipPops > 0) { skipPops--; return; }
+    const modal = topModal();
+    if (modal) {
+      if (modal.dataset.dismissible) closeModal(modal, true);
+      else history.pushState({ modal: true }, '');
+      return;
+    }
+    renderRoute();
+  });
 
   document.addEventListener('click', (e) => {
     document.querySelectorAll('.pop.open').forEach(pop => {

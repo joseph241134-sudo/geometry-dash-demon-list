@@ -107,7 +107,7 @@ const I18N = {
     'stats.edit': 'Clic para editar', 'stats.value': 'Valor:', 'stats.infoBtn': 'Información', 'stats.infoTitle': 'Sobre estas estadísticas',
     'stats.infoText': 'Por ahora estas estadísticas son manuales: haz clic en cualquiera para cambiar su valor a tu gusto. Próximamente se vincularán a tu cuenta de Geometry Dash.',
 
-    'lists.title': 'Mis listas de demons', 'lists.count': 'Listas totales: {n}', 'lists.add': '+ Agregar lista',
+    'lists.title': 'Mis listas demon', 'lists.count': 'Listas totales: {n}', 'lists.add': '+ Añadir lista',
     'lists.filterFav': 'Filtrar favoritos', 'lists.emptyFav': 'No tienes listas marcadas como favoritas.',
     'lists.empty': 'Tu panel de listas está vacío. ¡Agrega tu primera lista!',
     'list.edit': 'Editar lista', 'list.view': 'Ver', 'list.by': 'Por {name}',
@@ -187,7 +187,7 @@ const I18N = {
     'stats.edit': 'Cliquer pour modifier', 'stats.value': 'Valeur :', 'stats.infoBtn': 'Informations', 'stats.infoTitle': 'À propos de ces statistiques',
     'stats.infoText': 'Pour l\'instant ces statistiques sont manuelles : cliquez sur l\'une d\'elles pour modifier sa valeur comme vous voulez. Bientôt elles seront liées à votre compte Geometry Dash.',
 
-    'lists.title': 'Mes listes de demons', 'lists.count': 'Listes totales : {n}', 'lists.add': '+ Ajouter une liste',
+    'lists.title': 'Mes listes demon', 'lists.count': 'Listes totales : {n}', 'lists.add': '+ Ajouter liste',
     'lists.filterFav': 'Filtrer les favoris', 'lists.emptyFav': 'Vous n\'avez aucune liste marquée comme favorite.',
     'lists.empty': 'Votre panneau de listes est vide. Ajoutez votre première liste !',
     'list.edit': 'Modifier la liste', 'list.view': 'Voir', 'list.by': 'Par {name}',

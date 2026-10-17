@@ -297,6 +297,10 @@ function demonStatChip(label, value, cls = '') {
 function renderDemonCard(demon, position, index) {
   const ytThumb = demon.useDefaultIcon ? '' : getYouTubeThumbnail(demon.showcase);
   const id = escapeHTML(String(demon.id));
+  const extraChips =
+    demonStatChip(t('card.tier'), demon.tier ? String(demon.tier) : '', 'd-tier') +
+    demonStatChip(t('card.attempts'), demon.attempts ? Number(demon.attempts).toLocaleString() : '', 'd-att') +
+    demonStatChip(t('card.date'), demon.winDate, 'd-date');
 
   return `
     <article class="demon-card" data-id="${id}" style="${diffColorStyle(demon.difficulty)};--i:${Math.min(index, 8)}">
@@ -317,12 +321,11 @@ function renderDemonCard(demon, position, index) {
         ${demon.creator ? `<span class="d-creator">${t('card.publishedBy', { name: escapeHTML(demon.creator) })}</span>` : ''}
         <div class="demon-stats-row">
           <span class="d-diff">${escapeHTML(demon.difficulty)}</span>
-          ${demonStatChip(t('card.tier'), demon.tier ? String(demon.tier) : '', 'd-tier')}
-          ${demonStatChip(t('card.attempts'), demon.attempts ? Number(demon.attempts).toLocaleString() : '', 'd-att')}
-          ${demonStatChip(t('card.date'), demon.winDate, 'd-date')}
+          ${extraChips}
         </div>
       </div>
-      
+            ${extraChips ? `<div class="demon-extra">${extraChips}</div>` : ''}
+
       <button type="button" class="btn-edit-demon" data-edit-demon="${id}" title="${t('card.edit')}">✎</button>
       <button type="button" class="btn-add-demon-below" data-add-demon-after="${id}" title="${t('card.addBelow')}">+</button>
     </article>

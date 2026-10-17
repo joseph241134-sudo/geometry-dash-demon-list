@@ -260,8 +260,11 @@
   --------------------------- */
 
 @media (max-width: 900px) {
-  .list-view-body { flex-direction: column; }
-  .list-sidebar { position: static; max-width: none; }
+  .list-view-body { display: contents; }
+  .list-view-header   { order: 0; }
+  .list-sidebar       { order: 1; position: static; max-width: none; }
+  .list-view-controls { order: 2; }
+  .demons-container   { order: 3; width: 100%; }
   .list-view-controls { flex-wrap: wrap; }
   .search-box { flex: 1 1 180px; max-width: none; min-width: 0; }
 }

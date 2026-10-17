@@ -7,11 +7,14 @@ function topModal() {
   return all[all.length - 1] || null;
 }
 
+let skipPops = 0;
 function openModal({ title = '', titleExtra = '', body = '', actions = '', cls = '', dismissible = true, onClose = null }) {
   const overlay = document.createElement('div');
   overlay.className = 'modal-overlay';
   overlay.dataset.dismissible = dismissible ? '1' : '';
   overlay._onClose = onClose;
+  overlay._hasHistory = true;
+  history.pushState({ modal: true }, '');
   overlay.innerHTML = `
     <div class="modal-card ${cls}" role="dialog" aria-modal="true">
       ${title ? `<h2 class="modal-title"><span>${title}</span>${titleExtra}</h2>` : ''}
@@ -37,9 +40,13 @@ function openModal({ title = '', titleExtra = '', body = '', actions = '', cls =
   return overlay;
 }
 
-function closeModal(overlay) {
+function closeModal(overlay, fromPop = false) {
   const el = overlay || topModal();
   if (!el || el.classList.contains('closing')) return;
+  if (el._hasHistory) {
+    el._hasHistory = false;
+    if (!fromPop) { skipPops++; history.back(); }
+  }
   el.classList.add('closing');
   setTimeout(() => el.remove(), 170);
   if (typeof el._onClose === 'function') el._onClose();

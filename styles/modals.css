@@ -203,6 +203,8 @@
 
 .options-modal .pop-menu { left: auto; right: 0; width: fit-content; transform-origin: top right; }
 
+.modal-title .options-modal { flex: 0 0 auto; margin-left: 0; }
+.modal-title span { min-width: 0; }
 .btn-fav-icon { flex-shrink: 0; width: 28px; height: 28px; opacity: 0.6; }
 .btn-fav-icon:hover { opacity: 0.85; transform: scale(1.1); }
 .btn-fav-icon.active { opacity: 1; }
@@ -325,8 +327,8 @@
   =============================================== */
 
 @media (max-width: 480px) {
-  .modal-overlay { align-items: flex-end; padding: 0; }
-  .modal-card, .modal-card.modal-sm { max-width: none; max-height: 92vh; border-radius: var(--radius-sm) var(--radius-sm) 0 0; }
+  .modal-overlay { align-items: center; padding: 0 16px }
+  .modal-card, .modal-card.modal-sm { max-width: none; max-height: 92vh; border-radius: var(--radius-sm); }
   .modal-body, .modal-demon .modal-body { margin: 0 16px; }
   .modal-profile .modal-body { margin: 0; }
   .pe-fields { margin: 0 16px; }
@@ -337,6 +339,5 @@
   .field-row, .demon-modal-top { flex-direction: column; align-items: stretch; }
   .list-preview-container, .demon-thumb-preview { width: 100%; height: 150px; }
   .field-buttons { justify-content: flex-start; }
-  .form-grid { grid-template-columns: 1fr; }
-  .demon-diff-selector { gap: 8px; }
+  .demon-diff-selector { gap: 8px; }  
 }
