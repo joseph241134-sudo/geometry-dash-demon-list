@@ -187,7 +187,7 @@ const I18N = {
     'stats.edit': 'Cliquer pour modifier', 'stats.value': 'Valeur :', 'stats.infoBtn': 'Informations', 'stats.infoTitle': 'À propos de ces statistiques',
     'stats.infoText': 'Pour l\'instant ces statistiques sont manuelles : cliquez sur l\'une d\'elles pour modifier sa valeur comme vous voulez. Bientôt elles seront liées à votre compte Geometry Dash.',
 
-    'lists.title': 'Mes listes demon', 'lists.count': 'Listes totales : {n}', 'lists.add': '+ Ajouter liste',
+    'lists.title': 'Mes listes demon', 'lists.count': 'Listes totales : {n}', 'lists.add': '+ Ajouter',
     'lists.filterFav': 'Filtrer les favoris', 'lists.emptyFav': 'Vous n\'avez aucune liste marquée comme favorite.',
     'lists.empty': 'Votre panneau de listes est vide. Ajoutez votre première liste !',
     'list.edit': 'Modifier la liste', 'list.view': 'Voir', 'list.by': 'Par {name}',
