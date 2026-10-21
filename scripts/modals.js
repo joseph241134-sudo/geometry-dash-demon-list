@@ -684,7 +684,7 @@ function renderDemonModal(listId, demonData, afterId = null) {
         <div class="demon-thumb-preview" id="demonThumbPreview"></div>
         <div class="demon-top-inputs">
           <input type="text" id="demonShowcase" class="form-input" spellcheck="false" placeholder="YouTube URL" autocomplete="off"
-            value="${isEdit && demonData.showcase ? escapeHTML(showcaseUrl(demonData.showcase)) : ''}">
+            value="${isEdit && demonData.showcase ? escapeHTML(demonData.showcase) : ''}">
           <button type="button" id="btnDefaultIcon" class="btn-field"></button>
         </div>
       </div>

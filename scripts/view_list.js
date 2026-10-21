@@ -96,7 +96,7 @@ function initSortable() {
   sortableInstance = Sortable.create(container, {
     animation: 180,
     ghostClass: 'sortable-ghost',
-    delay: 150,             
+    delay: 250,             
     delayOnTouchOnly: true,
     touchStartThreshold: 5,
     onEnd: (evt) => {
@@ -406,7 +406,6 @@ function renderListStats() {
       </div>
 
       <div class="diff-breakdown-row">${breakdown}</div>
-      <div class="profile-footer">${t('view.footer')}</div>
     </div>
   `;
 

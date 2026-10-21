@@ -214,7 +214,7 @@
   Editar perfil
   --------------------------- */
 
-.modal-profile {max-width: 400px;}
+.modal-profile {max-width: 390px;}
 .modal-profile .modal-body { margin: 0; }
 .pe-fields { margin: 0 24px; }
 
@@ -328,7 +328,7 @@
 
 @media (max-width: 480px) {
   .modal-overlay { align-items: center; padding: 0 16px }
-  .modal-card, .modal-card.modal-sm { max-width: none; max-height: 92vh; border-radius: var(--radius-sm); }
+  .modal-card, .modal-card.modal-sm { max-width: none; max-height: 84vh; border-radius: var(--radius-sm); }
   .modal-body, .modal-demon .modal-body { margin: 0 16px; }
   .modal-profile .modal-body { margin: 0; }
   .pe-fields { margin: 0 16px; }
@@ -339,5 +339,6 @@
   .field-row, .demon-modal-top { flex-direction: column; align-items: stretch; }
   .list-preview-container, .demon-thumb-preview { width: 100%; height: 150px; }
   .field-buttons { justify-content: flex-start; }
+  .btn-field {align-self: center !important;}
   .demon-diff-selector { gap: 8px; }  
 }
