@@ -19,6 +19,12 @@ const DIFFICULTIES = Object.keys(DIFFICULTY);
 const diffIcon = d => (DIFFICULTY[d] || DIFFICULTY['Easy Demon']).icon;
 const diffColorStyle = d => `--diff-color:${DIFFICULTY[d] ? DIFFICULTY[d].color : 'var(--mute)'}`;
 
+// Iconos del botón de miniaturas (coloca tus imágenes en estas rutas)
+const THUMB_ICON = {
+  yt:   'resources/demon.png',
+  face: 'resources/demon.png'
+};
+
 const SORT_MODES = ['custom', 'recent', 'oldest', 'attempts_desc', 'attempts_asc', 'tier_desc', 'tier_asc'];
 
 // ------------------------------------------------------
@@ -27,15 +33,13 @@ const SORT_MODES = ['custom', 'recent', 'oldest', 'attempts_desc', 'attempts_asc
 
 const hasActiveFilters = () => !!(listFilters.search || listFilters.difficulty !== 'all' || listFilters.favorite);
 
-function getYouTubeThumbnail(url) {
+function getYouTubeThumbnail(url, quality = 'mqdefault') {
   if (!url) return '';
   const match = url.match(/(?:v=|youtu\.be\/|embed\/|shorts\/|^)([a-zA-Z0-9_-]{11})/);
   const id = match ? match[1] : url;
-  // el id va dentro de un atributo HTML: solo se acepta un id de YouTube válido
-  return /^[a-zA-Z0-9_-]{11}$/.test(id) ? `https://i.ytimg.com/vi/${id}/mqdefault.jpg` : '';
+  return /^[a-zA-Z0-9_-]{11}$/.test(id) ? `https://i.ytimg.com/vi/${id}/${quality}.jpg` : '';
 }
 
-// Acepta una URL completa o solo el id del video
 const showcaseUrl = s => (s.includes('http') ? s : `https://youtube.com/watch?v=${s}`);
 
 function listSubtitleText() {
@@ -47,6 +51,15 @@ function syncSortUI() {
   if (!label) return;
   label.textContent = t('sort.' + listFilters.sort);
   $('sortMenu').querySelectorAll('.pop-item').forEach(b => b.classList.toggle('active', b.dataset.sort === listFilters.sort));
+}
+
+// Botón alternante: miniatura / icon demon
+function updateThumbButton() {
+  const btn = $('btnToggleThumb');
+  if (!btn) return;
+  const faces = !!viewPrefs.showFaces;
+  btn.classList.toggle('active', faces);
+  btn.querySelector('img').src = faces ? THUMB_ICON.face : THUMB_ICON.yt;
 }
 
 function setSortMode(mode) {
@@ -208,6 +221,8 @@ function openListView(listId) {
 
         <button type="button" id="btnToggleLockDrag" class="button-square toggle" title="${t('view.lock')}"><img alt=""></button>
 
+        <button type="button" id="btnToggleThumb" class="button-square toggle" title="${t('view.thumbYt')}"><img alt=""></button>
+
         <div class="sort-wrap" data-pop-root>
           <button type="button" id="btnSort" class="form-input select-btn" title="${t('view.sort')}" aria-haspopup="listbox"><span id="sortLabel"></span></button>
           <div id="sortMenu" class="pop pop-menu">
@@ -261,6 +276,15 @@ function openListView(listId) {
     initSortable();
   });
 
+  // ---- miniaturas: youtube / cara ----->
+  $('btnToggleThumb').addEventListener('click', () => {
+    viewPrefs.showFaces = !viewPrefs.showFaces;
+    saveData();
+    updateThumbButton();
+    renderDemons();
+  });
+  updateThumbButton();
+
   // ---- orden ----->
   $('btnSort').addEventListener('click', () => setPop($('sortMenu'), !$('sortMenu').classList.contains('open')));
   $('sortMenu').addEventListener('click', (e) => {
@@ -295,7 +319,7 @@ function demonStatChip(label, value, cls = '') {
 }
 
 function renderDemonCard(demon, position, index) {
-  const ytThumb = demon.useDefaultIcon ? '' : getYouTubeThumbnail(demon.showcase);
+  const ytThumb = viewPrefs.showFaces ? '' : getYouTubeThumbnail(demon.showcase);
   const id = escapeHTML(String(demon.id));
   const extraChips =
     demonStatChip(t('card.tier'), demon.tier ? String(demon.tier) : '', 'd-tier') +

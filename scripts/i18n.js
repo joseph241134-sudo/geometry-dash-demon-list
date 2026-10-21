@@ -36,6 +36,7 @@ const I18N = {
     'view.all': 'All', 'view.favFilter': 'Filter favorites', 'view.onlyFav': 'Favorites only',
     'view.search': 'Search level...', 'view.lock': 'Lock/unlock dragging', 'view.sort': 'Sort by',
     'view.addDemon': '+ Demon', 'view.top': 'Back to top',
+    'view.thumbYt': 'show demon icons',
     'view.noMatch': 'No demon matches the filters', 'view.noMatchText': 'Change the search or the filters to see more results.',
     'view.empty': 'This list has no demons yet', 'view.emptyText': 'Use "+ Demon" to add your first demon.',
     'sort.custom': 'Custom order', 'sort.tier_desc': 'Tier (highest)', 'sort.tier_asc': 'Tier (lowest)',
@@ -44,7 +45,7 @@ const I18N = {
     'card.edit': 'Edit demon', 'card.addBelow': 'Add demon below', 'card.showcase': 'Watch showcase',
     'card.publishedBy': 'published by {name}', 'card.tier': 'Tier:', 'card.attempts': 'Attempts:', 'card.date': 'Date:',
 
-    'profile.editTitle': '✎ Edit profile', 'profile.username': 'Username:', 'profile.name': 'your name',
+    'profile.editTitle': 'Edit profile', 'profile.username': 'Username:', 'profile.name': 'your name',
     'profile.uploadImg': 'Upload image', 'profile.removeImg': 'Remove image',
     'profile.uploadBanner': 'Upload banner', 'profile.removeBanner': 'Remove banner',
     'profile.bannerColor': 'Change color',
@@ -65,8 +66,8 @@ const I18N = {
     'listm.replaceConfirm': 'This will replace the demons of this list with the ones in the file. Continue?',
     'listm.deleteConfirm': 'Delete "{title}" and all its demons?',
 
-    'demon.add': 'Add demon', 'demon.edit': 'Edit demon', 'demon.thumbHint': 'Video thumbnail / default icon:',
-    'demon.iconOn': 'Default icon: on', 'demon.iconOff': 'Default icon: off', 'demon.name': 'Name:',
+    'demon.add': 'Add demon', 'demon.edit': 'Edit demon', 'demon.thumbHint': 'Icon preview - thumbnail:',
+    'demon.name': 'Name:', 'demon.yt': 'YouTube URL:',
     'demon.creator': 'Creator:', 'demon.difficulty': 'Difficulty:', 'demon.tier': 'Tier:', 'demon.attempts': 'Attempts:',
     'demon.winDate': 'Win date:', 'demon.peak': 'Peak position:', 'demon.save': 'Save', 'demon.create': 'Add demon',
     'settings.title': 'Settings', 'settings.subtitle': 'Appearance and local data', 'settings.theme': 'Theme', 'settings.bg': 'Background',
@@ -115,6 +116,7 @@ const I18N = {
     'view.all': 'Todas', 'view.favFilter': 'Filtrar favoritos', 'view.onlyFav': 'Solo favoritos',
     'view.search': 'Buscar nivel...', 'view.lock': 'Bloquear/desbloquear arrastre', 'view.sort': 'Ordenar por',
     'view.addDemon': '+ Demon', 'view.top': 'Volver arriba',
+    'view.thumbYt': 'Mostrar iconos Demon',
     'view.noMatch': 'Ningún demon coincide con los filtros', 'view.noMatchText': 'Cambia la búsqueda o los filtros para ver más resultados.',
     'view.empty': 'Esta lista aún no tiene demons', 'view.emptyText': 'Usa "+ Demon" para añadir tu primer demon.',
     'sort.custom': 'Orden personalizado', 'sort.tier_desc': 'Tier (más alto)', 'sort.tier_asc': 'Tier (más bajo)',
@@ -143,8 +145,8 @@ const I18N = {
     'listm.replaceConfirm': 'Esto reemplazará los demons de esta lista por los del archivo. ¿Continuar?',
     'listm.deleteConfirm': '¿Eliminar "{title}" y todos sus demons?',
 
-    'demon.add': 'Agregar demon', 'demon.edit': 'Editar demon', 'demon.thumbHint': 'Miniatura de video / icono por defecto:',
-    'demon.iconOn': 'Icono por defecto: on', 'demon.iconOff': 'Icono por defecto: off', 'demon.name': 'Nombre:',
+    'demon.add': 'Agregar demon', 'demon.edit': 'Editar demon', 'demon.thumbHint': 'Previsualización de icono - miniatura:',
+    'demon.name': 'Nombre:', 'demon.yt': 'URL de Youtube:',
     'demon.creator': 'Creador:', 'demon.difficulty': 'Dificultad:', 'demon.tier': 'Tier:', 'demon.attempts': 'Intentos:',
     'demon.winDate': 'Fecha de victoria:', 'demon.peak': 'Máxima posición:', 'demon.save': 'Guardar', 'demon.create': 'Agregar demon',
 
@@ -194,6 +196,7 @@ const I18N = {
     'view.all': 'Toutes', 'view.favFilter': 'Filtrer les favoris', 'view.onlyFav': 'Uniquement favoris',
     'view.search': 'Rechercher un niveau...', 'view.lock': 'Verrouiller/déverrouiller le glissement', 'view.sort': 'Trier par',
     'view.addDemon': '+ Demon', 'view.top': 'Retour en haut',
+    'view.thumbYt': 'Afficher les icônes demon',
     'view.noMatch': 'Aucun demon ne correspond aux filtres', 'view.noMatchText': 'Modifiez la recherche ou les filtres pour voir plus de résultats.',
     'view.empty': 'Cette liste ne contient pas encore de demons', 'view.emptyText': 'Utilisez "+ Demon" pour ajouter votre premier demon.',
     'sort.custom': 'Ordre personnalisé', 'sort.tier_desc': 'Tier (plus élevé)', 'sort.tier_asc': 'Tier (plus bas)',
@@ -202,7 +205,7 @@ const I18N = {
     'card.edit': 'Modifier le demon', 'card.addBelow': 'Ajouter un demon ci-dessous', 'card.showcase': 'Voir le showcase',
     'card.publishedBy': 'publié par {name}', 'card.tier': 'Tier :', 'card.attempts': 'Essais :', 'card.date': 'Date :',
 
-    'profile.editTitle': '✎ Modifier le profil', 'profile.username': 'Nom d\'utilisateur :', 'profile.name': 'ton nom',
+    'profile.editTitle': 'Modifier le profil', 'profile.username': 'Nom d\'utilisateur :', 'profile.name': 'ton nom',
     'profile.uploadImg': 'Téléverser image', 'profile.removeImg': 'Supprimer image',
     'profile.uploadBanner': 'Téléverser bannière', 'profile.removeBanner': 'Supprimer bannière',
     'profile.bannerColor': 'Changer de couleur',
@@ -223,8 +226,8 @@ const I18N = {
     'listm.replaceConfirm': 'Cela remplacera les demons de cette liste par ceux du fichier. Continuer ?',
     'listm.deleteConfirm': 'Supprimer "{title}" et tous ses demons ?',
 
-    'demon.add': 'Ajouter un demon', 'demon.edit': 'Modifier le demon', 'demon.thumbHint': 'Miniature vidéo / icône par défaut :',
-    'demon.iconOn': 'Icône par défaut : activée', 'demon.iconOff': 'Icône par défaut : désactivée', 'demon.name': 'Nom :',
+    'demon.add': 'Ajouter un demon', 'demon.edit': 'Modifier le demon', 'demon.thumbHint': `Aperçu de l'icône - miniature :`,
+    'demon.name': 'Nom :', 'demon.yt': 'URL Youtube:',
     'demon.creator': 'Créateur :', 'demon.difficulty': 'Difficulté :', 'demon.tier': 'Tier :', 'demon.attempts': 'Essais :',
     'demon.winDate': 'Date de victoire :', 'demon.peak': 'Position maximale :', 'demon.save': 'Enregistrer', 'demon.create': 'Ajouter un demon',
 

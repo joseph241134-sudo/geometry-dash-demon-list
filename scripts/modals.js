@@ -126,9 +126,18 @@ function bindImagePicker({ upload, remove, file, opts }, onChange) {
 }
 
 const previewBox = (id, imgId) => `
-  <div class="list-preview-container" id="${id}">
-    <img id="${imgId}" alt="">
-    <span class="preview-empty">${t('common.noPhoto')}</span>
+  <div class="list-preview-wrap">
+    <div class="list-preview-container" id="${id}">
+      <img id="${imgId}" alt="">
+      <span class="preview-empty">${t('common.noPhoto')}</span>
+    </div>
+    <div class="preview-edit" data-pop-root>
+      <button type="button" class="edit-btn" id="${id}Btn" aria-haspopup="menu">${svgPencil}</button>
+      <div class="pop pop-menu" id="${id}Pop">
+        <button type="button" class="pop-item" data-act="upload">${t('listm.upload')}</button>
+        <button type="button" class="pop-item" data-act="remove" id="${id}Remove">${t('listm.remove')}</button>
+      </div>
+    </div>
   </div>`;
 
 function submitOnEnter(input, button) {
@@ -479,6 +488,7 @@ function openListModal(listId = null) {
 
   const ov = openModal({
     title: isEditing ? t('listm.edit') : t('listm.new'),
+    cls: 'modal-list',
     titleExtra: `<button type="button" id="favToggle" class="btn-fav-icon" title="${t('listm.favTitle')}"><img alt=""></button>
                 <div class="sort-wrap options-modal" data-pop-root>
                   <button type="button" id="btnOptionsList" class="btn-options-icon" title="options">${svgOptions}</button>
@@ -493,11 +503,7 @@ function openListModal(listId = null) {
         <label>${t('listm.banner')}</label>
         <div class="field-row">
           ${previewBox('listImgBox', 'listImgPreview')}
-          <div class="field-buttons" style="justify-content: center">
-            <button type="button" class="btn-field" id="btnListUploadImg">${t('listm.upload')}</button>
-            <button type="button" class="btn-field" id="btnListRemoveImg">${t('listm.remove')}</button>
-            <input type="file" id="fileListImg" accept="image/*" hidden>
-          </div>
+          <input type="file" id="fileListImg" accept="image/*" hidden>
         </div>
       </div>
 
@@ -523,10 +529,20 @@ function openListModal(listId = null) {
   const syncImage = () => {
     $('listImgBox').classList.toggle('has-img', !!image);
     if (image) $('listImgPreview').src = image; else $('listImgPreview').removeAttribute('src');
-    $('btnListRemoveImg').disabled = !image;
+    $('listImgBoxRemove').disabled = !image;
   };
-  bindImagePicker({ upload: 'btnListUploadImg', remove: 'btnListRemoveImg', file: 'fileListImg', opts: { maxSize: 800, quality: 0.86 } },
-    data => { image = data; syncImage(); });
+ bindFileInput('fileListImg', { maxSize: 800, quality: 0.86 }, data => { image = data; syncImage(); });
+
+  $('listImgBoxBtn').addEventListener('click', () => setPop($('listImgBoxPop'), !$('listImgBoxPop').classList.contains('open')));
+
+  $('listImgBoxPop').addEventListener('click', (e) => {
+    const item = e.target.closest('[data-act]');
+    if (!item || item.disabled) return;
+    setPop($('listImgBoxPop'), false);
+
+    if (item.dataset.act === 'upload') $('fileListImg').click();
+    else { image = ''; syncImage(); }
+  });
 
   // ---- pop exportar / importar ----->
   $('btnOptionsList').addEventListener('click', () => setPop($('optionsListMenu'), !$('optionsListMenu').classList.contains('open')));
@@ -671,7 +687,6 @@ function renderDemonModal(listId, demonData, afterId = null) {
 
   let isFav = isEdit ? !!demonData.isFavorite : false;
   let selectedDifficulty = isEdit && DIFFICULTY[demonData.difficulty] ? demonData.difficulty : 'Easy Demon';
-  let useDefaultIcon = isEdit ? !!demonData.useDefaultIcon : false;
   const val = key => (isEdit ? escapeHTML(String(demonData[key] ?? '')) : '');
 
   const ov = openModal({
@@ -679,14 +694,9 @@ function renderDemonModal(listId, demonData, afterId = null) {
     cls: 'modal-demon',
     titleExtra: `<button type="button" class="btn-fav-icon" id="demonFav" title="${t('listm.favTitle')}"><img alt=""></button>`,
     body: `
-      <p class="modal-hint">${t('demon.thumbHint')}</p>
       <div class="demon-modal-top">
+        <div class="thumb-text">${svgYutu}<p>${t('demon.thumbHint')}</p></div>
         <div class="demon-thumb-preview" id="demonThumbPreview"></div>
-        <div class="demon-top-inputs">
-          <input type="text" id="demonShowcase" class="form-input" spellcheck="false" placeholder="YouTube URL" autocomplete="off"
-            value="${isEdit && demonData.showcase ? escapeHTML(demonData.showcase) : ''}">
-          <button type="button" id="btnDefaultIcon" class="btn-field"></button>
-        </div>
       </div>
 
       <div class="form-group position-relative" data-pop-root>
@@ -710,14 +720,20 @@ function renderDemonModal(listId, demonData, afterId = null) {
       </div>
 
       <div class="form-grid">
-        <div class="form-group"><label for="demonTier">${t('demon.tier')}</label>
+        <div class="form-group"><label>${t('demon.tier')}</label>
           <input type="number" step="0.1" id="demonTier" class="form-input" placeholder="-" autocomplete="off" value="${val('tier')}"></div>
-        <div class="form-group"><label for="demonAtt">${t('demon.attempts')}</label>
+        <div class="form-group"><label>${t('demon.attempts')}</label>
           <input type="number" id="demonAtt" class="form-input" placeholder="-" autocomplete="off" value="${val('attempts')}"></div>
-        <div class="form-group"><label for="demonDate">${t('demon.winDate')}</label>
+        <div class="form-group"><label>${t('demon.winDate')}</label>
           <input type="date" id="demonDate" class="form-input" autocomplete="off" value="${val('winDate')}"></div>
-        <div class="form-group"><label for="demonPeak">${t('demon.peak')}</label>
+        <div class="form-group"><label>${t('demon.peak')}</label>
           <input type="number" id="demonPeak" class="form-input" placeholder="-" autocomplete="off" value="${val('peak')}"></div>
+      </div>
+      
+      <div class="form-group">
+        <label>${t('demon.yt')}</label>
+        <input type="text" id="demonShowcase" class="form-input" spellcheck="false" placeholder="YouTube URL" autocomplete="off"
+          value="${isEdit && demonData.showcase ? escapeHTML(demonData.showcase) : ''}">
       </div>`,
     actions: `
       ${isEdit ? `<button type="button" id="btnDeleteDemon" class="btn-danger push-left">${t('common.delete')}</button>` : ''}
@@ -727,10 +743,13 @@ function renderDemonModal(listId, demonData, afterId = null) {
 
   // ---- miniatura ----->
   const updateThumb = () => {
-    const yt = useDefaultIcon ? '' : getYouTubeThumbnail($('demonShowcase').value);
-    $('demonThumbPreview').innerHTML =
-      `<img src="${yt || diffIcon(selectedDifficulty)}" alt="" class="${yt ? 'cover' : 'contain'}">`;
-  };
+  const yt = getYouTubeThumbnail($('demonShowcase').value, 'maxresdefault');
+  $('demonThumbPreview').innerHTML =
+    `<img src="${yt || diffIcon(selectedDifficulty)}" alt="" class="${yt ? 'cover' : 'contain'}">`;
+
+  const img = $('demonThumbPreview').firstChild;
+  if (yt) img.onerror = () => { img.onerror = null; img.src = yt.replace('maxresdefault', 'mqdefault'); };
+};
 
   const setDifficultyUI = (diff) => {
     selectedDifficulty = DIFFICULTY[diff] ? diff : 'Easy Demon';
@@ -746,20 +765,13 @@ function renderDemonModal(listId, demonData, afterId = null) {
   });
   $('demonShowcase').addEventListener('input', updateThumb);
 
-  // ---- favorito e icono por defecto ----->
+  // ---- favorito ----->
   const favBtn = $('demonFav');
   const syncFav = () => {
     favBtn.classList.toggle('active', isFav);
     favBtn.querySelector('img').src = isFav ? FAV_ICON.on : FAV_ICON.off;
   };
   favBtn.addEventListener('click', () => { isFav = !isFav; syncFav(); });
-
-  const btnDefaultIcon = $('btnDefaultIcon');
-  const syncDefaultBtn = () => {
-    btnDefaultIcon.classList.toggle('is-on', useDefaultIcon);
-    btnDefaultIcon.textContent = useDefaultIcon ? t('demon.iconOn') : t('demon.iconOff');
-  };
-  btnDefaultIcon.addEventListener('click', () => { useDefaultIcon = !useDefaultIcon; syncDefaultBtn(); updateThumb(); });
 
   // ---- autocompletado - backend ----->
   const nameInput = $('demonName');
@@ -832,7 +844,6 @@ function renderDemonModal(listId, demonData, afterId = null) {
       winDate: $('demonDate').value,
       peak: $('demonPeak').value,
       isFavorite: isFav,
-      useDefaultIcon,
     });
 
     if (isEdit) {
@@ -852,6 +863,5 @@ function renderDemonModal(listId, demonData, afterId = null) {
   });
 
   syncFav();
-  syncDefaultBtn();
   setDifficultyUI(selectedDifficulty);
 }

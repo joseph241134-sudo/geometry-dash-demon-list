@@ -83,6 +83,8 @@
 }
 
 .sort-wrap { position: relative; margin-left: auto; }
+#btnToggleThumb { margin-left: auto; }
+#btnToggleThumb + .sort-wrap { margin-left: 0; }
 
 .select-btn {
   min-width: 170px;
@@ -266,7 +268,7 @@
   .list-view-controls { order: 2; }
   .demons-container   { order: 3; width: 100%; }
   .list-view-controls { flex-wrap: wrap; }
-  .search-box { flex: 1 1 180px; max-width: none; min-width: 0; }
+  .search-box { flex: 1 1 236px; max-width: none; min-width: 0; }
 }
 
 @media (max-width: 640px) {

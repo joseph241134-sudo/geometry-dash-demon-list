@@ -54,8 +54,10 @@
 
 .modal-body { display: flex; flex-direction: column; margin: 0 24px; }
 
-.modal-hint { margin-top: 10px; color: var(--mute); font-size: 13px; font-weight: 600; }
-.dialog-text { margin-top: 10px; color: var(--text-2); font-size: 14px; line-height: 1.5; white-space: pre-line; }
+.modal-card p { color: var(--mute); font-size: 13px; font-weight: 500; }
+.dialog-text { margin-top: 10px; white-space: pre-line}
+
+.thumb-text { white-space: pre-line; display: flex; flex-direction: row; gap: 6px}
 
 .modal-actions {
   display: flex;
@@ -78,7 +80,7 @@
 
 .position-relative { position: relative; }
 
-.field-row { display: flex; align-items: center; gap: 14px; }
+.field-row { display: flex; align-items: center; gap: 14px; flex-direction: column; align-items: stretch;}
 .field-buttons { display: flex; flex: 1; flex-wrap: wrap; align-items: flex-start; gap: 8px; min-width: 0; }
 
 .btn-field {
@@ -99,15 +101,17 @@
 /* Vista previa */
 .list-preview-container {
   flex-shrink: 0;
-  width: 192px;
-  height: 108px;
+  height: 160px;
+  width: 100%;
   overflow: hidden;
   background: var(--panel-1);
   border: 2px solid var(--line-1);
   border-radius: var(--radius-button);
+  position: relative;
 }
 .list-preview-container img { display: none; width: 100%; height: 100%; object-fit: cover; }
 .list-preview-container.has-img img { display: block; }
+
 .preview-empty {
   display: flex;
   align-items: center;
@@ -119,30 +123,63 @@
   font-size: 13px;
   font-weight: 600;
   text-align: center;
+  position: absolute;
 }
 .list-preview-container.has-img .preview-empty { display: none; }
+
+/* -------------------------- 
+  3. Modal de lista
+  --------------------------- */
+
+.modal-list {max-width: 380px;}
+
+.edit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  color: #fff;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+}
+.edit-btn:hover { background: rgba(0, 0, 0, 0.85); }
+
+.edit-btn svg {height: 16px; width: 16px; }
+
+.list-preview-wrap { position: relative; width: 100%; }
+.preview-edit { position: absolute; top: 6px; right: 6px; z-index: 3; }
+.preview-edit .pop-menu { left: auto; right: 0; top: 42px;min-width: 140px; transform-origin: top right; }  
 
 /* -------------------------- 
   4. Modal de demon
   --------------------------- */
 
+.modal-demon {max-width: 400px;}
+
 .modal-demon .modal-body { margin-right: 18px; }
 .modal-demon .modal-actions { padding-right: 18px; }
 
-.demon-modal-top { display: flex; gap: 14px; margin-top: 8px; }
+.demon-modal-top { display: flex; gap: 14px; margin-top: 8px; flex-direction: column; align-items: stretch;}
 
 .demon-thumb-preview {
   flex-shrink: 0;
-  width: 192px;
-  height: 108px;
+  width: 100%;
+  height: 180px;
   overflow: hidden;
   background-color: var(--panel-3);
   border: 2px solid var(--line-1);
   border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .demon-thumb-preview img { width: 100%; height: 100%; }
 .demon-thumb-preview img.cover { object-fit: cover; }
-.demon-thumb-preview img.contain { object-fit: contain; }
+.demon-thumb-preview img.contain { width: auto; height: auto; max-width: 128px; max-height: 128px; object-fit: contain; }
 
 .demon-top-inputs { display: flex; flex: 1; flex-direction: column; gap: 8px; min-width: 0; }
 .demon-top-inputs .btn-field { width: fit-content; }
@@ -150,7 +187,7 @@
 .demon-diff-selector { display: flex; gap: 12px; }
 .demon-diff-selector button {
   flex: 1;
-  height: 60px;
+  height: 56px;
   padding: 6px;
   background: var(--panel-3);
   border: 1px solid var(--line-1);
@@ -336,8 +373,7 @@
   .modal-title { padding-left: 16px; }
   .modal-actions, .modal-demon .modal-actions { padding: 14px 16px; }
 
-  .field-row, .demon-modal-top { flex-direction: column; align-items: stretch; }
-  .list-preview-container, .demon-thumb-preview { width: 100%; height: 150px; }
+  .list-preview-container, .demon-thumb-preview { height: 164px; }
   .field-buttons { justify-content: flex-start; }
   .btn-field {align-self: center !important;}
   .demon-diff-selector { gap: 8px; }  
