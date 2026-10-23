@@ -2,12 +2,14 @@
 // Inicialización y ciclo de vida de la app
 // ======================================================
 function renderRoute() {
+  // páginas legales: solo se vuelve a traducir el texto (legal.js)
+  if (document.body.classList.contains('legal')) {
+    if (typeof applyLegalLanguage === 'function') applyLegalLanguage();
+    return;
+  }
+
   const params = new URLSearchParams(location.search);
   const listId = params.get('list');
-  const onListPage = document.body.dataset.page === 'list';
-
-  if (listId && !onListPage) return location.replace('list.html' + location.search);
-  if (!listId && onListPage) return location.replace('./' + location.search);
 
   if (params.get('settings')) openSettingsView();
   else if (listId) openListView(Number(listId));
@@ -99,7 +101,11 @@ function initLegal() {
   initGlobalListeners();
   renderFooter();
 
-  const paint = () => { applyLanguage(); renderHeader(); };
+  const paint = () => {
+    applyLanguage();
+    if (typeof applyLegalLanguage === 'function');
+    renderHeader();
+  };
   paint();
   if (hasSession()) cloudStart().catch(e => console.error('cloudStart', e)).then(paint);
 }

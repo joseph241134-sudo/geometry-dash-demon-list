@@ -7,7 +7,7 @@ const THEMES = ['blue', 'white', 'dark', 'purple', 'infernal', 'discord', 'atard
 const DEFAULT_APP_SETTINGS = {
   theme: 'blue',
   bgImage: '',
-  lang: (navigator.language || 'en').toLowerCase().startsWith('en') ? 'en' : 'es'
+  lang: (l => I18N[l] ? l : 'en')((navigator.language || 'en').slice(0, 2).toLowerCase())
 };
 let appSettings = { ...DEFAULT_APP_SETTINGS };
 

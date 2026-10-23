@@ -293,7 +293,7 @@
 .pe-avatar .pe-edit-btn { position: absolute; inset: 0; z-index: 1; margin: auto; opacity: 0; }
 .pe-avatar:hover::after, .pe-avatar:hover .pe-edit-btn, .pe-avatar .pe-edit-btn:focus-visible { opacity: 1; }
 
-.pe-avatar-wrap .pop-menu { width: fit-content;; margin-top: -36px;}
+.pe-avatar-wrap .pop-menu { width: fit-content; margin-top: -36px;}
 .pe-avatar-wrap:has(.pop.open) .pe-avatar::after,
 .pe-avatar-wrap:has(.pop.open) .pe-edit-btn { opacity: 1; }
 

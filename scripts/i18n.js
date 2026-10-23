@@ -23,7 +23,7 @@ const I18N = {
     'profile.edit': 'Edit profile', 'profile.id': 'ID: {id}',
     'stats.demons': 'Demons', 'stats.moons': 'Moons', 'stats.diamonds': 'Diamonds', 'stats.stars': 'Stars',
     'stats.userCoins': 'User coins', 'stats.secretCoins': 'Secret coins',
-    'stats.edit': 'Click to edit', 'stats.value': 'Value:', 'stats.infoBtn': 'Information', 'stats.infoTitle': 'About these stats',
+    'stats.edit': 'Click to edit', 'stats.value': 'Value:',
 
     'lists.title': 'My demon lists', 'lists.count': 'Total lists: {n}', 'lists.add': '+ Add list',
     'lists.filterFav': 'Filter favorites', 'lists.emptyFav': 'You have no lists marked as favorite.',
@@ -68,10 +68,9 @@ const I18N = {
     'demon.add': 'Add demon', 'demon.edit': 'Edit demon', 'demon.thumbHint': 'Icon preview - thumbnail:',
     'demon.name': 'Name:', 'demon.yt': 'YouTube URL:', 'demon.position': 'Position:', 
     'demon.creator': 'Creator:', 'demon.difficulty': 'Difficulty:', 'demon.tier': 'Tier:', 'demon.attempts': 'Attempts:',
-    'demon.winDate': 'Win date:', 'demon.peak': 'Peak position:', 'demon.save': 'Save', 'demon.create': 'Add demon',
+    'demon.winDate': 'Win date:', 'demon.save': 'Save', 'demon.create': 'Add demon',
     'settings.title': 'Settings', 'settings.subtitle': 'Appearance and local data', 'settings.theme': 'Theme', 'settings.bg': 'Background',
-    'settings.upload': 'Upload image', 'settings.removeImg': 'Remove image', 'settings.bgColor': 'Background color',
-    'settings.bgColorReset': 'Use theme color',
+    'settings.upload': 'Upload image', 'settings.removeImg': 'Remove image',
     'settings.bgHint': 'The image appears over the color and disables any animation effects from the theme, upload lightweight images.',
     'settings.data': 'Data', 'settings.dataHint': 'Everything is stored solely within this browser. For security reasons, please export a copy of your data before performing any deletions or imports. You can sign in to save your data to the cloud.',
     'settings.export': 'Export all', 'settings.import': 'Import (overwrites everything)', 'settings.deleteAll': 'Delete all data',
@@ -102,7 +101,7 @@ const I18N = {
     'profile.edit': 'Editar perfil', 'profile.id': 'ID: {id}',
     'stats.demons': 'Demons', 'stats.moons': 'Moons', 'stats.diamonds': 'Diamonds', 'stats.stars': 'Stars',
     'stats.userCoins': 'User coins', 'stats.secretCoins': 'Secret coins',
-    'stats.edit': 'Clic para editar', 'stats.value': 'Valor:', 'stats.infoBtn': 'Información', 'stats.infoTitle': 'Sobre estas estadísticas',
+    'stats.edit': 'Clic para editar', 'stats.value': 'Valor:',
 
     'lists.title': 'Mis listas demon', 'lists.count': 'Listas totales: {n}', 'lists.add': '+ Añadir lista',
     'lists.filterFav': 'Filtrar favoritos', 'lists.emptyFav': 'No tienes listas marcadas como favoritas.',
@@ -146,11 +145,10 @@ const I18N = {
     'demon.add': 'Agregar demon', 'demon.edit': 'Editar demon', 'demon.thumbHint': 'Previsualización de icono - miniatura:',
     'demon.name': 'Nombre:', 'demon.yt': 'URL de Youtube:', 'demon.position': 'Posición:', 
     'demon.creator': 'Creador:', 'demon.difficulty': 'Dificultad:', 'demon.tier': 'Tier:', 'demon.attempts': 'Intentos:',
-    'demon.winDate': 'Fecha de victoria:', 'demon.peak': 'Máxima posición:', 'demon.save': 'Guardar', 'demon.create': 'Agregar demon',
+    'demon.winDate': 'Fecha de victoria:', 'demon.save': 'Guardar', 'demon.create': 'Agregar demon',
 
     'settings.title': 'Ajustes', 'settings.subtitle': 'Apariencia y datos locales', 'settings.theme': 'Tema', 'settings.bg': 'Fondo',
-    'settings.upload': 'Subir imagen', 'settings.removeImg': 'Quitar imagen', 'settings.bgColor': 'Color de fondo',
-    'settings.bgColorReset': 'Usar color del tema',
+    'settings.upload': 'Subir imagen', 'settings.removeImg': 'Quitar imagen',
     'settings.bgHint': 'La imagen se ve por encima del color y desactiva cualquier efecto de animación del tema, sube imagenes ligeras.',
     'settings.data': 'Datos', 'settings.dataHint': 'Todo se guarda únicamente en su navegador. Por motivos de seguridad, exporte una copia de sus datos antes de eliminar o importar. Puedes iniciar sesión para guardar sus datos en la nube.',
     'settings.export': 'Exportar todo', 'settings.import': 'Importar (sobrescribe todo)', 'settings.deleteAll': 'Borrar todos los datos',
@@ -181,7 +179,7 @@ const I18N = {
     'profile.edit': 'Modifier le profil', 'profile.id': 'ID : {id}',
     'stats.demons': 'Demons', 'stats.moons': 'Moons', 'stats.diamonds': 'Diamonds', 'stats.stars': 'Stars',
     'stats.userCoins': 'User coins', 'stats.secretCoins': 'Secret coins',
-    'stats.edit': 'Cliquer pour modifier', 'stats.value': 'Valeur :', 'stats.infoBtn': 'Informations', 'stats.infoTitle': 'À propos de ces statistiques',
+    'stats.edit': 'Cliquer pour modifier', 'stats.value': 'Valeur :',
 
     'lists.title': 'Mes listes demon', 'lists.count': 'Listes totales : {n}', 'lists.add': '+ Ajouter',
     'lists.filterFav': 'Filtrer les favoris', 'lists.emptyFav': 'Vous n\'avez aucune liste marquée comme favorite.',
@@ -226,11 +224,10 @@ const I18N = {
     'demon.add': 'Ajouter un demon', 'demon.edit': 'Modifier le demon', 'demon.thumbHint': `Aperçu de l'icône - miniature :`,
     'demon.name': 'Nom :', 'demon.yt': 'URL Youtube:', 'demon.position': 'Position :',
     'demon.creator': 'Créateur :', 'demon.difficulty': 'Difficulté :', 'demon.tier': 'Tier :', 'demon.attempts': 'Essais :',
-    'demon.winDate': 'Date de victoire :', 'demon.peak': 'Position maximale :', 'demon.save': 'Enregistrer', 'demon.create': 'Ajouter un demon',
+    'demon.winDate': 'Date de victoire :', 'demon.save': 'Enregistrer', 'demon.create': 'Ajouter un demon',
 
     'settings.title': 'Paramètres', 'settings.subtitle': 'Apparence et données locales', 'settings.theme': 'Thème', 'settings.bg': 'Arrière-plan',
-    'settings.upload': 'Téléverser image', 'settings.removeImg': 'Supprimer image', 'settings.bgColor': 'Couleur de fond',
-    'settings.bgColorReset': 'Utiliser la couleur du thème',
+    'settings.upload': 'Téléverser image', 'settings.removeImg': 'Supprimer image',
     'settings.bgHint': 'L\'image s\'affiche par-dessus la couleur et désactive tout effet d\'animation du thème, Téléversez des images légères.',
     'settings.data': 'Données', 'settings.dataHint': 'Tout est enregistré uniquement dans ce navigateur. Pour des raisons de sécurité, exportez une copie de vos données avant toute suppression ou importation. Vous pouvez vous connecter pour enregistrer vos données dans le cloud.',
     'settings.export': 'Tout exporter', 'settings.import': 'Importer (écrase tout)', 'settings.deleteAll': 'Supprimer toutes les données',
@@ -259,7 +256,7 @@ Object.assign(I18N.en, {
   'auth.overwriteTitle': 'Existing account',
   'auth.overwriteText': 'This account already has saved data. If you continue, it will replace the data currently on this device. Do you wish to continue?',
   'auth.overwriteBack': 'Go back', 'auth.overwriteOk': 'Continue',
-  'acc.sync': 'Sync now', 'acc.synced': 'Synced.', 'acc.error': 'Could not sync with the cloud. Check your connection.',
+  'acc.error': 'Could not sync with the cloud. Check your connection.',
   'settings.dataHintCloud': 'Your data is stored in your account. Export a copy for safekeeping before deleting or importing.',
   'settings.deleteConfirmCloud': 'ALL your data, including the cloud copy, will be deleted. Continue?'
 });
@@ -274,7 +271,7 @@ Object.assign(I18N.es, {
   'auth.overwriteTitle': 'Cuenta existente',
   'auth.overwriteText': 'Esta cuenta ya tiene datos guardados. Si continúas, reemplazarán los datos que tienes ahora en este dispositivo. ¿deseas continuar?',
   'auth.overwriteBack': 'Volver', 'auth.overwriteOk': 'Continuar',
-  'acc.sync': 'Sincronizar ahora', 'acc.synced': 'Sincronizado.', 'acc.error': 'No se pudo sincronizar con la nube. Revisa tu conexión.',
+  'acc.error': 'No se pudo sincronizar con la nube. Revisa tu conexión.',
   'settings.dataHintCloud': 'Tus datos se guardan en tu cuenta. Exporta una copia por seguridad antes de borrar o importar.',
   'settings.deleteConfirmCloud': 'Se borrarán TODOS tus datos, incluida la copia en la nube. ¿Continuar?'
 });
@@ -289,7 +286,7 @@ Object.assign(I18N.fr, {
   'auth.overwriteTitle': 'Compte existant',
   'auth.overwriteText': 'Ce compte contient déjà des données. Si vous continuez, elles remplaceront les données actuellement présentes sur cet appareil. Souhaitez-vous continuer ?',
   'auth.overwriteBack': 'Revenir', 'auth.overwriteOk': 'Continuer',
-  'acc.sync': 'Synchroniser', 'acc.synced': 'Synchronisé.', 'acc.error': 'Synchronisation impossible. Vérifiez votre connexion.',
+  'acc.error': 'Synchronisation impossible. Vérifiez votre connexion.',
   'settings.dataHintCloud': 'Vos données sont enregistrées dans votre compte. Exportez une copie par mesure de sécurité avant toute suppression ou importation.',
   'settings.deleteConfirmCloud': 'TOUTES vos données, y compris la copie cloud, seront supprimées. Continuer ?'
 });

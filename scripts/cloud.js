@@ -3,10 +3,6 @@ const SUPABASE_KEY = 'sb_publishable_KCu1CyH-A5dIllXIB2SoDg_udx8YibQ';
 
 const cloud = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const cloudSignUp = (email, password) => cloud.auth.signUp({ email, password });
-const cloudSignIn = (email, password) => cloud.auth.signInWithPassword({ email, password });
-const cloudLoadLists = () => cloud.from('lists').select('*');
-
 let cloudUser = null;
 let cloudReady = false;
 let cloudTimer = null;
@@ -224,3 +220,7 @@ async function cloudCleanImages() {
   if (stale.length) await cloud.storage.from(IMG_BUCKET).remove(stale);
   return stale.length;
 }
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && cloudUser && cloudReady) { clearTimeout(cloudTimer); cloudPush(); }
+});

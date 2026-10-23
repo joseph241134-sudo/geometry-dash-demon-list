@@ -6,8 +6,8 @@
 [data-theme] {
   --bg: #0b1118; --panel: #121a24; --panel-banner: #1d3a52; 
   --panel-1: #2f4256; --panel-1-hover: #28384a; --panel-2: #1a2633; --panel-3: #16202b;
-  --line-1: rgba(150, 200, 255, 0.12); --line-2: rgba(140, 180, 220, 0.4);; --outline: var(--panel-1);
-  --button: #2f7fb5; --button-hover: #286e9d;; --accent: var(--button); --card: #16202b;
+  --line-1: rgba(150, 200, 255, 0.12); --line-2: rgba(140, 180, 220, 0.4); --outline: var(--panel-1);
+  --button: #2f7fb5; --button-hover: #286e9d; --accent: var(--button); --card: #16202b;
   --danger: #cd4e49; --danger-hover: #b03e3a;
   --mute: #9fb4c8; --text-1: #e3e8ec; --text-2: #e3e8ec; --text-pri: #ffffff; --text-danger: #d9534f;
   --shadow-1: rgba(0, 0, 0, 0.1); --shadow-2: rgba(0, 0, 0, 0.2); --shadow-3: rgba(0, 0, 0, 0.2);
@@ -288,11 +288,6 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: var(--radius-sm); }
-
-.sr-only {
-  position: absolute; width: 1px; height: 1px; overflow: hidden;
-  clip: rect(0 0 0 0); white-space: nowrap;
-}
 
 .theme-fade, .theme-fade *, .theme-fade *::before {
   transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease !important;
@@ -781,12 +776,6 @@ body.booting::after {
   text-decoration: underline; 
 }
 
-.footer-disclaimer {
-  font-size: 12px;
-  color: var(--mute);
-  opacity: 0.7;
-  margin: 0;
-}
 
 @media (max-width: 640px) {
   .footer-card { 
@@ -850,8 +839,6 @@ body.booting::after {
 /* Páginas legales (privacy.html / terms.html). Usa las variables de tema de main.css */
 body.legal { min-height: 100vh; background: var(--bg); color: var(--text-1); line-height: 1.65; }
 .legal-wrap { max-width: 760px; margin: 0 auto; padding: 32px 20px 56px; }
-.legal-back { display: inline-block; margin-bottom: 20px; color: var(--accent); font-size: 14px; font-weight: 600; text-decoration: none; }
-.legal-back:hover { text-decoration: underline; }
 .legal-card { padding: 28px 30px; background: var(--panel); border: 1px solid var(--line-1); border-radius: var(--radius-box); }
 .legal-card h1 { color: var(--text-1); font-size: 26px; }
 .legal-card .updated { margin: 6px 0 22px; color: var(--mute); font-size: 13px; }

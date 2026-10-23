@@ -243,10 +243,6 @@
 .btn-edit-demon:focus-visible,
 .btn-add-demon-below:focus-visible { opacity: 1; }
 
-@media (hover: none) {
-  .btn-edit-demon, .btn-add-demon-below { opacity: 1; }
-}
-
 .d-creator { margin-top: 10px; color: var(--mute); font-size: 13px; font-weight: 500; }
 
 .demon-stats-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-top: 8px; font-size: 12px; }
@@ -266,8 +262,6 @@
 .d-stat-label { margin-right: 5px; color: var(--mute); font-weight: 500; }
 
 .demon-extra { display: none; } /* modo movil */
-
-.d-peak { flex-shrink: 0; padding-top: 4px; color: var(--mute); font-size: 12.5px; font-weight: 500; }
 
 /* Estado vacío */
 .demons-empty { padding: 48px 20px; text-align: center; background-color: var(--panel); border: 1px dashed var(--line-2); border-radius: var(--radius-sm); }

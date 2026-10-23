@@ -103,7 +103,7 @@ const fmtNum = n => (n === undefined || n === null || n === '') ? '-' : (Number(
 const normalizeText = s => String(s ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
 
 function escapeHTML(str) {
-  if (!str) return '';
+  if (str == null) return '';
   return String(str)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -191,13 +191,6 @@ function mountView(html, animate = true) {
 
 // navigate('') = inicio · navigate('?list=3') · navigate('?settings=1')
 function navigate(search = '') {
-  const onListPage = document.body.dataset.page === 'list';
-  const wantsList = /[?&]list=/.test(search);
-
-  if (wantsList !== onListPage) {                       // cambia de página
-    location.href = (wantsList ? 'list.html' : './') + search;
-    return;
-  }
   history.pushState(null, '', location.pathname + search);
   renderRoute();
   window.scrollTo({ top: 0, behavior: 'instant' });

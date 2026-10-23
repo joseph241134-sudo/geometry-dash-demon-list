@@ -41,7 +41,7 @@ function renderDemonCard(demon, position, index) {
           ${extraChips}
         </div>
       </div>
-            ${extraChips ? `<div class="demon-extra">${extraChips}</div>` : ''}
+      ${extraChips ? `<div class="demon-extra">${extraChips}</div>` : ''}
 
       <button type="button" class="btn-edit-demon" data-edit-demon="${id}" title="${t('card.edit')}">✎</button>
       <button type="button" class="btn-add-demon-below" data-add-demon-after="${id}" title="${t('card.addBelow')}">+</button>

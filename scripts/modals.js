@@ -453,7 +453,7 @@ function openAccountModal() {
     title: t('acc.title'),
     cls: 'modal-sm',
     body: `<p class="dialog-text">${t('acc.logged', { email: escapeHTML(cloudUser.email) })}</p>
-           <div id="accMsg" class="modal-hint"></div>`,
+           <div id="accMsg" class="error-msg"></div>`,
     actions: `
       <button type="button" class="btn-secondary" id="btnAccOut">${t('acc.signOut')}</button>`
   });
@@ -773,11 +773,11 @@ function renderDemonModal(listId, demonData, afterId = null) {
         <div class="form-group"><label>${t('demon.tier')}</label>
           <input type="number" step="0.1" id="demonTier" class="form-input" placeholder="-" autocomplete="off" value="${val('tier')}"></div>
         <div class="form-group"><label>${t('demon.attempts')}</label>
-          <input type="number" id="demonAtt" class="form-input" placeholder="-" autocomplete="off" value="${val('attempts')}"></div>
+          <input type="number" min="0" id="demonAtt" class="form-input" placeholder="-" autocomplete="off" value="${val('attempts')}"></div>
         <div class="form-group"><label>${t('demon.winDate')}</label>
           <input type="date" id="demonDate" class="form-input" autocomplete="off" value="${val('winDate')}"></div>
         <div class="form-group"><label>${t('demon.position')}</label>
-          <input type="number" id="demonPos" class="form-input" min="1" max="${maxPos}" step="1" autocomplete="off" value="${defaultPos}"></div>
+          <input type="number" min="1" id="demonPos" class="form-input" min="1" max="${maxPos}" step="1" autocomplete="off" value="${defaultPos}"></div>
       </div>
       
       <div class="form-group">

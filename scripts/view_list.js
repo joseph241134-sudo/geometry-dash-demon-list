@@ -33,15 +33,15 @@ const SORT_MODES = ['custom', 'recent', 'oldest', 'attempts_desc', 'attempts_asc
 
 const hasActiveFilters = () => !!(listFilters.search || listFilters.difficulty !== 'all' || listFilters.favorite);
 
+const youTubeId = s => {
+  s = String(s || '').trim();
+  return (s.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/) || s.match(/^([\w-]{11})$/) || [])[1] || '';
+};
+const showcaseUrl = s => `https://youtube.com/watch?v=${youTubeId(s)}`;
 function getYouTubeThumbnail(url, quality = 'mqdefault') {
-  if (!url) return '';
-  const match = url.match(/(?:v=|youtu\.be\/|embed\/|shorts\/|^)([a-zA-Z0-9_-]{11})/);
-  const id = match ? match[1] : url;
-  return /^[a-zA-Z0-9_-]{11}$/.test(id) ? `https://i.ytimg.com/vi/${id}/${quality}.jpg` : '';
+  const id = youTubeId(url);
+  return id ? `https://i.ytimg.com/vi/${id}/${quality}.jpg` : '';
 }
-
-const showcaseUrl = s => (s.includes('http') ? s : `https://youtube.com/watch?v=${s}`);
-
 function listSubtitleText() {
   return t('view.subtitle', { name: profileState.username, n: currentList.demons.length });
 }
@@ -160,26 +160,88 @@ function getVisibleDemons() {
 }
 
 // ------------------------------------------------------
-// 5. Vista de la lista (el HTML vive en list.html)
+// 5. Vista principal de la lista
 // ------------------------------------------------------
 
-let listViewBound = false;
+function openListView(listId) {
+  currentList = userLists.find(l => l.id === listId);
+  if (!currentList) {
+    history.replaceState(null, '', location.pathname);
+    return renderMainPage();
+  }
 
-function playViewEnter() {
-  const main = $('main');
-  main.classList.remove('view-enter');
-  void main.offsetWidth;
-  main.classList.add('view-enter');
-  setTimeout(() => main.classList.remove('view-enter'), 900);
-}
+  setPageTitle(currentList.title);
+  isDragLocked = viewPrefs.dragLocked !== false;
+  listFilters = {
+    sort: SORT_MODES.includes(viewPrefs.sort) ? viewPrefs.sort : 'custom',
+    difficulty: 'all',
+    favorite: false,
+    search: ''
+  };
 
-// Eventos: se enlazan una sola vez, el HTML no se vuelve a crear
-function bindListView() {
+  mountView(`
+    <div class="list-view">
+      <div class="list-view-header">
+        <div class="list-view-heading">
+          <h1 class="list-view-title">${escapeHTML(currentList.title)}</h1>
+          <span class="list-view-subtitle" id="listViewSubtitle">${escapeHTML(listSubtitleText())}</span>
+        </div>
+      </div>
+
+      <div class="list-view-controls panel">
+        <div class="filter-popup-wrapper" data-pop-root>
+          <button type="button" id="btnOpenFilter" class="btn-filter-toggle button-square" title="${t('view.filters')}">${svgFilter}</button>
+
+          <div id="filterPopup" class="pop filter-popup-dropdown">
+            <div class="filter-popup-header"><span>${t('view.filters')}</span></div>
+            <div class="filter-popup-section">
+              <span class="filter-popup-label">${t('view.difficulty')}</span>
+              <div class="filter-diff-grid" id="filterDiffGrid">
+                <button type="button" class="filter-diff-pill active" data-diff="all">${t('view.all')}</button>
+                ${DIFFICULTIES.map(d => `
+                  <button type="button" class="filter-diff-pill" data-diff="${d}">${d.replace(' Demon', '')}</button>
+                `).join('')}
+              </div>
+            </div>
+            <div class="filter-popup-section">
+              <span class="filter-popup-label">${t('view.favFilter')}</span>
+              <button type="button" id="btnPopupFav" class="filter-fav-option">
+                <img src="${FAV_ICON.off}" alt="">
+                <span>${t('view.onlyFav')}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="search-box" data-pop-root>
+          ${svgSearch}
+          <input type="text" id="searchDemon" class="form-input search-input-field" placeholder="${t('view.search')}" autocomplete="off" spellcheck="false">
+          <div id="searchAutocomplete" class="pop autocomplete-dropdown"></div>
+        </div>
+
+        <button type="button" id="btnToggleLockDrag" class="button-square toggle" title="${t('view.lock')}"><img alt=""></button>
+
+        <button type="button" id="btnToggleThumb" class="button-square toggle" title="${t('view.thumbYt')}"><img alt=""></button>
+
+        <div class="sort-wrap" data-pop-root>
+          <button type="button" id="btnSort" class="form-input select-btn" title="${t('view.sort')}" aria-haspopup="listbox"><span id="sortLabel"></span></button>
+          <div id="sortMenu" class="pop pop-menu">
+            ${SORT_MODES.map(m => `<button type="button" class="pop-item" data-sort="${m}">${t('sort.' + m)}</button>`).join('')}
+          </div>
+        </div>
+
+      </div>
+
+      <div class="list-view-body">
+        <div class="demons-container" id="demonsContainer"></div>
+        <aside class="list-sidebar panel">
+          <div id="listStatsContainer"></div>
+        </aside>
+      </div>
+    </div>
+  `);
+
   // ---- filtros ----->
-  $('filterDiffGrid').insertAdjacentHTML('beforeend', DIFFICULTIES.map(d => `
-    <button type="button" class="filter-diff-pill" data-diff="${d}">${d.replace(' Demon', '')}</button>
-  `).join(''));
-
   $('btnOpenFilter').addEventListener('click', () => setPop($('filterPopup'), !$('filterPopup').classList.contains('open')));
 
   $('filterDiffGrid').addEventListener('click', (e) => {
@@ -221,6 +283,7 @@ function bindListView() {
     updateThumbButton();
     renderDemons();
   });
+  updateThumbButton();
 
   // ---- orden ----->
   $('btnSort').addEventListener('click', () => setPop($('sortMenu'), !$('sortMenu').classList.contains('open')));
@@ -231,8 +294,9 @@ function bindListView() {
     setPop($('sortMenu'), false);
     renderDemons();
   });
+  syncSortUI();
 
-  // ---- cards ----->
+
   $('demonsContainer').addEventListener('click', (e) => {
     const editBtn = e.target.closest('[data-edit-demon]');
     if (editBtn) return openEditDemonModal(currentList.id, editBtn.dataset.editDemon);
@@ -240,45 +304,6 @@ function bindListView() {
     const addBtn = e.target.closest('[data-add-demon-after]');
     if (addBtn) openAddDemonModal(currentList.id, addBtn.dataset.addDemonAfter);
   });
-}
-
-// Deja los controles en su estado inicial (al abrir y al cambiar de idioma)
-function resetListControls() {
-  $('searchDemon').value = '';
-  ['filterPopup', 'sortMenu', 'searchAutocomplete'].forEach(id => setPop($(id), false));
-
-  $('filterDiffGrid').querySelectorAll('.filter-diff-pill').forEach(b => b.classList.toggle('active', b.dataset.diff === 'all'));
-
-  const fav = $('btnPopupFav');
-  fav.classList.remove('active');
-  fav.querySelector('img').src = FAV_ICON.off;
-
-  $('sortMenu').innerHTML = SORT_MODES.map(m => `<button type="button" class="pop-item" data-sort="${m}">${t('sort.' + m)}</button>`).join('');
-
-  updateThumbButton();
-  syncSortUI();
-}
-
-function openListView(listId) {
-  currentList = userLists.find(l => l.id === listId);
-  if (!currentList) return location.replace('./');
-
-  setPageTitle(currentList.title);
-  destroySortable();
-  isDragLocked = viewPrefs.dragLocked !== false;
-  listFilters = {
-    sort: SORT_MODES.includes(viewPrefs.sort) ? viewPrefs.sort : 'custom',
-    difficulty: 'all',
-    favorite: false,
-    search: ''
-  };
-
-  if (!listViewBound) { bindListView(); listViewBound = true; }
-  resetListControls();
-
-  $('listViewTitle').textContent = currentList.title;
-  $('listView').hidden = false;
-  playViewEnter();
 
   renderDemons();
   renderListStats();

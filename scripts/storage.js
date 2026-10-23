@@ -15,6 +15,8 @@ const STORAGE_VERSION = 2;
 // Normalización
 // ------------------------------------------------------
 
+const safeImg = u => /^(https:\/\/[^\s'"()\\]+|data:image\/(png|jpe?g|webp|gif|svg\+xml);base64,[A-Za-z0-9+\/=]+)$/i.test(u || '') ? u : '';
+
 const uid = (prefix) => `${prefix}_${Date.now()}${Math.random().toString(36).slice(2, 6)}`;
 
 function normalizeDemon(demon) {
@@ -72,6 +74,10 @@ function applySnapshot(data) {
   viewPrefs = { ...viewPrefs, ...(data.viewPrefs || {}) };
   appSettings = { ...DEFAULT_APP_SETTINGS, ...(data.appSettings || {}) };
   delete appSettings.bgColor;
+
+  profileState.avatar = safeImg(profileState.avatar);
+  profileState.banner = safeImg(profileState.banner);
+  appSettings.bgImage = safeImg(appSettings.bgImage)
 }
 
 // ------------------------------------------------------
@@ -111,7 +117,7 @@ function basicSnapshot() {
 }
 
 function saveLocal() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(cloudUser ? basicSnapshot() : buildSnapshot()));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(cloudUser && cloudReady ? basicSnapshot() : buildSnapshot()));
 }
 
 function resetData() {
