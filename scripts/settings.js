@@ -6,7 +6,6 @@ const THEMES = ['blue', 'white', 'dark', 'purple', 'infernal', 'discord', 'atard
 
 const DEFAULT_APP_SETTINGS = {
   theme: 'blue',
-  bgColor: '',
   bgImage: '',
   lang: (navigator.language || 'en').toLowerCase().startsWith('en') ? 'en' : 'es'
 };
@@ -29,10 +28,8 @@ function applyAppearance(fade = false) {
 
   const main = $('main');
   if (!main) return;
-  main.style.backgroundColor = appSettings.bgColor || '';
   main.style.backgroundImage = appSettings.bgImage ? `url("${appSettings.bgImage}")` : '';
-  // con fondo propio se oculta el fondo animado del tema (main.css)
-  main.toggleAttribute('data-custom-bg', !!(appSettings.bgColor || appSettings.bgImage));
+  main.toggleAttribute('data-custom-bg', !!appSettings.bgImage);
 }
 
 // ------------------------------------------------------
@@ -53,16 +50,25 @@ function setLanguage(lang) {
 // ------------------------------------------------------
 
 async function deleteAllData() {
-  if (!await showConfirm(t('settings.deleteConfirm'), { danger: true })) return;
+  if (cloudUser && !cloudReady) return showAlert(t('acc.error'));
+  if (!await showConfirm(t(cloudUser ? 'settings.deleteConfirmCloud' : 'settings.deleteConfirm'), { danger: true })) return;
   const word = await showPrompt(t('settings.deletePrompt'));
   if ((word || '').trim().toUpperCase() !== t('settings.deleteWord')) return;
 
+  resetData();
   localStorage.removeItem(STORAGE_KEY);
+  if (cloudUser && !await cloudPush()) return showAlert(t('acc.error'));   // borra listas + resetea perfil
   location.href = location.pathname;
 }
 
-function exportAllData() {
-  downloadJSON(`mdl_backup_${new Date().toISOString().slice(0, 10)}.json`, buildSnapshot());
+async function exportAllData() {
+  let snap = buildSnapshot();
+  if (cloudUser) {
+    const remote = await cloudFetch();                                      // exporta lo que hay en la nube
+    if (!remote) return showAlert(t('acc.error'));
+    snap = { ...(remote.profile || {}), userLists: remote.lists };
+  }
+  downloadJSON(`mdl_backup_${new Date().toISOString().slice(0, 10)}.json`, snap);
 }
 
 function importAllData(file) {
@@ -80,10 +86,15 @@ function importAllData(file) {
     }
     if (!await showConfirm(t('settings.importConfirm'), { danger: true })) return;
 
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
-    } catch (e) {
-      return showAlert(t('settings.importTooBig'));
+    if (cloudUser) {
+      if (!cloudReady) return showAlert(t('acc.error'));
+      applySnapshot(parsed);
+      await cloudMigrateImages();
+      if (!await cloudPush()) return showAlert(t('acc.error'));            // sube perfil/listas y borra las que no estén
+      saveLocal();
+    } else {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed)); }
+      catch (e) { return showAlert(t('settings.importTooBig')); }
     }
     location.href = location.pathname;
   };
@@ -128,11 +139,6 @@ function openSettingsView() {
               <button type="button" id="btnBgRemove" class="btn-header">${t('settings.removeImg')}</button>
               <input type="file" id="fileBg" accept="image/*" hidden>
             </div>
-            <div class="settings-row">
-              <label for="bgColorInput" class="settings-hint">${t('settings.bgColor')}</label>
-              <input type="color" id="bgColorInput" class="color-input">
-              <button type="button" id="btnBgColorReset" class="btn-header">${t('settings.bgColorReset')}</button>
-            </div>
             <p class="settings-hint">${t('settings.bgHint')}</p>
           </div>
         </div>
@@ -140,7 +146,7 @@ function openSettingsView() {
 
       <section class="settings-section panel" style="--i:2">
         <h2 class="settings-title">${t('settings.data')}</h2>
-        <p class="settings-hint">${t('settings.dataHint')}</p>
+        <p class="settings-hint">${t(cloudUser ? 'settings.dataHintCloud' : 'settings.dataHint')}</p>
         <div class="settings-row">
           <button type="button" id="btnExportAll" class="btn-header">${t('settings.export')}</button>
           <button type="button" id="btnImportAll" class="btn-header">${t('settings.import')}</button>
@@ -153,7 +159,6 @@ function openSettingsView() {
     </div>
   `);
 
-  const colorInput = $('bgColorInput');
 
   const refreshThemeCards = () => {
     document.querySelectorAll('#themeGrid .theme-card').forEach(card => {
@@ -163,12 +168,9 @@ function openSettingsView() {
 
   const refreshBg = () => {
     const preview = $('bgPreview');
-    preview.style.backgroundColor = appSettings.bgColor || '';
     preview.style.backgroundImage = appSettings.bgImage ? `url("${appSettings.bgImage}")` : '';
     preview.style.backgroundSize = appSettings.bgImage ? 'cover' : '';
-    colorInput.value = appSettings.bgColor || cssHex('--bg', '#101011');
     $('btnBgRemove').disabled = !appSettings.bgImage;
-    $('btnBgColorReset').disabled = !appSettings.bgColor;
   };
 
   // ---- Tema ----->
@@ -202,20 +204,6 @@ function openSettingsView() {
 
   $('btnBgRemove').addEventListener('click', () => {
     appSettings.bgImage = '';
-    saveData();
-    applyAppearance();
-    refreshBg();
-  });
-
-  colorInput.addEventListener('input', () => {
-    appSettings.bgColor = colorInput.value;
-    applyAppearance();
-    refreshBg();
-  });
-  colorInput.addEventListener('change', saveData);
-
-  $('btnBgColorReset').addEventListener('click', () => {
-    appSettings.bgColor = '';
     saveData();
     applyAppearance();
     refreshBg();

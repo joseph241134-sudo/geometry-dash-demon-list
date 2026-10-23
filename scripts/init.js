@@ -4,6 +4,10 @@
 function renderRoute() {
   const params = new URLSearchParams(location.search);
   const listId = params.get('list');
+  const onListPage = document.body.dataset.page === 'list';
+
+  if (listId && !onListPage) return location.replace('list.html' + location.search);
+  if (!listId && onListPage) return location.replace('./' + location.search);
 
   if (params.get('settings')) openSettingsView();
   else if (listId) openListView(Number(listId));
@@ -56,15 +60,49 @@ function initGlobalListeners() {
   });
 }
 
-function init() {
-  loadData();
+const hasSession = () =>
+  Object.keys(localStorage).some(k => /^sb-.+-auth-token$/.test(k)) ||
+  /access_token|[?&]code=/.test(location.hash + location.search);
+
+function paintAll() {
   applyAppearance();
   applyLanguage();
   renderHeader();
   renderRoute();
-  initScrollTop();
-  initGlobalListeners();
-  warmUpAPI();
 }
 
-document.addEventListener('DOMContentLoaded', init);
+function init() {
+  loadData();
+  applyAppearance();
+  initScrollTop();
+  initGlobalListeners();
+  renderFooter();
+  warmUpAPI();
+
+  if (!hasSession()) return paintAll();
+
+  document.body.classList.add('booting');
+  let painted = false;
+  const reveal = () => {
+    paintAll();
+    document.body.classList.remove('booting');
+    if (!painted && cloudUser && !cloudReady) showAlert(t('acc.error'));
+    painted = true;
+  };
+  cloudStart().catch(e => console.error('cloudStart', e)).then(reveal);
+  setTimeout(() => { if (!painted && !cloudAwaitingUser) reveal(); }, 8000);
+}
+
+function initLegal() {
+  loadData();
+  applyAppearance();
+  initGlobalListeners();
+  renderFooter();
+
+  const paint = () => { applyLanguage(); renderHeader(); };
+  paint();
+  if (hasSession()) cloudStart().catch(e => console.error('cloudStart', e)).then(paint);
+}
+
+document.addEventListener('DOMContentLoaded', () =>
+  document.body.classList.contains('legal') ? initLegal() : init());

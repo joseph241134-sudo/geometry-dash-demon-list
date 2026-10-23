@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+  <title>Política de privacidad | My Demon List</title>
+  <link rel="icon" type="image/png" href="resources/cube.png">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/cards.css">
+  <link rel="stylesheet" href="styles/panels.css">
+  <link rel="stylesheet" href="styles/modals.css">
+  <link rel="stylesheet" href="styles/view_list.css">
+  <link rel="stylesheet" href="styles/legal.css">
+  <script>try{document.documentElement.setAttribute("data-theme",JSON.parse(localStorage.getItem("mdl_app_data")).appSettings.theme)}catch(e){}</script>
+</head>
+<body class="legal" data-legal="privacy">
+  <header class="header" id="header"></header>
+  <div class="legal-wrap">
+    <article class="legal-card">
+      <div style="display: flex; flex-direction: row; align-items: center; gap: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--line-1);">
+        <div class="square">
+          <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor">
+            <path d="M 12 4.22 C 9.43 4.22 7.34 6.31 7.34 8.88 L 7.34 11.23 L 8.98 11.23 L 8.98 8.88 C 8.98 7.21 10.33 5.86 12 5.86 C 13.67 5.86 15.02 7.21 15.02 8.88 L 15.02 11.23 L 16.66 11.23 L 16.66 8.88 C 16.66 6.31 14.57 4.22 12 4.22 Z" />
+            <path d="M 7.68 10.37 L 16.32 10.37 C 17.12 10.37 17.76 11.01 17.76 11.81 L 17.76 18.34 C 17.76 19.14 17.12 19.78 16.32 19.78 L 7.68 19.78 C 6.88 19.78 6.24 19.14 6.24 18.34 L 6.24 11.81 C 6.24 11.01 6.88 10.37 7.68 10.37 Z M 12 12.62 C 11.39 12.62 10.9 13.12 10.9 13.73 C 10.9 14.21 11.21 14.62 11.62 14.77 L 11.62 17.04 C 11.62 17.25 11.79 17.42 12 17.42 C 12.21 17.42 12.38 17.25 12.38 17.04 L 12.38 14.77 C 12.79 14.62 13.1 14.21 13.1 13.73 C 13.1 13.12 12.61 12.62 12 12.62 Z" />
+          </svg>
+        </div>
+        <h1>Política de privacidad</h1>
+      </div>
+      <p class="updated" style="padding-top: 4px;">Última actualización: 23 de octubre de 2026</p>
+
+      <p>My Demon List es un proyecto independiente creado para organizar tus propias listas de niveles demon y tener un seguimiento de tu avance en <span style="font-weight: 600;">Geometry Dash</span>.</p>
+
+      <h2>1. ¿Qué datos recopilamos?</h2>
+      <ul>
+        <li><strong>Cuenta:</strong> si inicias sesión con Google, recibimos tu correo electrónico y los datos básicos de perfil que Google comparta. No recibimos tu contraseña.</li>
+        <li><strong>Contenido que creas:</strong> tus listas, demons, estadísticas, perfil (nombre, país, avatar, banner), imágenes que subas y ajustes de preferencia (color o imagen de fondo y tema)</li>
+        <li><strong>Datos técnicos:</strong> al usar el autocompletado de niveles, nuestro servidor recibe el texto buscado y tu dirección IP, solo para responder y limitar abusos.</li>
+      </ul>
+
+      <h2>2. ¿Dónde se guardan?</h2>
+      <ul>
+        <li><strong>Sin sesión:</strong> todo se guarda únicamente en tu navegador en el almacenamiento local.</li>
+        <li><strong>Con sesión:</strong> tus datos se guardan en la nube asociados a tu cuenta, para que no los pierdas y puedas verlos iniciando sesión en otros dispositivos. En tu navegador solo quedan preferencias básicas y la sesión.</li>
+      </ul>
+
+      <h2>3. Servicios de terceros</h2>
+      <ul>
+        <li>Google, para el inicio de sesión.</li>
+        <li>Supabase, para autenticación y base de datos.</li>
+        <li>GitHub Pages, para alojar la web, y Render, para el servicio de autocompletado de niveles.</li>
+      </ul>
+
+      <h2>4. ¿Qué no hacemos?</h2>
+      <p>No compartimos tu información con terceros salvo los proveedores necesarios para que la aplicación funcione.</p>
+
+      <h2>5. Tus derechos</h2>
+      <p>Puedes exportar tus datos y borrarlos en cualquier momento desde Ajustes → Datos.</p>
+
+    </article>
+  </div>
+  <footer class="footer" id="footer"></footer>
+  <div id="modalContainer"></div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="scripts/cloud.js"></script>
+<script defer src="scripts/i18n.js"></script>
+<script defer src="scripts/storage.js"></script>
+<script defer src="scripts/settings.js"></script>
+<script defer src="scripts/view_list.js"></script>
+<script defer src="scripts/modals.js"></script>
+<script defer src="scripts/layout.js"></script>
+<script defer src="scripts/main.js"></script>
+<script defer src="scripts/init.js"></script>
+</html>

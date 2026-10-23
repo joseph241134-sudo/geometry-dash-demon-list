@@ -26,6 +26,9 @@
   flex: 1;
   flex-direction: column;
   align-items: center;
+  overflow-y: auto;
+  max-height: 26em;
+  min-height: 0;
   gap: 16px;
   width: 100%;
   padding: 16px;
@@ -40,6 +43,7 @@
 .list-card {
   position: relative;
   display: flex;
+  flex-shrink: 0;
   width: 100%;
   max-width: 520px;
   height: 144px;

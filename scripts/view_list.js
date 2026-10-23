@@ -160,88 +160,26 @@ function getVisibleDemons() {
 }
 
 // ------------------------------------------------------
-// 5. Vista principal de la lista
+// 5. Vista de la lista (el HTML vive en list.html)
 // ------------------------------------------------------
 
-function openListView(listId) {
-  currentList = userLists.find(l => l.id === listId);
-  if (!currentList) {
-    history.replaceState(null, '', location.pathname);
-    return renderMainPage();
-  }
+let listViewBound = false;
 
-  setPageTitle(currentList.title);
-  isDragLocked = viewPrefs.dragLocked !== false;
-  listFilters = {
-    sort: SORT_MODES.includes(viewPrefs.sort) ? viewPrefs.sort : 'custom',
-    difficulty: 'all',
-    favorite: false,
-    search: ''
-  };
+function playViewEnter() {
+  const main = $('main');
+  main.classList.remove('view-enter');
+  void main.offsetWidth;
+  main.classList.add('view-enter');
+  setTimeout(() => main.classList.remove('view-enter'), 900);
+}
 
-  mountView(`
-    <div class="list-view">
-      <div class="list-view-header">
-        <div class="list-view-heading">
-          <h1 class="list-view-title">${escapeHTML(currentList.title)}</h1>
-          <span class="list-view-subtitle" id="listViewSubtitle">${escapeHTML(listSubtitleText())}</span>
-        </div>
-      </div>
-
-      <div class="list-view-controls panel">
-        <div class="filter-popup-wrapper" data-pop-root>
-          <button type="button" id="btnOpenFilter" class="btn-filter-toggle button-square" title="${t('view.filters')}">${svgFilter}</button>
-
-          <div id="filterPopup" class="pop filter-popup-dropdown">
-            <div class="filter-popup-header"><span>${t('view.filters')}</span></div>
-            <div class="filter-popup-section">
-              <span class="filter-popup-label">${t('view.difficulty')}</span>
-              <div class="filter-diff-grid" id="filterDiffGrid">
-                <button type="button" class="filter-diff-pill active" data-diff="all">${t('view.all')}</button>
-                ${DIFFICULTIES.map(d => `
-                  <button type="button" class="filter-diff-pill" data-diff="${d}">${d.replace(' Demon', '')}</button>
-                `).join('')}
-              </div>
-            </div>
-            <div class="filter-popup-section">
-              <span class="filter-popup-label">${t('view.favFilter')}</span>
-              <button type="button" id="btnPopupFav" class="filter-fav-option">
-                <img src="${FAV_ICON.off}" alt="">
-                <span>${t('view.onlyFav')}</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="search-box" data-pop-root>
-          ${svgSearch}
-          <input type="text" id="searchDemon" class="form-input search-input-field" placeholder="${t('view.search')}" autocomplete="off" spellcheck="false">
-          <div id="searchAutocomplete" class="pop autocomplete-dropdown"></div>
-        </div>
-
-        <button type="button" id="btnToggleLockDrag" class="button-square toggle" title="${t('view.lock')}"><img alt=""></button>
-
-        <button type="button" id="btnToggleThumb" class="button-square toggle" title="${t('view.thumbYt')}"><img alt=""></button>
-
-        <div class="sort-wrap" data-pop-root>
-          <button type="button" id="btnSort" class="form-input select-btn" title="${t('view.sort')}" aria-haspopup="listbox"><span id="sortLabel"></span></button>
-          <div id="sortMenu" class="pop pop-menu">
-            ${SORT_MODES.map(m => `<button type="button" class="pop-item" data-sort="${m}">${t('sort.' + m)}</button>`).join('')}
-          </div>
-        </div>
-
-      </div>
-
-      <div class="list-view-body">
-        <div class="demons-container" id="demonsContainer"></div>
-        <aside class="list-sidebar panel">
-          <div id="listStatsContainer"></div>
-        </aside>
-      </div>
-    </div>
-  `);
-
+// Eventos: se enlazan una sola vez, el HTML no se vuelve a crear
+function bindListView() {
   // ---- filtros ----->
+  $('filterDiffGrid').insertAdjacentHTML('beforeend', DIFFICULTIES.map(d => `
+    <button type="button" class="filter-diff-pill" data-diff="${d}">${d.replace(' Demon', '')}</button>
+  `).join(''));
+
   $('btnOpenFilter').addEventListener('click', () => setPop($('filterPopup'), !$('filterPopup').classList.contains('open')));
 
   $('filterDiffGrid').addEventListener('click', (e) => {
@@ -283,7 +221,6 @@ function openListView(listId) {
     updateThumbButton();
     renderDemons();
   });
-  updateThumbButton();
 
   // ---- orden ----->
   $('btnSort').addEventListener('click', () => setPop($('sortMenu'), !$('sortMenu').classList.contains('open')));
@@ -294,9 +231,8 @@ function openListView(listId) {
     setPop($('sortMenu'), false);
     renderDemons();
   });
-  syncSortUI();
 
-
+  // ---- cards ----->
   $('demonsContainer').addEventListener('click', (e) => {
     const editBtn = e.target.closest('[data-edit-demon]');
     if (editBtn) return openEditDemonModal(currentList.id, editBtn.dataset.editDemon);
@@ -304,165 +240,46 @@ function openListView(listId) {
     const addBtn = e.target.closest('[data-add-demon-after]');
     if (addBtn) openAddDemonModal(currentList.id, addBtn.dataset.addDemonAfter);
   });
+}
+
+// Deja los controles en su estado inicial (al abrir y al cambiar de idioma)
+function resetListControls() {
+  $('searchDemon').value = '';
+  ['filterPopup', 'sortMenu', 'searchAutocomplete'].forEach(id => setPop($(id), false));
+
+  $('filterDiffGrid').querySelectorAll('.filter-diff-pill').forEach(b => b.classList.toggle('active', b.dataset.diff === 'all'));
+
+  const fav = $('btnPopupFav');
+  fav.classList.remove('active');
+  fav.querySelector('img').src = FAV_ICON.off;
+
+  $('sortMenu').innerHTML = SORT_MODES.map(m => `<button type="button" class="pop-item" data-sort="${m}">${t('sort.' + m)}</button>`).join('');
+
+  updateThumbButton();
+  syncSortUI();
+}
+
+function openListView(listId) {
+  currentList = userLists.find(l => l.id === listId);
+  if (!currentList) return location.replace('./');
+
+  setPageTitle(currentList.title);
+  destroySortable();
+  isDragLocked = viewPrefs.dragLocked !== false;
+  listFilters = {
+    sort: SORT_MODES.includes(viewPrefs.sort) ? viewPrefs.sort : 'custom',
+    difficulty: 'all',
+    favorite: false,
+    search: ''
+  };
+
+  if (!listViewBound) { bindListView(); listViewBound = true; }
+  resetListControls();
+
+  $('listViewTitle').textContent = currentList.title;
+  $('listView').hidden = false;
+  playViewEnter();
 
   renderDemons();
   renderListStats();
-}
-
-// ======================================================
-// 6. Demon card
-// ======================================================
-
-function demonStatChip(label, value, cls = '') {
-  if (!value) return '';
-  return `<span class="d-stat ${cls}"><span class="d-stat-label">${label}</span>${escapeHTML(value)}</span>`;
-}
-
-function renderDemonCard(demon, position, index) {
-  const ytThumb = viewPrefs.showFaces ? '' : getYouTubeThumbnail(demon.showcase);
-  const id = escapeHTML(String(demon.id));
-  const extraChips =
-    demonStatChip(t('card.tier'), demon.tier ? String(demon.tier) : '', 'd-tier') +
-    demonStatChip(t('card.attempts'), demon.attempts ? Number(demon.attempts).toLocaleString() : '', 'd-att') +
-    demonStatChip(t('card.date'), demon.winDate, 'd-date');
-
-  return `
-    <article class="demon-card" data-id="${id}" style="${diffColorStyle(demon.difficulty)};--i:${Math.min(index, 8)}">
-      <div class="demon-thumb ${ytThumb ? 'has-yt' : 'default-thumb'}">
-        ${ytThumb
-          ? `<a href="${escapeHTML(showcaseUrl(demon.showcase))}" target="_blank" rel="noopener" title="${t('card.showcase')}">
-               <img src="${ytThumb}" alt="" loading="lazy" decoding="async">
-             </a>`
-          : `<img src="${diffIcon(demon.difficulty)}" alt="${escapeHTML(demon.difficulty)}">`}
-      </div>
-
-      <div class="demon-details">
-        <div class="demon-header">
-          <h2 class="demon-name">#${position} - ${escapeHTML(demon.name)}</h2>
-          ${demon.peak ? `<span class="d-peak">- #${Math.floor(Number(demon.peak))}</span>` : ''}
-          ${demon.isFavorite ? `<img class="demon-fav-star" src="${FAV_ICON.on}" alt="">` : ''}
-        </div>
-        ${demon.creator ? `<span class="d-creator">${t('card.publishedBy', { name: escapeHTML(demon.creator) })}</span>` : ''}
-        <div class="demon-stats-row">
-          <span class="d-diff">${escapeHTML(demon.difficulty)}</span>
-          ${extraChips}
-        </div>
-      </div>
-            ${extraChips ? `<div class="demon-extra">${extraChips}</div>` : ''}
-
-      <button type="button" class="btn-edit-demon" data-edit-demon="${id}" title="${t('card.edit')}">✎</button>
-      <button type="button" class="btn-add-demon-below" data-add-demon-after="${id}" title="${t('card.addBelow')}">+</button>
-    </article>
-  `;
-}
-
-function renderDemons() {
-  const container = $('demonsContainer');
-  if (!container) return;
-
-  updateLockButton();
-  const demons = getVisibleDemons();
-
-  if (demons.length === 0) {
-    const hasAny = currentList.demons.length > 0;
-    container.innerHTML = `
-      <div class="demons-empty">
-        <p class="demons-empty-title">${hasAny ? t('view.noMatch') : t('view.empty')}</p>
-        <p class="demons-empty-text">${hasAny ? t('view.noMatchText') : t('view.emptyText')}</p>
-        ${!hasAny ? `<button type="button" id="btnEmptyAddDemon" class="btn-primary" style="margin-top: 12px;">${t('view.addDemon')}</button>` : ''}
-      </div>
-    `;
-    
-    const emptyBtn = container.querySelector('#btnEmptyAddDemon');
-    if (emptyBtn) {
-      emptyBtn.addEventListener('click', () => openAddDemonModal(currentList.id));
-    }
-    return;
-  }
-
-  container.innerHTML = demons
-  .map((d, i) => renderDemonCard(d, d.originalPosition, i))
-  .join('');
-  initSortable();
-}
-
-// ======================================================
-// 7. Barra lateral de estadísticas
-// ======================================================
-
-function renderListStats() {
-  const container = $('listStatsContainer');
-  if (!container) return;
-
-  const demons = currentList.demons || [];
-  const hardest = demons.length ? (demons[0].name || '-') : '-';
-
-  const breakdown = DIFFICULTIES.map(diff => `
-    <div class="diff-col">
-      <img src="${DIFFICULTY[diff].icon}" alt="${diff}" class="diff-icon" title="${diff}">
-      <span class="diff-count">${demons.filter(d => d.difficulty === diff).length}</span>
-    </div>
-  `).join('');
-
-  const bannerImg = profileState.banner ? `background-image:url('${escapeHTML(profileState.banner)}');` : '';
-
-  container.innerHTML = `
-    <div class="profile-banner-container">
-      <div class="profile-banner" style="${bannerStyle()}${bannerImg}"></div>
-      <div class="profile-avatar-wrapper">
-        <img src="${escapeHTML(getAvatar())}" alt="" class="profile-avatar" onerror="this.onerror=null;this.src='${DEFAULT_AVATAR}'">
-      </div>
-    </div>
-
-    <div class="profile-body">
-      <h3 class="profile-title">${escapeHTML(profileState.username) || '-'}</h3>
-      <span class="profile-handle">${escapeHTML(currentList.title || '-')}</span>
-
-      <div class="stats-grid">
-        <div class="stat-card">
-          <span class="stat-card-label">Demons</span>
-          <strong class="stat-card-value">${demons.length}</strong>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card-label">Hardest</span>
-          <strong class="stat-card-value" title="${escapeHTML(hardest)}">${escapeHTML(hardest)}</strong>
-        </div>
-      </div>
-
-      <div class="diff-breakdown-row">${breakdown}</div>
-    </div>
-  `;
-
-  const subtitle = $('listViewSubtitle');
-  if (subtitle) subtitle.textContent = listSubtitleText();
-}
-
-// ======================================================
-// 8. Autocompletado del buscador
-// ======================================================
-
-function renderLocalAutocomplete(query) {
-  const dropdown = $('searchAutocomplete');
-  if (!dropdown) return;
-
-  const matches = query ? rankMatches(currentList.demons, query, d => d.name, 5) : [];
-  if (matches.length === 0) return setPop(dropdown, false);
-
-  dropdown.innerHTML = matches.map((m, i) => `
-    <div class="autocomplete-item local-item" data-index="${i}" style="${diffColorStyle(m.difficulty)}">
-      <span class="json-name">${escapeHTML(m.name)}</span>
-      <span class="d-diff">${escapeHTML(m.difficulty.replace(' Demon', ''))}</span>
-    </div>
-  `).join('');
-  setPop(dropdown, true);
-
-  dropdown.querySelectorAll('.autocomplete-item').forEach(el => {
-    el.addEventListener('click', () => {
-      const input = $('searchDemon');
-      input.value = matches[Number(el.dataset.index)].name;
-      listFilters.search = input.value.trim();
-      setPop(dropdown, false);
-      renderDemons();
-    });
-  });
 }

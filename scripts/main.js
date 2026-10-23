@@ -17,25 +17,6 @@ const getAvatar = () => profileState.avatar || DEFAULT_AVATAR;
 // Iconos SVG
 // ------------------------------------------------------
 
-const svgConfiguration = `
-<svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16" fill="currentColor">
-  <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
-  <circle cx="12" cy="12" r="2" />
-</svg>`;
-
-const svgHome = `
-<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-  <polyline points="9 22 9 12 15 12 15 22"></polyline>
-</svg>`;
-
-const svgGlobe = `
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-  <circle cx="12" cy="12" r="10"></circle>
-  <line x1="2" y1="12" x2="22" y2="12"></line>
-  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-</svg>`;
-
 const svgInfo = `
 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
   <circle cx="12" cy="12" r="10"></circle>
@@ -66,12 +47,6 @@ const svgSearch = `
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <circle cx="10" cy="10" r="6"></circle><line x1="21" y1="21" x2="15" y2="15"></line>
   </svg>`;
-
-const svgPerfil = `
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 2A5 5 0 1 0 12 12A5 5 0 0 0 12 2ZM4 19C4 15.686 7.582 13 12 13C16.418 13 20 15.686 20 19C20 20.105 19.105 21 18 21H6C4.895 21 4 20.105 4 19Z" />
-  </svg>
-`
 
 const svgDemon = `
 <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -216,6 +191,13 @@ function mountView(html, animate = true) {
 
 // navigate('') = inicio · navigate('?list=3') · navigate('?settings=1')
 function navigate(search = '') {
+  const onListPage = document.body.dataset.page === 'list';
+  const wantsList = /[?&]list=/.test(search);
+
+  if (wantsList !== onListPage) {                       // cambia de página
+    location.href = (wantsList ? 'list.html' : './') + search;
+    return;
+  }
   history.pushState(null, '', location.pathname + search);
   renderRoute();
   window.scrollTo({ top: 0, behavior: 'instant' });
@@ -241,58 +223,6 @@ const API_BASE = 'https://mdl-backend-tvpk.onrender.com';
 
 function warmUpAPI() {
   fetch(`${API_BASE}/api/health`, { cache: 'no-store' }).catch(() => {});
-}
-
-
-// -------------------------------------------------------------
-// 1. Header
-// -------------------------------------------------------------
-
-function renderHeader() {
-  const header = $('header');
-  if (!header) return;
-
-  header.innerHTML = `
-    <div class="header-left">
-      <div class="header-brand" title="${t('header.homeTitle')}">
-        <img src="resources/cube.png" alt="">
-        <span>My Demon List</span>
-      </div>
-      <nav class="header-actions">
-        <button type="button" id="btnHeaderMainView" class="btn-header" title="${t('header.home')}">
-          ${svgHome}<span class="btn-label">${t('header.home')}</span>
-        </button>
-        <button type="button" id="btnHeaderSettings" class="btn-header" title="${t('header.settings')}">
-          ${svgConfiguration}<span class="btn-label">${t('header.settings')}</span>
-        </button>
-        <div class="lang-wrap" data-pop-root>
-          <button type="button" id="btnHeaderLang" class="btn-header btn-icon" title="${t('header.language')}" aria-label="${t('header.language')}" aria-haspopup="menu">
-            ${svgGlobe}
-          </button>
-          <div id="langPop" class="pop pop-menu">
-            ${LANGS.map(l => `
-              <button type="button" class="pop-item ${l.id === currentLang() ? 'active' : ''}" data-lang="${l.id}">${l.name}</button>
-            `).join('')}
-          </div>
-        </div>
-      </nav>
-    </div>
-    <button type="button" id="btnHeaderLogin" class="btn-header btn-link-gd">
-      ${svgPerfil}${t('header.login')}
-    </button>
-  `;
-
-  $('btnHeaderMainView').addEventListener('click', () => navigate());
-  $('btnHeaderSettings').addEventListener('click', () => navigate('?settings=1'));
-  $('btnHeaderLang').addEventListener('click', () => setPop($('langPop'), !$('langPop').classList.contains('open')));
-  $('btnHeaderLogin').addEventListener('click', openLoginModal);
-
-  $('langPop').addEventListener('click', (e) => {
-  const item = e.target.closest('[data-lang]');
-  if (!item) return;
-  setPop($('langPop'), false);
-  setLanguage(item.dataset.lang);
-});
 }
 
 // -------------------------------------------------------------
@@ -390,7 +320,7 @@ function renderStatsPanel() {
 
   mainID.textContent = t('profile.id', { id: '-' });
   container.innerHTML = `
-    <button type="button" id="btnStatsInfo" class="btn-info-icon stats-info-btn" title="${escapeHTML(t('stats.infoBtn'))}" aria-label="${escapeHTML(t('stats.infoBtn'))}">${svgInfo}</button>
+    <button type="button" id="btnStatsInfo" class="btn-info-icon stats-info-btn" title="${escapeHTML(t('login.title'))}" aria-label="${escapeHTML(t('login.title'))}">${svgInfo}</button>
     <div class="grid-row">
       ${STAT_ITEMS.map(([icon, field, label]) => `
         <button type="button" class="stat" data-stat="${field}" title="${escapeHTML(t('stats.edit'))}">
@@ -402,7 +332,7 @@ function renderStatsPanel() {
     </div>
   `;
 
-  $('btnStatsInfo').addEventListener('click', openStatsInfoModal);
+  $('btnStatsInfo').addEventListener('click', openLoginModal);
   container.querySelector('.grid-row').addEventListener('click', (e) => {
     const stat = e.target.closest('[data-stat]');
     if (stat) openStatModal(stat.dataset.stat);
@@ -448,7 +378,7 @@ function renderListsCards() {
             <h2 class="card-title">${escapeHTML(list.title)}</h2>
             ${list.isFavorite ? `<img class="card-fav-star" src="${FAV_ICON.on}" alt="" title="${t('list.favorite')}">` : ''}
           </div>
-          <p class="card-author">${t('list.by', { name: escapeHTML(list.author || profileState.username) })}</p>
+          <p class="card-author">${t('list.by', { name: escapeHTML(profileState.username || '') })}</p>
           <p class="card-description">${t('list.info', { n: demons.length, hardest: escapeHTML(hardest) })}</p>
         </div>
 

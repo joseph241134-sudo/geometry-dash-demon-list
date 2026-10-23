@@ -411,8 +411,7 @@ function showInfoModal(title, text) {
   ov.querySelector('[data-ok]').addEventListener('click', () => closeModal(ov));
 }
 
-const openStatsInfoModal = () => showInfoModal(t('stats.infoTitle'), t('stats.infoText'));
-
+// Vincular cuenta de GD (el que abre el botón de info de las stats). Aún sin funcionalidad.
 function openLoginModal() {
   const ov = openModal({
     title: t('login.title'),
@@ -434,6 +433,51 @@ function openLoginModal() {
   $('loginInput').addEventListener('input', () => { $('loginMsg').textContent = ''; });
   // sin funcionalidad
   $('btnLogin').addEventListener('click', () => { $('loginMsg').textContent = t('login.soon'); });
+}
+
+// Cuenta de sincronización: inicio de sesión con Google (Supabase)
+async function cloudSignInGoogle() {
+  try { localStorage.setItem(LOGIN_FLAG, String(Date.now())); } catch (e) {}
+  const { error } = await cloud.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: location.origin + location.pathname }
+  });
+  if (error) showAlert(error.message);
+}
+
+// Solo para sesión iniciada: sincronizar y cerrar sesión
+function openAccountModal() {
+  if (!cloudUser) return openSignInModal();
+
+  const ov = openModal({
+    title: t('acc.title'),
+    cls: 'modal-sm',
+    body: `<p class="dialog-text">${t('acc.logged', { email: escapeHTML(cloudUser.email) })}</p>
+           <div id="accMsg" class="modal-hint"></div>`,
+    actions: `
+      <button type="button" class="btn-secondary" id="btnAccOut">${t('acc.signOut')}</button>`
+  });
+
+  $('btnAccOut').addEventListener('click', () => cloudSignOut());
+}
+
+const svgGoogle = `<svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.7 2.4 30.2 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.3 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.4 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.9-4.7l-7.8-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.8-6.1z"/><path fill="#34A853" d="M24 48c6.2 0 11.4-2 15.2-5.5l-7.5-5.8c-2 1.4-4.7 2.3-7.7 2.3-6.3 0-11.7-4.1-13.6-9.8l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>`;
+
+function openSignInModal() {
+  const link = (href, key) => `<a href="${href}" target="_blank" rel="noopener">${t(key)}</a>`;
+  openModal({
+    title: t('login.title'),
+    cls: 'modal-sm',
+    body: `
+      <p class="dialog-text">${t('auth.text')}</p>
+      <button type="button" class="btn-google" id="btnGoogle">${svgGoogle}<span>${t('auth.google')}</span></button>
+      <p class="legal-note">${t('auth.legal', { terms: link('terms.html', 'legal.terms'), privacy: link('privacy.html', 'legal.privacy') })}</p>`
+  });
+  $('btnGoogle').addEventListener('click', async () => {
+    $('btnGoogle').disabled = true;
+    await cloudSignInGoogle();
+    $('btnGoogle').disabled = false;
+  });
 }
 
 // Mini modal de stat
@@ -689,6 +733,12 @@ function renderDemonModal(listId, demonData, afterId = null) {
   let selectedDifficulty = isEdit && DIFFICULTY[demonData.difficulty] ? demonData.difficulty : 'Easy Demon';
   const val = key => (isEdit ? escapeHTML(String(demonData[key] ?? '')) : '');
 
+  const total = list.demons.length;
+  const maxPos = isEdit ? total : total + 1;
+  const curIdx = isEdit ? list.demons.findIndex(d => String(d.id) === String(demonData.id)) : -1;
+  const afterIdx = afterId !== null ? list.demons.findIndex(d => String(d.id) === String(afterId)) : -1;
+  const defaultPos = isEdit ? curIdx + 1 : (afterIdx === -1 ? total + 1 : afterIdx + 2);
+
   const ov = openModal({
     title: isEdit ? t('demon.edit') : t('demon.add'),
     cls: 'modal-demon',
@@ -726,8 +776,8 @@ function renderDemonModal(listId, demonData, afterId = null) {
           <input type="number" id="demonAtt" class="form-input" placeholder="-" autocomplete="off" value="${val('attempts')}"></div>
         <div class="form-group"><label>${t('demon.winDate')}</label>
           <input type="date" id="demonDate" class="form-input" autocomplete="off" value="${val('winDate')}"></div>
-        <div class="form-group"><label>${t('demon.peak')}</label>
-          <input type="number" id="demonPeak" class="form-input" placeholder="-" autocomplete="off" value="${val('peak')}"></div>
+        <div class="form-group"><label>${t('demon.position')}</label>
+          <input type="number" id="demonPos" class="form-input" min="1" max="${maxPos}" step="1" autocomplete="off" value="${defaultPos}"></div>
       </div>
       
       <div class="form-group">
@@ -829,7 +879,7 @@ function renderDemonModal(listId, demonData, afterId = null) {
     });
   }
 
-  $('btnSaveDemon').addEventListener('click', () => {
+    $('btnSaveDemon').addEventListener('click', () => {
     const name = nameInput.value.trim();
     if (!name) return markInvalid(nameInput);
 
@@ -842,20 +892,15 @@ function renderDemonModal(listId, demonData, afterId = null) {
       tier: $('demonTier').value,
       attempts: $('demonAtt').value,
       winDate: $('demonDate').value,
-      peak: $('demonPeak').value,
       isFavorite: isFav,
     });
 
-    if (isEdit) {
-      const idx = list.demons.findIndex(d => String(d.id) === String(demonData.id));
-      if (idx !== -1) list.demons[idx] = demon;
-    } else if (afterId !== null) {
-      const pos = list.demons.findIndex(d => String(d.id) === String(afterId));
-      list.demons.splice(pos === -1 ? list.demons.length : pos + 1, 0, demon);
-      if (listFilters.sort !== 'custom') setSortMode('custom');
-    } else {
-      list.demons.push(demon);
-    }
+    const pos = Math.min(maxPos, Math.max(1, parseInt($('demonPos').value, 10) || defaultPos));
+    if (isEdit && curIdx !== -1) list.demons.splice(curIdx, 1);
+    list.demons.splice(pos - 1, 0, demon);
+
+    const moved = isEdit ? pos !== defaultPos : pos !== total + 1;
+    if (moved && listFilters.sort !== 'custom') setSortMode('custom');
 
     saveData();
     closeModal(ov);

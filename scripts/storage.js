@@ -27,7 +27,6 @@ function normalizeDemon(demon) {
     tier: demon.tier ?? '',
     attempts: demon.attempts ?? '',
     winDate: demon.winDate || '',
-    peak: demon.peak ?? '',
     isFavorite: !!demon.isFavorite,
     useDefaultIcon: !!demon.useDefaultIcon,
   };
@@ -72,6 +71,7 @@ function applySnapshot(data) {
   filterFavoritesOnly = !!data.filterFavoritesOnly;
   viewPrefs = { ...viewPrefs, ...(data.viewPrefs || {}) };
   appSettings = { ...DEFAULT_APP_SETTINGS, ...(data.appSettings || {}) };
+  delete appSettings.bgColor;
 }
 
 // ------------------------------------------------------
@@ -96,7 +96,8 @@ function loadData() {
 
 function saveData() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(buildSnapshot()));
+    saveLocal();
+    cloudScheduleSync();
     return true;
   } catch (e) {
     console.error('No se pudo guardar en localStorage', e);
@@ -105,11 +106,36 @@ function saveData() {
   }
 }
 
+function basicSnapshot() {
+  return { version: STORAGE_VERSION, filterFavoritesOnly, viewPrefs, appSettings: { ...appSettings, bgImage: '' } };
+}
+
+function saveLocal() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(cloudUser ? basicSnapshot() : buildSnapshot()));
+}
+
+function resetData() {
+  profileStats = normalizeStats({});
+  profileState = { username: 'Player 1', avatar: '', banner: '', bannerColor: '', country: '' };
+  userLists = [];
+  filterFavoritesOnly = false;
+  viewPrefs = { sort: 'custom', dragLocked: false };
+  appSettings = { ...DEFAULT_APP_SETTINGS };
+}
+
 // ------------------------------------------------------
 // Imágenes
 // ------------------------------------------------------
 
-function readImageFile(file, opts = 1280) {
+async function readImageFile(file, opts) {
+  const data = await readImageFileRaw(file, opts);
+  if (!data || !cloudUser || !cloudReady) return data;     // sin sesión: base64 como antes
+  const url = await cloudStoreImage(data);
+  if (!url) { showAlert(t('acc.error')); return null; }
+  return url;
+}
+
+function readImageFileRaw(file, opts = 1280) {
   const { maxSize = 1280, quality = 0.86 } = typeof opts === 'number' ? { maxSize: opts } : opts;
 
   return new Promise((resolve) => {

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="google" content="notranslate">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#101011">
+
+  <title>My Demon List | Geometry Dash</title>
+
+  <link rel="icon" type="image/png" href="resources/cube.png">
+  <link rel="apple-touch-icon" href="resources/cube.png">
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/cards.css">
+  <link rel="stylesheet" href="styles/panels.css">
+  <link rel="stylesheet" href="styles/modals.css">
+  <link rel="stylesheet" href="styles/view_list.css">
+</head>
+<body data-page="list">
+  <header class="header" id="header"></header>
+
+  <main id="main">
+    <div class="list-view" id="listView" hidden>
+
+      <div class="list-view-header">
+        <div class="list-view-heading">
+          <h1 class="list-view-title" id="listViewTitle"></h1>
+          <span class="list-view-subtitle" id="listViewSubtitle"></span>
+        </div>
+      </div>
+
+      <div class="list-view-controls panel">
+        <div class="filter-popup-wrapper" data-pop-root>
+          <button type="button" id="btnOpenFilter" class="btn-filter-toggle button-square" data-i18n-title="view.filters">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line>
+              <line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line>
+              <line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line>
+              <line x1="17" y1="16" x2="23" y2="16"></line>
+            </svg>
+          </button>
+
+          <div id="filterPopup" class="pop filter-popup-dropdown">
+            <div class="filter-popup-header"><span data-i18n="view.filters"></span></div>
+            <div class="filter-popup-section">
+              <span class="filter-popup-label" data-i18n="view.difficulty"></span>
+              <div class="filter-diff-grid" id="filterDiffGrid">
+                <button type="button" class="filter-diff-pill active" data-diff="all" data-i18n="view.all"></button>
+              </div>
+            </div>
+            <div class="filter-popup-section">
+              <span class="filter-popup-label" data-i18n="view.favFilter"></span>
+              <button type="button" id="btnPopupFav" class="filter-fav-option">
+                <img src="resources/fav_off.png" alt="">
+                <span data-i18n="view.onlyFav"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="search-box" data-pop-root>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="10" cy="10" r="6"></circle><line x1="21" y1="21" x2="15" y2="15"></line>
+          </svg>
+          <input type="text" id="searchDemon" class="form-input search-input-field" data-i18n-placeholder="view.search" autocomplete="off" spellcheck="false">
+          <div id="searchAutocomplete" class="pop autocomplete-dropdown"></div>
+        </div>
+
+        <button type="button" id="btnToggleLockDrag" class="button-square toggle" data-i18n-title="view.lock"><img alt=""></button>
+
+        <button type="button" id="btnToggleThumb" class="button-square toggle"><img alt=""></button>
+
+        <div class="sort-wrap" data-pop-root>
+          <button type="button" id="btnSort" class="form-input select-btn" data-i18n-title="view.sort" aria-haspopup="listbox"><span id="sortLabel"></span></button>
+          <div id="sortMenu" class="pop pop-menu"></div>
+        </div>
+      </div>
+
+      <div class="list-view-body">
+        <div class="demons-container" id="demonsContainer"></div>
+        <aside class="list-sidebar panel">
+          <div id="listStatsContainer"></div>
+        </aside>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer" id="footer"></footer>
+  <div id="modalContainer"></div>
+
+  <noscript>
+    <h1>My Demon List</h1>
+    <p>Enable JavaScript to use this page.</p>
+  </noscript>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="scripts/cloud.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
+  <script defer src="scripts/i18n.js"></script>
+  <script defer src="scripts/storage.js"></script>
+  <script defer src="scripts/settings.js"></script>
+  <script defer src="scripts/demon_card.js"></script>
+  <script defer src="scripts/view_list.js"></script>
+  <script defer src="scripts/modals.js"></script>
+  <script defer src="scripts/layout.js"></script>
+  <script defer src="scripts/main.js"></script>
+  <script defer src="scripts/init.js"></script>
+</body>
+</html>
