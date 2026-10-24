@@ -286,6 +286,7 @@
 @media (max-width: 640px) {
   .lists-panel-head { padding: 12px 14px; }
   #listsContainer { padding: 12px; gap: 12px; }
+  .no-lists-msg {font-size: 13px;}
 
   .list-card { height: 128px; }
   .card-content { padding: 12px 0 14px 14px; }
