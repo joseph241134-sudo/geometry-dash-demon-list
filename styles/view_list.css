@@ -200,6 +200,8 @@
 .profile-title { margin: 0 0 2px; color: var(--text-1); font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
 .profile-handle { margin-bottom: 16px; color: var(--mute); font-size: 12.5px; font-weight: 500; }
 
+.profile-country-lists { position: absolute; top: 146px; right: 10px; display: flex; align-items: center; gap: 6px; max-width: 45%; overflow: hidden; color: var(--mute); font-size: 13px; font-weight: 600; white-space: nowrap; text-overflow: ellipsis; }
+
 .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-bottom: 20px; }
 
 .stat-card {
@@ -212,7 +214,7 @@
   border: 1px solid var(--line-1);
   border-radius: var(--radius-button);
 }
-.stat-card-label { margin-bottom: 4px; color: var(--mute); font-size: 12.5px; font-weight: 500; }
+.stat-card-label { margin-bottom: 4px; color: var(--mute); font-size: 12.5px; font-weight: 500; } 
 .stat-card-value { width: 100%; overflow: hidden; color: var(--mute); font-size: 14px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
 
 .diff-breakdown-row {
@@ -279,6 +281,7 @@
   #btnAddDemon { margin-left: auto; }
   .filter-popup-dropdown { width: min(260px, 80vw); }
   .scroll-top-btn { right: 14px; bottom: 14px; }
+  .profile-country-lists {top: 232px; right: 12px; }
 }
 
 

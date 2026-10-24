@@ -135,7 +135,7 @@ function renderFooter() {
 
       <div class="footer-bottom">
         <div class="footer-info-row">
-          <span class="footer-copy">© 2026 <a href="./" class="footer-site-link">mydemonlist.com</a> independent project · create by <span class="footer-devs">Ghabiel</span></span>
+          <span class="footer-copy">© 2026 <a href="./" class="footer-site-link">mydemonlist.com</a> independent project · create by <span class="footer-devs">Bokita</span></span>
         </div>
 
         <nav class="footer-links">

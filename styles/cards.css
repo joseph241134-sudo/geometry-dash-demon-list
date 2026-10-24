@@ -31,7 +31,18 @@
   min-height: 0;
   gap: 16px;
   width: 100%;
-  padding: 16px;
+  padding: 20px 16px;
+}
+
+.gradient-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: linear-gradient(to bottom, transparent, var(--shadow-2)); 
+  pointer-events: none;
+  z-index: 100;
 }
 
 .no-lists-msg { padding: 30px 0; color: var(--mute); text-align: center; font-size: 14px; font-weight: 500; }

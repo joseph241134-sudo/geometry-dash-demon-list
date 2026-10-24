@@ -13,19 +13,40 @@ const I18N = {
     'meta.title': 'My Demon List | Geometry Dash',
     'meta.desc': 'Create and organize your personal Geometry Dash demon lists: tier, attempts, win date, favorites and your stats.',
 
+    'header.home': 'Home', 'header.homeTitle': 'Go home', 'header.settings': 'Settings',
+    'header.language': 'Language', 'header.login': 'Log in',
+//modales --->
     'common.ok': 'OK', 'common.cancel': 'Cancel', 'common.save': 'Save',
     'common.delete': 'Delete', 'common.noPhoto': 'No image', 'o': 'or',
     'dlg.alert': 'Notice', 'dlg.confirm': 'Confirm',
+    
+    'login.title': 'Link account', 'login.user': 'Geometry Dash username or ID:', 'login.submit': 'Link', 'login.soon': 'Coming soon, with faith.',
+    'login.infoBtn': 'Information', 'login.infoTitle': 'Link account',
+    'login.infoText': 'We are still working on this feature. It will be available in upcoming versions :)',
 
-    'header.home': 'Home', 'header.homeTitle': 'Go home', 'header.settings': 'Settings',
-    'header.language': 'Language', 'header.login': 'Log in',
+    'profile.editTitle': 'Edit profile', 'profile.username': 'Username:', 'profile.name': 'your name',
+    'profile.uploadImg': 'Upload image', 'profile.removeImg': 'Remove image',
+    'profile.uploadBanner': 'Upload banner', 'profile.removeBanner': 'Remove banner',
+    'profile.bannerColor': 'Change color',
+
+    'profile.country': 'Nationality:', 'profile.countryPh': 'Search your country...',
+    'profile.editBanner': 'Edit banner', 'profile.editAvatar': 'Edit picture',
+    'color.title': 'Pick a color', 'color.reset': 'Reset', 'color.apply': 'Apply',
 
     'profile.edit': 'Edit profile', 'profile.id': 'ID: {id}',
     'stats.demons': 'Demons', 'stats.moons': 'Moons', 'stats.diamonds': 'Diamonds', 'stats.stars': 'Stars',
     'stats.userCoins': 'User coins', 'stats.secretCoins': 'Secret coins',
     'stats.edit': 'Click to edit', 'stats.value': 'Value:',
+    
+    'listm.new': 'Create new list', 'listm.edit': 'Edit list', 'listm.create': 'Create list', 'listm.saveChanges': 'Save',
+    'listm.banner': 'List banner or image:', 'listm.upload': 'Upload banner', 'listm.remove': 'Remove banner',
+    'listm.name': 'List name:', 'listm.import': 'Import list', 'listm.export': 'Export list',
+    'listm.favTitle': 'Mark as favorite', 'listm.invalidFile': 'The JSON file is not a valid list.',
+    'listm.importOk': 'List imported successfully.', 'listm.importErr': 'Error while processing the JSON file.',
+    'listm.replaceConfirm': 'This will replace the demons of this list with the ones in the file. Continue?',
+    'listm.deleteConfirm': 'Delete "{title}" and all its demons?',
 
-    'lists.title': 'My demon lists', 'lists.count': 'Total lists: {n}', 'lists.add': '+ Add list',
+    'lists.title': 'My demon lists', 'lists.count': 'Total lists: {n}', 'lists.add': '+ Add',
     'lists.filterFav': 'Filter favorites', 'lists.emptyFav': 'You have no lists marked as favorite.',
     'lists.empty': 'Your lists panel is empty. Add your first list!',
     'list.edit': 'Edit list', 'list.view': 'View', 'list.by': 'By {name}',
@@ -43,27 +64,6 @@ const I18N = {
     'sort.recent': 'Newest date', 'sort.oldest': 'Oldest date',
     'card.edit': 'Edit demon', 'card.addBelow': 'Add demon below', 'card.showcase': 'Watch showcase',
     'card.publishedBy': 'published by {name}', 'card.tier': 'Tier:', 'card.attempts': 'Attempts:', 'card.date': 'Date:',
-
-    'profile.editTitle': 'Edit profile', 'profile.username': 'Username:', 'profile.name': 'your name',
-    'profile.uploadImg': 'Upload image', 'profile.removeImg': 'Remove image',
-    'profile.uploadBanner': 'Upload banner', 'profile.removeBanner': 'Remove banner',
-    'profile.bannerColor': 'Change color',
-
-    'profile.country': 'Nationality:', 'profile.countryPh': 'Search your country...',
-    'profile.editBanner': 'Edit banner', 'profile.editAvatar': 'Edit picture',
-    'color.title': 'Pick a color', 'color.reset': 'Reset', 'color.apply': 'Apply',
-
-    'login.title': 'Link account', 'login.user': 'Geometry Dash username or ID:', 'login.submit': 'Link', 'login.soon': 'Coming soon, with faith.',
-    'login.infoBtn': 'Information', 'login.infoTitle': 'Link account',
-    'login.infoText': 'We are still working on this feature. It will be available in upcoming versions :)',
-
-    'listm.new': 'Create new list', 'listm.edit': 'Edit list', 'listm.create': 'Create list', 'listm.saveChanges': 'Save',
-    'listm.banner': 'List banner or image:', 'listm.upload': 'Upload banner', 'listm.remove': 'Remove banner',
-    'listm.name': 'List name:', 'listm.import': 'Import list', 'listm.export': 'Export list',
-    'listm.favTitle': 'Mark as favorite', 'listm.invalidFile': 'The JSON file is not a valid list.',
-    'listm.importOk': 'List imported successfully.', 'listm.importErr': 'Error while processing the JSON file.',
-    'listm.replaceConfirm': 'This will replace the demons of this list with the ones in the file. Continue?',
-    'listm.deleteConfirm': 'Delete "{title}" and all its demons?',
 
     'demon.add': 'Add demon', 'demon.edit': 'Edit demon', 'demon.thumbHint': 'Icon preview - thumbnail:',
     'demon.name': 'Name:', 'demon.yt': 'YouTube URL:', 'demon.position': 'Position:', 
@@ -98,12 +98,22 @@ const I18N = {
     'header.home': 'Inicio', 'header.homeTitle': 'Ir al inicio', 'header.settings': 'Ajustes',
     'header.language': 'Idioma', 'header.login': 'Iniciar sesión',
 
+//modales --->
+
     'profile.edit': 'Editar perfil', 'profile.id': 'ID: {id}',
     'stats.demons': 'Demons', 'stats.moons': 'Moons', 'stats.diamonds': 'Diamonds', 'stats.stars': 'Stars',
     'stats.userCoins': 'User coins', 'stats.secretCoins': 'Secret coins',
     'stats.edit': 'Clic para editar', 'stats.value': 'Valor:',
 
-    'lists.title': 'Mis listas demon', 'lists.count': 'Listas totales: {n}', 'lists.add': '+ Añadir lista',
+    'profile.editTitle': 'Editar perfil', 'profile.username': 'Nombre de usuario:', 'profile.uploadImg': 'Subir imagen',
+    'profile.removeImg': 'Quitar imagen', 'profile.uploadBanner': 'Subir banner', 'profile.removeBanner': 'Quitar banner',
+    'profile.bannerColor': 'Cambiar color', 'profile.name': 'tu nombre',
+
+    'profile.editBanner': 'Editar banner', 'profile.editAvatar': 'Editar imagen',
+    'profile.country': 'Nacionalidad:', 'profile.countryPh': 'Busca tu país...',
+    'color.title': 'Elegir color', 'color.reset': 'Restablecer', 'color.apply': 'Aplicar',
+
+    'lists.title': 'Mis listas demon', 'lists.count': 'Listas totales: {n}', 'lists.add': '+ Añadir',
     'lists.filterFav': 'Filtrar favoritos', 'lists.emptyFav': 'No tienes listas marcadas como favoritas.',
     'lists.empty': 'Tu panel de listas está vacío. ¡Agrega tu primera lista!',
     'list.edit': 'Editar lista', 'list.view': 'Ver', 'list.by': 'Por {name}',
@@ -121,14 +131,6 @@ const I18N = {
     'sort.recent': 'Fecha más reciente', 'sort.oldest': 'Fecha más antigua',
     'card.edit': 'Editar demon', 'card.addBelow': 'Agregar demon debajo', 'card.showcase': 'Ver showcase',
     'card.publishedBy': 'publicado por {name}', 'card.tier': 'Tier:', 'card.attempts': 'Intentos:', 'card.date': 'Fecha:',
-
-    'profile.editTitle': 'Editar perfil', 'profile.username': 'Nombre de usuario:', 'profile.uploadImg': 'Subir imagen',
-    'profile.removeImg': 'Quitar imagen', 'profile.uploadBanner': 'Subir banner', 'profile.removeBanner': 'Quitar banner',
-    'profile.bannerColor': 'Cambiar color', 'profile.name': 'tu nombre',
-
-    'profile.editBanner': 'Editar banner', 'profile.editAvatar': 'Editar imagen',
-    'profile.country': 'Nacionalidad:', 'profile.countryPh': 'Busca tu país...',
-    'color.title': 'Elegir color', 'color.reset': 'Restablecer', 'color.apply': 'Aplicar',
 
     'login.title': 'Vincular cuenta', 'login.user': 'Usuario o ID de Geometry Dash:', 'login.submit': 'Vincular', 'login.soon': 'Próximamente con fe.',
     'login.infoBtn': 'Información', 'login.infoTitle': 'Vincular cuenta',
