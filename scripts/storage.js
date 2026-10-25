@@ -3,9 +3,9 @@
 // ------------------------------------------------------
 // Todo lo que se guarda vive en un solo objeto (STORAGE_KEY).
 // Para persistir algo nuevo:
-//   1) agrégalo en buildSnapshot()   (guardar)
-//   2) agrégalo en applySnapshot()   (cargar)
-//   3) llama a saveData()
+//   1) agregar en buildSnapshot()   (guardar)
+//   2) agregar en applySnapshot()   (cargar)
+//   3) llamar a saveData()
 // ======================================================
 
 const STORAGE_KEY = 'mdl_app_data';

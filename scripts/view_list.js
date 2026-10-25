@@ -9,11 +9,11 @@ let sortableInstance = null;
 let listFilters = { sort: 'custom', difficulty: 'all', favorite: false, search: '' };
 
 const DIFFICULTY = {
-  'Easy Demon':    { icon: 'https://gdladder.com/images/demon_logos/easy_128.webp',    color: '#9651cb' },
-  'Medium Demon':  { icon: 'https://gdladder.com/images/demon_logos/medium_128.webp',  color: '#e241c2' },
-  'Hard Demon':    { icon: 'https://gdladder.com/images/demon_logos/hard_128.webp',    color: '#68de54' },
-  'Insane Demon':  { icon: 'https://gdladder.com/images/demon_logos/insane_128.webp',  color: '#d59c31' },
-  'Extreme Demon': { icon: 'https://gdladder.com/images/demon_logos/extreme_128.webp', color: '#952020' }
+  'Easy Demon':    { icon: 'resources/easy_128.webp',    color: '#9651cb' },
+  'Medium Demon':  { icon: 'resources/medium_128.webp',  color: '#e241c2' },
+  'Hard Demon':    { icon: 'resources/hard_128.webp',    color: '#68de54' },
+  'Insane Demon':  { icon: 'resources/insane_128.webp',  color: '#d59c31' },
+  'Extreme Demon': { icon: 'resources/extreme_128.webp', color: '#952020' }
 };
 const DIFFICULTIES = Object.keys(DIFFICULTY);
 const diffIcon = d => (DIFFICULTY[d] || DIFFICULTY['Easy Demon']).icon;

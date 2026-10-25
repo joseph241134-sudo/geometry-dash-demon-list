@@ -1,8 +1,5 @@
 // ======================================================
-// Layout compartido: header y footer
-// ------------------------------------------------------
-// Lo usan index.html y las páginas legales (privacy / terms).
-// Un solo lugar para cambiar el header o el footer.
+// Layout: header y footer
 // ======================================================
 
 const Form_URL = 'https://forms.gle/qRjqUCUfHmjcK4gx5';
@@ -135,7 +132,7 @@ function renderFooter() {
 
       <div class="footer-bottom">
         <div class="footer-info-row">
-          <span class="footer-copy">© 2026 <a href="./" class="footer-site-link">mydemonlist.com</a> <span data-i18n="footer.copy"></span> <span class="footer-devs">The Gamerlod</span></span>
+          <span class="footer-copy">© 2026 <a href="./" class="footer-site-link">My Demon List</a> <span data-i18n="footer.copy"></span> <span class="footer-devs">The Gamerlod</span></span>
         </div>
 
         <nav class="footer-links">

@@ -208,31 +208,6 @@
   }
 }
 
-[data-theme="discord"] {
-  --bg: #1e1f22;
-  --panel: #2b2d31;
-  --panel-banner: #35373c;
-  --panel-1: #717376;
-  --panel-1-hover: #64666d;
-  --panel-2: #393c41;
-  --panel-3: #303335;
-  --card: #303335;
-  --line-1: rgba(255, 255, 255, 0.08);
-  --line-2: rgba(255, 255, 255, 0.16);
-  
-  --button: #5865f2;
-  --button-hover: #4752c4;
-  
-  --danger: #da373c;
-  --danger-hover: #a1282c;
-  
-  --text-1: #f2f3f5;      
-  --text-2: #dbdee1;    
-  --mute: #aab0b8;         
-  
-  --header-bg: #2b2d31;
-}
-
 [data-theme="halloween"] {
   --bg: #0b0612; --panel: #130a1e; --panel-banner: #3b1254;
   --panel-1: #32164d; --panel-1-hover: #3d1b5e; --panel-2: #1b0e2b; --panel-3: #12081d;

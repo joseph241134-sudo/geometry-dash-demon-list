@@ -9,7 +9,6 @@ let cloudTimer = null;
 let cloudBusy = false;
 let cloudDirty = false;
 
-// Lo último confirmado en la nube: 'profile' y cada lista por id (JSON)
 const cloudLast = new Map();
 
 function cloudSplit() {
@@ -26,7 +25,7 @@ function cloudMarkSynced() {
   lists.forEach(l => cloudLast.set(l.id, JSON.stringify(l)));
 }
 
-// Lee la nube sin tocar nada local: { profile, lists } o null si falla
+// Lee la nube
 async function cloudFetch() {
   if (!cloudUser) return null;
   const [p, l] = await Promise.all([
@@ -37,7 +36,7 @@ async function cloudFetch() {
   return { profile: p.data?.data ?? null, lists: l.data.map(r => r.data).sort((a, b) => a.id - b.id) };
 }
 
-// Sube SOLO lo que cambió
+// Sube lo que cambió
 async function cloudSync() {
   const { profile, lists } = cloudSplit();
   const now = new Date().toISOString();
@@ -68,7 +67,7 @@ async function cloudSync() {
   return true;
 }
 
-// Evita pushes simultáneos; si hay cambios mientras sube, repite
+// Evita pushes simultáneos
 async function cloudPush() {
   if (!cloudUser) return false;
   if (cloudBusy) { cloudDirty = true; return true; }
@@ -93,9 +92,8 @@ async function cloudPull() {
   return 'ok';
 }
 
-// Marca que se acaba de pedir un inicio de sesión (sobrevive a la redirección de Google)
 const LOGIN_FLAG = 'mdl_login_pending';
-let cloudAwaitingUser = false;   // true mientras se espera la decisión del modal
+let cloudAwaitingUser = false;
 
 function consumeLoginFlag() {
   let fresh = false;
@@ -139,7 +137,6 @@ async function cloudStart() {
   cloudUser = data.session?.user ?? null;
   if (!cloudUser) { try { localStorage.removeItem(LOGIN_FLAG); } catch (e) {} return null; }
 
-  // Inicio de sesión recién hecho: si la cuenta ya tiene datos y aquí también, preguntar antes de reemplazar
   if (consumeLoginFlag() && localHasData()) {
     const remote = await cloudFetch();
     if (remote && (remote.profile || remote.lists.length)) {
@@ -152,23 +149,21 @@ async function cloudStart() {
 
   const res = await cloudPull();
   let synced = res === 'ok';
-  if (res === 'empty') synced = await cloudPush();   // primera vez: sube lo local
+  if (res === 'empty') synced = await cloudPush();
   cloudReady = res !== 'error';
-  if (synced) saveLocal();                           // local queda solo con lo básico
+  if (synced) saveLocal();
   if (cloudReady) cloudMigrateImages().then(() => cloudCleanImages()).catch(e => console.error(e));
   return cloudUser;
 }
 
-// keepLocal = true: cierra sesión sin tocar los datos locales (cancelar el reemplazo al iniciar sesión)
 async function cloudSignOut(keepLocal = false) {
   await cloud.auth.signOut();
   cloudUser = null; cloudReady = false; cloudLast.clear();
   clearTimeout(cloudTimer);
   if (keepLocal !== true) {
-    // evita que otra cuenta en este dispositivo herede los datos
     localStorage.setItem(STORAGE_KEY, JSON.stringify(basicSnapshot()));
   }
-  location.replace(location.pathname);   // también limpia ?code= / #access_token de la URL
+  location.replace(location.pathname);
 }
 
 function cloudScheduleSync() {
@@ -191,7 +186,6 @@ async function cloudStoreImage(dataUrl) {
   } catch (e) { console.error('storage', e); return null; }
 }
 
-// Pasa a Storage las imágenes que aún están como base64 (datos antiguos o importados)
 async function cloudMigrateImages() {
   if (!cloudUser || !cloudReady) return false;
   const jobs = [];
