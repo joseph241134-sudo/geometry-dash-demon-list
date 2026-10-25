@@ -6,7 +6,6 @@ const THEMES = ['blue', 'white', 'purple', 'rosa', 'dark','infernal', 'atardecer
 
 const DEFAULT_APP_SETTINGS = {
   theme: 'blue',
-  bgImage: '',
   lang: (l => I18N[l] ? l : 'en')((navigator.language || 'en').slice(0, 2).toLowerCase())
 };
 let appSettings = { ...DEFAULT_APP_SETTINGS };
@@ -25,11 +24,6 @@ function applyAppearance(fade = false) {
     setTimeout(() => root.classList.remove('theme-fade'), 450);
   }
   root.setAttribute('data-theme', theme);
-
-  const main = $('main');
-  if (!main) return;
-  main.style.backgroundImage = appSettings.bgImage ? `url("${appSettings.bgImage}")` : '';
-  main.toggleAttribute('data-custom-bg', !!appSettings.bgImage);
 }
 
 // ------------------------------------------------------
@@ -131,21 +125,6 @@ function openSettingsView() {
       </section>
 
       <section class="settings-section panel" style="--i:1">
-        <h2 class="settings-title">${t('settings.bg')}</h2>
-        <div class="settings-bg-body">
-          <p class="settings-hint">${t('settings.bgHint')}</p>
-          <div class="bg-preview" id="bgPreview"></div>
-          <div class="settings-bg-controls">
-            <div class="settings-row">
-              <button type="button" id="btnBgUpload" class="btn-header">${t('settings.upload')}</button>
-              <button type="button" id="btnBgRemove" class="btn-header">${t('settings.removeImg')}</button>
-              <input type="file" id="fileBg" accept="image/*" hidden>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="settings-section panel" style="--i:2">
         <h2 class="settings-title">${t('settings.data')}</h2>
         <p class="settings-hint">${t(cloudUser ? 'settings.dataHintCloud' : 'settings.dataHint')}</p>
         <div class="settings-row" style="border-bottom: 1px solid var(--line-1); padding-bottom: 12px;">
@@ -168,13 +147,6 @@ function openSettingsView() {
     });
   };
 
-  const refreshBg = () => {
-    const preview = $('bgPreview');
-    preview.style.backgroundImage = appSettings.bgImage ? `url("${appSettings.bgImage}")` : '';
-    preview.style.backgroundSize = appSettings.bgImage ? 'cover' : '';
-    $('btnBgRemove').disabled = !appSettings.bgImage;
-  };
-
   // ---- Tema ----->
   $('themeGrid').addEventListener('click', (e) => {
     const card = e.target.closest('.theme-card');
@@ -183,32 +155,6 @@ function openSettingsView() {
     applyAppearance(true);
     saveData();
     refreshThemeCards();
-    refreshBg();
-  });
-
-  // ---- Fondo ----->
-  $('btnBgUpload').addEventListener('click', () => $('fileBg').click());
-
-  $('fileBg').addEventListener('change', async (e) => {
-    const file = e.target.files[0];
-    e.target.value = '';
-    if (!file) return;
-
-    const img = await readImageFile(file, { maxSize: 1600, quality: 0.8 });
-    if (!img) return;
-
-    const prev = appSettings.bgImage;
-    appSettings.bgImage = img;
-    if (!saveData()) appSettings.bgImage = prev;
-    applyAppearance();
-    refreshBg();
-  });
-
-  $('btnBgRemove').addEventListener('click', () => {
-    appSettings.bgImage = '';
-    saveData();
-    applyAppearance();
-    refreshBg();
   });
 
   // ---- Datos ----->
@@ -222,5 +168,4 @@ function openSettingsView() {
   $('btnDeleteAll').addEventListener('click', deleteAllData);
 
   refreshThemeCards();
-  refreshBg();
 }

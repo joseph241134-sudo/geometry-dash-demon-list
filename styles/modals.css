@@ -46,17 +46,6 @@
   padding-top: 4px;
 }
 
-.modal-card .gradient-overlay {
-  position: absolute; 
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 20px;
-  background: linear-gradient(to bottom, transparent, var(--shadow-2)); 
-  pointer-events: none;
-  z-index: 5;
-}
-
 .modal-title {
   position: sticky;
   top: 0;
@@ -64,7 +53,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 18px 14px 24px;
+  padding: 14px 18px;
   background-color: var(--panel);
   border-bottom: 1px solid var(--line-1);
   box-shadow: 0 0 20px 4px rgba(0, 0, 0, 0.4);
@@ -78,7 +67,7 @@
 .modal-card p { color: var(--mute); font-size: 13.5px; font-weight: 500; line-height: 1.5; letter-spacing: 0.01em; ;}
 .dialog-text { margin-top: 10px; white-space: pre-line}
 
-.thumb-text { white-space: pre-line; display: flex; flex-direction: row; gap: 6px}
+.thumb-text { white-space: pre-line; display: flex; flex-direction: row; gap: 6px;}
 
 .modal-actions {
   display: flex;
@@ -398,7 +387,7 @@
   .modal-profile .modal-body { margin: 0; }
   .pe-fields { margin: 0 16px; }
   .pe-avatar-wrap { left: 16px; }
-  .modal-title { padding-left: 16px; }
+  .modal-title { padding-left: 16px; padding-right: 16px;}
   .modal-actions, .modal-demon .modal-actions { padding: 14px 16px; }
 
   .list-preview-container, .demon-thumb-preview { height: 164px; }

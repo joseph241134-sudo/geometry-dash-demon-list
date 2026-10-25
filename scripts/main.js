@@ -370,7 +370,7 @@ function renderListsCards() {
         <div class="card-content">
           <div class="card-title-row">
             <h2 class="card-title">${escapeHTML(list.title)}</h2>
-            ${list.isFavorite ? `<img class="card-fav-star" src="${FAV_ICON.on}" alt="" title="${t('list.favorite')}">` : ''}
+            ${list.isFavorite ? `<img class="card-fav-star" src="${FAV_ICON.on}" alt="">` : ''}
           </div>
           <p class="card-author">${t('list.by', { name: escapeHTML(profileState.username || '') })}</p>
           <p class="card-description">${t('list.info', { n: demons.length, hardest: escapeHTML(hardest) })}</p>

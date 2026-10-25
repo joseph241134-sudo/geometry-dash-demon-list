@@ -66,7 +66,6 @@ function buildSnapshot() {
 }
 
 function applySnapshot(data) {
-  // gdProfileData = formato de versiones anteriores (mismos nombres de campo)
   profileStats = normalizeStats({ ...(data.gdProfileData || {}), ...(data.profileStats || {}) });
   profileState = { ...profileState, ...(data.profileState || {}) };
   if (Array.isArray(data.userLists)) userLists = data.userLists.map(normalizeList);
@@ -74,10 +73,10 @@ function applySnapshot(data) {
   viewPrefs = { ...viewPrefs, ...(data.viewPrefs || {}) };
   appSettings = { ...DEFAULT_APP_SETTINGS, ...(data.appSettings || {}) };
   delete appSettings.bgColor;
+  delete appSettings.bgImage;
 
   profileState.avatar = safeImg(profileState.avatar);
   profileState.banner = safeImg(profileState.banner);
-  appSettings.bgImage = safeImg(appSettings.bgImage)
 }
 
 // ------------------------------------------------------
@@ -113,7 +112,7 @@ function saveData() {
 }
 
 function basicSnapshot() {
-  return { version: STORAGE_VERSION, filterFavoritesOnly, viewPrefs, appSettings: { ...appSettings, bgImage: '' } };
+  return { version: STORAGE_VERSION, filterFavoritesOnly, viewPrefs, appSettings};
 }
 
 function saveLocal() {

@@ -199,7 +199,7 @@ async function cloudMigrateImages() {
     if (typeof obj[key] === 'string' && obj[key].startsWith('data:'))
       jobs.push(cloudStoreImage(obj[key]).then(u => { if (u) obj[key] = u; }));
   };
-  swap(profileState, 'avatar'); swap(profileState, 'banner'); swap(appSettings, 'bgImage');
+  swap(profileState, 'avatar'); swap(profileState, 'banner');
   userLists.forEach(l => swap(l, 'image'));
   if (!jobs.length) return false;
   await Promise.all(jobs);

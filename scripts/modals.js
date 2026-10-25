@@ -22,7 +22,6 @@ function openModal({ title = '', titleExtra = '', body = '', actions = '', cls =
         <div class="modal-body">${body}</div>
         ${actions ? `<div class="modal-actions">${actions}</div>` : ''}
       </div>
-      <div class="gradient-overlay"></div>
     </div>
 `;
 
@@ -414,28 +413,27 @@ function showInfoModal(title, text) {
   ov.querySelector('[data-ok]').addEventListener('click', () => closeModal(ov));
 }
 
-// Vincular cuenta de GD (el que abre el botón de info de las stats). Aún sin funcionalidad.
 function openLoginModal() {
   const ov = openModal({
-    title: t('login.title'),
-    titleExtra: `<button type="button" id="btnLoginInfo" class="btn-info-icon" title="${escapeHTML(t('login.infoBtn'))}">${svgInfo}</button>`,
+    title: t('sync.title'),
+    titleExtra: `<button type="button" id="btnLoginInfo" class="btn-info-icon" title="${escapeHTML(t('sync.infoBtn'))}">${svgInfo}</button>`,
     cls: 'modal-sm',
     body: `
       <div class="form-group">
-        <label>${t('login.user')}</label>
+        <label>${t('sync.user')}</label>
         <input type="text" id="loginInput" class="form-input" placeholder="robtop - id" spellcheck="false" autocomplete="off">
       </div>
       <div id="loginMsg" class="modal-hint"></div>`,
     actions: `
       <button type="button" class="btn-secondary" id="btnCancelLogin">${t('common.cancel')}</button>
-      <button type="button" class="btn-primary" id="btnLogin">${t('login.submit')}</button>`
+      <button type="button" class="btn-primary" id="btnLogin">${t('sync.submit')}</button>`
   });
 
-  $('btnLoginInfo').addEventListener('click', () => showInfoModal(t('login.infoTitle'), t('login.infoText')));
+  $('btnLoginInfo').addEventListener('click', () => showInfoModal(t('sync.infoTitle'), t('sync.infoText')));
   $('btnCancelLogin').addEventListener('click', () => closeModal(ov));
   $('loginInput').addEventListener('input', () => { $('loginMsg').textContent = ''; });
   // sin funcionalidad
-  $('btnLogin').addEventListener('click', () => { $('loginMsg').textContent = t('login.soon'); });
+  $('btnLogin').addEventListener('click', () => { $('loginMsg').textContent = t('sync.soon'); });
 }
 
 // Cuenta de sincronización: inicio de sesión con Google (Supabase)
@@ -548,7 +546,7 @@ function openListModal(listId = null) {
     body: `
       <div class="form-group">
         <label>${t('listm.banner')}</label>
-        <div class="field-row">
+        <div class="field-row" style="padding-top: 4px">
           ${previewBox('listImgBox', 'listImgPreview')}
           <input type="file" id="fileListImg" accept="image/*" hidden>
         </div>

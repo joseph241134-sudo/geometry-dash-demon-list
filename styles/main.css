@@ -285,7 +285,7 @@ button {
 button:disabled { opacity: 0.45; cursor: not-allowed; }
 button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar { width: 7px; height: 7px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: var(--radius-sm); }
 
@@ -564,7 +564,6 @@ main::before {
   animation: var(--bg-fx-anim);
   will-change: background-position;
 }
-main[data-custom-bg]::before { display: none; }
 main > * { position: relative; z-index: 1; }
 
 main .body { display: flex; flex-direction: column; align-items: center; width: fit-content; padding: 0 12px; gap: 20px; }
@@ -619,20 +618,6 @@ main.view-enter .settings-section {
 .theme-swatches i:nth-child(1) { background: var(--bg-fx), var(--bg); background-size: var(--bg-fx-size); }
 .theme-swatches i:nth-child(2) { background: var(--panel-1); }
 .theme-swatches i:nth-child(3) { background: var(--button); }
-
-.settings-bg-body { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; }
-.settings-bg-controls { display: flex; flex-direction: column; gap: 12px; flex: 1; min-width: 240px; }
-
-.bg-preview {
-  flex-shrink: 0;
-  width: 192px;
-  height: 108px;
-  border-radius: var(--radius-button);
-  border: 2px solid var(--line-1);
-  background: var(--bg-fx), var(--bg);
-  background-size: var(--bg-fx-size);
-  background-position: center;
-}
 
 .color-input {
   width: 44px;
@@ -829,7 +814,6 @@ body.booting::after {
   main { padding: 10px; }
   .text-s { font-size: 21px; }
   .settings-section { padding: 14px; }
-  .bg-preview { width: 100%; height: 120px; }
 }
 
 @media (max-width: 480px) {

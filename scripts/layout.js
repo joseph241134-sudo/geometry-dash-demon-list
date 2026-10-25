@@ -123,7 +123,7 @@ function renderFooter() {
         </div>
 
         <div class="footer-socials">
-          <a href="${Form_URL}" class="social-btn" aria-label="Form" title="${t('footer.reports')}" target="_blank">
+          <a href="${Form_URL}" class="social-btn" data-i18n-title="footer.reports" target="_blank" rel="noopener">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
               <line x1="12" y1="8" x2="12" y2="14" />
@@ -135,7 +135,7 @@ function renderFooter() {
 
       <div class="footer-bottom">
         <div class="footer-info-row">
-          <span class="footer-copy">© 2026 <a href="./" class="footer-site-link">mydemonlist.com</a> ${t('footer.copy')} <span class="footer-devs">The Gamerlod</span></span>
+          <span class="footer-copy">© 2026 <a href="./" class="footer-site-link">mydemonlist.com</a> <span data-i18n="footer.copy"></span> <span class="footer-devs">The Gamerlod</span></span>
         </div>
 
         <nav class="footer-links">

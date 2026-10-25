@@ -12,77 +12,109 @@ const I18N = {
   en: {
     'meta.title': 'My Demon List | Geometry Dash',
     'meta.desc': 'Create and organize your personal Geometry Dash demon lists: tier, attempts, win date, favorites and your stats.',
+  
+  //generales ->
+    'common.ok': 'OK', 'common.cancel': 'Cancel', 'common.save': 'Save', 'common.delete': 'Delete', 
+    'common.noPhoto': 'No image',
+    'dlg.alert': 'Notice', 'dlg.confirm': 'Confirm', 'o': 'or',
+  
+  //header ->
+    'header.home': 'Home', 'header.settings': 'Settings', 'header.language': 'Language', 'header.login': 'Log in',
+  
+  //footer ->
+    'footer.text': 'Create your own level lists and share them.', 'footer.reports': 'Reports', 'footer.copy': 'independent project · created by',
+    'legal.privacy': 'Privacy policy', 'legal.terms': 'Terms of use',
 
-    'header.home': 'Home', 'header.homeTitle': 'Go home', 'header.settings': 'Settings',
-    'header.language': 'Language', 'header.login': 'Log in',
-//modales --->
-    'common.ok': 'OK', 'common.cancel': 'Cancel', 'common.save': 'Save',
-    'common.delete': 'Delete', 'common.noPhoto': 'No image', 'o': 'or',
-    'dlg.alert': 'Notice', 'dlg.confirm': 'Confirm',
-    
-    'login.title': 'Link account', 'login.user': 'Geometry Dash username or ID:', 'login.submit': 'Link', 'login.soon': 'Coming soon, with faith.',
-    'login.infoBtn': 'Information', 'login.infoTitle': 'Link account',
-    'login.infoText': 'We are still working on this feature. It will be available in upcoming versions :)',
-
-    'profile.editTitle': 'Edit profile', 'profile.username': 'Username:', 'profile.name': 'your name',
-    'profile.uploadImg': 'Upload image', 'profile.removeImg': 'Remove image',
-    'profile.uploadBanner': 'Upload banner', 'profile.removeBanner': 'Remove banner',
-    'profile.bannerColor': 'Change color',
-
-    'profile.country': 'Nationality:', 'profile.countryPh': 'Search your country...',
-    'profile.editBanner': 'Edit banner', 'profile.editAvatar': 'Edit picture',
-    'color.title': 'Pick a color', 'color.reset': 'Reset', 'color.apply': 'Apply',
+//vista (SPA): main ----->
 
     'profile.edit': 'Edit profile', 'profile.id': 'ID: {id}',
-    'stats.demons': 'Demons', 'stats.moons': 'Moons', 'stats.diamonds': 'Diamonds', 'stats.stars': 'Stars',
-    'stats.userCoins': 'User coins', 'stats.secretCoins': 'Secret coins',
-    'stats.edit': 'Click to edit', 'stats.value': 'Value:',
-    
-    'listm.new': 'Create new list', 'listm.edit': 'Edit list', 'listm.create': 'Create list', 'listm.saveChanges': 'Save',
-    'listm.banner': 'List banner or image:', 'listm.upload': 'Upload banner', 'listm.remove': 'Remove banner',
-    'listm.name': 'List name:', 'listm.import': 'Import list', 'listm.export': 'Export list',
-    'listm.favTitle': 'Mark as favorite', 'listm.invalidFile': 'The JSON file is not a valid list.',
-    'listm.importOk': 'List imported successfully.', 'listm.importErr': 'Error while processing the JSON file.',
-    'listm.replaceConfirm': 'This will replace the demons of this list with the ones in the file. Continue?',
-    'listm.deleteConfirm': 'Delete "{title}" and all its demons?',
+    'stats.demons': 'Demons', 'stats.moons': 'Moons', 'stats.diamonds': 'Diamonds', 'stats.stars': 'Stars', 'stats.userCoins': 'User coins', 'stats.secretCoins': 'Secret coins', 'stats.edit': 'Click to edit', 'stats.value': 'Value:',
 
-    'lists.title': 'My demon lists', 'lists.count': 'Total lists: {n}', 'lists.add': '+ Add',
-    'lists.filterFav': 'Filter favorites', 'lists.emptyFav': 'You have no lists marked as favorite.',
-    'lists.empty': 'Your lists panel is empty. Add your first list!',
+    'lists.title': 'My demon lists', 'lists.count': 'Total lists: {n}', 'lists.add': '+ Add', 'lists.filterFav': 'Filter favorites', 
+    'lists.empty': 'Your panel is empty. Add your first list!', 'lists.emptyFav': 'You have no lists marked as favorite.',
+
     'list.edit': 'Edit list', 'list.view': 'View', 'list.by': 'By {name}',
-    'list.info': 'Demons: {n} · Hardest: {hardest}', 'list.favorite': 'Favorite list',
+    'list.info': 'Demons: {n} · Hardest: {hardest}',
 
-    'view.subtitle': 'Created by {name} · {n} demons', 'view.filters': 'Filters', 'view.difficulty': 'Difficulty',
-    'view.all': 'All', 'view.favFilter': 'Filter favorites', 'view.onlyFav': 'Favorites only',
-    'view.search': 'Search level...', 'view.lock': 'Lock/unlock dragging', 'view.sort': 'Sort by',
-    'view.addDemon': '+ Demon', 'view.top': 'Back to top',
-    'view.thumbYt': 'show demon icons',
-    'view.noMatch': 'No demon matches the filters', 'view.noMatchText': 'Change the search or the filters to see more results.',
-    'view.empty': 'This list has no demons yet', 'view.emptyText': 'Use "+ Demon" to add your first demon.',
-    'sort.custom': 'Custom order', 'sort.tier_desc': 'Tier (highest)', 'sort.tier_asc': 'Tier (lowest)',
-    'sort.attempts_desc': 'Most attempts', 'sort.attempts_asc': 'Fewest attempts',
-    'sort.recent': 'Newest date', 'sort.oldest': 'Oldest date',
-    'card.edit': 'Edit demon', 'card.addBelow': 'Add demon below', 'card.showcase': 'Watch showcase',
+//modales y pops de modal --->
+
+  //modal-perfil ->
+    'profile.editTitle': 'Edit profile',
+    'profile.uploadImg': 'Upload image', 'profile.removeImg': 'Remove image', 'profile.uploadBanner': 'Upload banner', 'profile.removeBanner': 'Remove banner', 'profile.bannerColor': 'Change color',
+    'profile.editBanner': 'Edit banner', 'profile.editAvatar': 'Edit picture', 'color.title': 'Pick a color', 'color.reset': 'Reset', 'color.apply': 'Apply',
+
+    'profile.username': 'Username:', 'profile.name': 'your name', 'profile.country': 'Nationality:', 'profile.countryPh': 'Search your country...',
+  
+  //modal-iniciar sesion ->
+    'login.title': 'Log in', 'auth.text': 'Sign in to save your lists in the cloud and use them on any device.',
+    'auth.google': 'Continue with Google', 'auth.legal': 'By continuing, you accept our {terms} and {privacy}.',
+
+    'acc.title': 'Account', 'acc.logged': 'Signed in as {email}', 'acc.signOut': 'Sign out',
+
+    'auth.overwriteTitle': 'Existing account', 'auth.overwriteBack': 'Go back', 'auth.overwriteOk': 'Continue',
+    'auth.overwriteText': 'This account already has saved data. If you continue, it will replace the data currently on this device. Do you wish to continue?', 'acc.error': 'Could not sync with the cloud. Check your connection.',
+
+  //modal-vincular (en proceso) ->
+    'sync.title': 'Link account', 'sync.submit': 'Link', 
+    'sync.user': 'Geometry Dash username or ID:', 'sync.soon': 'Coming soon, with faith.',
+
+    'sync.infoBtn': 'Information', 'sync.infoTitle': 'Link account', 'sync.infoText': 'We are still working on this feature. It will be available in upcoming versions :)',
+    
+  //modal-lista ->
+    'listm.new': 'Create new list', 'listm.edit': 'Edit list', 'listm.create': 'Create list', 'listm.saveChanges': 'Save', 'listm.favTitle': 'Mark as favorite', 
+
+    'listm.banner': 'List banner or image:', 'listm.upload': 'Upload banner', 'listm.remove': 'Remove banner', 'listm.name': 'List name:',
+
+    'listm.import': 'Import list', 'listm.export': 'Export list', 
+    'listm.invalidFile': 'This format is not supported.', 'listm.importErr': 'Error, the list could not be imported.', 'listm.importOk': 'List imported successfully.',
+    'listm.replaceConfirm': 'This will replace the demons of this list with the ones in the file. Continue?', 'listm.deleteConfirm': 'Delete \"{title}\" and all its demons? This cannot be undone.',
+    
+  //modal-demon ->
+    'demon.add': 'Add demon', 'demon.edit': 'Edit demon', 'demon.save': 'Save', 'demon.create': 'Add demon',
+
+    'demon.thumbHint': 'Icon preview - thumbnail:', 'demon.name': 'Name:', 'demon.creator': 'Creator:', 'demon.difficulty': 'Difficulty:',
+    'demon.tier': 'Tier:', 'demon.attempts': 'Attempts:', 'demon.winDate': 'Win date:', 'demon.position': 'Position:',
+
+    'demon.yt': 'YouTube URL:',
+
+//vista (SPA): Lista ----->
+
+    'view.subtitle': 'Created by {name} · {n} demons', 
+    'view.filters': 'Filters', 'view.difficulty': 'Difficulty', 'view.all': 'All', 'view.favFilter': 'Filter favorites', 'view.onlyFav': 'Favorites only',
+
+    'view.search': 'Search level...', 'view.lock': 'Lock/unlock dragging', 'view.thumbYt': 'Show demon icons', 'view.sort': 'Sort by',
+
+    'sort.custom': 'Custom order', 'sort.tier_desc': 'Tier (highest)', 'sort.tier_asc': 'Tier (lowest)', 'sort.attempts_desc': 'Most attempts', 
+    'sort.attempts_asc': 'Fewest attempts', 'sort.recent': 'Newest date', 'sort.oldest': 'Oldest date',
+
+    'view.addDemon': '+ Demon', 'view.noMatch': 'No demon matches the filters', 'view.noMatchText': 'Change the search or the filters to see more results.',
+    'view.empty': 'This list has no demons yet', 'view.emptyText': 'Press to add your first demon.',
+
     'card.publishedBy': 'published by {name}', 'card.tier': 'Tier:', 'card.attempts': 'Attempts:', 'card.date': 'Date:',
+    'card.edit': 'Edit demon', 'card.addBelow': 'Add demon below', 'card.showcase': 'Watch showcase',
 
-    'demon.add': 'Add demon', 'demon.edit': 'Edit demon', 'demon.thumbHint': 'Icon preview - thumbnail:',
-    'demon.name': 'Name:', 'demon.yt': 'YouTube URL:', 'demon.position': 'Position:', 
-    'demon.creator': 'Creator:', 'demon.difficulty': 'Difficulty:', 'demon.tier': 'Tier:', 'demon.attempts': 'Attempts:',
-    'demon.winDate': 'Win date:', 'demon.save': 'Save', 'demon.create': 'Add demon',
-    'settings.title': 'Settings', 'settings.subtitle': 'Appearance and local data', 'settings.theme': 'Theme', 'settings.bg': 'Background',
-    'settings.upload': 'Upload image', 'settings.removeImg': 'Remove image',
-    'settings.bgHint': 'The image appears over the color and disables any animation effects from the theme, upload lightweight images.',
-    'settings.data': 'Data', 'settings.dataHint': 'Everything is stored solely within this browser. For security reasons, please export a copy of your data before performing any deletions or imports. You can sign in to save your data to the cloud.',
-    'settings.export': 'Export all', 'settings.import': 'Import (overwrites everything)', 'settings.deleteAll': 'Delete all data',
-    'settings.deleteConfirm': 'ALL your data on this device will be deleted. Continue?',
-    'settings.deletePrompt': 'Type DELETE to confirm', 'settings.deleteWord': 'DELETE',
-    'settings.invalidFile': 'The file is not valid.', 'settings.incompatible': 'The file does not match or is not compatible.',
-    'settings.importConfirm': 'This will replace ALL your current data with the file contents. Continue?',
-    'settings.importTooBig': 'Import failed, the file is too large.',
+    'view.top': 'Back to top',
+
+//vista (SPA): configuracion ----->
+
+    'settings.title': 'Settings', 'settings.subtitle': 'Appearance and data', 
+    
+    'settings.theme': 'Theme', 'settings.themeHint' : 'Preset themes, solid colors and gradients.',
 
     'theme.blue': 'Blue', 'theme.white': 'White', 'theme.dark': 'Dark', 'theme.purple': 'Purple', 'theme.infernal': 'Infernal',
-    'theme.discord': 'Discord', 'theme.atardecer': 'Sunset', 'theme.neon': 'Neon', 'theme.bosque': 'Forest', 'theme.rosa': 'Pastel pink',
+    'theme.atardecer': 'Sunset', 'theme.neon': 'Neon', 'theme.bosque': 'Forest', 'theme.rosa': 'Pastel pink',
     'theme.rosa-dark': 'Dark pink', 'theme.halloween': 'Halloween',
+    
+    'settings.data': 'Your account data', 
+    'settings.dataHint':`All data is stored only in this browser. Clearing the cache or site data may erase everything. You can avoid this by exporting a backup first or by signing in.`,
+    'settings.export': 'Export', 'settings.import': 'Import <small style="color: var(--mute); font-size: 11.5px; ">(overwrites everything)</small>', 
+
+    'settings.invalidFile': 'The file is not valid.', 'settings.incompatible': 'The file does not match or is not compatible.',
+    'settings.importConfirm': 'This will replace ALL your current data with the file contents. Continue?', 'settings.importTooBig': 'Import failed, the file is too large.',
+
+    'settings.delHint': 'Delete all your account data. If you are not signed in, the data saved in this browser will be deleted.', 'settings.dataHintCloud': 'Your data is stored in your account. Export a backup before deleting or importing.', 
+    'settings.deleteConfirm': 'ALL your data on this device will be deleted. There is no way to recover it. Continue?', 'settings.deleteConfirmCloud': 'ALL your account data will be deleted. There is no way to recover it. Continue?',
+    'settings.deleteAll': 'Delete all data', 'settings.deletePrompt': 'Type DELETE to confirm', 'settings.deleteWord': 'DELETE',
 
     'storage.full': 'Changes could not be saved: the browser storage is full. Try smaller images.'
   },
@@ -90,218 +122,223 @@ const I18N = {
   es: {
     'meta.title': 'My Demon List | Geometry Dash',
     'meta.desc': 'Crea y organiza tus listas personales de demons de Geometry Dash: tier, intentos, fecha de victoria, favoritos y tus estadísticas.',
-
-    'common.ok': 'Aceptar', 'common.cancel': 'Cancelar', 'common.save': 'Guardar',
-    'common.delete': 'Eliminar', 'common.noPhoto': 'Sin imagen',
+  
+  //generales ->
+    'common.ok': 'Aceptar', 'common.cancel': 'Cancelar', 'common.save': 'Guardar', 'common.delete': 'Eliminar', 
+    'common.noPhoto': 'Sin imagen',
     'dlg.alert': 'Aviso', 'dlg.confirm': 'Confirmar', 'o': 'o',
+  
+  //header ->
+    'header.home': 'Inicio', 'header.settings': 'Ajustes', 'header.language': 'Idioma', 'header.login': 'Iniciar sesión',
+  
+  //footer ->
+    'footer.text': 'Crea tus propias listas de niveles y compártelas.', 'footer.reports': 'Reportes', 'footer.copy': 'proyecto independiente · creado por',
+    'legal.privacy': 'Política de privacidad', 'legal.terms': 'Términos de uso',
 
-    'header.home': 'Inicio', 'header.homeTitle': 'Ir al inicio', 'header.settings': 'Ajustes',
-    'header.language': 'Idioma', 'header.login': 'Iniciar sesión',
-
-//modales --->
+//vista (SPA): main ----->
 
     'profile.edit': 'Editar perfil', 'profile.id': 'ID: {id}',
-    'stats.demons': 'Demons', 'stats.moons': 'Moons', 'stats.diamonds': 'Diamonds', 'stats.stars': 'Stars',
-    'stats.userCoins': 'User coins', 'stats.secretCoins': 'Secret coins',
-    'stats.edit': 'Clic para editar', 'stats.value': 'Valor:',
+    'stats.demons': 'Demons', 'stats.moons': 'Moons', 'stats.diamonds': 'Diamonds', 'stats.stars': 'Stars', 'stats.userCoins': 'User coins', 'stats.secretCoins': 'Secret coins', 'stats.edit': 'Clic para editar', 'stats.value': 'Valor:',
 
-    'profile.editTitle': 'Editar perfil', 'profile.username': 'Nombre de usuario:', 'profile.uploadImg': 'Subir imagen',
-    'profile.removeImg': 'Quitar imagen', 'profile.uploadBanner': 'Subir banner', 'profile.removeBanner': 'Quitar banner',
-    'profile.bannerColor': 'Cambiar color', 'profile.name': 'tu nombre',
+    'lists.title': 'Mis listas demon', 'lists.count': 'Listas totales: {n}', 'lists.add': '+ Añadir', 'lists.filterFav': 'Filtrar favoritos', 
+    'lists.empty': 'Tu panel está vacío. ¡Agrega tu primera lista!', 'lists.emptyFav': 'No tienes listas marcadas como favoritas.',
 
-    'profile.editBanner': 'Editar banner', 'profile.editAvatar': 'Editar imagen',
-    'profile.country': 'Nacionalidad:', 'profile.countryPh': 'Busca tu país...',
-    'color.title': 'Elegir color', 'color.reset': 'Restablecer', 'color.apply': 'Aplicar',
-
-    'lists.title': 'Mis listas demon', 'lists.count': 'Listas totales: {n}', 'lists.add': '+ Añadir',
-    'lists.filterFav': 'Filtrar favoritos', 'lists.emptyFav': 'No tienes listas marcadas como favoritas.',
-    'lists.empty': 'Tu panel está vacío. ¡Agrega tu primera lista!',
     'list.edit': 'Editar lista', 'list.view': 'Ver', 'list.by': 'Por {name}',
-    'list.info': 'Demons: {n} · Hardest: {hardest}', 'list.favorite': 'Lista favorita',
+    'list.info': 'Demons: {n} · Hardest: {hardest}',
 
-    'view.subtitle': 'Creada por {name} · {n} demons', 'view.filters': 'Filtros', 'view.difficulty': 'Dificultad',
-    'view.all': 'Todas', 'view.favFilter': 'Filtrar favoritos', 'view.onlyFav': 'Solo favoritos',
-    'view.search': 'Buscar nivel...', 'view.lock': 'Bloquear/desbloquear arrastre', 'view.sort': 'Ordenar por',
-    'view.addDemon': '+ Demon', 'view.top': 'Volver arriba',
-    'view.thumbYt': 'Mostrar iconos Demon',
-    'view.noMatch': 'Ningún demon coincide con los filtros', 'view.noMatchText': 'Cambia la búsqueda o los filtros para ver más resultados.',
-    'view.empty': 'Esta lista aún no tiene demons', 'view.emptyText': 'Pulsa para añadir tu primer demon.',
-    'sort.custom': 'Orden personalizado', 'sort.tier_desc': 'Tier (más alto)', 'sort.tier_asc': 'Tier (más bajo)',
-    'sort.attempts_desc': 'Más intentos', 'sort.attempts_asc': 'Menos intentos',
-    'sort.recent': 'Fecha más reciente', 'sort.oldest': 'Fecha más antigua',
-    'card.edit': 'Editar demon', 'card.addBelow': 'Agregar demon debajo', 'card.showcase': 'Ver showcase',
-    'card.publishedBy': 'publicado por {name}', 'card.tier': 'Tier:', 'card.attempts': 'Intentos:', 'card.date': 'Fecha:',
+//modales y pops de modal --->
 
-    'login.title': 'Vincular cuenta', 'login.user': 'Usuario o ID de Geometry Dash:', 'login.submit': 'Vincular', 'login.soon': 'Próximamente con fe.',
-    'login.infoBtn': 'Información', 'login.infoTitle': 'Vincular cuenta',
-    'login.infoText': 'Aún estamos trabajando en esta función. Estará disponible en próximas versiones :)',
+  //modal-perfil ->
+    'profile.editTitle': 'Editar perfil',
+    'profile.uploadImg': 'Subir imagen', 'profile.removeImg': 'Quitar imagen', 'profile.uploadBanner': 'Subir banner', 'profile.removeBanner': 'Quitar banner', 'profile.bannerColor': 'Cambiar color',
+    'profile.editBanner': 'Editar banner', 'profile.editAvatar': 'Editar imagen', 'color.title': 'Elegir color', 'color.reset': 'Restablecer', 'color.apply': 'Aplicar',
 
-    'listm.new': 'Crear nueva lista', 'listm.edit': 'Editar lista', 'listm.create': 'Crear lista', 'listm.saveChanges': 'Guardar',
-    'listm.banner': 'Banner o imagen de lista:', 'listm.upload': 'Subir banner', 'listm.remove': 'Eliminar banner',
-    'listm.name': 'Nombre de lista:', 'listm.import': 'Importar lista', 'listm.export': 'Exportar lista',
-    'listm.favTitle': 'Marcar como favorita', 'listm.invalidFile': 'El archivo JSON no tiene un formato válido de lista.',
-    'listm.importOk': 'Lista importada con éxito.', 'listm.importErr': 'Error al procesar el archivo JSON.',
-    'listm.replaceConfirm': 'Esto reemplazará los demons de esta lista por los del archivo. ¿Continuar?',
-    'listm.deleteConfirm': '¿Eliminar "{title}" y todos sus demons?',
+    'profile.username': 'Nombre de usuario:', 'profile.name': 'tu nombre', 'profile.country': 'Nacionalidad:', 'profile.countryPh': 'Busca tu país...',
+  
+  //modal-iniciar sesion ->
+    'login.title': 'Iniciar sesión', 'auth.text': 'Inicia sesión para guardar tus listas en la nube y usarlas en cualquier dispositivo.',
+    'auth.google': 'Continuar con Google', 'auth.legal': 'Al continuar, aceptas nuestros {terms} y la {privacy}.',
 
-    'demon.add': 'Agregar demon', 'demon.edit': 'Editar demon', 'demon.thumbHint': 'Previsualización de icono - miniatura:',
-    'demon.name': 'Nombre:', 'demon.yt': 'URL de Youtube:', 'demon.position': 'Posición:', 
-    'demon.creator': 'Creador:', 'demon.difficulty': 'Dificultad:', 'demon.tier': 'Tier:', 'demon.attempts': 'Intentos:',
-    'demon.winDate': 'Fecha de victoria:', 'demon.save': 'Guardar', 'demon.create': 'Agregar demon',
+    'acc.title': 'Cuenta', 'acc.logged': 'Sesión iniciada como {email}', 'acc.signOut': 'Cerrar sesión',
 
-    'settings.title': 'Configuración', 'settings.subtitle': 'Apariencia y datos', 
+    'auth.overwriteTitle': 'Cuenta existente', 'auth.overwriteBack': 'Volver', 'auth.overwriteOk': 'Continuar',
+    'auth.overwriteText': 'Esta cuenta ya tiene datos guardados. Si continúas, reemplazarán los datos que tienes ahora en este dispositivo. ¿Deseas continuar?', 'acc.error': 'No se pudo sincronizar con la nube. Revisa tu conexión.',
+
+  //modal-vincular (en proceso) ->
+    'sync.title': 'Vincular cuenta', 'sync.submit': 'Vincular', 
+    'sync.user': 'Usuario o ID de Geometry Dash:', 'sync.soon': 'Próximamente, con fe.',
+
+    'sync.infoBtn': 'Información', 'sync.infoTitle': 'Vincular cuenta', 'sync.infoText': 'Aún estamos trabajando en esta función. Estará disponible en próximas versiones :)',
     
-    'settings.theme': 'Tema', 'settings.themeHint' : 'Temas prestablecidos, colores sólidos y gradientes.',
+  //modal-lista ->
+    'listm.new': 'Crear nueva lista', 'listm.edit': 'Editar lista', 'listm.create': 'Crear lista', 'listm.saveChanges': 'Guardar', 'listm.favTitle': 'Marcar como favorito', 
 
-    'settings.bg': 'Fondo',
-    'settings.bgHint': 'La imagen se ve por encima del color y desactiva cualquier efecto de animación del tema, sube imágenes ligeras.',
-    'settings.upload': 'Subir imagen', 'settings.removeImg': 'Quitar imagen',
+    'listm.banner': 'Banner o imagen de lista:', 'listm.upload': 'Subir banner', 'listm.remove': 'Eliminar banner', 'listm.name': 'Nombre de lista:',
+
+    'listm.import': 'Importar lista', 'listm.export': 'Exportar lista', 
+    'listm.invalidFile': 'Este formato no es compatible.', 'listm.importErr': 'Error, no se pudo importar la lista.', 'listm.importOk': 'Lista importada con éxito.',
+    'listm.replaceConfirm': 'Esto reemplazará los demons de esta lista por los del archivo. ¿Continuar?', 'listm.deleteConfirm': '¿Eliminar "{title}" y todos sus demons? No se podrán recuperar.',
+    
+  //modal-demon ->
+    'demon.add': 'Agregar demon', 'demon.edit': 'Editar demon', 'demon.save': 'Guardar', 'demon.create': 'Agregar demon',
+
+    'demon.thumbHint': 'Previsualización de icono - miniatura:', 'demon.name': 'Nombre:', 'demon.creator': 'Creador:', 'demon.difficulty': 'Dificultad:',
+    'demon.tier': 'Tier:', 'demon.attempts': 'Intentos:', 'demon.winDate': 'Fecha de victoria:', 'demon.position': 'Posición:',
+
+    'demon.yt': 'URL de YouTube:',
+
+//vista (SPA): Lista ----->
+
+    'view.subtitle': 'Creado por {name} · {n} demons', 
+    'view.filters': 'Filtros', 'view.difficulty': 'Dificultad', 'view.all': 'Todas', 'view.favFilter': 'Filtrar favoritos', 'view.onlyFav': 'Solo favoritos',
+
+    'view.search': 'Buscar nivel...', 'view.lock': 'Bloquear/desbloquear arrastre', 'view.thumbYt': 'Mostrar iconos Demon', 'view.sort': 'Ordenar por',
+
+    'sort.custom': 'Orden personalizado', 'sort.tier_desc': 'Tier (más alto)', 'sort.tier_asc': 'Tier (más bajo)', 'sort.attempts_desc': 'Más intentos', 
+    'sort.attempts_asc': 'Menos intentos', 'sort.recent': 'Fecha más reciente', 'sort.oldest': 'Fecha más antigua',
+
+    'view.addDemon': '+ Demon', 'view.noMatch': 'Ningún demon coincide con los filtros', 'view.noMatchText': 'Cambia la búsqueda o filtros para ver más resultados.',
+    'view.empty': 'Esta lista aún no tiene demons', 'view.emptyText': 'Pulsa para añadir tu primer demon.',
+
+    'card.publishedBy': 'publicado por {name}', 'card.tier': 'Tier:', 'card.attempts': 'Intentos:', 'card.date': 'Fecha:',
+    'card.edit': 'Editar demon', 'card.addBelow': 'Agregar demon debajo', 'card.showcase': 'Ver showcase',
+
+    'view.top': 'Volver arriba',
+
+//vista (SPA): configuracion ----->
+
+    'settings.title': 'Ajustes', 'settings.subtitle': 'Apariencia y datos', 
+    
+    'settings.theme': 'Tema', 'settings.themeHint' : 'Temas preestablecidos, colores sólidos y gradientes.',
+
+    'theme.blue': 'Azul', 'theme.white': 'Blanco', 'theme.dark': 'Oscuro', 'theme.purple': 'Púrpura', 'theme.infernal': 'Infernal',
+    'theme.atardecer': 'Atardecer', 'theme.neon': 'Neón', 'theme.bosque': 'Bosque', 'theme.rosa': 'Rosa pastel',
+    'theme.rosa-dark': 'Rosa oscuro', 'theme.halloween': 'Halloween',
     
     'settings.data': 'Datos de tu cuenta', 
     'settings.dataHint':`Todos los datos se guardan únicamente en este navegador, al borrar el caché o datos del sistema es posible que toda la información se pierda. Puedes evitar esto exportando una copia de seguridad antes o iniciando sesión.`,
     'settings.export': 'Exportar', 'settings.import': 'Importar <small style="color: var(--mute); font-size: 11.5px; ">(sobreescribe todo)</small>', 
 
     'settings.invalidFile': 'El archivo no es válido.', 'settings.incompatible': 'El archivo no coincide o no es compatible.',
-    'settings.importConfirm': 'Esto reemplazará TODOS tus datos actuales por los del archivo. ¿Continuar?',
-    'settings.importTooBig': 'Error al importar, archivo demasiado grande.',
+    'settings.importConfirm': 'Esto reemplazará TODOS tus datos actuales por los del archivo. ¿Continuar?', 'settings.importTooBig': 'Error al importar, archivo demasiado grande.',
 
-    'settings.delHint': 'Borrar todos los datos de tu cuenta, si no has iniciado sesión se borrará la caché.', 'settings.deleteAll': 'Borrar todos los datos',
-    'settings.deleteConfirm': 'Se borrarán TODOS tus datos en este dispositivo. No hay manera de recuperarlos. ¿Continuar?',
-    'settings.deletePrompt': 'Escribe BORRAR para confirmar', 'settings.deleteWord': 'BORRAR',
+    'settings.delHint': 'Borrar todos los datos de tu cuenta. Si no has iniciado sesión, se borrarán los datos guardados en este navegador.', 'settings.dataHintCloud': 'Tus datos se guardan en tu cuenta. Exporta una copia de seguridad antes de borrar o importar.', 
+    'settings.deleteConfirm': 'Se borrarán TODOS tus datos en este dispositivo. No hay manera de recuperarlos. ¿Continuar?', 'settings.deleteConfirmCloud': 'Se borrarán TODOS los datos de tu cuenta, no hay manera de recuperarlos. ¿Continuar?',
+    'settings.deleteAll': 'Borrar todos los datos', 'settings.deletePrompt': 'Escribe BORRAR para confirmar', 'settings.deleteWord': 'BORRAR',
 
-    'theme.blue': 'Azul', 'theme.white': 'Blanco', 'theme.dark': 'Dark', 'theme.purple': 'Púrpura', 'theme.infernal': 'Infernal',
-    'theme.discord': 'Discord', 'theme.atardecer': 'Atardecer', 'theme.neon': 'Neón', 'theme.bosque': 'Bosque', 'theme.rosa': 'Rosa pastel',
-    'theme.rosa-dark': 'Rosa Oscuro', 'theme.halloween': 'Halloween',
-
-    'storage.full': 'No se pudieron guardar los cambios: el almacenamiento del navegador está lleno. Prueba con imágenes más pequeñas.'
+    'storage.full': 'No se pudieron guardar los cambios: el almacenamiento del navegador está lleno. Prueba con imágenes más ligeras.'
   },
 
   fr: {
     'meta.title': 'My Demon List | Geometry Dash',
     'meta.desc': 'Créez et organisez vos listes personnelles de demons Geometry Dash : tier, essais, date de victoire, favoris et vos statistiques.',
-
-    'common.ok': 'Ok', 'common.cancel': 'Annuler', 'common.save': 'Enregistrer',
-    'common.delete': 'Supprimer', 'common.noPhoto': 'Sans image',
+  
+  //generales ->
+    'common.ok': 'Ok', 'common.cancel': 'Annuler', 'common.save': 'Enregistrer', 'common.delete': 'Supprimer', 
+    'common.noPhoto': 'Sans image',
     'dlg.alert': 'Avis', 'dlg.confirm': 'Confirmer', 'o': 'ou',
+  
+  //header ->
+    'header.home': 'Accueil', 'header.settings': 'Paramètres', 'header.language': 'Langue', 'header.login': 'Se connecter',
+  
+  //footer ->
+    'footer.text': 'Créez vos propres listes de niveaux et partagez-les.', 'footer.reports': 'Signalements', 'footer.copy': 'projet indépendant · créé par',
+    'legal.privacy': 'Politique de confidentialité', 'legal.terms': 'Conditions d\'utilisation',
 
-    'header.home': 'Accueil', 'header.homeTitle': 'Aller à l\'accueil', 'header.settings': 'Paramètres',
-    'header.language': 'Langue', 'header.login': 'Se connecter',
+//vista (SPA): main ----->
 
     'profile.edit': 'Modifier le profil', 'profile.id': 'ID : {id}',
-    'stats.demons': 'Demons', 'stats.moons': 'Moons', 'stats.diamonds': 'Diamonds', 'stats.stars': 'Stars',
-    'stats.userCoins': 'User coins', 'stats.secretCoins': 'Secret coins',
-    'stats.edit': 'Cliquer pour modifier', 'stats.value': 'Valeur :',
+    'stats.demons': 'Demons', 'stats.moons': 'Moons', 'stats.diamonds': 'Diamonds', 'stats.stars': 'Stars', 'stats.userCoins': 'User coins', 'stats.secretCoins': 'Secret coins', 'stats.edit': 'Cliquer pour modifier', 'stats.value': 'Valeur :',
 
-    'lists.title': 'Mes listes demon', 'lists.count': 'Listes totales : {n}', 'lists.add': '+ Ajouter',
-    'lists.filterFav': 'Filtrer les favoris', 'lists.emptyFav': 'Vous n\'avez aucune liste marquée comme favorite.',
-    'lists.empty': 'Votre panneau de listes est vide. Ajoutez votre première liste !',
+    'lists.title': 'Mes listes demon', 'lists.count': 'Listes totales : {n}', 'lists.add': '+ Ajouter', 'lists.filterFav': 'Filtrer les favoris', 
+    'lists.empty': 'Votre panneau est vide. Ajoutez votre première liste !', 'lists.emptyFav': 'Vous n\'avez aucune liste marquée comme favorite.',
+
     'list.edit': 'Modifier la liste', 'list.view': 'Voir', 'list.by': 'Par {name}',
-    'list.info': 'Demons : {n} · Hardest : {hardest}', 'list.favorite': 'Liste favorite',
+    'list.info': 'Demons : {n} · Hardest : {hardest}',
 
-    'view.subtitle': 'Créée par {name} · {n} demons', 'view.filters': 'Filtres', 'view.difficulty': 'Difficulté',
-    'view.all': 'Toutes', 'view.favFilter': 'Filtrer les favoris', 'view.onlyFav': 'Uniquement favoris',
-    'view.search': 'Rechercher un niveau...', 'view.lock': 'Verrouiller/déverrouiller le glissement', 'view.sort': 'Trier par',
-    'view.addDemon': '+ Demon', 'view.top': 'Retour en haut',
-    'view.thumbYt': 'Afficher les icônes demon',
-    'view.noMatch': 'Aucun demon ne correspond aux filtres', 'view.noMatchText': 'Modifiez la recherche ou les filtres pour voir plus de résultats.',
-    'view.empty': 'Cette liste ne contient pas encore de demons', 'view.emptyText': 'Utilisez "+ Demon" pour ajouter votre premier demon.',
-    'sort.custom': 'Ordre personnalisé', 'sort.tier_desc': 'Tier (plus élevé)', 'sort.tier_asc': 'Tier (plus bas)',
-    'sort.attempts_desc': 'Plus d\'essais', 'sort.attempts_asc': 'Moins d\'essais',
-    'sort.recent': 'Date la plus récente', 'sort.oldest': 'Date la plus ancienne',
-    'card.edit': 'Modifier le demon', 'card.addBelow': 'Ajouter un demon ci-dessous', 'card.showcase': 'Voir le showcase',
+//modales y pops de modal --->
+
+  //modal-perfil ->
+    'profile.editTitle': 'Modifier le profil',
+    'profile.uploadImg': 'Téléverser une image', 'profile.removeImg': 'Supprimer l\'image', 'profile.uploadBanner': 'Téléverser une bannière', 'profile.removeBanner': 'Supprimer la bannière', 'profile.bannerColor': 'Changer de couleur',
+    'profile.editBanner': 'Modifier la bannière', 'profile.editAvatar': 'Modifier l\'image', 'color.title': 'Choisir une couleur', 'color.reset': 'Réinitialiser', 'color.apply': 'Appliquer',
+
+    'profile.username': 'Nom d\'utilisateur :', 'profile.name': 'votre nom', 'profile.country': 'Nationalité :', 'profile.countryPh': 'Recherchez votre pays...',
+  
+  //modal-iniciar sesion ->
+    'login.title': 'Se connecter', 'auth.text': 'Connectez-vous pour enregistrer vos listes dans le cloud et les utiliser sur tout appareil.',
+    'auth.google': 'Continuer avec Google', 'auth.legal': 'En continuant, vous acceptez nos {terms} et la {privacy}.',
+
+    'acc.title': 'Compte', 'acc.logged': 'Connecté en tant que {email}', 'acc.signOut': 'Se déconnecter',
+
+    'auth.overwriteTitle': 'Compte existant', 'auth.overwriteBack': 'Revenir', 'auth.overwriteOk': 'Continuer',
+    'auth.overwriteText': 'Ce compte contient déjà des données. Si vous continuez, elles remplaceront les données actuellement présentes sur cet appareil. Souhaitez-vous continuer ?', 'acc.error': 'Synchronisation impossible. Vérifiez votre connexion.',
+
+  //modal-vincular (en proceso) ->
+    'sync.title': 'Lier un compte', 'sync.submit': 'Lier', 
+    'sync.user': 'Nom d\'utilisateur ou ID Geometry Dash :', 'sync.soon': 'Bientôt disponible, avec foi.',
+
+    'sync.infoBtn': 'Informations', 'sync.infoTitle': 'Lier un compte', 'sync.infoText': 'Nous travaillons encore sur cette fonctionnalité. Elle sera disponible dans les prochaines versions :)',
+    
+  //modal-lista ->
+    'listm.new': 'Créer une nouvelle liste', 'listm.edit': 'Modifier la liste', 'listm.create': 'Créer la liste', 'listm.saveChanges': 'Enregistrer', 'listm.favTitle': 'Marquer comme favorite', 
+
+    'listm.banner': 'Bannière ou image de la liste :', 'listm.upload': 'Téléverser une bannière', 'listm.remove': 'Supprimer la bannière', 'listm.name': 'Nom de la liste :',
+
+    'listm.import': 'Importer une liste', 'listm.export': 'Exporter la liste', 
+    'listm.invalidFile': 'Ce format n\'est pas pris en charge.', 'listm.importErr': 'Erreur : impossible d\'importer la liste.', 'listm.importOk': 'Liste importée avec succès.',
+    'listm.replaceConfirm': 'Cela remplacera les demons de cette liste par ceux du fichier. Continuer ?', 'listm.deleteConfirm': 'Supprimer \"{title}\" et tous ses demons ? Impossible de les récupérer.',
+    
+  //modal-demon ->
+    'demon.add': 'Ajouter un demon', 'demon.edit': 'Modifier le demon', 'demon.save': 'Enregistrer', 'demon.create': 'Ajouter un demon',
+
+    'demon.thumbHint': 'Aperçu de l\'icône - miniature :', 'demon.name': 'Nom :', 'demon.creator': 'Créateur :', 'demon.difficulty': 'Difficulté :',
+    'demon.tier': 'Tier :', 'demon.attempts': 'Essais :', 'demon.winDate': 'Date de victoire :', 'demon.position': 'Position :',
+
+    'demon.yt': 'URL YouTube :',
+
+//vista (SPA): Lista ----->
+
+    'view.subtitle': 'Créée par {name} · {n} demons', 
+    'view.filters': 'Filtres', 'view.difficulty': 'Difficulté', 'view.all': 'Toutes', 'view.favFilter': 'Filtrer les favoris', 'view.onlyFav': 'Uniquement les favoris',
+
+    'view.search': 'Rechercher un niveau...', 'view.lock': 'Verrouiller/déverrouiller le glissement', 'view.thumbYt': 'Afficher les icônes demon', 'view.sort': 'Trier par',
+
+    'sort.custom': 'Ordre personnalisé', 'sort.tier_desc': 'Tier (plus élevé)', 'sort.tier_asc': 'Tier (plus bas)', 'sort.attempts_desc': 'Plus d\'essais', 
+    'sort.attempts_asc': 'Moins d\'essais', 'sort.recent': 'Date la plus récente', 'sort.oldest': 'Date la plus ancienne',
+
+    'view.addDemon': '+ Demon', 'view.noMatch': 'Aucun demon ne correspond aux filtres', 'view.noMatchText': 'Modifiez la recherche ou les filtres pour voir plus de résultats.',
+    'view.empty': 'Cette liste ne contient pas encore de demons', 'view.emptyText': 'Appuyez pour ajouter votre premier demon.',
+
     'card.publishedBy': 'publié par {name}', 'card.tier': 'Tier :', 'card.attempts': 'Essais :', 'card.date': 'Date :',
+    'card.edit': 'Modifier le demon', 'card.addBelow': 'Ajouter un demon ci-dessous', 'card.showcase': 'Voir le showcase',
 
-    'profile.editTitle': 'Modifier le profil', 'profile.username': 'Nom d\'utilisateur :', 'profile.name': 'ton nom',
-    'profile.uploadImg': 'Téléverser image', 'profile.removeImg': 'Supprimer image',
-    'profile.uploadBanner': 'Téléverser bannière', 'profile.removeBanner': 'Supprimer bannière',
-    'profile.bannerColor': 'Changer de couleur',
+    'view.top': 'Retour en haut',
 
-    'profile.country': 'Nationalité :', 'profile.countryPh': 'Recherchez votre pays...',
-    'profile.editBanner': 'Modifier la bannière', 'profile.editAvatar': 'Modifier l\'image',
-    'color.title': 'Choisir une couleur', 'color.reset': 'Réinitialiser', 'color.apply': 'Appliquer',
+//vista (SPA): configuracion ----->
 
-    'login.title': 'Lier un compte', 'login.user': 'Nom d\'utilisateur ou ID Geometry Dash :', 'login.submit': 'Lier', 'login.soon': 'Bientôt disponible, avec foi.',
-    'login.infoBtn': 'Informations', 'login.infoTitle': 'Lier un compte',
-    'login.infoText': 'Nous travaillons encore sur cette fonctionnalité. Elle sera disponible dans les prochaines versions :)',
-
-    'listm.new': 'Créer une nouvelle liste', 'listm.edit': 'Modifier la liste', 'listm.create': 'Créer la liste', 'listm.saveChanges': 'Enregistrer',
-    'listm.banner': 'Bannière ou image de la liste :', 'listm.upload': 'Téléverser bannière', 'listm.remove': 'Supprimer bannière',
-    'listm.name': 'Nom de la liste :', 'listm.import': 'Importer une liste', 'listm.export': 'Exporter la liste',
-    'listm.favTitle': 'Marquer comme favorite', 'listm.invalidFile': 'Le fichier JSON n\'a pas un format de liste valide.',
-    'listm.importOk': 'Liste importée avec succès.', 'listm.importErr': 'Erreur lors du traitement du fichier JSON.',
-    'listm.replaceConfirm': 'Cela remplacera les demons de cette liste par ceux du fichier. Continuer ?',
-    'listm.deleteConfirm': 'Supprimer "{title}" et tous ses demons ?',
-
-    'demon.add': 'Ajouter un demon', 'demon.edit': 'Modifier le demon', 'demon.thumbHint': `Aperçu de l'icône - miniature :`,
-    'demon.name': 'Nom :', 'demon.yt': 'URL Youtube:', 'demon.position': 'Position :',
-    'demon.creator': 'Créateur :', 'demon.difficulty': 'Difficulté :', 'demon.tier': 'Tier :', 'demon.attempts': 'Essais :',
-    'demon.winDate': 'Date de victoire :', 'demon.save': 'Enregistrer', 'demon.create': 'Ajouter un demon',
-
-    'settings.title': 'Paramètres', 'settings.subtitle': 'Apparence et données locales', 'settings.theme': 'Thème', 'settings.bg': 'Arrière-plan',
-    'settings.upload': 'Téléverser image', 'settings.removeImg': 'Supprimer image',
-    'settings.bgHint': 'L\'image s\'affiche par-dessus la couleur et désactive tout effet d\'animation du thème, Téléversez des images légères.',
-    'settings.data': 'Données', 'settings.dataHint': 'Tout est enregistré uniquement dans ce navigateur. Pour des raisons de sécurité, exportez une copie de vos données avant toute suppression ou importation. Vous pouvez vous connecter pour enregistrer vos données dans le cloud.',
-    'settings.export': 'Tout exporter', 'settings.import': 'Importer (écrase tout)', 'settings.deleteAll': 'Supprimer toutes les données',
-    'settings.deleteConfirm': 'TOUTES vos données sur cet appareil seront supprimées. Continuer ?',
-    'settings.deletePrompt': 'Tapez SUPPRIMER pour confirmer', 'settings.deleteWord': 'SUPPRIMER',
-    'settings.invalidFile': 'Le fichier n\'est pas valide.', 'settings.incompatible': 'Le fichier ne correspond pas ou n\'est pas compatible.',
-    'settings.importConfirm': 'Cela remplacera TOUTES vos données actuelles par le contenu du fichier. Continuer ?',
-    'settings.importTooBig': 'Échec de l\'importation, le fichier est trop volumineux.',
+    'settings.title': 'Paramètres', 'settings.subtitle': 'Apparence et données', 
+    
+    'settings.theme': 'Thème', 'settings.themeHint' : 'Thèmes prédéfinis, couleurs unies et dégradés.',
 
     'theme.blue': 'Bleu', 'theme.white': 'Blanc', 'theme.dark': 'Sombre', 'theme.purple': 'Violet', 'theme.infernal': 'Infernal',
     'theme.atardecer': 'Coucher de soleil', 'theme.neon': 'Néon', 'theme.bosque': 'Forêt', 'theme.rosa': 'Rose pastel',
-    'theme.rosa-dark': 'Rose Sombre', 'theme.discord': 'Discord', 'theme.halloween': 'Halloween',
+    'theme.rosa-dark': 'Rose sombre', 'theme.halloween': 'Halloween',
+    
+    'settings.data': 'Données de votre compte', 
+    'settings.dataHint':`Toutes les données sont enregistrées uniquement dans ce navigateur ; vider le cache ou les données du site peut tout effacer. Vous pouvez l'éviter en exportant d'abord une sauvegarde ou en vous connectant.`,
+    'settings.export': 'Exporter', 'settings.import': 'Importer <small style="color: var(--mute); font-size: 11.5px; ">(écrase tout)</small>', 
+
+    'settings.invalidFile': 'Le fichier n\'est pas valide.', 'settings.incompatible': 'Le fichier ne correspond pas ou n\'est pas compatible.',
+    'settings.importConfirm': 'Cela remplacera TOUTES vos données actuelles par le contenu du fichier. Continuer ?', 'settings.importTooBig': 'Échec de l\'importation, le fichier est trop volumineux.',
+
+    'settings.delHint': 'Supprimer toutes les données de votre compte. Si vous n\'êtes pas connecté, les données enregistrées dans ce navigateur seront supprimées.', 'settings.dataHintCloud': 'Vos données sont enregistrées dans votre compte. Exportez une sauvegarde avant toute suppression ou importation.', 
+    'settings.deleteConfirm': 'TOUTES vos données sur cet appareil seront supprimées. Impossible de les récupérer. Continuer ?', 'settings.deleteConfirmCloud': 'TOUTES les données de votre compte seront supprimées. Impossible de les récupérer. Continuer ?',
+    'settings.deleteAll': 'Supprimer toutes les données', 'settings.deletePrompt': 'Tapez SUPPRIMER pour confirmer', 'settings.deleteWord': 'SUPPRIMER',
 
     'storage.full': 'Les modifications n\'ont pas pu être enregistrées : le stockage du navigateur est plein. Essayez avec des images plus petites.'
   }
 };
-
-Object.assign(I18N.en, {
-  'auth.text': 'Sign in to save your lists in the cloud and use them on any device.',
-  'auth.google': 'Continue with Google',
-  'auth.legal': 'By continuing, you accept our {terms} and {privacy}.',
-  'legal.privacy': 'Privacy', 'legal.terms': 'Terms of use',
-  'footer.text': 'Your space to create your own tier lists and share them.',
-  'footer.copy': '© 2026 · Independent project',
-  'acc.title': 'Account', 'acc.logged': 'Signed in as {email}', 'acc.signOut': 'Sign out',
-  'auth.overwriteTitle': 'Existing account',
-  'auth.overwriteText': 'This account already has saved data. If you continue, it will replace the data currently on this device. Do you wish to continue?',
-  'auth.overwriteBack': 'Go back', 'auth.overwriteOk': 'Continue',
-  'acc.error': 'Could not sync with the cloud. Check your connection.',
-  'settings.dataHintCloud': 'Your data is stored in your account. Export a copy for safekeeping before deleting or importing.',
-  'settings.deleteConfirmCloud': 'ALL your data, including the cloud copy, will be deleted. Continue?'
-});
-Object.assign(I18N.es, {
-  'auth.text': 'Inicia sesión para guardar tus listas en la nube y usarlas en cualquier dispositivo.',
-  'auth.google': 'Continuar con Google',
-  'auth.legal': 'Al continuar, aceptas nuestros {terms} y la {privacy}.',
-  'legal.privacy': 'Política de privacidad', 'legal.terms': 'Términos de uso',
-  'footer.text': 'Crea tus propias listas de niveles y compartelas.',
-  'footer.reports': 'reportes',
-  'footer.copy': 'proyecto independiente · creado por',
-  'acc.title': 'Cuenta', 'acc.logged': 'Sesión iniciada como {email}', 'acc.signOut': 'Cerrar sesión',
-  'auth.overwriteTitle': 'Cuenta existente',
-  'auth.overwriteText': 'Esta cuenta ya tiene datos guardados. Si continúas, reemplazarán los datos que tienes ahora en este dispositivo. ¿deseas continuar?',
-  'auth.overwriteBack': 'Volver', 'auth.overwriteOk': 'Continuar',
-  'acc.error': 'No se pudo sincronizar con la nube. Revisa tu conexión.',
-  'settings.dataHintCloud': 'Tus datos se guardan en tu cuenta. Exporta una copia por seguridad antes de borrar o importar.',
-  'settings.deleteConfirmCloud': 'Se borrarán TODOS los datos de tu cuenta, no hay manera de recuperarlos ¿Continuar?'
-});
-Object.assign(I18N.fr, {
-  'auth.text': 'Connectez-vous pour enregistrer vos listes dans le cloud et les utiliser sur tout appareil.',
-  'auth.google': 'Continuer avec Google',
-  'auth.legal': 'En continuant, vous acceptez nos {terms} et la {privacy}.',
-  'legal.privacy': 'Politique de confidentialité', 'legal.terms': 'Conditions d\'utilisation',
-  'footer.text': 'Ton espace pour créer tes propres listes de niveaux et les partager.',
-  'footer.copy': '© 2026 · Projet indépendant',
-  'acc.title': 'Compte', 'acc.logged': 'Connecté en tant que {email}', 'acc.signOut': 'Se déconnecter',
-  'auth.overwriteTitle': 'Compte existant',
-  'auth.overwriteText': 'Ce compte contient déjà des données. Si vous continuez, elles remplaceront les données actuellement présentes sur cet appareil. Souhaitez-vous continuer ?',
-  'auth.overwriteBack': 'Revenir', 'auth.overwriteOk': 'Continuer',
-  'acc.error': 'Synchronisation impossible. Vérifiez votre connexion.',
-  'settings.dataHintCloud': 'Vos données sont enregistrées dans votre compte. Exportez une copie par mesure de sécurité avant toute suppression ou importation.',
-  'settings.deleteConfirmCloud': 'TOUTES vos données, y compris la copie cloud, seront supprimées. Continuer ?'
-});
 
 const currentLang = () => (typeof appSettings !== 'undefined' && I18N[appSettings.lang]) ? appSettings.lang : 'en';
 
@@ -391,8 +428,8 @@ const LEGAL_I18N = {
         <h2>1. What data is collected?</h2>
         <ul>
           <li><strong>Account:</strong> if you sign in with Google, we receive your email address and the basic profile data Google provides. We do not receive your password.</li>
-          <li><strong>Content you create:</strong> your lists, demons, statistics and profile. We also receive any images you upload and your preference settings (background image and theme).</li>
-          <li><strong>Technical data:</strong> when you use level autocomplete, our server receives the text searched and your IP address in order to respond and limit abuse.</li>
+          <li><strong>Content you create:</strong> your lists, demons, statistics and profile. We also receive any images you upload and your preference settings (theme).</li>
+          <li><strong>Technical data:</strong> when you use level autocomplete, the server receives the search text and your IP address in order to provide a response and limit abuse.</li>
         </ul>
 
         <h2>2. Where is it stored?</h2>
@@ -456,7 +493,7 @@ const LEGAL_I18N = {
         </ul>
 
         <h2>4. Availability and liability</h2>
-        <p>The service is provided "as is". As an independent project, we do not guarantee that it will be uninterrupted or error-free. We are not responsible for accidental loss of data or progress. We recommend exporting a backup copy from <b>Settings</b>.</p>
+        <p>The service is provided "as is". As an independent project, it is not guaranteed to be uninterrupted or error-free. We are not responsible for accidental loss of data or progress. We recommend exporting a backup copy from <b>Settings</b>.</p>
 
         <h2>5. Suspension</h2>
         <p>We may limit or delete accounts that violate these terms.</p>
@@ -487,8 +524,8 @@ const LEGAL_I18N = {
         <h2>1. Quelles données sont collectées ?</h2>
         <ul>
           <li><strong>Compte :</strong> si vous vous connectez avec Google, nous recevons votre adresse e-mail et les données de profil de base fournies par Google. Nous ne recevons pas votre mot de passe.</li>
-          <li><strong>Contenu que vous créez :</strong> vos listes, demons, statistiques et profil. Nous recevons aussi les images que vous téléversez et vos paramètres de préférence (image de fond et thème).</li>
-          <li><strong>Données techniques :</strong> lorsque vous utilisez l'autocomplétion des niveaux, notre serveur reçoit le texte recherché et votre adresse IP afin de répondre et de limiter les abus.</li>
+          <li><strong>Contenu que vous créez :</strong> vos listes, demons, statistiques et profil. Nous recevons aussi les images que vous téléversez et vos paramètres de préférence (thème).</li>
+          <li><strong>Données techniques :</strong> lorsque vous utilisez l'autocomplétion des niveaux, le serveur reçoit le texte recherché ainsi que votre adresse IP, afin de fournir une réponse et de limiter les abus.</li>
         </ul>
 
         <h2>2. Où sont-elles stockées ?</h2>
@@ -552,7 +589,7 @@ const LEGAL_I18N = {
         </ul>
 
         <h2>4. Disponibilité et responsabilité</h2>
-        <p>Le service est fourni « tel quel ». Étant un projet indépendant, nous ne garantissons pas qu'il sera ininterrompu ou sans erreur. Nous ne sommes pas responsables de la perte accidentelle de données ou de progression. Nous vous recommandons d'exporter une copie de sauvegarde depuis les <b>Paramètres</b>.</p>
+        <p>Le service est fourni « tel quel ». Étant un projet indépendant, il n’est pas garanti qu’il soit ininterrompu ou exempt d’erreurs. Nous ne sommes pas responsables de la perte accidentelle de données ou de progression. Nous vous recommandons d'exporter une copie de sauvegarde depuis les <b>Paramètres</b>.</p>
 
         <h2>5. Suspension</h2>
         <p>Nous pouvons limiter ou supprimer les comptes qui ne respectent pas ces conditions.</p>
