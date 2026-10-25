@@ -265,7 +265,6 @@ function renderMainPage(animate = true) {
             </div>
           </div>
           <div id="listsContainer"></div>
-          <div class="gradient-overlay"></div>
         </div>
       </div>
     </div>

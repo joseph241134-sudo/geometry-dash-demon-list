@@ -24,9 +24,9 @@
 
 [data-theme="white"] {
   --bg: #f3f3f3; --panel: #ffffff; --panel-banner: #c9d3e3;
-  --panel-1: #d5d9df; --panel-1-hover: #c8cdd5; --panel-2: #f3f5f8; --panel-3: #e8ebf0;
+  --panel-1: #dfdfdf; --panel-1-hover: #d9d9d9; --panel-2: #f6f6f6; --panel-3: #efefef;
   --line-1: rgba(0, 0, 0, 0.10); --line-2: rgba(0, 0, 0, 0.2); --card: #fff;
-  --button: #b6b6b6; --button-hover: #a4a4a4;
+  --button: #3a3a3a; --button-hover: #4a4a4a;
   --danger: #d8453f; --danger-hover: #bd3832;
   --text-1: #14171c; --text-2: #20252d; --mute: #5f6773;
   --shadow-1: rgba(20, 30, 50, 0.10); --shadow-2: rgba(20, 20, 20, 0.1);
@@ -55,7 +55,7 @@
   --line-1: rgba(200, 170, 255, 0.12); --line-2: rgba(180, 150, 230, 0.4);
   --button: #8b5cf6; --button-hover: #7646dc; --card:#1c1527;
   --text-1: #f3e6f4; --text-2: #d9d0ea; --mute: #b3a8c7; --header-bg: #07050c;
-  --shadow-1: rgba(0, 0, 0, 0.4); --shadow-2: rgba(0, 0, 0, 0.6); --shadow-3: rgba(0, 0, 0, 0.9);
+  --shadow-1: rgba(0, 0, 0, 0.4); --shadow-2: rgba(0, 0, 0, 0.6); --shadow-3: rgba(0, 0, 0, 0.7);
 }
 
 [data-theme="rosa"] {
@@ -483,7 +483,7 @@ header {
   gap: 12px;
   padding: 0 24px;
   background-color: var(--header-bg);
-  box-shadow: 0 0 48px 16px var(--shadow-3);
+  box-shadow: 0 0 42px 16px var(--shadow-2);
   border-bottom: 1px solid var(--line-2);
 }
 

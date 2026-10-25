@@ -56,7 +56,7 @@
 .main-panel-stats { display: flex; flex-direction: column; height: 52vh; min-height: 380px; border-bottom: 1px solid var(--line-1); }
 .main-panel-stats .panel { height: 248px; }
 
-.main-panel-stats .banner { height: 180px; box-shadow: 0 0 24px 10px var(--shadow-2); }
+.main-panel-stats .banner { height: 180px; box-shadow: 0 0 24px 10px var(--shadow-1); }
 
 .main-panel-stats .avatar-wrapper { left: 32px; z-index: 2; }
 .main-panel-stats .avatar { width: 140px; height: 140px; border: 5px solid var(--panel); }
