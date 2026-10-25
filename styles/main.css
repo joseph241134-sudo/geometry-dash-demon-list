@@ -592,7 +592,7 @@ main.view-enter .settings-section {
   border-radius: var(--radius-sm);
 }
 
-.settings-title { color: var(--text-1); font-size: 18px; font-weight: 700; }
+.settings-title { color: var(--text-1); font-size: 18px; font-weight: 700; border-bottom: 1px solid var(--line-1); padding-bottom: 10px;}
 .settings-hint { color: var(--mute); font-size: 12.5px; font-weight: 500; }
 .settings-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 
@@ -743,7 +743,7 @@ body.booting::after {
 
 .footer-info-row {
   font-size: 13px;
-  line-height: 2; letter-spacing: 0.5px;
+  line-height: 2;
   color: var(--mute);
   opacity: 0.9;
 }
@@ -772,7 +772,7 @@ body.booting::after {
 
 .footer-links a { 
   color: var(--accent); 
-  font-size: 14px; 
+  font-size: 13.5px; 
   text-decoration: underline; 
 }
 

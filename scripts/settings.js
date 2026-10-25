@@ -2,7 +2,7 @@
 // Ajustes: temas, fondo, idioma y datos locales -- es basico
 // ======================================================
 
-const THEMES = ['blue', 'white', 'dark', 'purple', 'infernal', 'discord', 'atardecer', 'neon', 'bosque', 'rosa', 'rosa-dark', 'halloween'];
+const THEMES = ['blue', 'white', 'purple', 'rosa', 'dark','infernal', 'atardecer', 'neon', 'bosque', 'rosa-dark', 'halloween'];
 
 const DEFAULT_APP_SETTINGS = {
   theme: 'blue',
@@ -119,6 +119,7 @@ function openSettingsView() {
 
       <section class="settings-section panel" style="--i:0">
         <h2 class="settings-title">${t('settings.theme')}</h2>
+        <p class="settings-hint">${t('settings.themeHint')}</p>
         <div class="theme-grid" id="themeGrid">
           ${THEMES.map(id => `
             <button type="button" class="theme-card" data-theme="${id}" data-theme-id="${id}">
@@ -132,6 +133,7 @@ function openSettingsView() {
       <section class="settings-section panel" style="--i:1">
         <h2 class="settings-title">${t('settings.bg')}</h2>
         <div class="settings-bg-body">
+          <p class="settings-hint">${t('settings.bgHint')}</p>
           <div class="bg-preview" id="bgPreview"></div>
           <div class="settings-bg-controls">
             <div class="settings-row">
@@ -139,7 +141,6 @@ function openSettingsView() {
               <button type="button" id="btnBgRemove" class="btn-header">${t('settings.removeImg')}</button>
               <input type="file" id="fileBg" accept="image/*" hidden>
             </div>
-            <p class="settings-hint">${t('settings.bgHint')}</p>
           </div>
         </div>
       </section>
@@ -147,11 +148,12 @@ function openSettingsView() {
       <section class="settings-section panel" style="--i:2">
         <h2 class="settings-title">${t('settings.data')}</h2>
         <p class="settings-hint">${t(cloudUser ? 'settings.dataHintCloud' : 'settings.dataHint')}</p>
-        <div class="settings-row">
+        <div class="settings-row" style="border-bottom: 1px solid var(--line-1); padding-bottom: 12px;">
           <button type="button" id="btnExportAll" class="btn-header">${t('settings.export')}</button>
           <button type="button" id="btnImportAll" class="btn-header">${t('settings.import')}</button>
           <input type="file" id="fileImportAll" accept=".json,application/json" hidden>
         </div>
+        <p class="settings-hint">${t('settings.delHint')}</p>
         <div class="settings-row">
           <button type="button" id="btnDeleteAll" class="btn-danger">${t('settings.deleteAll')}</button>
         </div>

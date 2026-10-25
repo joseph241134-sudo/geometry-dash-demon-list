@@ -18,10 +18,13 @@ function openModal({ title = '', titleExtra = '', body = '', actions = '', cls =
   overlay.innerHTML = `
     <div class="modal-card ${cls}" role="dialog" aria-modal="true">
       ${title ? `<h2 class="modal-title"><span>${title}</span>${titleExtra}</h2>` : ''}
-      <div class="modal-body">${body}</div>
-      ${actions ? `<div class="modal-actions">${actions}</div>` : ''}
+      <div class="modal-scroll-area">
+        <div class="modal-body">${body}</div>
+        ${actions ? `<div class="modal-actions">${actions}</div>` : ''}
+      </div>
+      <div class="gradient-overlay"></div>
     </div>
-  `;
+`;
 
   let downOnOverlay = false;
   overlay.addEventListener('pointerdown', e => { downOnOverlay = e.target === overlay; });
@@ -73,7 +76,7 @@ function showConfirm(message, { title = t('dlg.confirm'), danger = false, okText
     let result = false;
     const ov = openModal({
       title, cls: 'modal-sm', onClose: () => resolve(result),
-      body: `<p class="dialog-text">${escapeHTML(message)}</p>`,
+      body: `<p class="dialog-text">${message}</p>`,
       actions: `
         <button type="button" class="btn-secondary" data-cancel>${t('common.cancel')}</button>
         <button type="button" class="${danger ? 'btn-danger' : 'btn-primary'}" data-ok>${okText}</button>`

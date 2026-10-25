@@ -288,7 +288,7 @@
   #listsContainer { padding: 12px; gap: 12px; }
   .no-lists-msg {font-size: 13px;}
 
-  .list-card { height: 128px; }
+  .list-card { height: 128px; } 
   .card-content { padding: 12px 0 14px 14px; }
   .card-title { font-size: 20px; }
   .card-over-side { width: 42%; padding-left: 16px; }

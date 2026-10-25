@@ -19,11 +19,11 @@
 .modal-card {
   display: flex;
   flex-direction: column;
+  position: relative;
   width: 100%;
   max-width: 440px;
   max-height: 88vh;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   background-color: var(--panel-2);
   border: 1px solid var(--line-1);
   border-radius: var(--radius-sm);
@@ -31,9 +31,31 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
   animation: modalIn 0.22s cubic-bezier(0.2, 0.9, 0.3, 1.05);
 }
+
 .modal-overlay.closing .modal-card { animation: modalOut 0.17s ease forwards; }
 
 .modal-card.modal-sm { max-width: 360px; }
+
+.modal-scroll-area {
+  position: relative; 
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 4px;
+}
+
+.modal-card .gradient-overlay {
+  position: absolute; 
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: linear-gradient(to bottom, transparent, var(--shadow-2)); 
+  pointer-events: none;
+  z-index: 5;
+}
 
 .modal-title {
   position: sticky;
@@ -42,7 +64,6 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 0 0 6px;
   padding: 14px 18px 14px 24px;
   background-color: var(--panel);
   border-bottom: 1px solid var(--line-1);

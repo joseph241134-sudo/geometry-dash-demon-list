@@ -115,7 +115,7 @@ const I18N = {
 
     'lists.title': 'Mis listas demon', 'lists.count': 'Listas totales: {n}', 'lists.add': '+ Añadir',
     'lists.filterFav': 'Filtrar favoritos', 'lists.emptyFav': 'No tienes listas marcadas como favoritas.',
-    'lists.empty': 'Tu panel de listas está vacío. ¡Agrega tu primera lista!',
+    'lists.empty': 'Tu panel está vacío. ¡Agrega tu primera lista!',
     'list.edit': 'Editar lista', 'list.view': 'Ver', 'list.by': 'Por {name}',
     'list.info': 'Demons: {n} · Hardest: {hardest}', 'list.favorite': 'Lista favorita',
 
@@ -125,7 +125,7 @@ const I18N = {
     'view.addDemon': '+ Demon', 'view.top': 'Volver arriba',
     'view.thumbYt': 'Mostrar iconos Demon',
     'view.noMatch': 'Ningún demon coincide con los filtros', 'view.noMatchText': 'Cambia la búsqueda o los filtros para ver más resultados.',
-    'view.empty': 'Esta lista aún no tiene demons', 'view.emptyText': 'Usa "+ Demon" para añadir tu primer demon.',
+    'view.empty': 'Esta lista aún no tiene demons', 'view.emptyText': 'Pulsa para añadir tu primer demon.',
     'sort.custom': 'Orden personalizado', 'sort.tier_desc': 'Tier (más alto)', 'sort.tier_asc': 'Tier (más bajo)',
     'sort.attempts_desc': 'Más intentos', 'sort.attempts_asc': 'Menos intentos',
     'sort.recent': 'Fecha más reciente', 'sort.oldest': 'Fecha más antigua',
@@ -149,16 +149,25 @@ const I18N = {
     'demon.creator': 'Creador:', 'demon.difficulty': 'Dificultad:', 'demon.tier': 'Tier:', 'demon.attempts': 'Intentos:',
     'demon.winDate': 'Fecha de victoria:', 'demon.save': 'Guardar', 'demon.create': 'Agregar demon',
 
-    'settings.title': 'Ajustes', 'settings.subtitle': 'Apariencia y datos locales', 'settings.theme': 'Tema', 'settings.bg': 'Fondo',
+    'settings.title': 'Configuración', 'settings.subtitle': 'Apariencia y datos', 
+    
+    'settings.theme': 'Tema', 'settings.themeHint' : 'Temas prestablecidos, colores sólidos y gradientes.',
+
+    'settings.bg': 'Fondo',
+    'settings.bgHint': 'La imagen se ve por encima del color y desactiva cualquier efecto de animación del tema, sube imágenes ligeras.',
     'settings.upload': 'Subir imagen', 'settings.removeImg': 'Quitar imagen',
-    'settings.bgHint': 'La imagen se ve por encima del color y desactiva cualquier efecto de animación del tema, sube imagenes ligeras.',
-    'settings.data': 'Datos', 'settings.dataHint': 'Todo se guarda únicamente en su navegador. Por motivos de seguridad, exporte una copia de sus datos antes de eliminar o importar. Puedes iniciar sesión para guardar sus datos en la nube.',
-    'settings.export': 'Exportar todo', 'settings.import': 'Importar (sobrescribe todo)', 'settings.deleteAll': 'Borrar todos los datos',
-    'settings.deleteConfirm': 'Se borrarán TODOS tus datos en este dispositivo. ¿Continuar?',
-    'settings.deletePrompt': 'Escribe BORRAR para confirmar', 'settings.deleteWord': 'BORRAR',
+    
+    'settings.data': 'Datos de tu cuenta', 
+    'settings.dataHint':`Todos los datos se guardan únicamente en este navegador, al borrar el caché o datos del sistema es posible que toda la información se pierda. Puedes evitar esto exportando una copia de seguridad antes o iniciando sesión.`,
+    'settings.export': 'Exportar', 'settings.import': 'Importar <small style="color: var(--mute); font-size: 11.5px; ">(sobreescribe todo)</small>', 
+
     'settings.invalidFile': 'El archivo no es válido.', 'settings.incompatible': 'El archivo no coincide o no es compatible.',
     'settings.importConfirm': 'Esto reemplazará TODOS tus datos actuales por los del archivo. ¿Continuar?',
     'settings.importTooBig': 'Error al importar, archivo demasiado grande.',
+
+    'settings.delHint': 'Borrar todos los datos de tu cuenta, si no has iniciado sesión se borrará la caché.', 'settings.deleteAll': 'Borrar todos los datos',
+    'settings.deleteConfirm': 'Se borrarán TODOS tus datos en este dispositivo. No hay manera de recuperarlos. ¿Continuar?',
+    'settings.deletePrompt': 'Escribe BORRAR para confirmar', 'settings.deleteWord': 'BORRAR',
 
     'theme.blue': 'Azul', 'theme.white': 'Blanco', 'theme.dark': 'Dark', 'theme.purple': 'Púrpura', 'theme.infernal': 'Infernal',
     'theme.discord': 'Discord', 'theme.atardecer': 'Atardecer', 'theme.neon': 'Neón', 'theme.bosque': 'Bosque', 'theme.rosa': 'Rosa pastel',
@@ -268,14 +277,15 @@ Object.assign(I18N.es, {
   'auth.legal': 'Al continuar, aceptas nuestros {terms} y la {privacy}.',
   'legal.privacy': 'Política de privacidad', 'legal.terms': 'Términos de uso',
   'footer.text': 'Crea tus propias listas de niveles y compartelas.',
-  'footer.copy': '© 2026 · Proyecto independiente',
+  'footer.reports': 'reportes',
+  'footer.copy': 'proyecto independiente · creado por',
   'acc.title': 'Cuenta', 'acc.logged': 'Sesión iniciada como {email}', 'acc.signOut': 'Cerrar sesión',
   'auth.overwriteTitle': 'Cuenta existente',
   'auth.overwriteText': 'Esta cuenta ya tiene datos guardados. Si continúas, reemplazarán los datos que tienes ahora en este dispositivo. ¿deseas continuar?',
   'auth.overwriteBack': 'Volver', 'auth.overwriteOk': 'Continuar',
   'acc.error': 'No se pudo sincronizar con la nube. Revisa tu conexión.',
   'settings.dataHintCloud': 'Tus datos se guardan en tu cuenta. Exporta una copia por seguridad antes de borrar o importar.',
-  'settings.deleteConfirmCloud': 'Se borrarán TODOS tus datos, incluida la copia en la nube. ¿Continuar?'
+  'settings.deleteConfirmCloud': 'Se borrarán TODOS los datos de tu cuenta, no hay manera de recuperarlos ¿Continuar?'
 });
 Object.assign(I18N.fr, {
   'auth.text': 'Connectez-vous pour enregistrer vos listes dans le cloud et les utiliser sur tout appareil.',
@@ -374,35 +384,41 @@ const LEGAL_I18N = {
           </div>
           <h1>Privacy Policy</h1>
         </div>
-        <p class="updated" style="padding-top: 4px;">Last updated: October 23, 2026</p>
- 
-        <p>My Demon List is an independent project created to organize your own lists of demon levels and keep track of your progress in <span style="font-weight: 600;">Geometry Dash</span>.</p>
- 
-        <h2>1. What data do we collect?</h2>
+                <p class="updated" style="padding-top: 4px;">Last updated: October 24, 2026</p>
+
+        <p>My Demon List is an independent project created to organize your own lists of demon levels and keep track of your progress in <strong>Geometry Dash</strong>.</p>
+
+        <h2>1. What data is collected?</h2>
         <ul>
-          <li><strong>Account:</strong> if you sign in with Google, we receive your email address and the basic profile data Google shares. We do not receive your password.</li>
-          <li><strong>Content you create:</strong> your lists, demons, statistics, profile (name, country, avatar, banner), images you upload and preference settings (background color or image, and theme)</li>
-          <li><strong>Technical data:</strong> when you use level autocomplete, our server receives the text searched and your IP address, only to respond and limit abuse.</li>
+          <li><strong>Account:</strong> if you sign in with Google, we receive your email address and the basic profile data Google provides. We do not receive your password.</li>
+          <li><strong>Content you create:</strong> your lists, demons, statistics and profile. We also receive any images you upload and your preference settings (background image and theme).</li>
+          <li><strong>Technical data:</strong> when you use level autocomplete, our server receives the text searched and your IP address in order to respond and limit abuse.</li>
         </ul>
- 
+
         <h2>2. Where is it stored?</h2>
         <ul>
           <li><strong>Without signing in:</strong> everything is stored only in your browser, in local storage.</li>
-          <li><strong>Signed in:</strong> your data is stored in the cloud linked to your account, so you don't lose it and can see it by signing in on other devices. Your browser only keeps basic preferences and the session.</li>
+          <li><strong>Signed in:</strong> your data is stored in the cloud. Images you upload are kept in public storage: anyone with the direct link can view them. Your browser only keeps basic preferences and the session.</li>
         </ul>
- 
+
         <h2>3. Third-party services</h2>
+        <p>To work, the application uses the following services. Some of them receive your IP address when your browser loads or queries their resources:</p>
         <ul>
-          <li>Google, for sign-in.</li>
-          <li>Supabase, for authentication and database.</li>
-          <li>GitHub Pages, to host the website, and Render, for the level autocomplete service.</li>
+          <li><strong>Google:</strong> sign-in and YouTube video thumbnails.</li>
+          <li><strong>Supabase:</strong> authentication, database and image storage.</li>
+          <li><strong>GitHub Pages:</strong> website hosting.</li>
+          <li><strong>Render:</strong> level autocomplete service; it receives the text searched and your IP.</li>
         </ul>
- 
+        <p>Level data comes from GD Ladder (gdladder.com), adapted for this project.</p>
+
         <h2>4. What we don't do</h2>
-        <p>We do not share your information with third parties except the providers needed for the application to work.</p>
- 
+        <p>We do not sell your data or use analytics. We use your browser's local storage to keep your session and preferences; we do not use tracking cookies. We do not share your information with third parties, except the providers needed for the app to work (section 3).</p>
+
         <h2>5. Your rights</h2>
-        <p>You can export and delete your data at any time from Settings → Data.</p>
+        <p>You can export and delete your data at any time from <b>Settings</b>. To delete your account and your email, contact us through the report form.</p>
+
+        <h2>6. Changes and contact</h2>
+        <p>We may update this policy; the date above shows the latest version. For questions or requests, use the report form.</p>
       `
     },
     terms: {
@@ -419,33 +435,34 @@ const LEGAL_I18N = {
           </div>
           <h1>Terms of Use</h1>
         </div>
-        <p class="updated" style="padding-top: 4px;">Last updated: October 23, 2026</p>
- 
+                <p class="updated" style="padding-top: 4px;">Last updated: October 24, 2026</p>
+
         <p>By using or registering on My Demon List, you agree to comply with these terms. If you do not agree with them, please do not use the application.</p>
- 
+
         <h2>1. Independent project</h2>
-        <p>My Demon List is a fan-made project with no affiliation with RobTop Games or Geometry Dash. All names, trademarks, logos and visual assets of the game belong to their respective owners.</p>
- 
+        <p>My Demon List is a fan-made project with no affiliation with RobTop Games or Geometry Dash. All names, trademarks, logos and visual assets of the game belong to their respective owners. Level data comes from GD Ladder, adapted for this project.</p>
+
         <h2>2. Your account and your content</h2>
         <ul>
-          <li>Although we do our best to keep your data safe, as an independent project we do not guarantee that the service will be uninterrupted or error-free, and we are not responsible for accidental loss of data or progress.</li>
-          <li>You can explore the application anonymously or sign in with your Google account to sync and save your data in the cloud.</li>
+          <li>You can use the application anonymously or sign in with Google to sync your data in the cloud.</li>
+          <li>You are responsible for what you upload. You keep all rights to your content.</li>
+          <li>Your personal data is handled according to the <a href="privacy.html">privacy policy</a>.</li>
         </ul>
- 
+
         <h2>3. Acceptable use</h2>
         <ul>
           <li>Do not upload content that is illegal, offensive or that infringes third-party rights.</li>
-          <li>Do not attempt to abuse or overload the application.</li>
+          <li>Do not attempt to abuse or overload the server.</li>
         </ul>
- 
-        <h2>4. Availability</h2>
-        <p>The service is provided "as is". It may change, be interrupted or be removed at any time. We recommend exporting a copy of your data from Settings.</p>
- 
+
+        <h2>4. Availability and liability</h2>
+        <p>The service is provided "as is". As an independent project, we do not guarantee that it will be uninterrupted or error-free. We are not responsible for accidental loss of data or progress. We recommend exporting a backup copy from <b>Settings</b>.</p>
+
         <h2>5. Suspension</h2>
         <p>We may limit or delete accounts that violate these terms.</p>
- 
+
         <h2>6. Changes</h2>
-        <p>Continuing to use the application means accepting the current version. See also the <a href="privacy.html">privacy policy</a>.</p>
+        <p>We may update these terms; continuing to use the application means accepting the current version.</p>
       `
     }
   },
@@ -463,35 +480,41 @@ const LEGAL_I18N = {
           </div>
           <h1>Politique de confidentialité</h1>
         </div>
-        <p class="updated" style="padding-top: 4px;">Dernière mise à jour : 23 octobre 2026</p>
- 
-        <p>My Demon List est un projet indépendant créé pour organiser vos propres listes de niveaux demon et suivre votre progression dans <span style="font-weight: 600;">Geometry Dash</span>.</p>
- 
-        <h2>1. Quelles données collectons-nous ?</h2>
+                <p class="updated" style="padding-top: 4px;">Dernière mise à jour : 24 octobre 2026</p>
+
+        <p>My Demon List est un projet indépendant créé pour organiser vos propres listes de niveaux demon et suivre votre progression dans <strong>Geometry Dash</strong>.</p>
+
+        <h2>1. Quelles données sont collectées ?</h2>
         <ul>
-          <li><strong>Compte :</strong> si vous vous connectez avec Google, nous recevons votre adresse e-mail et les données de profil de base que Google partage. Nous ne recevons pas votre mot de passe.</li>
-          <li><strong>Contenu que vous créez :</strong> vos listes, demons, statistiques, profil (nom, pays, avatar, bannière), images que vous téléversez et paramètres de préférence (couleur ou image de fond, et thème)</li>
-          <li><strong>Données techniques :</strong> lorsque vous utilisez l'autocomplétion des niveaux, notre serveur reçoit le texte recherché et votre adresse IP, uniquement pour répondre et limiter les abus.</li>
+          <li><strong>Compte :</strong> si vous vous connectez avec Google, nous recevons votre adresse e-mail et les données de profil de base fournies par Google. Nous ne recevons pas votre mot de passe.</li>
+          <li><strong>Contenu que vous créez :</strong> vos listes, demons, statistiques et profil. Nous recevons aussi les images que vous téléversez et vos paramètres de préférence (image de fond et thème).</li>
+          <li><strong>Données techniques :</strong> lorsque vous utilisez l'autocomplétion des niveaux, notre serveur reçoit le texte recherché et votre adresse IP afin de répondre et de limiter les abus.</li>
         </ul>
- 
+
         <h2>2. Où sont-elles stockées ?</h2>
         <ul>
           <li><strong>Sans connexion :</strong> tout est stocké uniquement dans votre navigateur, dans le stockage local.</li>
-          <li><strong>Avec connexion :</strong> vos données sont stockées dans le cloud, associées à votre compte, pour que vous ne les perdiez pas et puissiez les retrouver en vous connectant sur d'autres appareils. Dans votre navigateur ne restent que des préférences de base et la session.</li>
+          <li><strong>Avec connexion :</strong> vos données sont stockées dans le cloud. Les images que vous téléversez sont conservées dans un stockage public : toute personne disposant du lien direct peut les voir. Dans votre navigateur ne restent que les préférences de base et la session.</li>
         </ul>
- 
+
         <h2>3. Services tiers</h2>
+        <p>Pour fonctionner, l'application utilise les services suivants. Certains reçoivent votre adresse IP lorsque votre navigateur charge ou interroge leurs ressources :</p>
         <ul>
-          <li>Google, pour la connexion.</li>
-          <li>Supabase, pour l'authentification et la base de données.</li>
-          <li>GitHub Pages, pour héberger le site, et Render, pour le service d'autocomplétion des niveaux.</li>
+          <li><strong>Google :</strong> connexion et miniatures des vidéos YouTube.</li>
+          <li><strong>Supabase :</strong> authentification, base de données et stockage des images.</li>
+          <li><strong>GitHub Pages :</strong> hébergement du site.</li>
+          <li><strong>Render :</strong> service d'autocomplétion des niveaux ; il reçoit le texte recherché et votre IP.</li>
         </ul>
- 
+        <p>Les données des niveaux proviennent de GD Ladder (gdladder.com), adaptées pour ce projet.</p>
+
         <h2>4. Ce que nous ne faisons pas</h2>
-        <p>Nous ne partageons pas vos informations avec des tiers, sauf les prestataires nécessaires au fonctionnement de l'application.</p>
- 
+        <p>Nous ne vendons pas vos données et n'utilisons pas d'outils d'analyse. Nous utilisons le stockage local de votre navigateur pour conserver votre session et vos préférences ; nous n'utilisons pas de cookies de suivi. Nous ne partageons pas vos informations avec des tiers, sauf les prestataires nécessaires au fonctionnement de l'application (section 3).</p>
+
         <h2>5. Vos droits</h2>
-        <p>Vous pouvez exporter et supprimer vos données à tout moment depuis Paramètres → Données.</p>
+        <p>Vous pouvez exporter et supprimer vos données à tout moment depuis les <b>Paramètres</b>. Pour supprimer votre compte et votre e-mail, contactez-nous via le formulaire de signalement.</p>
+
+        <h2>6. Modifications et contact</h2>
+        <p>Nous pouvons mettre à jour cette politique ; la date ci-dessus indique la dernière version. Pour toute question ou demande, utilisez le formulaire de signalement.</p>
       `
     },
     terms: {
@@ -508,33 +531,34 @@ const LEGAL_I18N = {
           </div>
           <h1>Conditions d'utilisation</h1>
         </div>
-        <p class="updated" style="padding-top: 4px;">Dernière mise à jour : 23 octobre 2026</p>
- 
+                <p class="updated" style="padding-top: 4px;">Dernière mise à jour : 24 octobre 2026</p>
+
         <p>En utilisant My Demon List ou en vous y inscrivant, vous acceptez de respecter ces conditions. Si vous n'êtes pas d'accord, veuillez ne pas utiliser l'application.</p>
- 
+
         <h2>1. Projet indépendant</h2>
-        <p>My Demon List est un projet de fans, sans lien avec RobTop Games ni avec Geometry Dash. Tous les noms, marques déposées, logos et ressources visuelles du jeu appartiennent à leurs propriétaires respectifs.</p>
- 
+        <p>My Demon List est un projet de fans, sans lien avec RobTop Games ni avec Geometry Dash. Tous les noms, marques déposées, logos et ressources visuelles du jeu appartiennent à leurs propriétaires respectifs. Les données des niveaux proviennent de GD Ladder, adaptées pour ce projet.</p>
+
         <h2>2. Votre compte et votre contenu</h2>
         <ul>
-          <li>Bien que nous nous efforcions de protéger vos données, il s'agit d'un projet indépendant : nous ne garantissons pas que le service sera ininterrompu ou sans erreur, et nous ne sommes pas responsables de la perte accidentelle de données ou de progression.</li>
-          <li>Vous pouvez explorer l'application de manière anonyme ou vous connecter avec votre compte Google pour synchroniser et enregistrer vos données dans le cloud.</li>
+          <li>Vous pouvez utiliser l'application de manière anonyme ou vous connecter avec Google pour synchroniser vos données dans le cloud.</li>
+          <li>Vous êtes responsable de ce que vous téléversez. Vous conservez tous les droits sur votre contenu.</li>
+          <li>Vos données personnelles sont traitées conformément à la <a href="privacy.html">politique de confidentialité</a>.</li>
         </ul>
- 
+
         <h2>3. Utilisation acceptable</h2>
         <ul>
           <li>Ne téléversez pas de contenu illégal, offensant ou portant atteinte aux droits de tiers.</li>
-          <li>N'essayez pas d'abuser de l'application ni de la surcharger.</li>
+          <li>N'essayez pas d'abuser du serveur ni de le surcharger.</li>
         </ul>
- 
-        <h2>4. Disponibilité</h2>
-        <p>Le service est fourni « tel quel ». Il peut changer, être interrompu ou supprimé à tout moment. Nous vous recommandons d'exporter une copie de vos données depuis les Paramètres.</p>
- 
+
+        <h2>4. Disponibilité et responsabilité</h2>
+        <p>Le service est fourni « tel quel ». Étant un projet indépendant, nous ne garantissons pas qu'il sera ininterrompu ou sans erreur. Nous ne sommes pas responsables de la perte accidentelle de données ou de progression. Nous vous recommandons d'exporter une copie de sauvegarde depuis les <b>Paramètres</b>.</p>
+
         <h2>5. Suspension</h2>
         <p>Nous pouvons limiter ou supprimer les comptes qui ne respectent pas ces conditions.</p>
- 
+
         <h2>6. Modifications</h2>
-        <p>Continuer à utiliser l'application implique d'accepter la version en vigueur. Consultez aussi la <a href="privacy.html">politique de confidentialité</a>.</p>
+        <p>Nous pouvons mettre à jour ces conditions ; continuer à utiliser l'application implique d'accepter la version en vigueur.</p>
       `
     }
   }
