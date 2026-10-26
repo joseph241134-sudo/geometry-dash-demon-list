@@ -26,7 +26,7 @@ function normalizeDemon(demon) {
     creator: demon.creator || '',
     showcase: demon.showcase || '',
     difficulty: demon.difficulty || 'Easy Demon',
-    tier: demon.tier ?? '',
+    levelId: String(demon.levelId ?? '').replace(/\D/g, ''),
     attempts: demon.attempts ?? '',
     winDate: demon.winDate || '',
     isFavorite: !!demon.isFavorite,

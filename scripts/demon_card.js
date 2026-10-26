@@ -16,7 +16,6 @@ function renderDemonCard(demon, position, index) {
   const ytThumb = viewPrefs.showFaces ? '' : getYouTubeThumbnail(demon.showcase);
   const id = escapeHTML(String(demon.id));
   const extraChips =
-    demonStatChip(t('card.tier'), demon.tier ? String(demon.tier) : '', 'd-tier') +
     demonStatChip(t('card.attempts'), demon.attempts ? Number(demon.attempts).toLocaleString() : '', 'd-att') +
     demonStatChip(t('card.date'), demon.winDate, 'd-date');
 

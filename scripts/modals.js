@@ -721,7 +721,7 @@ function levelToFormData(level) {
     name: level.name || level.title || '',
     creator: level.publisherName || level.creator || level.author || '',
     difficulty,
-    tier: Number(tier) ? Number(tier).toFixed(2) : tier,
+    levelId: String(level.id ?? '').replace(/\D/g, ''),
   };
 }
 
@@ -771,14 +771,14 @@ function renderDemonModal(listId, demonData, afterId = null) {
       </div>
 
       <div class="form-grid">
-        <div class="form-group"><label>${t('demon.tier')}</label>
-          <input type="number" step="0.1" id="demonTier" class="form-input" placeholder="-" autocomplete="off" value="${val('tier')}"></div>
-        <div class="form-group"><label>${t('demon.attempts')}</label>
-          <input type="number" min="0" id="demonAtt" class="form-input" placeholder="-" autocomplete="off" value="${val('attempts')}"></div>
-        <div class="form-group"><label>${t('demon.winDate')}</label>
-          <input type="date" id="demonDate" class="form-input" autocomplete="off" value="${val('winDate')}"></div>
+        <div class="form-group"><label>${t('demon.levelId')}</label>
+          <input type="text" inputmode="numeric" maxlength="12" id="demonLevelId" class="form-input" placeholder="-" autocomplete="off" value="${val('levelId')}"></div>
         <div class="form-group"><label>${t('demon.position')}</label>
           <input type="number" min="1" id="demonPos" class="form-input" min="1" max="${maxPos}" step="1" autocomplete="off" value="${defaultPos}"></div>
+        <div class="form-group"><label>${t('demon.winDate')}</label>
+          <input type="date" id="demonDate" class="form-input" autocomplete="off" value="${val('winDate')}"></div>
+        <div class="form-group"><label>${t('demon.attempts')}</label>
+          <input type="number" min="0" id="demonAtt" class="form-input" placeholder="-" autocomplete="off" value="${val('attempts')}"></div>
       </div>
       
       <div class="form-group">
@@ -841,7 +841,7 @@ function renderDemonModal(listId, demonData, afterId = null) {
       return `
         <div class="autocomplete-item json-item" data-index="${i}">
           <div class="json-name">${escapeHTML(lv.name || 'Unknown')} <span class="json-creator">by ${escapeHTML(lv.creator || 'Unknown')}</span></div>
-          <div class="json-stats">${escapeHTML(lv.difficulty)} - Tier: ${escapeHTML(String(lv.tier || '-'))}</div>
+          <div class="json-stats">${escapeHTML(lv.difficulty)}</div>
         </div>`;
     }).join('');
     setPop(dropdown, true);
@@ -854,7 +854,7 @@ function renderDemonModal(listId, demonData, afterId = null) {
         nameInput.value = lv.name;
         $('demonCreator').value = lv.creator;
         $('demonShowcase').value = selected.showcase ? `youtube.com/watch?v=${selected.showcase}` : '';
-        $('demonTier').value = lv.tier;
+        $('demonLevelId').value = lv.levelId;
         setDifficultyUI(lv.difficulty);
         setPop(dropdown, false);
       });
@@ -890,7 +890,7 @@ function renderDemonModal(listId, demonData, afterId = null) {
       creator: $('demonCreator').value.trim(),
       showcase: $('demonShowcase').value.trim(),
       difficulty: selectedDifficulty,
-      tier: $('demonTier').value,
+      levelId: $('demonLevelId').value.trim(),
       attempts: $('demonAtt').value,
       winDate: $('demonDate').value,
       isFavorite: isFav,

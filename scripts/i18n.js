@@ -73,7 +73,7 @@ const I18N = {
     'demon.add': 'Add demon', 'demon.edit': 'Edit demon', 'demon.save': 'Save', 'demon.create': 'Add demon',
 
     'demon.thumbHint': 'Icon preview - thumbnail:', 'demon.name': 'Name:', 'demon.creator': 'Creator:', 'demon.difficulty': 'Difficulty:',
-    'demon.tier': 'Tier:', 'demon.attempts': 'Attempts:', 'demon.winDate': 'Win date:', 'demon.position': 'Position:',
+    'demon.levelId': 'ID:','demon.attempts': 'Attempts:', 'demon.winDate': 'Win date:', 'demon.position': 'Position:',
 
     'demon.yt': 'YouTube URL:',
 
@@ -84,13 +84,13 @@ const I18N = {
 
     'view.search': 'Search level...', 'view.lock': 'Lock/unlock dragging', 'view.thumbYt': 'Show demon icons', 'view.sort': 'Sort by',
 
-    'sort.custom': 'Custom order', 'sort.tier_desc': 'Tier (highest)', 'sort.tier_asc': 'Tier (lowest)', 'sort.attempts_desc': 'Most attempts', 
+    'sort.custom': 'Custom order', 'sort.attempts_desc': 'Most attempts', 
     'sort.attempts_asc': 'Fewest attempts', 'sort.recent': 'Newest date', 'sort.oldest': 'Oldest date',
 
     'view.addDemon': '+ Demon', 'view.noMatch': 'No demon matches the filters', 'view.noMatchText': 'Change the search or the filters to see more results.',
     'view.empty': 'This list has no demons yet', 'view.emptyText': 'Press to add your first demon.',
 
-    'card.publishedBy': 'published by {name}', 'card.tier': 'Tier:', 'card.attempts': 'Attempts:', 'card.date': 'Date:',
+    'card.publishedBy': 'published by {name}', 'card.attempts': 'Attempts:', 'card.date': 'Date:',
     'card.edit': 'Edit demon', 'card.addBelow': 'Add demon below', 'card.showcase': 'Watch showcase',
 
     'view.top': 'Back to top',
@@ -183,7 +183,7 @@ const I18N = {
     'demon.add': 'Agregar demon', 'demon.edit': 'Editar demon', 'demon.save': 'Guardar', 'demon.create': 'Agregar demon',
 
     'demon.thumbHint': 'Previsualización de icono - miniatura:', 'demon.name': 'Nombre:', 'demon.creator': 'Creador:', 'demon.difficulty': 'Dificultad:',
-    'demon.tier': 'Tier:', 'demon.attempts': 'Intentos:', 'demon.winDate': 'Fecha de victoria:', 'demon.position': 'Posición:',
+    'demon.levelId': 'ID:', 'demon.attempts': 'Intentos:', 'demon.winDate': 'Fecha de victoria:', 'demon.position': 'Posición:',
 
     'demon.yt': 'URL de YouTube:',
 
@@ -194,13 +194,13 @@ const I18N = {
 
     'view.search': 'Buscar nivel...', 'view.lock': 'Bloquear/desbloquear arrastre', 'view.thumbYt': 'Mostrar iconos Demon', 'view.sort': 'Ordenar por',
 
-    'sort.custom': 'Orden personalizado', 'sort.tier_desc': 'Tier (más alto)', 'sort.tier_asc': 'Tier (más bajo)', 'sort.attempts_desc': 'Más intentos', 
+    'sort.custom': 'Orden personalizado', 'sort.attempts_desc': 'Más intentos', 
     'sort.attempts_asc': 'Menos intentos', 'sort.recent': 'Fecha más reciente', 'sort.oldest': 'Fecha más antigua',
 
     'view.addDemon': '+ Demon', 'view.noMatch': 'Ningún demon coincide con los filtros', 'view.noMatchText': 'Cambia la búsqueda o filtros para ver más resultados.',
     'view.empty': 'Esta lista aún no tiene demons', 'view.emptyText': 'Pulsa para añadir tu primer demon.',
 
-    'card.publishedBy': 'publicado por {name}', 'card.tier': 'Tier:', 'card.attempts': 'Intentos:', 'card.date': 'Fecha:',
+    'card.publishedBy': 'publicado por {name}', 'card.attempts': 'Intentos:', 'card.date': 'Fecha:',
     'card.edit': 'Editar demon', 'card.addBelow': 'Agregar demon debajo', 'card.showcase': 'Ver showcase',
 
     'view.top': 'Volver arriba',
@@ -293,7 +293,7 @@ const I18N = {
     'demon.add': 'Ajouter un demon', 'demon.edit': 'Modifier le demon', 'demon.save': 'Enregistrer', 'demon.create': 'Ajouter un demon',
 
     'demon.thumbHint': 'Aperçu de l\'icône - miniature :', 'demon.name': 'Nom :', 'demon.creator': 'Créateur :', 'demon.difficulty': 'Difficulté :',
-    'demon.tier': 'Tier :', 'demon.attempts': 'Essais :', 'demon.winDate': 'Date de victoire :', 'demon.position': 'Position :',
+    'demon.levelId': 'ID :', 'demon.attempts': 'Essais :', 'demon.winDate': 'Date de victoire :', 'demon.position': 'Position :',
 
     'demon.yt': 'URL YouTube :',
 
@@ -304,13 +304,13 @@ const I18N = {
 
     'view.search': 'Rechercher un niveau...', 'view.lock': 'Verrouiller/déverrouiller le glissement', 'view.thumbYt': 'Afficher les icônes demon', 'view.sort': 'Trier par',
 
-    'sort.custom': 'Ordre personnalisé', 'sort.tier_desc': 'Tier (plus élevé)', 'sort.tier_asc': 'Tier (plus bas)', 'sort.attempts_desc': 'Plus d\'essais', 
+    'sort.custom': 'Ordre personnalisé', 'sort.attempts_desc': 'Plus d\'essais', 
     'sort.attempts_asc': 'Moins d\'essais', 'sort.recent': 'Date la plus récente', 'sort.oldest': 'Date la plus ancienne',
 
     'view.addDemon': '+ Demon', 'view.noMatch': 'Aucun demon ne correspond aux filtres', 'view.noMatchText': 'Modifiez la recherche ou les filtres pour voir plus de résultats.',
     'view.empty': 'Cette liste ne contient pas encore de demons', 'view.emptyText': 'Appuyez pour ajouter votre premier demon.',
 
-    'card.publishedBy': 'publié par {name}', 'card.tier': 'Tier :', 'card.attempts': 'Essais :', 'card.date': 'Date :',
+    'card.publishedBy': 'publié par {name}', 'card.attempts': 'Essais :', 'card.date': 'Date :',
     'card.edit': 'Modifier le demon', 'card.addBelow': 'Ajouter un demon ci-dessous', 'card.showcase': 'Voir le showcase',
 
     'view.top': 'Retour en haut',
@@ -477,7 +477,7 @@ const LEGAL_I18N = {
         <p>By using or registering on My Demon List, you agree to comply with these terms. If you do not agree with them, please do not use the application.</p>
 
         <h2>1. Independent project</h2>
-        <p>My Demon List is a fan-made project with no affiliation with RobTop Games or Geometry Dash. All names, trademarks, logos and visual assets of the game belong to their respective owners. Level data comes from GD Ladder, adapted for this project.</p>
+        <p>My Demon List is a fan-made project with no affiliation with RobTop Games or Geometry Dash. All names, trademarks, logos and visual assets of the game belong to their respective owners.</p>
 
         <h2>2. Your account and your content</h2>
         <ul>
@@ -573,7 +573,7 @@ const LEGAL_I18N = {
         <p>En utilisant My Demon List ou en vous y inscrivant, vous acceptez de respecter ces conditions. Si vous n'êtes pas d'accord, veuillez ne pas utiliser l'application.</p>
 
         <h2>1. Projet indépendant</h2>
-        <p>My Demon List est un projet de fans, sans lien avec RobTop Games ni avec Geometry Dash. Tous les noms, marques déposées, logos et ressources visuelles du jeu appartiennent à leurs propriétaires respectifs. Les données des niveaux proviennent de GD Ladder, adaptées pour ce projet.</p>
+        <p>My Demon List est un projet de fans, sans lien avec RobTop Games ni avec Geometry Dash. Tous les noms, marques déposées, logos et ressources visuelles du jeu appartiennent à leurs propriétaires respectifs.</p>
 
         <h2>2. Votre compte et votre contenu</h2>
         <ul>

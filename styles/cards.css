@@ -257,7 +257,7 @@
   font-weight: 600;
 }
 
-/* Datos secundarios (Tier, Attempts, Date) */
+/* Datos secundarios (Attempts, Date) */
 .d-stat { padding: 3px 8px; color: var(--text-1); background-color: var(--card); border-radius: var(--radius-button); font-weight: 600; }
 .d-stat-label { margin-right: 5px; color: var(--mute); font-weight: 500; }
 

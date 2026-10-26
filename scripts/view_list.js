@@ -25,7 +25,7 @@ const THUMB_ICON = {
   face: 'resources/demon.png'
 };
 
-const SORT_MODES = ['custom', 'recent', 'oldest', 'attempts_desc', 'attempts_asc', 'tier_desc', 'tier_asc'];
+const SORT_MODES = ['custom', 'recent', 'oldest', 'attempts_desc', 'attempts_asc'];
 
 // ------------------------------------------------------
 // 2. Utilidades de la vista
@@ -150,9 +150,7 @@ function getVisibleDemons() {
     recent: (a, b) => time(b) - time(a),
     oldest: (a, b) => time(a) - time(b),
     attempts_desc: (a, b) => num(b, 'attempts') - num(a, 'attempts'),
-    attempts_asc: (a, b) => num(a, 'attempts') - num(b, 'attempts'),
-    tier_desc: (a, b) => num(b, 'tier') - num(a, 'tier'),
-    tier_asc: (a, b) => num(a, 'tier') - num(b, 'tier')
+    attempts_asc: (a, b) => num(a, 'attempts') - num(b, 'attempts')
   };
   if (sorters[listFilters.sort]) demons.sort(sorters[listFilters.sort]);
 
