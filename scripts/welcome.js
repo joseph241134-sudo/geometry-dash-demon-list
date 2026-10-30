@@ -1,6 +1,3 @@
-// ======================================================
-// Vista de bienvenida (solo la primera vez, sin sesión)
-// ======================================================
 const WELCOME_KEY = 'mdl_welcome_seen';
 const LEVELS_TOTAL = 10000;
 
@@ -13,7 +10,6 @@ function enterApp() {
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
-// Cuenta de 1 hasta "to" con desaceleración al final
 function countUp(el, to, duration = 1400, delay = 250) {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     el.textContent = to.toLocaleString();

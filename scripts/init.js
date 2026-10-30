@@ -12,7 +12,9 @@ function renderRoute() {
   const isWelcome = !params.get('settings') && !listId && !welcomeSeen() && !cloudUser;
 
   const settingsBtn = $('btnHeaderSettings');
+  const HomeBtn = $('btnHeaderMainView');
   if (settingsBtn) settingsBtn.disabled = isWelcome;
+  if (HomeBtn) HomeBtn.disabled = isWelcome;
 
   if (params.get('settings')) openSettingsView();
   else if (listId) openListView(Number(listId));
