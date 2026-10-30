@@ -18,7 +18,7 @@
     linear-gradient(135deg, rgba(217, 217, 217, 0.1) 0%, transparent 40%),
     radial-gradient(70% 60% at 50% 0%, rgba(217, 217, 217, 0.08), transparent 75%);
 
-  --bg-fx-size: 100% 100%, 100% 100%; --bg-fx-anim: none;
+  --bg-fx-size: 100% 100%, 100% 100%; --bg-fx-anim: none; --bg-fx-inset: 0; --bg-fx-static: none;
 /* ---------------------------------------------------------------------------------------------- */
   --font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --radius-button: 6px;
@@ -74,7 +74,7 @@
 
   --bg-fx: linear-gradient(135deg, rgba(240, 100, 60, 0.24), rgba(194, 57, 132, 0.20) 45%, rgba(99, 60, 200, 0.22));
 
-  --bg-fx-size: 300% 300%; --bg-fx-anim: fxDrift 18s ease-in-out infinite alternate;
+  --bg-fx-size: 100% 100%; --bg-fx-inset: -50%; --bg-fx-anim: fxDrift 18s ease-in-out infinite alternate;
 }
 
 [data-theme="neon"] {
@@ -87,10 +87,9 @@
 
   --bg-fx:
     linear-gradient(rgba(34, 211, 238, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(34, 211, 238, 0.07) 1px, transparent 1px),
-    radial-gradient(60% 50% at 50% 0%, rgba(217, 70, 239, 0.14), transparent 70%);
-
-  --bg-fx-size: 48px 48px, 48px 48px, 100% 100%; --bg-fx-anim: fxGrid 6s linear infinite;
+    linear-gradient(90deg, rgba(34, 211, 238, 0.07) 1px, transparent 1px);
+  --bg-fx-static: radial-gradient(60% 50% at 50% 0%, rgba(217, 70, 239, 0.14), transparent 70%);
+  --bg-fx-size: 48px 48px, 48px 48px; --bg-fx-inset: -48px; --bg-fx-anim: fxGrid 6s linear infinite;
 }
 
 [data-theme="rosa-dark"] {
@@ -201,11 +200,8 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   25% { transform: translateX(-4px); }
   75% { transform: translateX(4px); }
 }
-@keyframes fxDrift { from { background-position: 0% 0%; } to { background-position: 100% 100%; } }
-@keyframes fxGrid {
-  from { background-position: 0 0, 0 0, 0 0; }
-  to   { background-position: 48px 48px, 48px 48px, 0 0; }
-}
+@keyframes fxDrift { to { transform: translate3d(-25%, -25%, 0); } }
+@keyframes fxGrid  { to { transform: translate3d(48px, 48px, 0); } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -583,6 +579,7 @@ main {
   min-height: calc(100vh - 60px);
   padding: 16px 20px;
   background-color: var(--bg);
+  background-image: var(--bg-fx-static);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -592,13 +589,13 @@ main {
 main::before {
   content: "";
   position: fixed;
-  inset: 0;
+  inset: var(--bg-fx-inset);
   z-index: 0;
   pointer-events: none;
   background: var(--bg-fx);
   background-size: var(--bg-fx-size);
   animation: var(--bg-fx-anim);
-  will-change: background-position;
+  will-change: transform;
 }
 main > * { position: relative; z-index: 1; }
 
@@ -766,25 +763,31 @@ body.legal { min-height: 100vh; background: var(--bg); color: var(--text-1); lin
 /* ---- Bienvenida ---- */
 .welcome {
   display: flex; flex-direction: column; align-items: center; text-align: center;
-  gap: 26px; width: min(720px, 100%); margin: auto; padding: 40px 0;
+  gap: 12px; width: min(720px, 100%); margin: auto; padding: 40px 0;
 }
 .welcome > * { animation: riseIn 0.6s cubic-bezier(0.2, 0.8, 0.3, 1) both; animation-delay: calc(var(--d, 0) * 120ms); }
 
-.welcome-eyebrow { color: var(--button); font-size: 32px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
-.welcome-text { color: var(--text-1); font-size: clamp(20px, 3.4vw, 22px); font-weight: 600; line-height: 1.35; max-width: 640px; }
+.welcome-eyebrow { color: var(--text-1); font-size: 32px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+.welcome-text { color: var(--mute); font-size: 20px; font-weight: 600; line-height: 1.35; max-width: 640px; }
 
-.welcome-stat { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.welcome-stat-icon { color: var(--button); display: flex; }
-.welcome-stat-label { color: var(--mute); font-size: 12.5px; font-weight: 500; letter-spacing: 0.5px;}
+.welcome-stat { display: flex; flex-direction: column; align-items: center; gap: 4px; 
+  padding: 16px 40px; margin: 12px auto 16px auto;
+  border-radius: 22px; background-color: rgba(0, 0, 0, 0.4);
+  border: 2px solid var(--accent); }
+.welcome-stat-label { color: var(--mute); font-size: 13px; font-weight: 500; letter-spacing: 0.5px; margin-top: 2px;}
+
+.welcome-stat-row { 
+  display: flex; 
+  align-items: baseline; 
+  justify-content: center; 
+}
+.welcome-stat-num, .welcome-stat-plus { color: var(--text-1); font-size: 34px; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.welcome-stat-num { min-width: 5.5ch; }
 
 .welcome-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
 .welcome-actions .btn-primary, .welcome-actions .btn-line {font-size: 14.5px; }
 .welcome-actions .btn-line { background-color: var(--panel-2); }
 .welcome-actions .btn-line:hover:not(:disabled) { background-color: var(--panel-1); }
-
-.welcome-stat-row { display: flex; align-items: baseline; justify-content: center; }
-.welcome-stat-num, .welcome-stat-plus { color: var(--text-1); font-size: clamp(40px, 8vw, 22px); font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
-.welcome-stat-num { min-width: 5.5ch; }
 
 .welcome > .welcome-cards { animation: none; }
 .welcome-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; width: 100%; margin-top: 10px; }

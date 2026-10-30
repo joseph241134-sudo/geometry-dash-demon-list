@@ -39,7 +39,7 @@ const I18N = {
     'welcome.text': 'Manage your progress, create your own Demon List of your hardest levels in Geometry Dash',
     'welcome.account': 'Log in', 'welcome.guest': 'Enter as guest', 'welcome.levels': 'Registered levels',
 
-    'welcome.f1t': 'Autocomplete', 'welcome.f1d': 'Autocomplete for over 10k registered levels.',
+    'welcome.f1t': 'Autocomplete', 'welcome.f1d': 'Automatic level completion.',
     'welcome.f2t': 'List editor', 'welcome.f2d': 'Easily edit your demon list.',
     'welcome.f3t': 'Registry', 'welcome.f3d': 'Record the date and number of attempts for each level.',
     'welcome.f4t': 'Themes', 'welcome.f4d': 'Choose from multiple custom themes.',
@@ -154,10 +154,10 @@ const I18N = {
     'list.edit': 'Editar lista', 'list.view': 'Ver', 'list.by': 'Por {name}',
     'list.info': 'Demons: {n} · Hardest: {hardest}',
 
-    'welcome.text': 'Gestiona tu progreso, crea tu propia Demon list de tus niveles mas difíciles en Geometry Dash',
+    'welcome.text': 'Gestiona tu progreso, crea tu propia Demon list de tus niveles más difíciles en Geometry Dash',
     'welcome.account': 'Iniciar sesión', 'welcome.guest': 'Entrar sin cuenta', 'welcome.levels': 'Niveles registrados',
 
-    'welcome.f1t': 'Autocompletado', 'welcome.f1d': 'Autocompletado de más de 10k de niveles registrados.',
+    'welcome.f1t': 'Autocompletado', 'welcome.f1d': 'Autocompletado de niveles automático.',
     'welcome.f2t': 'Editor de lista', 'welcome.f2d': 'Edita fácilmente tu lista de demons.',
     'welcome.f3t': 'Registro', 'welcome.f3d': 'Registra la fecha y el número de intentos de cada nivel.',
     'welcome.f4t': 'Temas', 'welcome.f4d': 'Elige entre varios temas personalizados.',
@@ -275,7 +275,7 @@ const I18N = {
     'welcome.text': 'Gérez votre progression, créez votre propre Demon List de vos niveaux les plus difficiles sur Geometry Dash',
     'welcome.account': 'Se connecter', 'welcome.guest': 'Entrer sans compte', 'welcome.levels': 'Niveaux enregistrés',
 
-    'welcome.f1t': 'Saisie automatique', 'welcome.f1d': 'Saisie automatique pour plus de 10k niveaux enregistrés.',
+    'welcome.f1t': 'Saisie automatique', 'welcome.f1d': 'Auto-complétion automatique des niveaux.',
     'welcome.f2t': 'Éditeur de liste', 'welcome.f2d': 'Modifiez facilement votre demon list.',
     'welcome.f3t': 'Enregistrement', 'welcome.f3d': 'Enregistrez la date et le nombre de tentatives pour chaque niveau.',
     'welcome.f4t': 'Thèmes', 'welcome.f4d': 'Choisissez parmi plusieurs thèmes personnalisés.',
@@ -724,6 +724,6 @@ const svg = {
   AREDL: `
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="M4 4v16h16"/>
-    <polyline points="7 16 10 12 13 14 19 7"/>
+    <polyline points="7 16 10 12 13 14 19 8"/>
   </svg>`
 }

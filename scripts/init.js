@@ -9,10 +9,14 @@ function renderRoute() {
 
   const params = new URLSearchParams(location.search);
   const listId = params.get('list');
+  const isWelcome = !params.get('settings') && !listId && !welcomeSeen() && !cloudUser;
+
+  const settingsBtn = $('btnHeaderSettings');
+  if (settingsBtn) settingsBtn.disabled = isWelcome;
 
   if (params.get('settings')) openSettingsView();
   else if (listId) openListView(Number(listId));
-  else if (!welcomeSeen() && !cloudUser) renderWelcome();
+  else if (isWelcome) renderWelcome();
   else renderMainPage();
 }
 

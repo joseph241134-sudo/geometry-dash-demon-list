@@ -38,7 +38,6 @@ function renderWelcome() {
       <p class="welcome-text" style="--d:1">${t('welcome.text')}</p>
 
       <div class="welcome-stat" style="--d:2">
-        <span class="welcome-stat-icon">${svg.List}</span>
         <span class="welcome-stat-row"><span class="welcome-stat-plus">+</span><span class="welcome-stat-num" id="welcomeCount">1</span></span>
         <span class="welcome-stat-label">${t('welcome.levels')}</span>
       </div>

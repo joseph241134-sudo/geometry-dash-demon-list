@@ -24,7 +24,7 @@ function renderHeader() {
     <div class="header-left">
       <div class="header-brand" title="My Demon List">
         <img src="resources/copes.png" alt="">
-        <span>My Demon List</span>
+        <span>My <span style="color: var(--button)">Demon</span> List</span>
       </div>
       <nav class="header-actions">
         <button type="button" id="btnHeaderMainView" class="btn-header" title="${t('header.home')}">
