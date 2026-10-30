@@ -105,9 +105,11 @@ function consumeLoginFlag() {
   return fresh;
 }
 
-// ¿Hay algo en este dispositivo que se perdería al bajar los datos de la nube?
+const isPristineList = l =>
+  l.title === DEFAULT_LIST_TITLE && !l.demons.length && !l.image && !l.isFavorite;
+
 function localHasData() {
-  return userLists.length > 0
+  return userLists.some(l => !isPristineList(l))
     || Object.values(profileStats).some(v => v)
     || !!(profileState.avatar || profileState.banner || profileState.bannerColor || profileState.country)
     || (!!profileState.username && profileState.username !== 'Player 1');
@@ -163,6 +165,7 @@ async function cloudSignOut(keepLocal = false) {
   if (keepLocal !== true) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(basicSnapshot()));
   }
+  try { sessionStorage.removeItem('mdl_welcome_seen'); } catch (e) {}
   location.replace(location.pathname);
 }
 
@@ -177,6 +180,7 @@ const IMG_BUCKET = 'images';
 // Sube una imagen (dataURL) y devuelve su URL pública, o null si falla
 async function cloudStoreImage(dataUrl) {
   try {
+    if (/^data:image\/svg/i.test(dataUrl)) return null;
     const blob = await (await fetch(dataUrl)).blob();
     const ext = (blob.type.split('/')[1] || 'webp').replace('jpeg', 'jpg');
     const path = `${cloudUser.id}/${Date.now()}${Math.random().toString(36).slice(2, 6)}.${ext}`;

@@ -59,7 +59,7 @@
 .main-panel-stats .banner { height: 180px; box-shadow: 0 0 24px 10px var(--shadow-1); }
 
 .main-panel-stats .avatar-wrapper { left: 32px; z-index: 2; }
-.main-panel-stats .avatar { width: 140px; height: 140px; border: 5px solid var(--panel); }
+.main-panel-stats .avatar { width: 140px; height: 140px; border: 6px solid var(--panel); }
 
 #btnEditProfile { z-index: 10; width: 40px; height: 40px; border: 5px solid var(--panel); color: var(--mute); }
 

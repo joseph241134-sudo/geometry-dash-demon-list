@@ -2,7 +2,7 @@
 // Ajustes: temas, fondo, idioma y datos locales -- es basico
 // ======================================================
 
-const THEMES = ['blue', 'white', 'purple', 'rosa', 'dark','infernal', 'atardecer', 'neon', 'bosque', 'rosa-dark', 'halloween'];
+const THEMES = ['blue', 'purple', 'dark', 'atardecer', 'neon', 'rosa-dark', 'bosque','halloween'];
 
 const DEFAULT_APP_SETTINGS = {
   theme: 'blue',
@@ -128,8 +128,8 @@ function openSettingsView() {
         <h2 class="settings-title">${t('settings.data')}</h2>
         <p class="settings-hint">${t(cloudUser ? 'settings.dataHintCloud' : 'settings.dataHint')}</p>
         <div class="settings-row" style="border-bottom: 1px solid var(--line-1); padding-bottom: 12px;">
-          <button type="button" id="btnExportAll" class="btn-header">${t('settings.export')}</button>
-          <button type="button" id="btnImportAll" class="btn-header">${t('settings.import')}</button>
+          <button type="button" id="btnExportAll" class="btn-line">${t('settings.export')}</button>
+          <button type="button" id="btnImportAll" class="btn-line">${t('settings.import')}</button>
           <input type="file" id="fileImportAll" accept=".json,application/json" hidden>
         </div>
         <p class="settings-hint">${t('settings.delHint')}</p>

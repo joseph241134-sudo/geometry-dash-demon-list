@@ -10,6 +10,7 @@
 
 const STORAGE_KEY = 'mdl_app_data';
 const STORAGE_VERSION = 2;
+const DEFAULT_LIST_TITLE = 'My Demon List';
 
 // ------------------------------------------------------
 // Normalización
@@ -39,6 +40,7 @@ function normalizeList(list) {
     ...list,
     id: Number(list.id) || Date.now(),
     title: list.title || 'Sin título',
+    image: safeImg(list.image),
     isFavorite: !!list.isFavorite,
     demons: Array.isArray(list.demons) ? list.demons.map(normalizeDemon) : []
   };
@@ -92,6 +94,7 @@ function loadData() {
   }
 
   if (!parsed || typeof parsed !== 'object') {
+    userLists = [normalizeList({ id: Date.now(), title: DEFAULT_LIST_TITLE, author: profileState.username, demons: [] })];
     saveData();
     return;
   }

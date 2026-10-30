@@ -134,7 +134,7 @@ const previewBox = (id, imgId) => `
       <span class="preview-empty">${t('common.noPhoto')}</span>
     </div>
     <div class="preview-edit" data-pop-root>
-      <button type="button" class="edit-btn" id="${id}Btn" aria-haspopup="menu">${svgPencil}</button>
+      <button type="button" class="edit-btn" id="${id}Btn" aria-haspopup="menu">${svg.Pencil}</button>
       <div class="pop pop-menu" id="${id}Pop">
         <button type="button" class="pop-item" data-act="upload">${t('listm.upload')}</button>
         <button type="button" class="pop-item" data-act="remove" id="${id}Remove">${t('listm.remove')}</button>
@@ -269,7 +269,7 @@ function openEditProfileModal() {
         <div class="pe-banner" id="peBanner"><img id="bannerPreview" alt=""></div>
 
         <div class="pe-banner-edit" data-pop-root>
-          <button type="button" class="pe-edit-btn" id="btnBannerEdit" title="${t('profile.editBanner')}" aria-haspopup="menu">${svgPencil}</button>
+          <button type="button" class="pe-edit-btn" id="btnBannerEdit" title="${t('profile.editBanner')}" aria-haspopup="menu">${svg.Pencil}</button>
           <div class="pop pop-menu" id="bannerPop">
             <button type="button" class="pop-item" data-act="upload">${t('profile.uploadBanner')}</button>
             <button type="button" class="pop-item" data-act="remove" id="btnBannerRemove">${t('profile.removeBanner')}</button>
@@ -280,7 +280,7 @@ function openEditProfileModal() {
         <div class="pe-avatar-wrap" data-pop-root id="btnAvatarEdit">
           <div class="pe-avatar">
             <img id="avatarPreview" alt="">
-            <button type="button" class="pe-edit-btn" title="${t('profile.editAvatar')}" aria-haspopup="menu">${svgPencil}</button>
+            <button type="button" class="pe-edit-btn" title="${t('profile.editAvatar')}" aria-haspopup="menu">${svg.Pencil}</button>
           </div>
           <div class="pop pop-menu" id="avatarPop">
             <button type="button" class="pop-item" data-act="upload">${t('profile.uploadImg')}</button>
@@ -416,7 +416,7 @@ function showInfoModal(title, text) {
 function openLoginModal() {
   const ov = openModal({
     title: t('sync.title'),
-    titleExtra: `<button type="button" id="btnLoginInfo" class="btn-info-icon" title="${escapeHTML(t('sync.infoBtn'))}">${svgInfo}</button>`,
+    titleExtra: `<button type="button" id="btnLoginInfo" class="btn-info-icon" title="${escapeHTML(t('sync.infoBtn'))}">${svg.Info}</button>`,
     cls: 'modal-sm',
     body: `
       <div class="form-group">
@@ -536,7 +536,7 @@ function openListModal(listId = null) {
     cls: 'modal-list',
     titleExtra: `<button type="button" id="favToggle" class="btn-fav-icon" title="${t('listm.favTitle')}"><img alt=""></button>
                 <div class="sort-wrap options-modal" data-pop-root>
-                  <button type="button" id="btnOptionsList" class="btn-options-icon" title="options">${svgOptions}</button>
+                  <button type="button" id="btnOptionsList" class="btn-options-icon" title="options">${svg.Options}</button>
                   <div class="pop pop-menu" id="optionsListMenu">
                      <button type="button" class="pop-item" data-act="import">${t('listm.import')}</button>
                      <button type="button" class="pop-item" data-act="export" ${!isEditing ? 'disabled' : ''}>${t('listm.export')}</button>
@@ -746,7 +746,7 @@ function renderDemonModal(listId, demonData, afterId = null) {
     titleExtra: `<button type="button" class="btn-fav-icon" id="demonFav" title="${t('listm.favTitle')}"><img alt=""></button>`,
     body: `
       <div class="demon-modal-top">
-        <div class="thumb-text">${svgYutu}<p>${t('demon.thumbHint')}</p></div>
+        <div class="thumb-text">${svg.Yt}<p>${t('demon.thumbHint')}</p></div>
         <div class="demon-thumb-preview" id="demonThumbPreview"></div>
       </div>
 

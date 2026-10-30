@@ -2,7 +2,6 @@
 // Inicialización y ciclo de vida de la app
 // ======================================================
 function renderRoute() {
-  // páginas legales: solo se vuelve a traducir el texto (legal.js)
   if (document.body.classList.contains('legal')) {
     if (typeof applyLegalLanguage === 'function') applyLegalLanguage();
     return;
@@ -13,6 +12,7 @@ function renderRoute() {
 
   if (params.get('settings')) openSettingsView();
   else if (listId) openListView(Number(listId));
+  else if (!welcomeSeen() && !cloudUser) renderWelcome();
   else renderMainPage();
 }
 
@@ -28,7 +28,7 @@ function initScrollTop() {
     </svg>`;
   document.body.appendChild(btn);
 
-  window.addEventListener('scroll', () => btn.classList.toggle('show', window.scrollY > 600), { passive: true });
+  window.addEventListener('scroll', () => btn.classList.toggle('show', window.scrollY > 200), { passive: true });
   btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
@@ -80,6 +80,7 @@ function init() {
   initGlobalListeners();
   renderFooter();
   warmUpAPI();
+  if (hasSession()) markWelcomeSeen();
 
   if (!hasSession()) return paintAll();
 
@@ -103,7 +104,6 @@ function initLegal() {
 
   const paint = () => {
     applyLanguage();
-    if (typeof applyLegalLanguage === 'function');
     renderHeader();
   };
   paint();

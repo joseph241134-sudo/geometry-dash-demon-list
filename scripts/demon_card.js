@@ -107,7 +107,7 @@ function renderListStats() {
     </div>
 
     <div class="profile-body">
-      <span class="profile-country-lists">${svgPin}${escapeHTML(profileState.country) || '-'}</span>
+      <span class="profile-country-lists">${svg.Pin}${escapeHTML(profileState.country) || '-'}</span>
       <h3 class="profile-title">${escapeHTML(profileState.username) || '-'}</h3>  
       <span class="profile-handle">${escapeHTML(currentList.title || '-')}</span>
 

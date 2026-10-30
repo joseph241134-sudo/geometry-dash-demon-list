@@ -188,7 +188,7 @@ function openListView(listId) {
 
       <div class="list-view-controls panel">
         <div class="filter-popup-wrapper" data-pop-root>
-          <button type="button" id="btnOpenFilter" class="btn-filter-toggle button-square" title="${t('view.filters')}">${svgFilter}</button>
+          <button type="button" id="btnOpenFilter" class="btn-filter-toggle button-square" title="${t('view.filters')}">${svg.Filter}</button>
 
           <div id="filterPopup" class="pop filter-popup-dropdown">
             <div class="filter-popup-header"><span>${t('view.filters')}</span></div>
@@ -212,7 +212,7 @@ function openListView(listId) {
         </div>
 
         <div class="search-box" data-pop-root>
-          ${svgSearch}
+          ${svg.Search}
           <input type="text" id="searchDemon" class="form-input search-input-field" placeholder="${t('view.search')}" autocomplete="off" spellcheck="false">
           <div id="searchAutocomplete" class="pop autocomplete-dropdown"></div>
         </div>
