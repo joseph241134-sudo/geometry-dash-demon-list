@@ -410,13 +410,22 @@
 .dice-head.rolling { min-height: 110px; justify-content: center; }
 .dice-text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .dice-title { color: var(--text-1); font-size: 19px; font-weight: 800; overflow-wrap: anywhere; }
-.dice-head.rolling .dice-title { text-align: center; font-size: 24px; opacity: 0.8; }
 #diceName { display: inline-block; transform-origin: left center; }
-#diceName.tick { animation: diceTick 0.12s ease-out; }
-@keyframes diceTick { from { opacity: 0.3; transform: translateY(-8px); } }
 .dice-diff { flex-shrink: 0; width: 52px; height: 52px; object-fit: contain; animation: diceFade 0.4s ease both; }
 .dice-head.rolling .dice-diff { display: none; }
 @keyframes diceFade { from { opacity: 0; transform: scale(0.8); } }
+
+/* animación de tirada */
+.dice-head { border-radius: var(--radius-button); transition: min-height 0.4s ease, background-color 0.3s, box-shadow 0.3s; }
+.dice-head.rolling { min-height: 135px; justify-content: center; background-color: var(--panel-3); box-shadow: inset 0 0 0 1px var(--line-1); }
+.dice-head.rolling .dice-title { text-align: center; font-size: 20px; }
+.dice-head.rolling #diceName {
+  display: block; width: 100%; height: 135px; overflow: hidden;
+  -webkit-mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent);
+          mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent);
+}
+.dice-strip { will-change: transform; }
+.dice-row { display: block; height: 45px; line-height: 44px; padding: 0 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* info */
 .dice-by { margin-top: 2px; }

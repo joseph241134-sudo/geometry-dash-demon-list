@@ -223,12 +223,12 @@ function openRandomDemonModal() {
   const demons = currentList.demons;
   if (!demons.length) return showAlert(t('dice.empty'));
 
-  let timer = null, closed = false, rolling = false, copyTimer;
+  let anim = null, closed = false, rolling = false, copyTimer;
 
   const ov = openModal({
     title: 'Random Demon',
     cls: 'modal-dice',
-    onClose: () => { closed = true; clearTimeout(timer); },
+    onClose: () => { closed = true; if (anim) anim.cancel(); },
     body: `
       <div class="dice-fold" id="diceThumb"><div class="dice-fold-in">
         <a class="dice-video" id="diceVideo" target="_blank" rel="noopener" title="${t('card.showcase')}"><img alt=""></a>
@@ -277,11 +277,9 @@ function openRandomDemonModal() {
 };
 
   const finish = (d) => {
-    // posición inicial (centrado y grande)
     const fs0 = parseFloat(getComputedStyle(nameEl).fontSize);
     const bw = nameEl.parentElement.clientWidth;
 
-    nameEl.classList.remove('tick');
     head.classList.remove('rolling');
     nameEl.textContent = `#${demons.indexOf(d) + 1} - ${d.name}`;
     fillInfo(d);
@@ -291,12 +289,14 @@ function openRandomDemonModal() {
     const w = nameEl.offsetWidth;
     nameEl.animate(
       [{ transform: `translateX(${(bw - w * s) / 2}px) scale(${s})` }, { transform: 'none' }],
-      { duration: 450, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)' }
+      { duration: 280, easing: 'cubic-bezier(0.2, 0.9, 0.3, 1)' }
     );
 
     rolling = false;
     rollBtn.disabled = false;
   };
+
+  const ROW = 45;
 
   const roll = () => {
     if (rolling) return;
@@ -308,27 +308,37 @@ function openRandomDemonModal() {
     head.classList.add('rolling');
 
     const final = demons[Math.floor(Math.random() * demons.length)];
+    if (demons.length < 2) return finish(final);
+
     const others = demons.filter(d => d !== final);
-    const steps = demons.length > 1 ? 16 + Math.floor(Math.random() * 6) : 0;
-    let i = 0, last = null;
-
-    const tick = () => {
-      if (closed) return;
-      if (i >= steps) return finish(final);
-
+    const n = 21;
+    const seq = [];
+    let last = null;
+    for (let i = 0; i < n; i++) {
       const pool = others.filter(d => d !== last);
-      const list = pool.length ? pool : others;
-      const d = i === steps - 1 ? final : list[Math.floor(Math.random() * list.length)];
-      last = d;
-      nameEl.textContent = d.name;
-      nameEl.classList.remove('tick');
-      void nameEl.offsetWidth;
-      nameEl.classList.add('tick');
+      last = (pool.length ? pool : others)[Math.floor(Math.random() * (pool.length || others.length))];
+      seq.push(last);
+    }
+    seq.push(final);                    // índice n
+    seq.push(others[Math.floor(Math.random() * others.length)]); // fila de relleno debajo
 
-      i++;
-      timer = setTimeout(tick, 45 + i * i * 0.9); // va frenando
+    nameEl.innerHTML = `<div class="dice-strip">${seq.map(d => `<span class="dice-row">${escapeHTML(d.name)}</span>`).join('')}</div>`;
+
+    anim = nameEl.firstChild.animate(
+      [{ transform: 'translateY(0)' }, { transform: `translateY(${-(n - 1) * ROW}px)` }],
+      { duration: 1680, easing: 'cubic-bezier(0.3, 0.6, 0.3, 1)', fill: 'forwards' }
+    );
+    anim.onfinish = () => { if (!closed) finish(final); };
+
+    let lastRow = 0;
+    const watch = () => {
+      if (closed || anim.playState === 'finished') return;
+      const p = anim.effect.getComputedTiming().progress;
+      const row = p == null ? 0 : Math.floor(p * (n - 1) + 0.5);
+      if (row > lastRow) { lastRow = row; tickSound(); }
+      requestAnimationFrame(watch);
     };
-    tick();
+    watch();
   };
 
   idBtn.addEventListener('click', async () => {
@@ -345,6 +355,30 @@ function openRandomDemonModal() {
   rollBtn.addEventListener('click', roll);
   roll();
 }
+
+const SFX = {
+  tick: { type: 'triangle', from: 900, to: 300, dur: 0.026, vol: 0.06 },
+};
+
+let audioCtx;
+function playSfx(layers) {
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    [].concat(layers).forEach(({ type, from, to, dur, vol, delay = 0 }) => {
+      const t0 = audioCtx.currentTime + delay;
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      o.type = type;
+      o.frequency.setValueAtTime(from, t0);
+      o.frequency.exponentialRampToValueAtTime(Math.max(to, 1), t0 + dur);
+      g.gain.setValueAtTime(vol, t0);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+      o.connect(g).connect(audioCtx.destination);
+      o.start(t0); o.stop(t0 + dur + 0.02);
+    });
+  } catch (e) {}
+}
+const tickSound = () => playSfx(SFX.tick);
 
 // ---- lista compacta ----->
 function openCompactListModal() {
@@ -421,7 +455,8 @@ function openExportImageModal() {
         <div class="form-group"><label>${t('export.to')}</label>
           <input type="number" id="exTo" class="form-input" min="1" max="${total}" step="1" value="${allN}"></div>
       </div>
-      <p class="modal-hint" style="margin-top: 10px; font-size: 13px" id="exRange"></p>
+
+      <p class="modal-hint" style="margin-top: 10px; font-size: 13px; color: var(--text-1)" id="exRange"></p>
 
       <div class="ex-section ex-extra">
         <span class="ex-label" style="margin-bottom: 6px; ">${t('export.extra')}</span>
@@ -643,7 +678,7 @@ function openListView(listId) {
         <button type="button" id="btnCompactList" class="button-square" title="${t('compact.title')}">${svg.Grid}</button>
 
         <div class="sort-wrap" data-pop-root>
-          <button type="button" id="btnSort" class="form-input select-btn" title="${t('view.sort')}" aria-haspopup="listbox"><span id="sortLabel"></span></button>
+          <button type="button" id="btnSort" class="form-input select-btn" title="${t('view.sort')}" aria-haspopup="listbox"><span id="sortLabel"></span>${svg.MiniWave}</button>
           <div id="sortMenu" class="pop pop-menu">
             ${SORT_MODES.map(m => `<button type="button" class="pop-item" data-sort="${m}">${t('sort.' + m)}</button>`).join('')}
           </div>
@@ -661,7 +696,9 @@ function openListView(listId) {
     </div>
   `);
   
+  // ---- img export ----->
   $('btnExportImg').addEventListener('click', openExportImageModal);
+
   // ---- random mode ----->
   $('btnRandomDemon').addEventListener('click', openRandomDemonModal);
 

@@ -311,7 +311,7 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 .toast {
   position: fixed; left: 50%; bottom: 28px; z-index: 1100;
-  max-width: min(420px, calc(100vw - 32px)); padding: 10px 16px;
+  max-width: min(420px, calc(100vw - 12px)); padding: 10px 16px;
   background: rgba(0, 0, 0, 0.82); color: var(--text-1);
   border: 1px solid var(--line-2); border-radius: var(--radius-sm);
   font-size: 13px; font-weight: 500; text-align: center;
@@ -380,7 +380,7 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   transform-origin: center;
 }
 
-body:has(#langPop.open) .icon-chevron {
+[data-pop-root]:has(.pop.open) .icon-chevron {
   transform: rotate(180deg);
 }
 

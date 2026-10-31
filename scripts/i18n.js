@@ -112,8 +112,8 @@ const I18N = {
     'dice.again': 'Roll again', 'dice.empty': 'Add some demons to your list first.', 'dice.copy': 'Click to copy', 'dice.copied': 'Copied!',
     'compact.title': 'Overview',
 
-    'export.btn': 'Download image', 'export.quick': 'Quick select:', 'export.extra': 'Extra options:',
-    'export.title': 'Download list as PNG', 'export.from': 'From:', 'export.to': 'To:', 'export.all': 'All', 'export.top': 'Top {n}',
+    'export.btn': 'List', 'export.quick': 'Quick select:', 'export.extra': 'Extra options:',
+    'export.title': 'Download list image', 'export.from': 'From:', 'export.to': 'To:', 'export.all': 'All', 'export.top': 'Top {n}',
     'export.hint': 'Select the levels you wish to include in the image; a maximum of {max} per upload.', 
     'export.profile': 'Include photo and name',
     'export.range': 'Selected: #{from} – #{to} · ({n} demons)', 'export.download': 'Download',
@@ -248,8 +248,8 @@ const I18N = {
     'dice.again': 'Volver a tirar', 'dice.empty': 'Primero agrega demons a tu lista.', 'dice.copy': 'copiar ID', 'dice.copied': '¡Copiado!',
     'compact.title': 'Resumen',
 
-    'export.btn': 'Descargar imagen', 'export.quick': 'Selección rápida:', 'export.extra': 'Opciones extras:',
-    'export.title': 'Descargar Lista como PNG', 'export.from': 'Desde:', 'export.to': 'Hasta:', 'export.all': 'Todos', 'export.top': 'Top {n}',
+    'export.btn': 'Lista', 'export.quick': 'Selección rápida:', 'export.extra': 'Opciones extras:',
+    'export.title': 'Descargar imagen de lista', 'export.from': 'Desde:', 'export.to': 'Hasta:', 'export.all': 'Todos', 'export.top': 'Top {n}',
     'export.hint': 'Selecciona los niveles que quieras incluir en la imagen, un máximo de {max} por descarga.', 
     'export.profile': 'Incluir foto y nombre',
     'export.range': 'Seleccionados: #{from} – #{to} · ({n} demons)', 'export.download': 'Descargar',
@@ -384,8 +384,8 @@ const I18N = {
     'dice.again': 'Relancer', 'dice.empty': 'Ajoutez d\'abord des demons à votre liste.', 'dice.copy': 'Cliquer pour copier', 'dice.copied': 'Copié !',
     'compact.title': 'Aperçu',
 
-    'export.btn': 'Télécharger l\'image', 'export.quick': 'Sélection rapide :', 'export.extra': 'Options supplémentaires :',
-    'export.title': 'Télécharger la liste en PNG', 'export.from': 'De :', 'export.to': 'À :', 'export.all': 'Tous', 'export.top': 'Top {n}',
+    'export.btn': 'Liste', 'export.quick': 'Sélection rapide :', 'export.extra': 'Options supplémentaires :',
+    'export.title': 'Télécharger l\'image de la liste', 'export.from': 'De :', 'export.to': 'À :', 'export.all': 'Tous', 'export.top': 'Top {n}',
     'export.hint': 'Sélectionnez les niveaux que vous souhaitez inclure dans l\'image, avec un maximum de {max} par chargement.', 
     'export.profile': 'Inclure la photo et le nom',
     'export.range': 'Sélectionnés : #{from} – #{to} · ({n} demons)', 'export.download': 'Télécharger',
@@ -756,6 +756,10 @@ const svg = {
   </svg>`,
   Wave: `
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" class="icon-chevron">
+    <path d="M 7.41 8.59 L 12 13.17 L 16.59 8.59 L 18 10 L 12 16 L 6 10 L 7.41 8.59 Z" fill="currentColor" />
+  </svg>`,
+  MiniWave: `
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" class="icon-chevron">
     <path d="M 7.41 8.59 L 12 13.17 L 16.59 8.59 L 18 10 L 12 16 L 6 10 L 7.41 8.59 Z" fill="currentColor" />
   </svg>`,
   Drag: `
