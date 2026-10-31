@@ -441,6 +441,8 @@
 #exPresets .filter-diff-pill { padding: 10px; font-size: 13px; }
 #exPresets .filter-diff-pill:disabled { background-color: var(--panel-3); cursor: not-allowed; }
 
+@media ( max-width: 480px) { .ex-img-modal {max-width: 324px !important;} }
+
 /* --------------------------
   Modal vista compacta
   --------------------------- */

@@ -403,7 +403,7 @@ function openExportImageModal() {
 
   const ov = openModal({
     title: t('export.title'),
-    cls: 'modal-sm',
+    cls: 'modal-sm ex-img-modal',
     body: `
       <div class="thumb-text" style="margin-top: 8px; "><p>${t('export.hint', { total, max: MAX })}</p></div>
 

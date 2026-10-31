@@ -299,6 +299,7 @@
   .list-view-controls { gap: 0 8px; padding: 5px 8px; }
   .list-view-controls > * { margin-block: 3px; }
   .list-view-controls::before { content: ''; order: 1; flex: 0 0 100%; height: 0; }
+  #btnToggleLockDrag {order: -1; }
   .filter-popup-wrapper { order: 2; }
   .search-box { order: 2; flex: 1 1 0; max-width: none; min-width: 0; }
   #btnCompactList { margin-left: 0; }

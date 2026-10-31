@@ -114,7 +114,8 @@ const I18N = {
 
     'export.btn': 'Download image', 'export.quick': 'Quick select:', 'export.extra': 'Extra options:',
     'export.title': 'Download list as PNG', 'export.from': 'From:', 'export.to': 'To:', 'export.all': 'All', 'export.top': 'Top {n}',
-    'export.hint': 'You can export at most {max} demons.', 'export.profile': 'Include photo and name',
+    'export.hint': 'Select the levels you wish to include in the image; a maximum of {max} per upload.', 
+    'export.profile': 'Include photo and name',
     'export.range': 'Selected: #{from} – #{to} · ({n} demons)', 'export.download': 'Download',
     
     'export.needLogin': 'Log in to download your list as a PNG.',
@@ -249,7 +250,8 @@ const I18N = {
 
     'export.btn': 'Descargar imagen', 'export.quick': 'Selección rápida:', 'export.extra': 'Opciones extras:',
     'export.title': 'Descargar Lista como PNG', 'export.from': 'Desde:', 'export.to': 'Hasta:', 'export.all': 'Todos', 'export.top': 'Top {n}',
-    'export.hint': 'Puedes exportar como máximo {max} Demons.', 'export.profile': 'Incluir foto y nombre',
+    'export.hint': 'Selecciona los niveles que quieras incluir en la imagen, un máximo de {max} por descarga.', 
+    'export.profile': 'Incluir foto y nombre',
     'export.range': 'Seleccionados: #{from} – #{to} · ({n} demons)', 'export.download': 'Descargar',
     
     'export.needLogin': 'Inicia sesión para descargar tu lista como PNG.',
@@ -384,7 +386,8 @@ const I18N = {
 
     'export.btn': 'Télécharger l\'image', 'export.quick': 'Sélection rapide :', 'export.extra': 'Options supplémentaires :',
     'export.title': 'Télécharger la liste en PNG', 'export.from': 'De :', 'export.to': 'À :', 'export.all': 'Tous', 'export.top': 'Top {n}',
-    'export.hint': 'Vous pouvez exporter au maximum {max} demons.', 'export.profile': 'Inclure la photo et le nom',
+    'export.hint': 'Sélectionnez les niveaux que vous souhaitez inclure dans l\'image, avec un maximum de {max} par chargement.', 
+    'export.profile': 'Inclure la photo et le nom',
     'export.range': 'Sélectionnés : #{from} – #{to} · ({n} demons)', 'export.download': 'Télécharger',
     
     'export.needLogin': 'Connectez-vous pour télécharger votre liste en PNG.',
