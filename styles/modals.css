@@ -67,7 +67,7 @@
 .modal-card p { color: var(--mute); font-size: 13.5px; font-weight: 500; line-height: 1.5; letter-spacing: 0.01em; ;}
 .dialog-text { margin-top: 10px; white-space: pre-line}
 
-.thumb-text { white-space: pre-line; display: flex; flex-direction: row; gap: 6px;}
+.thumb-text { white-space: pre-line; display: flex; flex-direction: row; gap: 6px; align-items: center;}
 
 .modal-actions {
   display: flex;
@@ -375,6 +375,108 @@
 .btn-google svg { width: 18px; height: 18px; flex-shrink: 0; }
 .modal-card .legal-note { margin: 16px 0 22px; font-size: 12px; line-height: 1.5; text-align: center; }
 .legal-note a { color: var(--accent); text-decoration: underline; }
+
+/* --------------------------
+  Modal dado (demon aleatorio)
+  --------------------------- */
+.modal-dice .modal-scroll-area { padding-top: 0; }
+
+.modal-dice { max-width: 400px; }
+.modal-dice .modal-body { margin: 0; }
+.dice-pad { padding: 0 24px; }
+
+/* bloques que se despliegan */
+.dice-fold { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s ease; }
+.dice-fold.show { grid-template-rows: 1fr; }
+.dice-fold-in { display: flex; flex-direction: column; min-height: 0; overflow: hidden; opacity: 0; transition: opacity 0.3s ease 0.15s; }
+.dice-fold.show .dice-fold-in { opacity: 1; }
+
+/* miniatura */
+.dice-video { position: relative; display: block; height: 200px; }
+.dice-video img {
+  display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;
+  -webkit-mask-image: linear-gradient(#000 30%, transparent 98%);
+          mask-image: linear-gradient(#000 30%, transparent 98%);
+}
+.dice-video:hover::after {
+  content: "▶"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, 0.2); color: #fff; font-size: 26px;
+  -webkit-mask-image: linear-gradient(#000 30%, transparent 98%);
+          mask-image: linear-gradient(#000 30%, transparent 98%);
+}
+
+/* título + icono */
+.dice-head { display: flex; align-items: center; gap: 12px; margin-top: 12px; min-height: 0; transition: min-height 0.4s ease; }
+.dice-head.rolling { min-height: 110px; justify-content: center; }
+.dice-text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.dice-title { color: var(--text-1); font-size: 19px; font-weight: 800; overflow-wrap: anywhere; }
+.dice-head.rolling .dice-title { text-align: center; font-size: 24px; opacity: 0.8; }
+#diceName { display: inline-block; transform-origin: left center; }
+#diceName.tick { animation: diceTick 0.12s ease-out; }
+@keyframes diceTick { from { opacity: 0.3; transform: translateY(-8px); } }
+.dice-diff { flex-shrink: 0; width: 52px; height: 52px; object-fit: contain; animation: diceFade 0.4s ease both; }
+.dice-head.rolling .dice-diff { display: none; }
+@keyframes diceFade { from { opacity: 0; transform: scale(0.8); } }
+
+/* info */
+.dice-by { margin-top: 2px; }
+.dice-by strong { color: var(--text-1); font-weight: 700; }
+.dice-id {
+  align-self: center; margin-top: 24px; padding: 4px 12px;
+  background: var(--panel-1); border: 1px solid var(--line-1); border-radius: var(--radius-button);
+  font-family: ui-monospace, Consolas, monospace; font-size: 12.5px; font-weight: 500; letter-spacing: 0.5px;
+}
+.dice-id:hover:not(:disabled) { background: var(--panel-1-hover); }
+
+@media (max-width: 480px) { .dice-pad { padding: 0 16px; } }
+
+.ex-section { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.ex-label { color: var(--mute); font-size: 13px; font-weight: 500; }
+.ex-extra { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line-1); }
+.ex-check { display: flex; align-items: center; gap: 8px; color: var(--text-1); font-size: 12.5px; font-weight: 500; cursor: pointer; }
+.ex-check input { width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; }
+.filter-diff-pill.ex-all { grid-column: 1 / -1; justify-self: center; min-width: 50%; }
+
+#exPresets { gap: 8px; }
+#exPresets .filter-diff-pill { padding: 10px; font-size: 13px; }
+#exPresets .filter-diff-pill:disabled { background-color: var(--panel-3); cursor: not-allowed; }
+
+/* --------------------------
+  Modal vista compacta
+  --------------------------- */
+
+.modal-compact { max-width: 520px; } .compact-list-subtitle {color: var(--mute); font-size: 13.5px; font-weight: 500; padding-left: 6px; }
+.compact-count { padding: 2px 10px 4px 10px; background: var(--panel-1); border-radius: 999px; color: var(--mute); font-size: 13px; font-weight: 700; }
+
+.compact-header { 
+  display: flex; 
+  align-items: baseline; 
+  padding: 10px 12px; 
+  border: 1px solid var(--line-1); 
+  font-size: 12.5px; 
+  letter-spacing: 0.5px; 
+  color: var(--mute);
+  font-weight: 700; 
+  background-color: rgba(0, 0, 0, 0.3); 
+  border-radius: var(--radius-button); 
+  margin-top: 8px;
+}
+.compact-header-name { flex: 1 1 auto; min-width: 0; } 
+.compact-header-creator { flex: 0 1 36%; min-width: 0; } 
+.compact-header-diff { flex: 0 0 65px; text-align: right; }
+
+.compact-list { list-style: none; margin: 10px 8px 0 8px; }
+
+.compact-row { display: flex; align-items: baseline; gap: 10px; padding: 9px 0; border-bottom: 1px dashed var(--line-1); font-size: 13px; }
+.compact-row:last-child { border-bottom: none; }
+.compact-pos { flex: 0 0 auto; color: var(--mute); font-weight: 700; font-variant-numeric: tabular-nums; }
+.compact-name { flex: 1 1 auto; min-width: 0; overflow: hidden; color: var(--text-1); font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.compact-creator { flex: 0 1 34%; min-width: 0; overflow: hidden; color: var(--mute); font-size: 12.5px; text-overflow: ellipsis; white-space: nowrap; }
+.compact-diff { flex: 0 0 60px; color: var(--diff-color); font-size: 12px; font-weight: 700; text-align: right; }
+
+@media (max-width: 480px) {
+  .compact-creator, .compact-header-creator { display: none; }
+}
 
 /* ==============================================
   5. Responsive

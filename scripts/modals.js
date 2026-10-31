@@ -644,7 +644,7 @@ function openListModal(listId = null) {
 
   if (isEditing) {
     $('btnDeleteList').addEventListener('click', async () => {
-      if (!await showConfirm(t('listm.deleteConfirm', { title: list.title }), { danger: true, okText: t('common.delete') })) return;
+      if (!await showConfirm(t('listm.deleteConfirm', { title: escapeHTML(list.title) }), { danger: true, okText: t('common.delete') })) return;
       userLists = userLists.filter(item => item.id !== listId);
       saveData();
       closeModal(ov);
@@ -716,7 +716,6 @@ function openEditDemonModal(listId, demonId) {
 function levelToFormData(level) {
   const rawDiff = level.difficulty || level.diff || 'Easy';
   const difficulty = rawDiff.includes('Demon') ? rawDiff : `${rawDiff} Demon`;
-  const tier = level.tier ?? level.rating ?? '';
   return {
     name: level.name || level.title || '',
     creator: level.publisherName || level.creator || level.author || '',
@@ -774,7 +773,7 @@ function renderDemonModal(listId, demonData, afterId = null) {
         <div class="form-group"><label>${t('demon.levelId')}</label>
           <input type="text" inputmode="numeric" maxlength="12" id="demonLevelId" class="form-input" placeholder="-" autocomplete="off" value="${val('levelId')}"></div>
         <div class="form-group"><label>${t('demon.position')}</label>
-          <input type="number" min="1" id="demonPos" class="form-input" min="1" max="${maxPos}" step="1" autocomplete="off" value="${defaultPos}"></div>
+          <input type="number" min="1" id="demonPos" class="form-input" max="${maxPos}" step="1" autocomplete="off" value="${defaultPos}"></div>
         <div class="form-group"><label>${t('demon.winDate')}</label>
           <input type="date" id="demonDate" class="form-input" autocomplete="off" value="${val('winDate')}"></div>
         <div class="form-group"><label>${t('demon.attempts')}</label>
@@ -872,7 +871,8 @@ function renderDemonModal(listId, demonData, afterId = null) {
   $('btnCancelDemon').addEventListener('click', () => closeModal(ov));
 
   if (isEdit) {
-    $('btnDeleteDemon').addEventListener('click', () => {
+  $('btnDeleteDemon').addEventListener('click', async () => {
+      if (!await showConfirm(t('demon.deleteConfirm', { name: escapeHTML(demonData.name) }), { danger: true, okText: t('common.delete') })) return;
       list.demons = list.demons.filter(d => String(d.id) !== String(demonData.id));
       saveData();
       closeModal(ov);
@@ -906,6 +906,8 @@ function renderDemonModal(listId, demonData, afterId = null) {
     saveData();
     closeModal(ov);
     refreshView();
+
+    if (!isEdit) showAddDemonHint();
   });
 
   syncFav();

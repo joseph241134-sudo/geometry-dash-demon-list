@@ -26,6 +26,10 @@ function countUp(el, to, duration = 1400, delay = 250) {
   requestAnimationFrame(tick);
 }
 
+// ------------------------------------------------------
+// Renderizado de vista de bienvenida
+// ------------------------------------------------------
+
 function renderWelcome() {
   setPageTitle();
   mountView(`

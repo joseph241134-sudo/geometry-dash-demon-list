@@ -35,6 +35,8 @@
 
 .list-view-subtitle { color: var(--mute); font-size: 13px; font-weight: 500; }
 
+.list-view-actions { display: flex; flex-shrink: 0; gap: 8px; }
+
 /* -------------------------- 
   2. controles
   --------------------------- */
@@ -82,9 +84,13 @@
   outline: none !important;
 }
 
+.local-main { display: flex; flex-direction: row; min-width: 0; gap: 6px; align-items: center;}
+.local-main .json-name, .local-main .json-creator { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.json-creator {padding-top: 4px; }
+
 .sort-wrap { position: relative; margin-left: auto; }
-#btnToggleThumb { margin-left: auto; }
-#btnToggleThumb + .sort-wrap { margin-left: 0; }
+#btnCompactList { margin-left: auto; }
+#btnCompactList ~ .sort-wrap { margin-left: 0; }
 
 .select-btn {
   min-width: 170px;
@@ -200,8 +206,6 @@
 .profile-title { margin: 0 0 2px; color: var(--text-1); font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
 .profile-handle { margin-bottom: 16px; color: var(--mute); font-size: 12.5px; font-weight: 500; }
 
-.profile-country-lists { position: absolute; top: 146px; right: 10px; display: flex; align-items: center; gap: 6px; max-width: 45%; overflow: hidden; color: var(--mute); font-size: 13px; font-weight: 600; white-space: nowrap; text-overflow: ellipsis; }
-
 .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-bottom: 20px; }
 
 .stat-card {
@@ -232,32 +236,54 @@
 
 .profile-footer { margin-top: 8px; color: var(--mute); font-size: 12px; text-align: center; word-break: break-word; }
 
-/* -------------------------- 
-  4. botón volver arriba
+/* --------------------------
+  Aviso: agregar otro demon
   --------------------------- */
 
-.scroll-top-btn {
+.demon-hint {
   position: fixed;
-  right: 24px;
+  left: 24px;
   bottom: 24px;
-  z-index: 999;
+  z-index: 900;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  background-color: var(--panel-2);
+  gap: 12px;
+  max-width: min(360px, calc(100vw - 48px));
+  padding: 12px 14px 14px 12px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(4px);
   border: 1px solid var(--line-2);
-  border-radius: 50%;
-  color: var(--text-1);
-  box-shadow: 0 2px 12px var(--shadow-1);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.2s;
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 8px 24px var(--shadow-3);
+  animation: hintIn 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.1) both;
 }
-.scroll-top-btn.show { opacity: 1; visibility: visible; transform: translateY(0); }
-.scroll-top-btn:hover { background-color: var(--panel-3); }
+.demon-hint.leaving { animation: hintOut 0.25s ease forwards; }
+.demon-hint::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 2px;
+  background: var(--accent);
+  transform-origin: left;
+  animation: hintBar 9s linear forwards;
+}
+.demon-hint-icon {
+  display: flex; flex-shrink: 0; align-items: center; justify-content: center;
+  width: 28px; height: 28px; padding-bottom: 2px;
+  background: var(--accent); color: var(--text-pri);
+  border-radius: 50%; font-size: 18px; font-weight: 700;
+}
+.demon-hint p { color: var(--text-1); font-size: 13px; font-weight: 500; line-height: 1.45; }
+.demon-hint-close { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; color: var(--mute); font-size: 12px; }
+.demon-hint-close:hover { color: var(--text-1); background: var(--panel-1); }
+
+@keyframes hintIn  { from { opacity: 0; transform: translateX(-48px); } }
+@keyframes hintOut { to   { opacity: 0; transform: translateX(-32px); } }
+@keyframes hintBar { to   { transform: scaleX(0); } }
+
+@media (hover: none), (max-width: 640px) { .demon-hint { display: none; } }
 
 /* -------------------------- 
   5. responsive
@@ -270,18 +296,23 @@
   .list-view-controls { order: 2; }
   .demons-container   { order: 3; width: 100%; }
   .list-view-controls { flex-wrap: wrap; }
-  .search-box { flex: 1 1 236px; max-width: none; min-width: 0; }
+  .list-view-controls { gap: 0 8px; padding: 5px 8px; }
+  .list-view-controls > * { margin-block: 3px; }
+  .list-view-controls::before { content: ''; order: 1; flex: 0 0 100%; height: 0; }
+  .filter-popup-wrapper { order: 2; }
+  .search-box { order: 2; flex: 1 1 0; max-width: none; min-width: 0; }
+  #btnCompactList { margin-left: 0; }
+  .sort-wrap { flex: 1 1 0; min-width: 0; margin-left: 0; }
+  .select-btn { width: 100%; min-width: 0; }
+  #sortLabel { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sort-wrap .pop-menu { left: auto; right: 0; }
 }
 
 @media (max-width: 640px) {
   .list-view-title { font-size: 24px; }
-  .list-view-controls { gap: 8px; padding: 8px; }
-  .sort-wrap { flex: 1 1 140px; margin-left: 0; }
-  .select-btn { width: 100%; min-width: 0; }
   #btnAddDemon { margin-left: auto; }
   .filter-popup-dropdown { width: min(220px, 80vw); }
   .scroll-top-btn { right: 14px; bottom: 14px; }
-  .profile-country-lists {top: 228px; right: 12px; }
 }
 
 

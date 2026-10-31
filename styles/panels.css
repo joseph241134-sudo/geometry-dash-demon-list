@@ -19,6 +19,37 @@
   border-radius: var(--radius-box);
 }
 
+.lists-panel { display: flex; flex-direction: column; height: auto; width: 100%; }
+
+.lists-panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line-1);
+  box-shadow: 0 0 60px 4px var(--shadow-1);
+  z-index: 10;
+}
+
+.lists-head-text { display: flex; flex-direction: column; min-width: 0; white-space: nowrap;  }
+.lists-head-actions { display: flex; align-items: center; gap: 12px; }
+
+#listsContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  max-height: 26em;
+  min-height: 0;
+  gap: 16px;
+  width: 100%;
+  padding: 20px 16px;
+}
+
+.no-lists-msg { padding: 30px 0; color: var(--mute); text-align: center; font-size: 14px; font-weight: 500; }
+
 /* -------------------------- 
   2. banner
   --------------------------- */

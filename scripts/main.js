@@ -1,6 +1,9 @@
-// main.js
 // ======================================================
-// Estado global, utilidades, header y vista principal
+// Main: renderizado de vista principal - costantes y utilidades
+// ======================================================
+
+// ======================================================
+// 1. Estado global y utilidades
 // ======================================================
 
 let profileStats = { demons: 0, moons: 0, diamonds: 0, stars: 0, userCoins: 0, coins: 0 };
@@ -38,6 +41,23 @@ function debounce(fn, ms = 100) {
   return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), ms); };
 }
 
+let toastTimer;
+function showToast(msg) {
+  let el = $('toast');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'toast';
+    el.className = 'toast';
+    el.setAttribute('role', 'status');
+    document.body.appendChild(el);
+  }
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
+}
+
+// -------------------- color modal --------------------------------------
 // Devuelve el color si es un #hex válido, si no ''
 function safeColor(value) {
   return /^#[0-9a-f]{6}$/i.test(value || '') ? value : '';
@@ -86,7 +106,6 @@ function rankMatches(items, query, getName, limit = 10) {
   return scored.slice(0, limit).map(s => s.item);
 }
 
-// Abre/cierra cualquier pop (init.js)
 const setPop = (el, open) => { if (el) el.classList.toggle('open', open); };
 
 // ------------------------------------------------------
@@ -95,7 +114,7 @@ const setPop = (el, open) => { if (el) el.classList.toggle('open', open); };
 
 let viewEnterTimer;
 
-// Reemplaza el contenido de <main>. animate=false para repintar sin animación de entrada
+// Reemplaza el contenido de <main>. animate = false para repintar sin animación de entrada
 function mountView(html, animate = true) {
   const main = $('main');
   destroySortable();
@@ -121,15 +140,14 @@ function setPageTitle(sub) {
   document.title = sub ? `${sub} | My Demon List` : t('meta.title');
 }
 
-// Estilo del banner (imagen o color)
+// Estilo de banner
 function bannerStyle() {
   const color = safeColor(profileState.bannerColor);
   return color ? `background-color:${color};` : '';
 }
 
 // -------------------------------------------------------------
-// API
-//  · Backend (Render): autocompletado de niveles (/api/levels) y warm-up
+// API · Backend (Render): autocompletado de niveles (/api/levels) y warm-up
 // -------------------------------------------------------------
 
 const API_BASE = 'https://mdl-backend-tvpk.onrender.com';
@@ -138,9 +156,9 @@ function warmUpAPI() {
   fetch(`${API_BASE}/api/health`, { cache: 'no-store' }).catch(() => {});
 }
 
-// -------------------------------------------------------------
+// ======================================================
 // 2. Vista principal
-// -------------------------------------------------------------
+// ======================================================
 
 function renderMainPage(animate = true) {
   if (!$('main')) return;
@@ -203,7 +221,7 @@ function renderMainPage(animate = true) {
 }
 
 // -------------------------------------------------------------
-// 3. Panel de estadísticas del perfil
+// 2.1. Panel de estadísticas del perfil
 // -------------------------------------------------------------
 
 const STAT_ITEMS = [
@@ -217,7 +235,7 @@ const STAT_ITEMS = [
 
 const STAT_MAX = 999999999;
 
-// Deja cada stat como entero entre 0 y STAT_MAX (también migra los datos guardados por versiones anteriores)
+// Deja cada stat como entero (también migra los datos guardados por versiones anteriores)
 function normalizeStats(src) {
   const out = {};
   STAT_ITEMS.forEach(([, field]) => {
@@ -259,7 +277,7 @@ function refreshProfileViews() {
 }
 
 // -------------------------------------------------------------
-// 4. Panel de listas
+// 2.2. Panel de listas
 // -------------------------------------------------------------
 
 function renderListsCards() {

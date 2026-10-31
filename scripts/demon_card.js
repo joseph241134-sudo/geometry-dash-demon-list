@@ -7,7 +7,7 @@
 // 1. Demon card
 // ======================================================
 
-function demonStatChip(label, value, cls = '') {
+function demonStatChip(label, value, cls = '', svg = '') {
   if (!value) return '';
   return `<span class="d-stat ${cls}"><span class="d-stat-label">${label}</span>${escapeHTML(value)}</span>`;
 }
@@ -16,8 +16,8 @@ function renderDemonCard(demon, position, index) {
   const ytThumb = viewPrefs.showFaces ? '' : getYouTubeThumbnail(demon.showcase);
   const id = escapeHTML(String(demon.id));
   const extraChips =
-    demonStatChip(t('card.attempts'), demon.attempts ? Number(demon.attempts).toLocaleString() : '', 'd-att') +
-    demonStatChip(t('card.date'), demon.winDate, 'd-date');
+    demonStatChip(t('card.date'), demon.winDate, 'd-date') +
+    demonStatChip(t('card.attempts'), demon.attempts ? Number(demon.attempts).toLocaleString() : '', 'd-att');
 
   return `
     <article class="demon-card" data-id="${id}" style="${diffColorStyle(demon.difficulty)};--i:${Math.min(index, 8)}">
@@ -107,7 +107,6 @@ function renderListStats() {
     </div>
 
     <div class="profile-body">
-      <span class="profile-country-lists">${svg.Pin}${escapeHTML(profileState.country) || '-'}</span>
       <h3 class="profile-title">${escapeHTML(profileState.username) || '-'}</h3>  
       <span class="profile-handle">${escapeHTML(currentList.title || '-')}</span>
 
@@ -143,7 +142,10 @@ function renderLocalAutocomplete(query) {
 
   dropdown.innerHTML = matches.map((m, i) => `
     <div class="autocomplete-item local-item" data-index="${i}" style="${diffColorStyle(m.difficulty)}">
-      <span class="json-name">${escapeHTML(m.name)}</span>
+      <div class="local-main">
+        <span class="json-name">#${currentList.demons.indexOf(m) + 1} - ${escapeHTML(m.name)}</span>
+        ${m.creator ? `<span class="json-creator">${t('list.by', { name: escapeHTML(m.creator) })}</span>` : ''}
+      </div>
       <span class="d-diff">${escapeHTML(m.difficulty.replace(' Demon', ''))}</span>
     </div>
   `).join('');

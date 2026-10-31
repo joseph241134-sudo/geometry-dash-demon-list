@@ -25,6 +25,8 @@ const I18N = {
     'footer.text': 'Create your own level lists and share them.', 'footer.reports': 'Reports', 'footer.copy': 'independent project · created by',
     'legal.privacy': 'Privacy policy', 'legal.terms': 'Terms of use',
 
+    'view.top': 'Back to top',
+
 //vista (SPA): main ----->
 
     'profile.edit': 'Edit profile', 'profile.id': 'ID: {id}',
@@ -75,13 +77,13 @@ const I18N = {
 
     'listm.import': 'Import list', 'listm.export': 'Export list', 
     'listm.invalidFile': 'This format is not supported.', 'listm.importErr': 'Error, the list could not be imported.', 'listm.importOk': 'List imported successfully.',
-    'listm.replaceConfirm': 'This will replace the demons of this list with the ones in the file. Continue?', 'listm.deleteConfirm': 'Delete \"{title}\" and all its demons? This cannot be undone.',
+    'listm.replaceConfirm': 'This will replace the demons of this list with the ones in the file. Continue?', 'listm.deleteConfirm': 'Delete "{title}" and all its demons? This cannot be undone.',
     
   //modal-demon ->
     'demon.add': 'Add demon', 'demon.edit': 'Edit demon', 'demon.save': 'Save', 'demon.create': 'Add demon',
 
     'demon.thumbHint': 'Icon preview - thumbnail:', 'demon.name': 'Name:', 'demon.creator': 'Creator:', 'demon.difficulty': 'Difficulty:',
-    'demon.levelId': 'ID:','demon.attempts': 'Attempts:', 'demon.winDate': 'Win date:', 'demon.position': 'Position:',
+    'demon.levelId': 'ID:', 'demon.attempts': 'Attempts:', 'demon.winDate': 'Win date:', 'demon.position': 'Position:',
 
     'demon.yt': 'YouTube URL:',
 
@@ -92,7 +94,7 @@ const I18N = {
 
     'view.search': 'Search level...', 'view.lock': 'Lock/unlock dragging', 'view.thumbYt': 'Show demon icons', 'view.sort': 'Sort by',
 
-    'sort.custom': 'Custom order', 'sort.attempts_desc': 'Most attempts', 
+    'sort.custom_rev': 'Reversed order', 'sort.custom': 'Custom order', 'sort.attempts_desc': 'Most attempts', 
     'sort.attempts_asc': 'Fewest attempts', 'sort.recent': 'Newest date', 'sort.oldest': 'Oldest date',
 
     'view.addDemon': '+ Demon', 'view.noMatch': 'No demon matches the filters', 'view.noMatchText': 'Change the search or the filters to see more results.',
@@ -101,20 +103,35 @@ const I18N = {
     'card.publishedBy': 'published by {name}', 'card.attempts': 'Attempts:', 'card.date': 'Date:',
     'card.edit': 'Edit demon', 'card.addBelow': 'Add demon below', 'card.showcase': 'Watch showcase',
 
-    'view.top': 'Back to top',
+    'common.name': 'Name', 'common.creator': 'Creator', 'common.difficulty': 'Difficulty',
+    'common.close': 'Close', 'hint.addDemon': 'To add another demon, hover over a demon card and press +.',
+
+    'demon.deleteConfirm': 'Delete "{name}" from this list? This cannot be undone.',
+
+    'dice.title': 'Random demon',
+    'dice.again': 'Roll again', 'dice.empty': 'Add some demons to your list first.', 'dice.copy': 'Click to copy', 'dice.copied': 'Copied!',
+    'compact.title': 'Overview',
+
+    'export.btn': 'Download image', 'export.quick': 'Quick select:', 'export.extra': 'Extra options:',
+    'export.title': 'Download list as PNG', 'export.from': 'From:', 'export.to': 'To:', 'export.all': 'All', 'export.top': 'Top {n}',
+    'export.hint': 'You can export at most {max} demons.', 'export.profile': 'Include photo and name',
+    'export.range': 'Selected: #{from} – #{to} · ({n} demons)', 'export.download': 'Download',
+    
+    'export.needLogin': 'Log in to download your list as a PNG.',
+    'view.lockBlocked': 'Clear the filters or sort mode to unlock dragging.',
 
 //vista (SPA): configuracion ----->
 
     'settings.title': 'Settings', 'settings.subtitle': 'Appearance and data', 
     
-    'settings.theme': 'Theme', 'settings.themeHint' : 'Preset themes, solid colors and gradients.',
+    'settings.theme': 'Theme', 'settings.themeHint': 'Preset themes, solid colors and gradients.',
 
     'theme.blue': 'Blue', 'theme.white': 'White', 'theme.dark': 'Dark', 'theme.purple': 'Purple', 'theme.infernal': 'Infernal',
     'theme.atardecer': 'Sunset', 'theme.neon': 'Neon', 'theme.bosque': 'Forest', 'theme.rosa': 'Pastel pink',
     'theme.rosa-dark': 'Dark pink', 'theme.halloween': 'Halloween',
     
     'settings.data': 'Your account data', 
-    'settings.dataHint':`All data is stored only in this browser. Clearing the cache or site data may erase everything. You can avoid this by exporting a backup first or by signing in.`,
+    'settings.dataHint': `All data is stored only in this browser. Clearing the cache or site data may erase everything. You can avoid this by exporting a backup first or by signing in.`,
     'settings.export': 'Export', 'settings.import': 'Import <small style="color: var(--mute); font-size: 11.5px; ">(overwrites everything)</small>', 
 
     'settings.invalidFile': 'The file is not valid.', 'settings.incompatible': 'The file does not match or is not compatible.',
@@ -142,6 +159,8 @@ const I18N = {
   //footer ->
     'footer.text': 'Crea tus propias listas de niveles y compártelas.', 'footer.reports': 'Reportes', 'footer.copy': 'proyecto independiente · creado por',
     'legal.privacy': 'Política de privacidad', 'legal.terms': 'Términos de uso',
+
+    'view.top': 'Volver arriba',
 
 //vista (SPA): main ----->
 
@@ -210,7 +229,7 @@ const I18N = {
 
     'view.search': 'Buscar nivel...', 'view.lock': 'Bloquear/desbloquear arrastre', 'view.thumbYt': 'Mostrar iconos Demon', 'view.sort': 'Ordenar por',
 
-    'sort.custom': 'Orden personalizado', 'sort.attempts_desc': 'Más intentos', 
+    'sort.custom_rev': 'Orden invertido', 'sort.custom': 'Orden personalizado', 'sort.attempts_desc': 'Más intentos', 
     'sort.attempts_asc': 'Menos intentos', 'sort.recent': 'Fecha más reciente', 'sort.oldest': 'Fecha más antigua',
 
     'view.addDemon': '+ Demon', 'view.noMatch': 'Ningún demon coincide con los filtros', 'view.noMatchText': 'Cambia la búsqueda o filtros para ver más resultados.',
@@ -219,20 +238,35 @@ const I18N = {
     'card.publishedBy': 'publicado por {name}', 'card.attempts': 'Intentos:', 'card.date': 'Fecha:',
     'card.edit': 'Editar demon', 'card.addBelow': 'Agregar demon debajo', 'card.showcase': 'Ver showcase',
 
-    'view.top': 'Volver arriba',
+    'common.name': 'Nombre', 'common.creator': 'Creador', 'common.difficulty': 'Dificultad',
+    'common.close': 'Cerrar', 'hint.addDemon': 'Para agregar un nivel pasa el mouse sobre una carta demon y pulsa (+).',
+
+    'demon.deleteConfirm': '¿Eliminar "{name}" de esta lista? No se podrá recuperar.',
+
+    'dice.title': 'Demon aleatorio',
+    'dice.again': 'Volver a tirar', 'dice.empty': 'Primero agrega demons a tu lista.', 'dice.copy': 'copiar ID', 'dice.copied': '¡Copiado!',
+    'compact.title': 'Resumen',
+
+    'export.btn': 'Descargar imagen', 'export.quick': 'Selección rápida:', 'export.extra': 'Opciones extras:',
+    'export.title': 'Descargar Lista como PNG', 'export.from': 'Desde:', 'export.to': 'Hasta:', 'export.all': 'Todos', 'export.top': 'Top {n}',
+    'export.hint': 'Puedes exportar como máximo {max} Demons.', 'export.profile': 'Incluir foto y nombre',
+    'export.range': 'Seleccionados: #{from} – #{to} · ({n} demons)', 'export.download': 'Descargar',
+    
+    'export.needLogin': 'Inicia sesión para descargar tu lista como PNG.',
+    'view.lockBlocked': 'Quita los filtros o el modo de orden para desbloquear el arrastre.',
 
 //vista (SPA): configuracion ----->
 
     'settings.title': 'Ajustes', 'settings.subtitle': 'Apariencia y datos', 
     
-    'settings.theme': 'Tema', 'settings.themeHint' : 'Temas preestablecidos, colores sólidos y gradientes.',
+    'settings.theme': 'Tema', 'settings.themeHint': 'Temas preestablecidos, colores sólidos y gradientes.',
 
     'theme.blue': 'Azul', 'theme.white': 'Blanco', 'theme.dark': 'Oscuro', 'theme.purple': 'Púrpura', 'theme.infernal': 'Infernal',
     'theme.atardecer': 'Atardecer', 'theme.neon': 'Neón', 'theme.bosque': 'Bosque', 'theme.rosa': 'Rosa pastel',
     'theme.rosa-dark': 'Rosa oscuro', 'theme.halloween': 'Halloween',
     
     'settings.data': 'Datos de tu cuenta', 
-    'settings.dataHint':`Todos los datos se guardan únicamente en este navegador, al borrar el caché o datos del sistema es posible que toda la información se pierda. Puedes evitar esto exportando una copia de seguridad antes o iniciando sesión.`,
+    'settings.dataHint': `Todos los datos se guardan únicamente en este navegador, al borrar el caché o datos del sistema es posible que toda la información se pierda. Puedes evitar esto exportando una copia de seguridad antes o iniciando sesión.`,
     'settings.export': 'Exportar', 'settings.import': 'Importar <small style="color: var(--mute); font-size: 11.5px; ">(sobreescribe todo)</small>', 
 
     'settings.invalidFile': 'El archivo no es válido.', 'settings.incompatible': 'El archivo no coincide o no es compatible.',
@@ -260,6 +294,8 @@ const I18N = {
   //footer ->
     'footer.text': 'Créez vos propres listes de niveaux et partagez-les.', 'footer.reports': 'Signalements', 'footer.copy': 'projet indépendant · créé par',
     'legal.privacy': 'Politique de confidentialité', 'legal.terms': 'Conditions d\'utilisation',
+
+    'view.top': 'Retour en haut',
 
 //vista (SPA): main ----->
 
@@ -311,7 +347,7 @@ const I18N = {
 
     'listm.import': 'Importer une liste', 'listm.export': 'Exporter la liste', 
     'listm.invalidFile': 'Ce format n\'est pas pris en charge.', 'listm.importErr': 'Erreur : impossible d\'importer la liste.', 'listm.importOk': 'Liste importée avec succès.',
-    'listm.replaceConfirm': 'Cela remplacera les demons de cette liste par ceux du fichier. Continuer ?', 'listm.deleteConfirm': 'Supprimer \"{title}\" et tous ses demons ? Impossible de les récupérer.',
+    'listm.replaceConfirm': 'Cela remplacera les demons de cette liste par ceux du fichier. Continuer ?', 'listm.deleteConfirm': 'Supprimer « {title} » et tous ses demons ? Impossible de les récupérer.',
     
   //modal-demon ->
     'demon.add': 'Ajouter un demon', 'demon.edit': 'Modifier le demon', 'demon.save': 'Enregistrer', 'demon.create': 'Ajouter un demon',
@@ -328,7 +364,7 @@ const I18N = {
 
     'view.search': 'Rechercher un niveau...', 'view.lock': 'Verrouiller/déverrouiller le glissement', 'view.thumbYt': 'Afficher les icônes demon', 'view.sort': 'Trier par',
 
-    'sort.custom': 'Ordre personnalisé', 'sort.attempts_desc': 'Plus d\'essais', 
+    'sort.custom_rev': 'Ordre inversé', 'sort.custom': 'Ordre personnalisé', 'sort.attempts_desc': 'Plus d\'essais', 
     'sort.attempts_asc': 'Moins d\'essais', 'sort.recent': 'Date la plus récente', 'sort.oldest': 'Date la plus ancienne',
 
     'view.addDemon': '+ Demon', 'view.noMatch': 'Aucun demon ne correspond aux filtres', 'view.noMatchText': 'Modifiez la recherche ou les filtres pour voir plus de résultats.',
@@ -337,20 +373,35 @@ const I18N = {
     'card.publishedBy': 'publié par {name}', 'card.attempts': 'Essais :', 'card.date': 'Date :',
     'card.edit': 'Modifier le demon', 'card.addBelow': 'Ajouter un demon ci-dessous', 'card.showcase': 'Voir le showcase',
 
-    'view.top': 'Retour en haut',
+    'common.name': 'Nom', 'common.creator': 'Créateur', 'common.difficulty': 'Difficulté',
+    'common.close': 'Fermer', 'hint.addDemon': 'Pour ajouter un autre demon, survolez une carte et cliquez sur +.',
+
+    'demon.deleteConfirm': 'Supprimer « {name} » de cette liste ? Impossible de le récupérer.',
+
+    'dice.title': 'Demon aléatoire',
+    'dice.again': 'Relancer', 'dice.empty': 'Ajoutez d\'abord des demons à votre liste.', 'dice.copy': 'Cliquer pour copier', 'dice.copied': 'Copié !',
+    'compact.title': 'Aperçu',
+
+    'export.btn': 'Télécharger l\'image', 'export.quick': 'Sélection rapide :', 'export.extra': 'Options supplémentaires :',
+    'export.title': 'Télécharger la liste en PNG', 'export.from': 'De :', 'export.to': 'À :', 'export.all': 'Tous', 'export.top': 'Top {n}',
+    'export.hint': 'Vous pouvez exporter au maximum {max} demons.', 'export.profile': 'Inclure la photo et le nom',
+    'export.range': 'Sélectionnés : #{from} – #{to} · ({n} demons)', 'export.download': 'Télécharger',
+    
+    'export.needLogin': 'Connectez-vous pour télécharger votre liste en PNG.',
+    'view.lockBlocked': 'Retirez les filtres ou le mode de tri pour déverrouiller le glissement.',
 
 //vista (SPA): configuracion ----->
 
     'settings.title': 'Paramètres', 'settings.subtitle': 'Apparence et données', 
     
-    'settings.theme': 'Thème', 'settings.themeHint' : 'Thèmes prédéfinis, couleurs unies et dégradés.',
+    'settings.theme': 'Thème', 'settings.themeHint': 'Thèmes prédéfinis, couleurs unies et dégradés.',
 
     'theme.blue': 'Bleu', 'theme.white': 'Blanc', 'theme.dark': 'Sombre', 'theme.purple': 'Violet', 'theme.infernal': 'Infernal',
     'theme.atardecer': 'Coucher de soleil', 'theme.neon': 'Néon', 'theme.bosque': 'Forêt', 'theme.rosa': 'Rose pastel',
     'theme.rosa-dark': 'Rose sombre', 'theme.halloween': 'Halloween',
     
     'settings.data': 'Données de votre compte', 
-    'settings.dataHint':`Toutes les données sont enregistrées uniquement dans ce navigateur ; vider le cache ou les données du site peut tout effacer. Vous pouvez l'éviter en exportant d'abord une sauvegarde ou en vous connectant.`,
+    'settings.dataHint': `Toutes les données sont enregistrées uniquement dans ce navigateur ; vider le cache ou les données du site peut tout effacer. Vous pouvez l'éviter en exportant d'abord une sauvegarde ou en vous connectant.`,
     'settings.export': 'Exporter', 'settings.import': 'Importer <small style="color: var(--mute); font-size: 11.5px; ">(écrase tout)</small>', 
 
     'settings.invalidFile': 'Le fichier n\'est pas valide.', 'settings.incompatible': 'Le fichier ne correspond pas ou n\'est pas compatible.',
@@ -704,11 +755,6 @@ const svg = {
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" class="icon-chevron">
     <path d="M 7.41 8.59 L 12 13.17 L 16.59 8.59 L 18 10 L 12 16 L 6 10 L 7.41 8.59 Z" fill="currentColor" />
   </svg>`,
-  List: `
-  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-    <line x1="9" y1="6" x2="21" y2="6"></line><line x1="9" y1="12" x2="21" y2="12"></line><line x1="9" y1="18" x2="21" y2="18"></line>
-    <circle cx="4" cy="6" r="1" fill="currentColor"></circle><circle cx="4" cy="12" r="1" fill="currentColor"></circle><circle cx="4" cy="18" r="1" fill="currentColor"></circle>
-  </svg>`,
   Drag: `
   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
     <circle cx="9" cy="6" r="1.8"/><circle cx="15" cy="6" r="1.8"/><circle cx="9" cy="12" r="1.8"/>
@@ -725,5 +771,30 @@ const svg = {
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="M4 4v16h16"/>
     <polyline points="7 16 10 12 13 14 19 8"/>
+  </svg>`,
+  Dice: `
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="22" height="24">
+    <g>
+      <path fill-rule="evenodd" d="M 250,50 L 440,145 Q 460,155 460,175 L 460,355 Q 460,375 440,385 L 270,475 Q 250,485 230,475 L 60,385 Q 40,375 40,355 L 40,175 Q 40,155 60,145 Z 
+        M 250,95 a 28.5,19.5 0 1,0 0.1,0 Z 
+        M 175,132 a 28.5,19.5 0 1,0 0.1,0 Z 
+        M 325,132 a 28.5,19.5 0 1,0 0.1,0 Z 
+        M 250,168 a 28.5,19.5 0 1,0 0.1,0 Z 
+        M 150,280 a 18,22.5 0 1,0 0.1,0 Z 
+        M 330,270 a 21,27 0 1,0 0.1,0 Z 
+        M 385,320 a 19.5,25.5 0 1,0 0.1,0 Z" fill="white" />
+    </g>
+  </svg>
+  `,
+  Grid: `
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+    <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+    <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+    <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+    <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+  </svg>`,
+  Image: `
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline>
   </svg>`
 }

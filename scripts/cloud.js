@@ -205,7 +205,7 @@ async function cloudMigrateImages() {
   return true;
 }
 
-// Borra de Storage las imágenes que ya no usa nada (solo las de más de 1 día)
+// Borra de Storage las imágenes que ya no se usan (más de 1 día)
 async function cloudCleanImages() {
   if (!cloudUser || !cloudReady) return 0;
   const { profile, lists } = cloudSplit();
