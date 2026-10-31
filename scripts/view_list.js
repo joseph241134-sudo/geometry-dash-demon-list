@@ -675,7 +675,7 @@ function openListView(listId) {
 
         <button type="button" id="btnToggleLockDrag" class="button-square toggle" title="${t('view.lock')}"><img alt=""></button>
         
-        <button type="button" id="btnCompactList" class="button-square" title="${t('compact.title')}">${svg.Grid}</button>
+        <button type="button" id="btnToggleThumb" class="button-square toggle" style="margin-left: auto" title="${t('view.thumbYt')}"><img alt=""></button>
 
         <div class="sort-wrap" data-pop-root>
           <button type="button" id="btnSort" class="form-input select-btn" title="${t('view.sort')}" aria-haspopup="listbox"><span id="sortLabel"></span>${svg.MiniWave}</button>
@@ -683,7 +683,8 @@ function openListView(listId) {
             ${SORT_MODES.map(m => `<button type="button" class="pop-item" data-sort="${m}">${t('sort.' + m)}</button>`).join('')}
           </div>
         </div>
-        <button type="button" id="btnToggleThumb" class="button-square toggle" title="${t('view.thumbYt')}"><img alt=""></button>
+
+        <button type="button" id="btnCompactList" class="button-square" title="${t('compact.title')}">${svg.Grid}</button>
 
       </div>
 

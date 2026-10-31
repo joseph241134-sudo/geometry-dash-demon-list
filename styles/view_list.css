@@ -88,9 +88,9 @@
 .local-main .json-name, .local-main .json-creator { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .json-creator {padding-top: 4px; }
 
-.sort-wrap { position: relative; margin-left: auto; }
-#btnCompactList { margin-left: auto; }
+.sort-wrap { position: relative; }
 #btnCompactList ~ .sort-wrap { margin-left: 0; }
+
 
 .select-btn {
   display: flex;
