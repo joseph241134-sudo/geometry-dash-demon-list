@@ -157,7 +157,7 @@ main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
 .hp-main-bg {
   position: absolute; inset: -20px; z-index: -1;
   background-size: cover; background-position: center;
-  filter: blur(2px) brightness(0.4);
+  filter: blur(1px) brightness(0.36);
   -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent 76%);
           mask-image: linear-gradient(180deg, #000 45%, transparent 76%);
   pointer-events: none;
@@ -191,6 +191,18 @@ main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
   font-size: 11px;
   font-weight: 700;
 }
+
+.hp-diff { white-space: nowrap; }
+.hp-diff-empty { color: var(--mute); border: 1px solid var(--line-1); background-color: rgba(0, 0, 0, 0.5); border-radius: var(--radius-button);
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 10px;
+}
+
+.hp-main-thumb.empty .hp-diff-empty { left: 50%; bottom: 50%; transform: translate(-50%, 50%); }
 
 .hp-main-info { display: flex; flex: 1; flex-direction: column; gap: 2px; min-width: 0; }
 .hp-main-title { color: var(--text-1); font-size: 24px; font-weight: 700; overflow-wrap: anywhere; }

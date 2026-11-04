@@ -216,9 +216,9 @@ function profileBadges() {
 }
 
 const RANK_TIERS = [
-  [1, '#ffd54a'], [2, '#cfd8dc'], [3, '#e0925a'],
-  [100, '#c084fc'], [1000, '#38bdf8'], [10000, '#4ade80'],
-  [100000, '#94a3b8'], [1000000, '#78716c']
+  [1, '#ffd54a'], [10, '#ffd54a'], [100, '#aeacab'],
+  [500, '#e0925a'], [1000, '#38bdf8'], [10000, '#4ade80'], [100000, '#d97fca'],
+  [1000000, '#7c7c7c'],
 ];
 
 const rankLabel = max =>
@@ -235,7 +235,7 @@ function renderGdRank() {
   const n = parseInt(profileState.gdRank, 10) || 0;
   const tier = n ? RANK_TIERS.find(([max]) => n <= max) : null;
   return `
-    <div class="hp-gd-rank ${tier && tier[0] <= 3 ? 'podium' : ''}" style="--rank:${tier ? tier[1] : 'var(--mute)'}" title="${t('home.gdRank')}">
+    <div class="hp-gd-rank ${tier && tier[0] <= 1 ? 'podium' : ''}" style="--rank:${tier ? tier[1] : 'var(--mute)'}" title="${t('home.gdRank')}">
       <span class="hp-trophy">${svg.Trophy}</span>
       <strong>${tier ? rankLabel(tier[0]) : '-'}</strong>
     </div>`;
@@ -350,6 +350,7 @@ function renderMainCard(list) {
   const top = demons[0];
   const hardest = top ? (top.name || '-') : '-';
   const img = listThumb(list);
+  const hdImg = list.image ? '' : getYouTubeThumbnail(demons[0]?.showcase, 'maxresdefault');
   const last = lastAddedDemon(demons);
 
   const lastSlide = last ? `
@@ -369,9 +370,11 @@ function renderMainCard(list) {
       <div class="hp-main-top">
         <div class="hp-main-thumb ${img ? '' : 'empty'}">
           ${img
-            ? `<img src="${escapeHTML(img)}" alt="" loading="lazy">`
+            ? `<img src="${escapeHTML(hdImg || img)}" alt="" loading="lazy" ${hdImg ? `onerror="this.onerror=null;this.src='${escapeHTML(img)}'"` : ''}>`
             : (top ? `<img class="contain" src="${diffIcon(top.difficulty)}" alt="">` : '')}
-          ${top ? `<span class="hp-diff" style="${diffColorStyle(top.difficulty)}">#1 · ${escapeHTML(top.difficulty)}</span>` : ''}
+          ${top
+            ? `<span class="hp-diff" style="${diffColorStyle(top.difficulty)}">#1 · ${escapeHTML(top.difficulty)}</span>`
+            : `<span class="hp-diff-empty">${t('home.listEmpty')}</span>`}
         </div>
         <div class="hp-main-info">
           <h3 class="hp-main-title">${escapeHTML(list.title)}</h3>

@@ -607,7 +607,7 @@ function openListModal(listId = null, asMain = false) {
     $('listImgBoxSrc').innerHTML = image ? svg.Image : (yt ? svg.Yt : '');
     $('listImgBoxRemove').disabled = !image;
   };
-  bindFileInput('fileListImg', { maxSize: 800, quality: 0.86 }, data => { image = data; syncImage(); });
+  bindFileInput('fileListImg', { maxSize: 1280, quality: 0.86 }, data => { image = data; syncImage(); });
 
   $('listImgBoxBtn').addEventListener('click', () => setPop($('listImgBoxPop'), !$('listImgBoxPop').classList.contains('open')));
 

@@ -106,12 +106,12 @@ function renderListStats() {
         <span class="ps-label">${t('profile.bio')}</span>
         <div class="hp-bio-box"><p class="hp-bio ${profileState.bio ? '' : 'empty'}">${profileState.bio ? escapeHTML(profileState.bio) : t('profile.noBio')}</p></div>
       </div>
-      <div class="ps-block">
+      <div class="ps-block" style="gap: 10px">
         <span class="ps-label">${t('home.gdProfile')}</span>
         <div class="hp-gd-row">
           <div class="hp-gd-profile">
             <strong class="hp-gd-name">${escapeHTML(profileState.gdName) || '-'}</strong>
-            <span class="hp-gd-id">${t('profile.id', { id: escapeHTML(profileState.gdId) || '-' })}</span>
+            <span class="hp-gd-id" style="font-size: 11.5px">${t('profile.id', { id: escapeHTML(profileState.gdId) || '-' })}</span>
           </div>
           ${renderGdRank()}
         </div>
