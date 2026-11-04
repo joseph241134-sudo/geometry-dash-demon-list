@@ -2,12 +2,14 @@
 // Ajustes: temas, fondo, idioma y datos locales -- es basico
 // ======================================================
 
-const THEMES = ['blue', 'purple', 'dark', 'atardecer', 'neon', 'rosa-dark', 'bosque','halloween'];
+const THEMES = ['blue', 'pizarra', 'gris', 'purple', 'dark', 'atardecer', 'neon', 'rosa-dark', 'bosque','halloween'];
 
 const DEFAULT_APP_SETTINGS = {
   theme: 'blue',
+  bgList: true,
   lang: (l => I18N[l] ? l : 'en')((navigator.language || 'en').slice(0, 2).toLowerCase())
 };
+
 let appSettings = { ...DEFAULT_APP_SETTINGS };
 
 // ------------------------------------------------------
@@ -23,6 +25,7 @@ function applyAppearance(fade = false) {
     root.classList.add('theme-fade');
     setTimeout(() => root.classList.remove('theme-fade'), 450);
   }
+  root.setAttribute('data-bg-list', appSettings.bgList === false ? 'off' : 'on');
   root.setAttribute('data-theme', theme);
 }
 
@@ -123,8 +126,14 @@ function openSettingsView() {
           `).join('')}
         </div>
       </section>
-
+      
       <section class="settings-section panel" style="--i:1">
+        <h2 class="settings-title">${t('settings.blur')}</h2>
+        <p class="settings-hint">${t('settings.blurHint')}</p>
+        <label class="ex-check"><input type="checkbox" id="optBgList">${t('settings.blurList')}</label>
+      </section>
+
+      <section class="settings-section panel" style="--i:2">
         <h2 class="settings-title">${t('settings.data')}</h2>
         <p class="settings-hint">${t(cloudUser ? 'settings.dataHintCloud' : 'settings.dataHint')}</p>
         <div class="settings-row" style="border-bottom: 1px solid var(--line-1); padding-bottom: 12px;">
@@ -155,6 +164,17 @@ function openSettingsView() {
     applyAppearance(true);
     saveData();
     refreshThemeCards();
+  });
+
+  // ---- Difuminado ----->
+  [['optBgList', 'bgList']].forEach(([id, key]) => {
+    const el = $(id);
+    el.checked = appSettings[key] !== false;
+    el.addEventListener('change', () => {
+      appSettings[key] = el.checked;
+      applyAppearance();
+      saveData();
+    });
   });
 
   // ---- Datos ----->

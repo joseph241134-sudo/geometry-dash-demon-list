@@ -1,0 +1,450 @@
+/* ==============================================
+  1. Contenedor
+  =============================================== */
+
+.home { display: flex; flex-direction: column; gap: 28px; width: min(1000px, 100%); margin: 0 auto; }
+
+main.view-enter .hp-hero,
+main.view-enter .hp-col { animation: riseIn 0.4s cubic-bezier(0.2, 0.8, 0.3, 1) both; }
+main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
+
+/* ==============================================
+  2. Hero (banner + avatar + perfil)
+  =============================================== */
+
+.hp-hero { border: 1px solid var(--line-1); border-radius: var(--radius-box); box-shadow: 0 8px 28px var(--shadow-2); }
+
+.hp-banner { position: relative; height: 200px; background-color: var(--panel-banner); border-bottom: 1px solid var(--line-1); box-shadow: 0 0 24px 6px var(--shadow-2); }
+.hp-banner img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.hp-banner:not([style]) {
+  background-image: linear-gradient(135deg,
+    color-mix(in srgb, var(--button) 30%, var(--panel-banner)) 0%,
+    var(--panel-banner) 55%,
+    color-mix(in srgb, var(--panel) 60%, var(--panel-banner)) 100%);
+}
+
+.hp-hero-body { position: relative; z-index: 2; display: flex; flex-direction: column; min-height: 192px; padding: 0 16px 12px; }
+.hp-top { display: flex; align-items: flex-start; gap: 12px; padding: 0 10px; }
+
+.hp-avatar {
+  flex-shrink: 0;
+  width: 144px;
+  height: 144px;
+  margin-top: -56px;
+  overflow: hidden;
+  background-color: var(--panel-1);
+  border: 6px solid var(--panel);
+  border-radius: 50%;
+}
+.hp-avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.hp-info { display: flex; flex: 1; flex-direction: column; gap: 10px; min-width: 0; padding-top: 6px; }
+
+.hp-name-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.hp-name { color: var(--text-1); font-size: 21.5px; font-weight: 800; letter-spacing: 0.5px; overflow-wrap: anywhere; }
+.hp-id {
+  padding: 2px 10px;
+  margin-top: 4px;
+  background-color: var(--panel-3);
+  border: 1px solid var(--line-1);
+  border-radius: var(--radius-button);
+  color: var(--mute);
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 11px;
+}
+
+.hp-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.hp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background-color: var(--panel-2);
+  border: 1px solid var(--line-1);
+  border-radius: var(--radius-button);
+  color: var(--text-1);
+  font-size: 12px;
+  font-weight: 500;
+}
+.hp-badge svg { flex-shrink: 0; color: var(--button); }
+
+.hp-edit { flex-shrink: 0; margin-top: 14px; background-color: var(--panel-2); font-size: 12.5px; }
+.hp-edit svg { width: 16px; height: 16px; }
+
+/* ---- Bio + perfil de GD ---- */
+
+.hp-lower { display: flex; flex: 1; align-items: stretch; padding-top: 10px; }
+
+.hp-bio-wrap { display: flex; flex: 1; flex-direction: column; gap: 8px; min-width: 0; margin-right: 18px; }
+.hp-bio-label { color: var(--mute); font-size: 13px; font-weight: 600; }
+
+.hp-bio-box {
+  flex: 1; min-width: 0; padding: 6px 12px;
+  background-color: rgba(0, 0, 0, 0.14);
+  border: 1px solid var(--line-1);
+  border-radius: var(--radius-sm);
+}
+.hp-bio { color: var(--mute); font-size: 13px; line-height: 1.55; overflow-wrap: anywhere; white-space: pre-line; font-style: italic; }
+.hp-bio.empty { opacity: 0.55; }
+
+.hp-gd {
+  flex: 0 0 370px; margin-left: auto; padding-left: 18px;
+  display: flex; flex-direction: column; justify-content: center; gap: 10px;
+  border-left: 1px solid var(--line-1);
+}
+.hp-gd-head { display: flex; align-items: center; gap: 8px; }
+.hp-gd-label { color: var(--mute); font-size: 13px; font-weight: 600; }
+.hp-gd-edit { width: 22px; height: 22px; }
+.hp-gd-edit svg { width: 11px; height: 11px; }
+
+.hp-gd-row { display: flex; align-items: center; gap: 14px; }
+
+.hp-gd-profile { display: flex; flex: 4; flex-direction: column; gap: 3px; min-width: 0; }
+.hp-gd-name { overflow: hidden; color: var(--text-1); font-size: 16px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.hp-gd-id { color: var(--mute); font-family: ui-monospace, Consolas, monospace; font-size: 12px; }
+
+.hp-gd-rank { display: flex; flex: 3; flex-shrink: 0; align-items: center; gap: 10px; padding-left: 14px; border-left: 1px dashed var(--line-1); }
+.hp-gd-rank strong { color: var(--rank); font-size: 16px; font-weight: 700; }
+.hp-gd-rank.podium .hp-trophy { box-shadow: 0 0 14px color-mix(in srgb, var(--rank) 55%, transparent); }
+.hp-trophy {
+  display: grid; place-items: center; width: 40px; height: 40px;
+  color: var(--rank);
+  background: color-mix(in srgb, var(--rank) 14%, var(--panel-3));
+  border: 1px solid color-mix(in srgb, var(--rank) 45%, transparent);
+  border-radius: 12px;
+}
+
+/* ==============================================
+  3. Grilla y cabeceras de sección
+  =============================================== */
+
+.hp-grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 3fr); gap: 28px; align-items: start; }
+
+.hp-section-head { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 42px; margin-bottom: 18px; padding-bottom: 10px; }
+.hp-section-head::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 0.5px; background-color: var(--line-1); }
+
+.hp-title { color: var(--text-1); font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
+
+
+.hp-head-actions { display: flex; align-items: center; gap: 8px; }
+.hp-head-actions .button-square {height: 30px; width: 30px; opacity: 1; background-color: var(--panel);}
+
+.hp-head-actions .button-square.active {color: var(--text-pri);}
+
+/* ==============================================
+  4. Lista principal
+  =============================================== */
+
+.hp-main-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 22px 18px 6px;
+  overflow: hidden;
+  isolation: isolate;
+  cursor: pointer;
+  background-color: var(--panel);
+  border: 1px solid var(--line-1);
+  border-radius: var(--radius-box);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.hp-main-card:hover { border-color: var(--line-2); box-shadow: 0 4px 22px var(--shadow-2); }
+
+.hp-main-card > .hp-menu { position: absolute; top: 14px; right: 14px; z-index: 5; }
+.hp-main-card .hp-dots { width: 24px; height: 24px; }
+.hp-main-card .hp-dots svg { width: 14px; height: 14px; }
+
+.hp-main-bg {
+  position: absolute; inset: -20px; z-index: -1;
+  background-size: cover; background-position: center;
+  filter: blur(2px) brightness(0.4);
+  -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent 76%);
+          mask-image: linear-gradient(180deg, #000 45%, transparent 76%);
+  pointer-events: none;
+}
+
+.hp-main-top { display: flex; align-items: stretch; gap: 20px; }
+
+.hp-main-thumb {
+  position: relative;
+  flex-shrink: 0;
+  width: 232px;
+  height: 144px;
+  overflow: hidden;
+  background-color: var(--panel-3);
+  border: 1px solid var(--line-1);
+  border-radius: var(--radius-card);
+}
+.hp-main-thumb.empty { border: 1px dashed var(--line-2); }
+.hp-main-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.hp-main-thumb img.contain { padding: 28px; object-fit: contain; } /* miniatura vacía: icono de dificultad */
+
+.hp-diff {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  padding: 3px 9px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--diff-color);
+  border-radius: var(--radius-button);
+  color: var(--diff-color);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.hp-main-info { display: flex; flex: 1; flex-direction: column; gap: 2px; min-width: 0; }
+.hp-main-title { color: var(--text-1); font-size: 24px; font-weight: 700; overflow-wrap: anywhere; }
+.hp-main-by { color: var(--mute); font-size: 14px; font-weight: 600; }
+
+.hp-main-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: auto; padding-top: 8px; }
+.hp-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--line-1);
+  border-radius: var(--radius-button);
+}
+.hp-stat span { color: var(--mute); font-size: 12.5px; font-weight: 500; }
+.hp-stat strong { max-width: 100%; overflow: hidden; color: var(--text-1); font-size: 14.5px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.hp-stat strong.hp-hardest { color: var(--diff-color, var(--text-1)); }
+
+.hp-main-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; padding-top: 10px; border-top: 1px solid var(--line-1); }
+.hp-main-btn { padding: 8px 28px; font-size: 14px; }
+
+/* ---- Rotor: último demon <-> desglose por dificultad ---- */
+
+.hp-main-last { display: flex; flex-direction: column; flex: 1; min-width: 0; height: 46px; margin-right: auto; overflow: hidden; line-height: 1.5; }
+.hp-main-last-label { color: var(--mute); font-size: 11.5px; font-weight: 600; }
+.hp-main-last-date { color: var(--text-1); font-weight: 700; }
+.hp-main-last strong { overflow: hidden; color: var(--text-1); font-size: 13.5px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+
+.hp-rotor-track { transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); will-change: transform; }
+.hp-rotor-slide { display: flex; flex-direction: column; height: 46px; min-width: 0; line-height: 1.5; }
+.hp-rotor-diffs { flex-direction: row; align-items: center; gap: 6px; }
+
+.hp-main-last-name { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.hp-main-last-name img { flex-shrink: 0; width: 26px; height: 26px; object-fit: contain; }
+
+.hp-diff-chip {
+  display: flex; align-items: center; justify-content: center; gap: 5px; min-width: 26px;
+  padding: 6px 14px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--line-1);
+  border-radius: 12px;
+}
+.hp-diff-chip img { flex-shrink: 0; width: 22px; height: 22px; object-fit: contain; }
+.hp-diff-chip strong { color: var(--text-1); font-size: 12.5px; font-weight: 700; }
+
+/* ---- Sin lista principal ---- */
+
+.hp-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 48px 20px;
+  text-align: center;
+  background-color: var(--panel);
+  border: 1px dashed var(--line-2);
+  border-radius: var(--radius-box);
+}
+.hp-empty-title { color: var(--text-1); font-size: 16px; font-weight: 700; }
+.hp-empty-text { color: var(--mute); font-size: 13px; font-weight: 500; }
+.hp-empty .btn-primary { margin-top: 12px; }
+
+/* ==============================================
+  5. Otras listas
+  =============================================== */
+
+.hp-others-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 380px;
+  padding: 12px;
+  overflow-y: auto;
+  background-color: var(--panel);
+  border: 1px solid var(--line-1);
+  border-radius: var(--radius-box);
+}
+
+.no-lists-msg {font-size: 13px; text-align: center; color: var(--mute); font-weight: 400; }
+
+.hp-item {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 106px;
+  padding: 8px 8px 8px 12px;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: var(--panel-2);
+  border: 1px solid var(--line-1);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.2s;
+}
+.hp-item:hover { border-color: var(--line-2); border-left-color: var(--diff-color, var(--line-2)); }
+
+.hp-item-icon.empty::before { content: ""; width: 70%; height: 70%; border: 1px dashed var(--line-2); border-radius: 50%; }
+
+.hp-item-bg {
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%;
+  height: 120%;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.4) blur(1px);
+  -webkit-mask-image: linear-gradient(90deg, #000 25%, rgba(0, 0, 0, 0.4) 100%);
+          mask-image: linear-gradient(90deg, #000 25%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+}
+
+/* icono de dificultad del hardest */
+.hp-item-icon { position: relative; flex-shrink: 0; display: grid; place-items: center; width: 50px; height: 50px; }
+.hp-item-icon img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5)); }
+
+.hp-item-info, .hp-item-actions { position: relative; }
+.hp-item-info { flex: 1; min-width: 0; }
+.hp-item-info h4 { overflow: hidden; color: var(--text-1); font-size: 21px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+
+.hp-item-chips { display: flex; gap: 6px; margin-top: 6px; min-width: 0; }
+.hp-chip {
+  flex-shrink: 0;
+  padding: 4px 8px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--line-1);
+  border-radius: 8px;
+  color: var(--mute);
+  font-size: 11.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.hp-chip b { color: var(--text-1); font-weight: 600; }
+.hp-chip-hardest { flex-shrink: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.hp-chip.hp-chip-hardest b { color: var(--diff-color, var(--text-1)); }
+
+.hp-item-actions { display: flex; flex-shrink: 0; flex-direction: column; align-items: flex-end; justify-content: space-between; align-self: stretch; gap: 10px; }
+.hp-item .hp-dots { width: 24px; height: 24px; }
+.hp-item .hp-dots svg { width: 14px; height: 14px; }
+
+.hp-view { padding: 7px 16px; background-color: color-mix(in srgb, var(--panel) 90%, transparent); border-radius: var(--radius-button); border: 1px solid var(--line-1); color: var(--text-1); font-size: 12.5px; font-weight: 600; margin-bottom: 2px;}
+.hp-view:hover { background-color: var(--button-hover); }
+
+.hp-item-bar { position: absolute; left: 0; right: 0; bottom: 0; display: flex; height: 2px; opacity: 0.85; pointer-events: none; }
+.hp-item-bar i { display: block; min-width: 2px; }
+
+.hp-item.reordering { cursor: default; }
+.hp-item-actions.hp-reorder { justify-content: center; gap: 6px; }
+.hp-move {
+  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 24px;
+  background-color: var(--panel-3);
+  border-radius: var(--radius-button);
+  border: 1px solid var(--line-2);
+  color: var(--text-1);
+}
+.hp-move:hover:not(:disabled) { background-color: var(--panel-1-hover); }
+
+/* ==============================================
+  6. Menú ⋮ (compartido por ambas tarjetas)
+  =============================================== */
+
+.hp-menu { position: relative; }
+.hp-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: var(--panel-2);
+  border: 1px solid var(--line-1);
+  border-radius: var(--radius-button);
+  color: var(--mute);
+}
+.hp-dots:hover { background-color: var(--panel-1-hover); color: var(--text-1); }
+
+.pop.hp-menu-pop { position: fixed; left: auto; min-width: 100px; transform-origin: top right; }
+.hp-menu-pop .pop-item.danger { color: var(--text-danger); }
+.hp-menu-pop .pop-item.danger:hover { background-color: color-mix(in srgb, var(--danger) 16%, transparent); }
+
+/* ==============================================
+  7. Ajustes según fondo difuminado / tema
+  =============================================== */
+
+[data-bg-list="off"] .hp-main-bg,
+[data-bg-list="off"] .hp-item-bg { display: none; }
+
+/* sombra de texto solo cuando hay imagen de fondo visible */
+[data-bg-list="on"] .hp-main-card.has-bg :is(.hp-main-title, .hp-main-by),
+[data-bg-list="on"] .hp-item.has-bg .hp-item-info h4 { text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7); }
+
+/* sin imagen de fondo visible: stats con color del tema y sin sombra en el icono */
+:is([data-bg-list="off"] .hp-main-card, .hp-main-card:not(.has-bg)) :is(.hp-stat, .hp-diff-chip) { background-color: var(--panel-2); }
+:is([data-bg-list="off"] .hp-item, .hp-item:not(.has-bg)) .hp-chip { background-color: var(--panel-3); }
+:is([data-bg-list="off"] .hp-item, .hp-item:not(.has-bg)) .hp-item-icon img { filter: none; }
+
+/* ==============================================
+  8. Modal editar perfil
+  =============================================== */
+
+.pe-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.pe-types .filter-diff-pill { padding: 6px 6px 8px; font-size: 12.5px; }
+
+textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize: vertical; }
+
+/* ==============================================
+  9. Responsive
+  =============================================== */
+
+@media (max-width: 900px) {
+  .hp-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .home { gap: 22px; }
+
+  /* hero */
+  .hp-banner { height: 150px; }
+  .hp-hero-body { gap: 4px; padding: 0 14px 16px; }
+  .hp-top { flex-wrap: wrap; padding: 0; }
+  .hp-avatar { width: 108px; height: 108px; margin-top: -56px; border-width: 5px; }
+  .hp-info { flex: 1 1 100%; padding-top: 0; margin-top: -4px; }
+  .hp-name { font-size: 21px; }
+  .hp-edit { position: absolute; top: 10px; right: 14px; justify-content: center; width: 30px; height: 30px; margin: 0; padding: 0; }
+  .hp-edit span { display: none; }
+
+  .hp-lower { flex-direction: column; gap: 12px; }
+  .hp-bio-wrap { margin-right: 0; }
+  .hp-bio-box { min-height: 64px; }
+  .hp-gd { flex: none; width: 100%; margin-left: 0; padding: 14px 14px 4px; border-left: none; border-top: 1px solid var(--line-1); }
+
+  /* lista principal */
+  .hp-main-card { padding: 16px 12px 6px; gap: 16px; }
+  .hp-main-card > .hp-menu { top: 26px; right: 26px; }
+  .hp-main-top { flex-direction: column; gap: 0; }
+  .hp-main-thumb { width: 100%; height: 170px; }
+  .hp-main-info {padding-left: 8px; margin-top: 10px;}
+  .hp-main-title { font-size: 21px; }
+  .hp-main-stats {padding: 12px 8px 0; margin-top: 6px; }
+  .hp-main-actions {padding-left: 2px; padding-right: 4px; }
+  .hp-main-btn { padding: 8px 16px; }
+  .hp-diff-chip { gap: 3px; padding: 5px 8px 5px 6px; }
+  .hp-diff-chip img { width: 21px; height: 21px; }
+  .hp-diff-chip strong { font-size: 9.5px; }
+
+  /* otras listas */
+  .hp-others-box { max-height: 340px; }
+  .hp-item { min-height: 98px; padding: 10px 8px 10px 10px; }
+  .hp-item-icon { width: 42px; height: 42px; }
+  .hp-item-info h4 { font-size: 18px; }
+}

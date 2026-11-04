@@ -14,7 +14,7 @@ function renderHeader() {
   const header = $('header');
   if (!header) return;
 
-  header.innerHTML = `
+    header.innerHTML = `
     <div class="header-left">
       <div class="header-brand" title="My Demon List">
         <img src="resources/copes.png" alt="">
@@ -24,25 +24,29 @@ function renderHeader() {
         <button type="button" id="btnHeaderMainView" class="btn-header" title="${t('header.home')}">
           ${svg.Home}<span class="btn-label">${t('header.home')}</span>
         </button>
-        <div class="lang-wrap" data-pop-root>
-          <button type="button" id="btnHeaderLang" class="btn-header btn-icon" title="${t('header.language')}" aria-label="${t('header.language')}" aria-haspopup="menu">
-            ${svg.Lang}${svg.Wave}
-          </button>
-          <div id="langPop" class="pop pop-menu">
-            ${LANGS.map(l => `
-            <button type="button" class="pop-item ${l.id === currentLang() ? 'active' : ''}" data-lang="${l.id}">${l.name}</button>
-             `).join('')}
-          </div>
-        </div>
       </nav>
     </div>
-    <nav class="header-actions" style="flex: 1; gap: 2px; ">
-      <button type="button" id="btnHeaderSettings" class="btn-header" title="${t('header.settings')}" style="margin-left: auto; ">
+    <nav class="header-actions" style="flex: 1; gap: 2px; align-items: center;">
+      <div class="lang-wrap" data-pop-root style="margin-left: auto;">
+        <button type="button" id="btnHeaderLang" class="btn-header btn-icon" title="${t('header.language')}" aria-label="${t('header.language')}" aria-haspopup="menu">
+          ${svg.Lang}${svg.Wave}
+        </button>
+        <div id="langPop" class="pop pop-menu">
+          ${LANGS.map(l => `
+          <button type="button" class="pop-item ${l.id === currentLang() ? 'active' : ''}" data-lang="${l.id}">${l.name}</button>
+           `).join('')}
+        </div>
+      </div>
+      <span class="header-sep" aria-hidden="true"></span>
+      <button type="button" id="btnHeaderSettings" class="btn-header" title="${t('header.settings')}">
         ${svg.Configuration}
       </button>
     </nav>
-    <button type="button" id="btnHeaderLogin" class="btn-header btn-link-gd">
-      ${svg.Perfil}${cloudUser ? escapeHTML(profileState.username) : t('header.login')}
+    <button type="button" id="btnHeaderLogin" class="btn-header btn-link-gd ${cloudUser ? 'hd-user' : 'btn-capsule'}">
+      ${cloudUser
+        ? `<span class="hd-user-text"><b>${escapeHTML(profileState.username)}</b><small>${t('profile.id', { id: publicIdText() })}</small></span>
+          <img class="hd-avatar" src="${escapeHTML(getAvatar())}" alt="" onerror="this.onerror=null;this.src='${DEFAULT_AVATAR}'">`
+        : `${svg.Perfil}${t('header.login')}`}
     </button>
   `;
 

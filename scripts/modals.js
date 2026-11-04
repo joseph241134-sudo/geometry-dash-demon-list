@@ -108,23 +108,36 @@ function showPrompt(message, { title = t('dlg.confirm'), placeholder = '' } = {}
   });
 }
 
+// true si hay sesión; si no, ofrece iniciarla
+function requireLogin(msgKey) {
+  if (cloudUser) return true;
+  showConfirm(t(msgKey), { okText: t('login.title') }).then(ok => { if (ok) openSignInModal(); });
+  return false;
+}
+
 // ---- Piezas reutilizables de formularios ----->
 
 // Conecta un <input type=file> oculto: al elegir una imagen la reduce y llama onChange(dataURL)
 function bindFileInput(file, opts, onChange) {
-  $(file).addEventListener('change', async (e) => {
+  const input = $(file);
+  const ov = input.closest('.modal-overlay');
+  const save = ov.querySelector('.modal-actions .btn-primary');
+
+  const setBusy = d => {
+    ov._uploads = (ov._uploads || 0) + d;
+    ov.classList.toggle('uploading', ov._uploads > 0);
+    if (save) save.disabled = ov._uploads > 0;
+  };
+
+  input.addEventListener('change', async (e) => {
     const f = e.target.files[0];
     e.target.value = '';
     if (!f) return;
+    setBusy(1);
     const data = await readImageFile(f, opts);
-    if (data) onChange(data);
+    setBusy(-1);
+    if (data && !ov.classList.contains('closing')) onChange(data);
   });
-}
-
-function bindImagePicker({ upload, remove, file, opts }, onChange) {
-  $(upload).addEventListener('click', () => $(file).click());
-  $(remove).addEventListener('click', () => onChange(''));
-  bindFileInput(file, opts, onChange);
 }
 
 const previewBox = (id, imgId) => `
@@ -132,6 +145,7 @@ const previewBox = (id, imgId) => `
     <div class="list-preview-container" id="${id}">
       <img id="${imgId}" alt="">
       <span class="preview-empty">${t('common.noPhoto')}</span>
+      <span class="preview-src" id="${id}Src"></span>
     </div>
     <div class="preview-edit" data-pop-root>
       <button type="button" class="edit-btn" id="${id}Btn" aria-haspopup="menu">${svg.Pencil}</button>
@@ -260,6 +274,7 @@ function openEditProfileModal() {
   let avatar = profileState.avatar || '';
   let banner = profileState.banner || '';
   let bannerColor = safeColor(profileState.bannerColor);
+  let playerType = profileState.playerType || '';
 
   const ov = openModal({
     title: t('profile.editTitle'),
@@ -298,10 +313,24 @@ function openEditProfileModal() {
           <input type="text" id="editName" class="form-input" spellcheck="false" placeholder="${t('profile.name')}" maxlength="24" value="${escapeHTML(profileState.username)}">
         </div>
 
+        <div class="form-group">
+          <label>${t('profile.type')}</label>
+          <div class="pe-types" id="peTypes">
+            <button type="button" class="filter-diff-pill" data-type="">${t('profile.typeNone')}</button>
+            <button type="button" class="filter-diff-pill" data-type="pc">${t('profile.typePc')}</button>
+            <button type="button" class="filter-diff-pill" data-type="mobile">${t('profile.typeMobile')}</button>
+          </div>
+        </div>
+
         <div class="form-group position-relative" data-pop-root>
           <label>${t('profile.country')}</label>
           <input type="text" id="editCountry" class="form-input" spellcheck="false" autocomplete="off" placeholder="${t('profile.countryPh')}" value="${escapeHTML(profileState.country || '')}">
-          <div id="countryPop" class="pop autocomplete-dropdown drop-up"  style="margin-bottom: -20px"></div>
+          <div id="countryPop" class="pop autocomplete-dropdown drop-up" style="margin-bottom: -20px"></div>
+        </div>
+
+        <div class="form-group">
+          <label>${t('profile.bio')}</label>
+          <textarea id="editBio" class="form-input" maxlength="160" rows="3" spellcheck="false" placeholder="${t('profile.bioPh')}">${escapeHTML(profileState.bio || '')}</textarea>
         </div>
       </div>`,
     actions: `
@@ -319,11 +348,12 @@ function openEditProfileModal() {
 
     $('btnBannerRemove').disabled = !banner;
     $('btnAvatarRemove').disabled = !avatar;
+    ov.querySelectorAll('#peTypes .filter-diff-pill').forEach(b => b.classList.toggle('active', b.dataset.type === playerType));
   };
 
   // ---- archivos ----->
   bindFileInput('fileAvatar', 512, data => { avatar = data; sync(); });
-  bindFileInput('fileBanner', 1280, data => { banner = data; sync(); });
+  bindFileInput('fileBanner', { maxSize: 1600, quality: 0.85 }, data => { banner = data; sync(); });
 
   // ---- banner ----->
   $('btnBannerEdit').addEventListener('click', () => setPop($('bannerPop'), !$('bannerPop').classList.contains('open')));
@@ -333,7 +363,7 @@ function openEditProfileModal() {
     if (!item || item.disabled) return;
     setPop($('bannerPop'), false);
 
-    if (item.dataset.act === 'upload') $('fileBanner').click();
+    if (item.dataset.act === 'upload') { if (requireLogin('login.bannerNeeded')) $('fileBanner').click(); }
     else if (item.dataset.act === 'remove') { banner = ''; sync(); }
     else openColorModal({
       value: bannerColor,
@@ -354,6 +384,12 @@ function openEditProfileModal() {
     else { avatar = ''; sync(); }
   });
 
+  $('peTypes').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-type]');
+    if (!b) return;
+    playerType = b.dataset.type;
+    sync();
+  });
   // ---- nacionalidad ----->
   const countryInput = $('editCountry');
   const countryPop = $('countryPop');
@@ -388,10 +424,73 @@ function openEditProfileModal() {
     const country = typed ? COUNTRIES.find(c => normalizeText(c) === normalizeText(typed)) : '';
     if (typed && !country) return markInvalid(countryInput);
 
+    const bio = $('editBio').value.trim().slice(0, 160);
+
     const prev = { ...profileState };
-    Object.assign(profileState, { username: name, avatar, banner, bannerColor, country });
+    Object.assign(profileState, { username: name, avatar, banner, bannerColor, country, playerType, bio });
     if (!saveData()) { Object.assign(profileState, prev); return; }
 
+    closeModal(ov);
+    renderHeader();
+    renderMainPage(false);
+  });
+
+  sync();
+}
+
+function openEditGdModal() {
+  let rank = normalizeGdRank(profileState.gdRank);
+
+  const ov = openModal({
+    title: t('gd.editTitle'),
+    cls: 'modal-sm',
+    body: `
+      <div class="form-group">
+        <label>${t('profile.gdName')}</label>
+        <input type="text" id="editGdName" class="form-input" spellcheck="false" maxlength="20" autocomplete="off" placeholder="-" value="${escapeHTML(profileState.gdName || '')}">
+      </div>
+      <div class="form-group">
+        <label>${t('profile.gdId')}</label>
+        <input type="text" id="editGdId" class="form-input" inputmode="numeric" maxlength="12" autocomplete="off" placeholder="-" value="${escapeHTML(profileState.gdId || '')}">
+      </div>
+      <div class="form-group position-relative" data-pop-root>
+        <label>${t('profile.gdRank')}</label>
+        <button type="button" id="gdRankBtn" class="form-input select-btn" aria-haspopup="listbox"><span id="gdRankLabel"></span>${svg.MiniWave}</button>
+        <div id="gdRankPop" class="pop pop-menu rank-pop">
+          <button type="button" class="pop-item" data-rank="">${t('profile.typeNone')}</button>
+          ${RANK_TIERS.map(([max]) => `<button type="button" class="pop-item" data-rank="${max}">${rankLabel(max)}</button>`).join('')}
+        </div>
+      </div>`,
+    actions: `
+      <button type="button" class="btn-secondary" id="btnCancelGd">${t('common.cancel')}</button>
+      <button type="button" class="btn-primary" id="btnSaveGd">${t('common.save')}</button>`
+  });
+
+  const sync = () => {
+    $('gdRankLabel').textContent = rank ? rankLabel(Number(rank)) : t('profile.typeNone');
+    ov.querySelectorAll('#gdRankPop .pop-item').forEach(b => b.classList.toggle('active', b.dataset.rank === rank));
+  };
+
+  $('gdRankBtn').addEventListener('click', () => setPop($('gdRankPop'), !$('gdRankPop').classList.contains('open')));
+  $('gdRankPop').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-rank]');
+    if (!b) return;
+    rank = b.dataset.rank;
+    setPop($('gdRankPop'), false);
+    sync();
+  });
+
+  $('btnCancelGd').addEventListener('click', () => closeModal(ov));
+  ['editGdName', 'editGdId'].forEach(id => submitOnEnter($(id), $('btnSaveGd')));
+
+  $('btnSaveGd').addEventListener('click', () => {
+    const prev = { ...profileState };
+    Object.assign(profileState, {
+      gdName: $('editGdName').value.trim().slice(0, 20),
+      gdId: $('editGdId').value.replace(/\D/g, '').slice(0, 12),
+      gdRank: rank
+    });
+    if (!saveData()) { Object.assign(profileState, prev); return; }
     closeModal(ov);
     renderMainPage(false);
   });
@@ -413,29 +512,6 @@ function showInfoModal(title, text) {
   ov.querySelector('[data-ok]').addEventListener('click', () => closeModal(ov));
 }
 
-function openLoginModal() {
-  const ov = openModal({
-    title: t('sync.title'),
-    titleExtra: `<button type="button" id="btnLoginInfo" class="btn-info-icon" title="${escapeHTML(t('sync.infoBtn'))}">${svg.Info}</button>`,
-    cls: 'modal-sm',
-    body: `
-      <div class="form-group">
-        <label>${t('sync.user')}</label>
-        <input type="text" id="loginInput" class="form-input" placeholder="robtop - id" spellcheck="false" autocomplete="off">
-      </div>
-      <div id="loginMsg" class="modal-hint"></div>`,
-    actions: `
-      <button type="button" class="btn-secondary" id="btnCancelLogin">${t('common.cancel')}</button>
-      <button type="button" class="btn-primary" id="btnLogin">${t('sync.submit')}</button>`
-  });
-
-  $('btnLoginInfo').addEventListener('click', () => showInfoModal(t('sync.infoTitle'), t('sync.infoText')));
-  $('btnCancelLogin').addEventListener('click', () => closeModal(ov));
-  $('loginInput').addEventListener('input', () => { $('loginMsg').textContent = ''; });
-  // sin funcionalidad
-  $('btnLogin').addEventListener('click', () => { $('loginMsg').textContent = t('sync.soon'); });
-}
-
 // Cuenta de sincronización: inicio de sesión con Google (Supabase)
 async function cloudSignInGoogle() {
   try { localStorage.setItem(LOGIN_FLAG, String(Date.now())); } catch (e) {}
@@ -453,8 +529,7 @@ function openAccountModal() {
   const ov = openModal({
     title: t('acc.title'),
     cls: 'modal-sm',
-    body: `<p class="dialog-text">${t('acc.logged', { email: escapeHTML(cloudUser.email) })}</p>
-           <div id="accMsg" class="error-msg"></div>`,
+    body: `<p class="dialog-text">${t('acc.logged', { email: escapeHTML(cloudUser.email) })}</p>`,
     actions: `
       <button type="button" class="btn-secondary" id="btnAccOut">${t('acc.signOut')}</button>`
   });
@@ -481,70 +556,32 @@ function openSignInModal() {
   });
 }
 
-// Mini modal de stat
-function openStatModal(field) {
-  const item = STAT_ITEMS.find(s => s[1] === field);
-  if (!item) return;
-
-  const ov = openModal({
-    title: t(item[2]),
-    cls: 'modal-sm',
-    body: `
-      <div class="form-group">
-        <label>${t('stats.value')}</label>
-        <input type="number" id="statInput" class="form-input" min="0" max="${STAT_MAX}" step="1" inputmode="numeric" autocomplete="off" value="${Number(profileStats[field]) || 0}">
-      </div>`,
-    actions: `
-      <button type="button" class="btn-secondary" id="btnCancelStat">${t('common.cancel')}</button>
-      <button type="button" class="btn-primary" id="btnSaveStat">${t('common.save')}</button>`
-  });
-
-  const input = $('statInput');
-  if (window.matchMedia('(hover: hover)').matches) { input.focus({ preventScroll: true }); input.select(); }
-
-  $('btnCancelStat').addEventListener('click', () => closeModal(ov));
-  submitOnEnter(input, $('btnSaveStat'));
-
-  $('btnSaveStat').addEventListener('click', () => {
-    const raw = input.value.trim();
-    const n = Number(raw);
-    if (raw === '' || !Number.isFinite(n) || n < 0 || n > STAT_MAX) return markInvalid(input);
-
-    const prev = profileStats[field];
-    profileStats[field] = Math.floor(n);
-    if (!saveData()) { profileStats[field] = prev; return; }
-
-    closeModal(ov);
-    renderStatsPanel();
-  });
-}
-
 // ======================================================
 // 5. Modal - Agregar / editar lista
 // ======================================================
 
-function openListModal(listId = null) {
+function openListModal(listId = null, asMain = false) {
   const isEditing = listId !== null;
   const list = isEditing ? userLists.find(item => item.id === listId) : null;
   if (isEditing && !list) return;
 
-  let isFav = list ? !!list.isFavorite : false;
   let image = list ? (list.image || '') : '';
 
   const ov = openModal({
     title: isEditing ? t('listm.edit') : t('listm.new'),
     cls: 'modal-list',
-    titleExtra: `<button type="button" id="favToggle" class="btn-fav-icon" title="${t('listm.favTitle')}"><img alt=""></button>
-                <div class="sort-wrap options-modal" data-pop-root>
+    titleExtra: `<div class="sort-wrap options-modal" data-pop-root>
                   <button type="button" id="btnOptionsList" class="btn-options-icon" title="options">${svg.Options}</button>
                   <div class="pop pop-menu" id="optionsListMenu">
                      <button type="button" class="pop-item" data-act="import">${t('listm.import')}</button>
                      <button type="button" class="pop-item" data-act="export" ${!isEditing ? 'disabled' : ''}>${t('listm.export')}</button>
                      <input type="file" id="fileImportJSON" accept=".json" hidden>
+                     <button type="button" class="pop-item" data-act="image" ${!isEditing ? 'disabled' : ''}>${t('listm.png')}</button>
                   </div>
                 </div>`,
     body: `
       <div class="form-group">
+        ${appSettings.bgList === false ? `<small class="blur-off">${t('listm.blurOff')}</small>` : ''}
         <label>${t('listm.banner')}</label>
         <div class="field-row" style="padding-top: 4px">
           ${previewBox('listImgBox', 'listImgPreview')}
@@ -557,26 +594,20 @@ function openListModal(listId = null) {
         <input type="text" id="editListTitle" maxlength="32" spellcheck="false" class="form-input" placeholder="My Demon List" value="${list ? escapeHTML(list.title) : ''}">
       </div>`,
     actions: `
-      ${isEditing ? `<button type="button" id="btnDeleteList" class="btn-danger push-left">${t('common.delete')}</button>` : ''}
       <button type="button" id="btnCancelListModal" class="btn-secondary">${t('common.cancel')}</button>
       <button type="button" id="btnSaveListModal" class="btn-primary">${isEditing ? t('listm.saveChanges') : t('listm.create')}</button>`
   });
 
-  // ---- favorito ----->
-  const favBtn = $('favToggle');
-  const syncFav = () => {
-    favBtn.classList.toggle('active', isFav);
-    favBtn.querySelector('img').src = isFav ? FAV_ICON.on : FAV_ICON.off;
-  };
-  favBtn.addEventListener('click', () => { isFav = !isFav; syncFav(); });
-
   // ---- imagen ----->
   const syncImage = () => {
-    $('listImgBox').classList.toggle('has-img', !!image);
-    if (image) $('listImgPreview').src = image; else $('listImgPreview').removeAttribute('src');
+    const yt = !image && list ? getYouTubeThumbnail(list.demons?.[0]?.showcase) : '';
+    const shown = image || yt;
+    $('listImgBox').classList.toggle('has-img', !!shown);
+    if (shown) $('listImgPreview').src = shown; else $('listImgPreview').removeAttribute('src');
+    $('listImgBoxSrc').innerHTML = image ? svg.Image : (yt ? svg.Yt : '');
     $('listImgBoxRemove').disabled = !image;
   };
- bindFileInput('fileListImg', { maxSize: 800, quality: 0.86 }, data => { image = data; syncImage(); });
+  bindFileInput('fileListImg', { maxSize: 800, quality: 0.86 }, data => { image = data; syncImage(); });
 
   $('listImgBoxBtn').addEventListener('click', () => setPop($('listImgBoxPop'), !$('listImgBoxPop').classList.contains('open')));
 
@@ -604,53 +635,38 @@ function openListModal(listId = null) {
     } 
     else if (action === 'export') {
       if (!isEditing) return;
-      downloadJSON(`${list.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_export.json`, list);
+      exportListJSON(list);
+    } else if (action === 'image') {
+      if (!isEditing) return;
+      currentList = list;
+      openExportImageModal();
     }
   });
-
+  
   // ---- logica importar ----->
-  $('fileImportJSON').addEventListener('change', (e) => {
+  $('fileImportJSON').addEventListener('change', async (e) => {
     const file = e.target.files[0];
     e.target.value = '';
     if (!file) return;
+    const { data, error } = await readListFile(file);
+    if (error) return showAlert(t(error));
 
-    const reader = new FileReader();
-    reader.onload = async (event) => {
-      let data;
-      try {
-        data = JSON.parse(event.target.result);
-      } catch (err) {
-        return showAlert(t('listm.importErr'));
-      }
-      if (!data || !data.title || !Array.isArray(data.demons)) return showAlert(t('listm.invalidFile'));
-
-      if (isEditing) {
-        if (!await showConfirm(t('listm.replaceConfirm'), { danger: true })) return;
-        list.demons = data.demons.map(normalizeDemon);
-      } else {
-        userLists.push(normalizeList({ ...data, id: Date.now(), author: profileState.username }));
-      }
-
-      if (!saveData()) return;
-      closeModal(ov);
-      renderListsCards();
-      showAlert(t('listm.importOk'));
-    };
-    reader.readAsText(file);
+    if (isEditing) {
+      if (!await showConfirm(t('listm.replaceConfirm'), { danger: true })) return;
+      list.demons = data.demons.map(normalizeDemon);
+    } else {
+      const imported = normalizeList({ ...data, id: Date.now(), isMain: false, order: Date.now(), author: profileState.username });
+      userLists.push(imported);
+      if (asMain) setMainList(imported.id);
+    }
+    if (!saveData()) return;
+    closeModal(ov);
+    renderListsCards();
+    showAlert(t('listm.importOk'));
   });
 
   // ---- eliminar / guardar ----->
   $('btnCancelListModal').addEventListener('click', () => closeModal(ov));
-
-  if (isEditing) {
-    $('btnDeleteList').addEventListener('click', async () => {
-      if (!await showConfirm(t('listm.deleteConfirm', { title: escapeHTML(list.title) }), { danger: true, okText: t('common.delete') })) return;
-      userLists = userLists.filter(item => item.id !== listId);
-      saveData();
-      closeModal(ov);
-      renderListsCards();
-    });
-  }
 
   submitOnEnter($('editListTitle'), $('btnSaveListModal'));
 
@@ -659,12 +675,11 @@ function openListModal(listId = null) {
     if (!title) return markInvalid($('editListTitle'));
 
     if (isEditing) {
-      Object.assign(list, { title, image, isFavorite: isFav });
+      Object.assign(list, { title, image });
     } else {
-      userLists.push(normalizeList({
-        id: Date.now(), title, image, isFavorite: isFav,
-        author: profileState.username, demons: []
-      }));
+      const created = normalizeList({ id: Date.now(), title, image, author: profileState.username, demons: [] });
+      userLists.push(created);
+      if (asMain) setMainList(created.id);
     }
 
     saveData();
@@ -672,7 +687,6 @@ function openListModal(listId = null) {
     renderListsCards();
   });
 
-  syncFav();
   syncImage();
 }
 
@@ -880,7 +894,7 @@ function renderDemonModal(listId, demonData, afterId = null) {
     });
   }
 
-    $('btnSaveDemon').addEventListener('click', () => {
+  $('btnSaveDemon').addEventListener('click', () => {
     const name = nameInput.value.trim();
     if (!name) return markInvalid(nameInput);
 
@@ -892,7 +906,7 @@ function renderDemonModal(listId, demonData, afterId = null) {
       difficulty: selectedDifficulty,
       levelId: $('demonLevelId').value.trim(),
       attempts: $('demonAtt').value,
-      winDate: $('demonDate').value,
+      winDate: $('demonDate').value > maxDate ? maxDate : $('demonDate').value,
       isFavorite: isFav,
     });
 
@@ -908,7 +922,13 @@ function renderDemonModal(listId, demonData, afterId = null) {
     refreshView();
 
     if (!isEdit) showAddDemonHint();
+
   });
+  
+  const today = new Date();
+    today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+    const maxDate = today.toISOString().slice(0, 10);
+    $('demonDate').max = maxDate;
 
   syncFav();
   setDifficultyUI(selectedDifficulty);

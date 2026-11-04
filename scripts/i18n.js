@@ -17,7 +17,7 @@ const I18N = {
     'common.ok': 'OK', 'common.cancel': 'Cancel', 'common.save': 'Save', 'common.delete': 'Delete', 
     'common.noPhoto': 'No image',
     'dlg.alert': 'Notice', 'dlg.confirm': 'Confirm', 'o': 'or',
-  
+
   //header ->
     'header.home': 'Home', 'header.settings': 'Settings', 'header.language': 'Language', 'header.login': 'Log in',
   
@@ -28,17 +28,27 @@ const I18N = {
     'view.top': 'Back to top',
 
 //vista (SPA): main ----->
-
     'profile.edit': 'Edit profile', 'profile.id': 'ID: {id}',
-    'stats.demons': 'Demons', 'stats.moons': 'Moons', 'stats.diamonds': 'Diamonds', 'stats.stars': 'Stars', 'stats.userCoins': 'User coins', 'stats.secretCoins': 'Secret coins', 'stats.edit': 'Click to edit', 'stats.value': 'Value:',
 
-    'lists.title': 'My demon lists', 'lists.count': 'Total lists: {n}', 'lists.add': '+ Add', 'lists.filterFav': 'Filter favorites', 
-    'lists.empty': 'Your panel is empty. Add your first list!', 'lists.emptyFav': 'You have no lists marked as favorite.',
+    'home.gdProfile': 'Geometry Dash - Stats:', 'home.gdRank': 'Global Top',
+    'gd.editTitle': 'Edit GD stats', 'profile.gdName': 'Username:', 'profile.gdId': 'ID:', 'profile.gdRank': 'Global top:',
 
-    'list.edit': 'Edit list', 'list.view': 'View', 'list.by': 'By {name}',
-    'list.info': 'Demons: {n} · Hardest: {hardest}',
+    'home.main': 'Main list', 'home.others': 'Other lists', 
 
-    'welcome.text': 'Manage your progress, create your own Demon List of your hardest levels in Geometry Dash',
+    'list.edit': 'Edit list', 'list.setMain': 'Set as main', 'list.unsetMain': 'Remove from main',
+
+    'list.by': 'By {name}', 'home.demons': 'Demons', 'home.hardest': 'Hardest',
+    'home.lastAdded': 'Last demon added', 'list.view': 'View',
+
+    'home.mainEmpty': 'No main list', 'home.mainEmptyText': 'Create your main list to see it here.', 'home.createMain': 'Create list',
+
+    'lists.reorder': 'Reorder lists', 'list.moveUp': 'Move up', 'list.moveDown': 'Move down',
+    'lists.add': '+ Add', 'lists.empty': 'You have no secondary lists.', 'home.listEmpty': 'No demons',
+
+    'io.import': 'Import', 'io.export': 'Export', 'view.stats': 'Stats', 'io.options': 'Options',
+
+//vista de bienvenida --->
+    'welcome.text': 'Manage your progress, create your own Demon List of your hardest levels in Geometry Dash', 'welcome.h1': 'Create and organize your own',
     'welcome.account': 'Log in', 'welcome.guest': 'Enter as guest', 'welcome.levels': 'Registered levels',
 
     'welcome.f1t': 'Autocomplete', 'welcome.f1d': 'Automatic level completion.',
@@ -53,8 +63,15 @@ const I18N = {
     'profile.uploadImg': 'Upload image', 'profile.removeImg': 'Remove image', 'profile.uploadBanner': 'Upload banner', 'profile.removeBanner': 'Remove banner', 'profile.bannerColor': 'Change color',
     'profile.editBanner': 'Edit banner', 'profile.editAvatar': 'Edit picture', 'color.title': 'Pick a color', 'color.reset': 'Reset', 'color.apply': 'Apply',
 
+    'login.bannerNeeded': 'Log in to upload a banner.',
+
     'profile.username': 'Username:', 'profile.name': 'your name', 'profile.country': 'Nationality:', 'profile.countryPh': 'Search your country...',
-  
+    
+    'profile.bio': 'Biography:', 'profile.noBio': 'No biography.',
+
+    'profile.type': 'Platform:', 'profile.typeNone': 'Not specified', 'profile.typePc': 'PC', 'profile.typeMobile': 'Mobile',
+    'profile.bioPh': 'Describe yourself in one sentence ...',
+
   //modal-iniciar sesion ->
     'login.title': 'Log in', 'auth.text': 'Sign in to save your lists in the cloud and use them on any device.',
     'auth.google': 'Continue with Google', 'auth.legal': 'By continuing, you accept our {terms} and {privacy}.',
@@ -69,11 +86,21 @@ const I18N = {
     'sync.user': 'Geometry Dash username or ID:', 'sync.soon': 'Coming soon, with faith.',
 
     'sync.infoBtn': 'Information', 'sync.infoTitle': 'Link account', 'sync.infoText': 'We are still working on this feature. It will be available in upcoming versions :)',
-    
+  // modal-exportar lista como imagen ->
+    'export.btn': 'List', 'export.quick': 'Quick select:', 'export.extra': 'Extra options:',
+    'export.title': 'Download list image', 'export.from': 'From:', 'export.to': 'To:', 'export.all': 'All', 'export.top': 'Top {n}',
+    'export.hint': 'Select the levels you wish to include in the image, a maximum of {max} per download.', 
+    'export.profile': 'Include photo and name',
+    'export.range': 'Selected: #{from} – #{to} · ({n} demons)', 'export.download': 'Download',
+
   //modal-lista ->
     'listm.new': 'Create new list', 'listm.edit': 'Edit list', 'listm.create': 'Create list', 'listm.saveChanges': 'Save', 'listm.favTitle': 'Mark as favorite', 
 
-    'listm.banner': 'List banner or image:', 'listm.upload': 'Upload banner', 'listm.remove': 'Remove banner', 'listm.name': 'List name:',
+    'listm.upload': 'Upload banner', 'listm.remove': 'Remove banner', 'listm.png': 'Download image', 
+    
+    'listm.banner': 'List banner or image:', 'listm.name': 'List name:',
+
+    'listm.blurOff': 'Card blur is turned off in Settings.',
 
     'listm.import': 'Import list', 'listm.export': 'Export list', 
     'listm.invalidFile': 'This format is not supported.', 'listm.importErr': 'Error, the list could not be imported.', 'listm.importOk': 'List imported successfully.',
@@ -87,10 +114,14 @@ const I18N = {
 
     'demon.yt': 'YouTube URL:',
 
+    'demon.deleteConfirm': 'Delete "{name}" from this list? This cannot be undone.',
+
 //vista (SPA): Lista ----->
 
-    'view.subtitle': 'Created by {name} · {n} demons', 
+    'view.subtitle': 'Created by {name} · {n} demons', 'view.listId': 'list: {id}',
     'view.filters': 'Filters', 'view.difficulty': 'Difficulty', 'view.all': 'All', 'view.favFilter': 'Filter favorites', 'view.onlyFav': 'Favorites only',
+
+    'export.needLogin': 'Log in to download your list as a PNG.',
 
     'view.search': 'Search level...', 'view.lock': 'Lock/unlock dragging', 'view.thumbYt': 'Show demon icons', 'view.sort': 'Sort by',
 
@@ -99,26 +130,19 @@ const I18N = {
 
     'view.addDemon': '+ Demon', 'view.noMatch': 'No demon matches the filters', 'view.noMatchText': 'Change the search or the filters to see more results.',
     'view.empty': 'This list has no demons yet', 'view.emptyText': 'Press to add your first demon.',
-
+  
+  //card-demon ->
     'card.publishedBy': 'published by {name}', 'card.attempts': 'Attempts:', 'card.date': 'Date:',
     'card.edit': 'Edit demon', 'card.addBelow': 'Add demon below', 'card.showcase': 'Watch showcase',
 
     'common.name': 'Name', 'common.creator': 'Creator', 'common.difficulty': 'Difficulty',
-    'common.close': 'Close', 'hint.addDemon': 'To add another demon, hover over a demon card and press +.',
-
-    'demon.deleteConfirm': 'Delete "{name}" from this list? This cannot be undone.',
-
+  
+  //demon-aleatorio ->
     'dice.title': 'Random demon',
-    'dice.again': 'Roll again', 'dice.empty': 'Add some demons to your list first.', 'dice.copy': 'Click to copy', 'dice.copied': 'Copied!',
+    'dice.again': 'Roll again', 'dice.empty': 'Add some demons to your list first.', 'dice.copy': 'Copy ID', 'dice.copied': 'Copied!',
     'compact.title': 'Overview',
-
-    'export.btn': 'List', 'export.quick': 'Quick select:', 'export.extra': 'Extra options:',
-    'export.title': 'Download list image', 'export.from': 'From:', 'export.to': 'To:', 'export.all': 'All', 'export.top': 'Top {n}',
-    'export.hint': 'Select the levels you wish to include in the image; a maximum of {max} per upload.', 
-    'export.profile': 'Include photo and name',
-    'export.range': 'Selected: #{from} – #{to} · ({n} demons)', 'export.download': 'Download',
     
-    'export.needLogin': 'Log in to download your list as a PNG.',
+    'common.close': 'Close', 'hint.addDemon': 'To add another demon, hover over a demon card and press (+).',
     'view.lockBlocked': 'Clear the filters or sort mode to unlock dragging.',
 
 //vista (SPA): configuracion ----->
@@ -127,9 +151,11 @@ const I18N = {
     
     'settings.theme': 'Theme', 'settings.themeHint': 'Preset themes, solid colors and gradients.',
 
-    'theme.blue': 'Blue', 'theme.white': 'White', 'theme.dark': 'Dark', 'theme.purple': 'Purple', 'theme.infernal': 'Infernal',
-    'theme.atardecer': 'Sunset', 'theme.neon': 'Neon', 'theme.bosque': 'Forest', 'theme.rosa': 'Pastel pink',
-    'theme.rosa-dark': 'Dark pink', 'theme.halloween': 'Halloween',
+    'theme.blue': 'Blue', 'theme.white': 'White', 'theme.dark': 'Dark', 'theme.purple': 'Purple', 'theme.rosa-dark': 'Dark pink', 'theme.halloween': 'Halloween',
+    'theme.atardecer': 'Sunset', 'theme.neon': 'Neon', 'theme.bosque': 'Forest', 'theme.pizarra': 'Slate', 'theme.gris': 'Gray',
+
+    'settings.blur': 'Blur', 'settings.blurHint': 'Shown on list cards: a dark, blurred background using the list thumbnail.',
+    'settings.blurList': 'Blur',
     
     'settings.data': 'Your account data', 
     'settings.dataHint': `All data is stored only in this browser. Clearing the cache or site data may erase everything. You can avoid this by exporting a backup first or by signing in.`,
@@ -153,7 +179,7 @@ const I18N = {
     'common.ok': 'Aceptar', 'common.cancel': 'Cancelar', 'common.save': 'Guardar', 'common.delete': 'Eliminar', 
     'common.noPhoto': 'Sin imagen',
     'dlg.alert': 'Aviso', 'dlg.confirm': 'Confirmar', 'o': 'o',
-  
+
   //header ->
     'header.home': 'Inicio', 'header.settings': 'Ajustes', 'header.language': 'Idioma', 'header.login': 'Iniciar sesión',
   
@@ -164,17 +190,27 @@ const I18N = {
     'view.top': 'Volver arriba',
 
 //vista (SPA): main ----->
-
     'profile.edit': 'Editar perfil', 'profile.id': 'ID: {id}',
-    'stats.demons': 'Demons', 'stats.moons': 'Moons', 'stats.diamonds': 'Diamonds', 'stats.stars': 'Stars', 'stats.userCoins': 'User coins', 'stats.secretCoins': 'Secret coins', 'stats.edit': 'Clic para editar', 'stats.value': 'Valor:',
 
-    'lists.title': 'Mis listas demon', 'lists.count': 'Listas totales: {n}', 'lists.add': '+ Añadir', 'lists.filterFav': 'Filtrar favoritos', 
-    'lists.empty': 'Tu panel está vacío. ¡Agrega tu primera lista!', 'lists.emptyFav': 'No tienes listas marcadas como favoritas.',
+    'home.gdProfile': 'Geometry Dash - Estadísticas:', 'home.gdRank': 'Top Global',
+    'gd.editTitle': 'Editar estadísticas de GD', 'profile.gdName': 'Usuario:', 'profile.gdId': 'ID:', 'profile.gdRank': 'Top global:',
 
-    'list.edit': 'Editar lista', 'list.view': 'Ver', 'list.by': 'Por {name}',
-    'list.info': 'Demons: {n} · Hardest: {hardest}',
+    'home.main': 'Lista principal', 'home.others': 'Otras listas', 
 
-    'welcome.text': 'Gestiona tu progreso, crea tu propia Demon list de tus niveles más difíciles en Geometry Dash',
+    'list.edit': 'Editar lista', 'list.setMain': 'Establecer como principal', 'list.unsetMain': 'Quitar de principal',
+
+    'list.by': 'Por {name}', 'home.demons': 'Demons', 'home.hardest': 'Hardest',
+    'home.lastAdded': 'Último Demon agregado', 'list.view': 'Ver',
+
+    'home.mainEmpty': 'Sin lista principal', 'home.mainEmptyText': 'Crea tu lista principal para verla aquí.', 'home.createMain': 'Crear lista',
+
+    'lists.reorder': 'Ordenar listas', 'list.moveUp': 'Subir', 'list.moveDown': 'Bajar',
+    'lists.add': '+ Añadir', 'lists.empty': 'No tienes listas secundarias.', 'home.listEmpty': 'Sin demons',
+
+    'io.import': 'Importar', 'io.export': 'Exportar', 'view.stats': 'Estadísticas', 'io.options': 'Opciones',
+
+//vista de bienvenida --->
+    'welcome.text': 'Gestiona tu progreso, crea tu propia Demon list de tus niveles más difíciles en Geometry Dash', 'welcome.h1': 'Crea y organiza tu propia',
     'welcome.account': 'Iniciar sesión', 'welcome.guest': 'Entrar sin cuenta', 'welcome.levels': 'Niveles registrados',
 
     'welcome.f1t': 'Autocompletado', 'welcome.f1d': 'Autocompletado de niveles automático.',
@@ -189,8 +225,15 @@ const I18N = {
     'profile.uploadImg': 'Subir imagen', 'profile.removeImg': 'Quitar imagen', 'profile.uploadBanner': 'Subir banner', 'profile.removeBanner': 'Quitar banner', 'profile.bannerColor': 'Cambiar color',
     'profile.editBanner': 'Editar banner', 'profile.editAvatar': 'Editar imagen', 'color.title': 'Elegir color', 'color.reset': 'Restablecer', 'color.apply': 'Aplicar',
 
+    'login.bannerNeeded': 'Inicia sesión para subir un banner.',
+
     'profile.username': 'Nombre de usuario:', 'profile.name': 'tu nombre', 'profile.country': 'Nacionalidad:', 'profile.countryPh': 'Busca tu país...',
-  
+    
+    'profile.bio': 'Biografía:', 'profile.noBio': 'Sin biografía.',
+
+    'profile.type': 'Plataforma:', 'profile.typeNone': 'Sin especificar', 'profile.typePc': 'PC', 'profile.typeMobile': 'Celular',
+    'profile.bioPh': 'Descríbete en una frase ...',
+
   //modal-iniciar sesion ->
     'login.title': 'Iniciar sesión', 'auth.text': 'Inicia sesión para guardar tus listas en la nube y usarlas en cualquier dispositivo.',
     'auth.google': 'Continuar con Google', 'auth.legal': 'Al continuar, aceptas nuestros {terms} y la {privacy}.',
@@ -205,11 +248,22 @@ const I18N = {
     'sync.user': 'Usuario o ID de Geometry Dash:', 'sync.soon': 'Próximamente, con fe.',
 
     'sync.infoBtn': 'Información', 'sync.infoTitle': 'Vincular cuenta', 'sync.infoText': 'Aún estamos trabajando en esta función. Estará disponible en próximas versiones :)',
-    
+
+  // modal-exportar lista como imagen ->
+    'export.btn': 'Lista', 'export.quick': 'Selección rápida:', 'export.extra': 'Opciones extras:',
+    'export.title': 'Descargar imagen de lista', 'export.from': 'Desde:', 'export.to': 'Hasta:', 'export.all': 'Todos', 'export.top': 'Top {n}',
+    'export.hint': 'Selecciona los niveles que quieras incluir en la imagen, un máximo de {max} por descarga.', 
+    'export.profile': 'Incluir foto y nombre',
+    'export.range': 'Seleccionados: #{from} – #{to} · ({n} demons)', 'export.download': 'Descargar',
+
   //modal-lista ->
     'listm.new': 'Crear nueva lista', 'listm.edit': 'Editar lista', 'listm.create': 'Crear lista', 'listm.saveChanges': 'Guardar', 'listm.favTitle': 'Marcar como favorito', 
 
-    'listm.banner': 'Banner o imagen de lista:', 'listm.upload': 'Subir banner', 'listm.remove': 'Eliminar banner', 'listm.name': 'Nombre de lista:',
+    'listm.upload': 'Subir banner', 'listm.remove': 'Eliminar banner', 'listm.png': 'Descargar imagen',
+    
+    'listm.banner': 'Banner o imagen de lista:', 'listm.name': 'Nombre de lista:',
+
+    'listm.blurOff': 'El difuminado de cartas está desactivado en Ajustes.',
 
     'listm.import': 'Importar lista', 'listm.export': 'Exportar lista', 
     'listm.invalidFile': 'Este formato no es compatible.', 'listm.importErr': 'Error, no se pudo importar la lista.', 'listm.importOk': 'Lista importada con éxito.',
@@ -223,10 +277,14 @@ const I18N = {
 
     'demon.yt': 'URL de YouTube:',
 
+    'demon.deleteConfirm': '¿Eliminar "{name}" de esta lista? No se podrá recuperar.',
+
 //vista (SPA): Lista ----->
 
-    'view.subtitle': 'Creado por {name} · {n} demons', 
+    'view.subtitle': 'Creado por {name} · {n} demons', 'view.listId': 'lista: {id}',
     'view.filters': 'Filtros', 'view.difficulty': 'Dificultad', 'view.all': 'Todas', 'view.favFilter': 'Filtrar favoritos', 'view.onlyFav': 'Solo favoritos',
+
+    'export.needLogin': 'Inicia sesión para descargar tu lista como PNG.',
 
     'view.search': 'Buscar nivel...', 'view.lock': 'Bloquear/desbloquear arrastre', 'view.thumbYt': 'Mostrar iconos Demon', 'view.sort': 'Ordenar por',
 
@@ -235,26 +293,19 @@ const I18N = {
 
     'view.addDemon': '+ Demon', 'view.noMatch': 'Ningún demon coincide con los filtros', 'view.noMatchText': 'Cambia la búsqueda o filtros para ver más resultados.',
     'view.empty': 'Esta lista aún no tiene demons', 'view.emptyText': 'Pulsa para añadir tu primer demon.',
-
+  
+  //card-demon ->
     'card.publishedBy': 'publicado por {name}', 'card.attempts': 'Intentos:', 'card.date': 'Fecha:',
     'card.edit': 'Editar demon', 'card.addBelow': 'Agregar demon debajo', 'card.showcase': 'Ver showcase',
 
     'common.name': 'Nombre', 'common.creator': 'Creador', 'common.difficulty': 'Dificultad',
-    'common.close': 'Cerrar', 'hint.addDemon': 'Para agregar un nivel pasa el mouse sobre una carta demon y pulsa (+).',
-
-    'demon.deleteConfirm': '¿Eliminar "{name}" de esta lista? No se podrá recuperar.',
-
+  
+  //demon-aleatorio ->
     'dice.title': 'Demon aleatorio',
     'dice.again': 'Volver a tirar', 'dice.empty': 'Primero agrega demons a tu lista.', 'dice.copy': 'copiar ID', 'dice.copied': '¡Copiado!',
     'compact.title': 'Resumen',
-
-    'export.btn': 'Lista', 'export.quick': 'Selección rápida:', 'export.extra': 'Opciones extras:',
-    'export.title': 'Descargar imagen de lista', 'export.from': 'Desde:', 'export.to': 'Hasta:', 'export.all': 'Todos', 'export.top': 'Top {n}',
-    'export.hint': 'Selecciona los niveles que quieras incluir en la imagen, un máximo de {max} por descarga.', 
-    'export.profile': 'Incluir foto y nombre',
-    'export.range': 'Seleccionados: #{from} – #{to} · ({n} demons)', 'export.download': 'Descargar',
     
-    'export.needLogin': 'Inicia sesión para descargar tu lista como PNG.',
+    'common.close': 'Cerrar', 'hint.addDemon': 'Para agregar un nivel pasa el mouse sobre una carta demon y pulsa (+).',
     'view.lockBlocked': 'Quita los filtros o el modo de orden para desbloquear el arrastre.',
 
 //vista (SPA): configuracion ----->
@@ -263,9 +314,11 @@ const I18N = {
     
     'settings.theme': 'Tema', 'settings.themeHint': 'Temas preestablecidos, colores sólidos y gradientes.',
 
-    'theme.blue': 'Azul', 'theme.white': 'Blanco', 'theme.dark': 'Oscuro', 'theme.purple': 'Púrpura', 'theme.infernal': 'Infernal',
-    'theme.atardecer': 'Atardecer', 'theme.neon': 'Neón', 'theme.bosque': 'Bosque', 'theme.rosa': 'Rosa pastel',
-    'theme.rosa-dark': 'Rosa oscuro', 'theme.halloween': 'Halloween',
+    'theme.blue': 'Azul', 'theme.white': 'Blanco', 'theme.dark': 'Oscuro', 'theme.purple': 'Púrpura', 'theme.rosa-dark': 'Rosa oscuro', 'theme.halloween': 'Halloween',
+    'theme.atardecer': 'Atardecer', 'theme.neon': 'Neón', 'theme.bosque': 'Bosque', 'theme.pizarra': 'Pizarra', 'theme.gris': 'Gris',
+
+    'settings.blur': 'Difuminado', 'settings.blurHint': 'Aparece en las cartas de listas, un fondo oscuro y difuminado con la miniatura de la lista.',
+    'settings.blurList': 'Difuminado',
     
     'settings.data': 'Datos de tu cuenta', 
     'settings.dataHint': `Todos los datos se guardan únicamente en este navegador, al borrar el caché o datos del sistema es posible que toda la información se pierda. Puedes evitar esto exportando una copia de seguridad antes o iniciando sesión.`,
@@ -289,7 +342,7 @@ const I18N = {
     'common.ok': 'Ok', 'common.cancel': 'Annuler', 'common.save': 'Enregistrer', 'common.delete': 'Supprimer', 
     'common.noPhoto': 'Sans image',
     'dlg.alert': 'Avis', 'dlg.confirm': 'Confirmer', 'o': 'ou',
-  
+
   //header ->
     'header.home': 'Accueil', 'header.settings': 'Paramètres', 'header.language': 'Langue', 'header.login': 'Se connecter',
   
@@ -300,17 +353,27 @@ const I18N = {
     'view.top': 'Retour en haut',
 
 //vista (SPA): main ----->
-
     'profile.edit': 'Modifier le profil', 'profile.id': 'ID : {id}',
-    'stats.demons': 'Demons', 'stats.moons': 'Moons', 'stats.diamonds': 'Diamonds', 'stats.stars': 'Stars', 'stats.userCoins': 'User coins', 'stats.secretCoins': 'Secret coins', 'stats.edit': 'Cliquer pour modifier', 'stats.value': 'Valeur :',
 
-    'lists.title': 'Mes listes demon', 'lists.count': 'Listes totales : {n}', 'lists.add': '+ Ajouter', 'lists.filterFav': 'Filtrer les favoris', 
-    'lists.empty': 'Votre panneau est vide. Ajoutez votre première liste !', 'lists.emptyFav': 'Vous n\'avez aucune liste marquée comme favorite.',
+    'home.gdProfile': 'Geometry Dash - Statistiques :', 'home.gdRank': 'Top mondial',
+    'gd.editTitle': 'Modifier les statistiques GD', 'profile.gdName': 'Utilisateur :', 'profile.gdId': 'ID :', 'profile.gdRank': 'Top mondial :',
 
-    'list.edit': 'Modifier la liste', 'list.view': 'Voir', 'list.by': 'Par {name}',
-    'list.info': 'Demons : {n} · Hardest : {hardest}',
+    'home.main': 'Liste principale', 'home.others': 'Autres listes', 
 
-    'welcome.text': 'Gérez votre progression, créez votre propre Demon List de vos niveaux les plus difficiles sur Geometry Dash',
+    'list.edit': 'Modifier la liste', 'list.setMain': 'Définir comme principale', 'list.unsetMain': 'Retirer des principales',
+
+    'list.by': 'Par {name}', 'home.demons': 'Demons', 'home.hardest': 'Hardest',
+    'home.lastAdded': 'Dernier demon ajouté', 'list.view': 'Voir',
+
+    'home.mainEmpty': 'Aucune liste principale', 'home.mainEmptyText': 'Créez votre liste principale pour la voir ici.', 'home.createMain': 'Créer une liste',
+
+    'lists.reorder': 'Réorganiser les listes', 'list.moveUp': 'Monter', 'list.moveDown': 'Descendre',
+    'lists.add': '+ Ajouter', 'lists.empty': 'Vous n\'avez aucune liste secondaire.', 'home.listEmpty': 'Aucun demon',
+
+    'io.import': 'Importer', 'io.export': 'Exporter', 'view.stats': 'Statistiques', 'io.options': 'Options',
+
+//vista de bienvenida --->
+    'welcome.text': 'Gérez votre progression, créez votre propre Demon List de vos niveaux les plus difficiles sur Geometry Dash', 'welcome.h1': 'Créez et organisez votre propre',
     'welcome.account': 'Se connecter', 'welcome.guest': 'Entrer sans compte', 'welcome.levels': 'Niveaux enregistrés',
 
     'welcome.f1t': 'Saisie automatique', 'welcome.f1d': 'Auto-complétion automatique des niveaux.',
@@ -325,8 +388,15 @@ const I18N = {
     'profile.uploadImg': 'Téléverser une image', 'profile.removeImg': 'Supprimer l\'image', 'profile.uploadBanner': 'Téléverser une bannière', 'profile.removeBanner': 'Supprimer la bannière', 'profile.bannerColor': 'Changer de couleur',
     'profile.editBanner': 'Modifier la bannière', 'profile.editAvatar': 'Modifier l\'image', 'color.title': 'Choisir une couleur', 'color.reset': 'Réinitialiser', 'color.apply': 'Appliquer',
 
+    'login.bannerNeeded': 'Connectez-vous pour téléverser une bannière.',
+
     'profile.username': 'Nom d\'utilisateur :', 'profile.name': 'votre nom', 'profile.country': 'Nationalité :', 'profile.countryPh': 'Recherchez votre pays...',
-  
+    
+    'profile.bio': 'Biographie :', 'profile.noBio': 'Aucune biographie.',
+
+    'profile.type': 'Plateforme :', 'profile.typeNone': 'Non spécifiée', 'profile.typePc': 'PC', 'profile.typeMobile': 'Mobile',
+    'profile.bioPh': 'Décrivez-vous en une phrase ...',
+
   //modal-iniciar sesion ->
     'login.title': 'Se connecter', 'auth.text': 'Connectez-vous pour enregistrer vos listes dans le cloud et les utiliser sur tout appareil.',
     'auth.google': 'Continuer avec Google', 'auth.legal': 'En continuant, vous acceptez nos {terms} et la {privacy}.',
@@ -341,11 +411,21 @@ const I18N = {
     'sync.user': 'Nom d\'utilisateur ou ID Geometry Dash :', 'sync.soon': 'Bientôt disponible, avec foi.',
 
     'sync.infoBtn': 'Informations', 'sync.infoTitle': 'Lier un compte', 'sync.infoText': 'Nous travaillons encore sur cette fonctionnalité. Elle sera disponible dans les prochaines versions :)',
-    
+  // modal-exportar lista como imagen ->
+    'export.btn': 'Liste', 'export.quick': 'Sélection rapide :', 'export.extra': 'Options supplémentaires :',
+    'export.title': 'Télécharger l\'image de la liste', 'export.from': 'De :', 'export.to': 'À :', 'export.all': 'Tous', 'export.top': 'Top {n}',
+    'export.hint': 'Sélectionnez les niveaux que vous souhaitez inclure dans l\'image, avec un maximum de {max} par téléchargement.', 
+    'export.profile': 'Inclure la photo et le nom',
+    'export.range': 'Sélectionnés : #{from} – #{to} · ({n} demons)', 'export.download': 'Télécharger',
+
   //modal-lista ->
     'listm.new': 'Créer une nouvelle liste', 'listm.edit': 'Modifier la liste', 'listm.create': 'Créer la liste', 'listm.saveChanges': 'Enregistrer', 'listm.favTitle': 'Marquer comme favorite', 
 
-    'listm.banner': 'Bannière ou image de la liste :', 'listm.upload': 'Téléverser une bannière', 'listm.remove': 'Supprimer la bannière', 'listm.name': 'Nom de la liste :',
+    'listm.upload': 'Téléverser une bannière', 'listm.remove': 'Supprimer la bannière', 'listm.png': 'Télécharger l\'image', 
+    
+    'listm.banner': 'Bannière ou image de la liste :', 'listm.name': 'Nom de la liste :',
+
+    'listm.blurOff': 'Le flou des cartes est désactivé dans les Paramètres.',
 
     'listm.import': 'Importer une liste', 'listm.export': 'Exporter la liste', 
     'listm.invalidFile': 'Ce format n\'est pas pris en charge.', 'listm.importErr': 'Erreur : impossible d\'importer la liste.', 'listm.importOk': 'Liste importée avec succès.',
@@ -359,10 +439,14 @@ const I18N = {
 
     'demon.yt': 'URL YouTube :',
 
+    'demon.deleteConfirm': 'Supprimer « {name} » de cette liste ? Impossible de le récupérer.',
+
 //vista (SPA): Lista ----->
 
-    'view.subtitle': 'Créée par {name} · {n} demons', 
+    'view.subtitle': 'Créée par {name} · {n} demons', 'view.listId': 'liste : {id}',
     'view.filters': 'Filtres', 'view.difficulty': 'Difficulté', 'view.all': 'Toutes', 'view.favFilter': 'Filtrer les favoris', 'view.onlyFav': 'Uniquement les favoris',
+
+    'export.needLogin': 'Connectez-vous pour télécharger votre liste en PNG.',
 
     'view.search': 'Rechercher un niveau...', 'view.lock': 'Verrouiller/déverrouiller le glissement', 'view.thumbYt': 'Afficher les icônes demon', 'view.sort': 'Trier par',
 
@@ -371,26 +455,19 @@ const I18N = {
 
     'view.addDemon': '+ Demon', 'view.noMatch': 'Aucun demon ne correspond aux filtres', 'view.noMatchText': 'Modifiez la recherche ou les filtres pour voir plus de résultats.',
     'view.empty': 'Cette liste ne contient pas encore de demons', 'view.emptyText': 'Appuyez pour ajouter votre premier demon.',
-
+  
+  //card-demon ->
     'card.publishedBy': 'publié par {name}', 'card.attempts': 'Essais :', 'card.date': 'Date :',
     'card.edit': 'Modifier le demon', 'card.addBelow': 'Ajouter un demon ci-dessous', 'card.showcase': 'Voir le showcase',
 
     'common.name': 'Nom', 'common.creator': 'Créateur', 'common.difficulty': 'Difficulté',
-    'common.close': 'Fermer', 'hint.addDemon': 'Pour ajouter un autre demon, survolez une carte et cliquez sur +.',
-
-    'demon.deleteConfirm': 'Supprimer « {name} » de cette liste ? Impossible de le récupérer.',
-
+  
+  //demon-aleatorio ->
     'dice.title': 'Demon aléatoire',
-    'dice.again': 'Relancer', 'dice.empty': 'Ajoutez d\'abord des demons à votre liste.', 'dice.copy': 'Cliquer pour copier', 'dice.copied': 'Copié !',
+    'dice.again': 'Relancer', 'dice.empty': 'Ajoutez d\'abord des demons à votre liste.', 'dice.copy': 'Copier l\'ID', 'dice.copied': 'Copié !',
     'compact.title': 'Aperçu',
-
-    'export.btn': 'Liste', 'export.quick': 'Sélection rapide :', 'export.extra': 'Options supplémentaires :',
-    'export.title': 'Télécharger l\'image de la liste', 'export.from': 'De :', 'export.to': 'À :', 'export.all': 'Tous', 'export.top': 'Top {n}',
-    'export.hint': 'Sélectionnez les niveaux que vous souhaitez inclure dans l\'image, avec un maximum de {max} par chargement.', 
-    'export.profile': 'Inclure la photo et le nom',
-    'export.range': 'Sélectionnés : #{from} – #{to} · ({n} demons)', 'export.download': 'Télécharger',
     
-    'export.needLogin': 'Connectez-vous pour télécharger votre liste en PNG.',
+    'common.close': 'Fermer', 'hint.addDemon': 'Pour ajouter un autre demon, survolez une carte demon et cliquez sur (+).',
     'view.lockBlocked': 'Retirez les filtres ou le mode de tri pour déverrouiller le glissement.',
 
 //vista (SPA): configuracion ----->
@@ -399,9 +476,11 @@ const I18N = {
     
     'settings.theme': 'Thème', 'settings.themeHint': 'Thèmes prédéfinis, couleurs unies et dégradés.',
 
-    'theme.blue': 'Bleu', 'theme.white': 'Blanc', 'theme.dark': 'Sombre', 'theme.purple': 'Violet', 'theme.infernal': 'Infernal',
-    'theme.atardecer': 'Coucher de soleil', 'theme.neon': 'Néon', 'theme.bosque': 'Forêt', 'theme.rosa': 'Rose pastel',
-    'theme.rosa-dark': 'Rose sombre', 'theme.halloween': 'Halloween',
+    'theme.blue': 'Bleu', 'theme.white': 'Blanc', 'theme.dark': 'Sombre', 'theme.purple': 'Violet', 'theme.rosa-dark': 'Rose sombre', 'theme.halloween': 'Halloween',
+    'theme.atardecer': 'Coucher de soleil', 'theme.neon': 'Néon', 'theme.bosque': 'Forêt', 'theme.pizarra': 'Ardoise', 'theme.gris': 'Gris',
+
+    'settings.blur': 'Flou', 'settings.blurHint': 'Affiché sur les cartes de listes : un fond sombre et flouté avec la miniature de la liste.',
+    'settings.blurList': 'Flou',
     
     'settings.data': 'Données de votre compte', 
     'settings.dataHint': `Toutes les données sont enregistrées uniquement dans ce navigateur ; vider le cache ou les données du site peut tout effacer. Vous pouvez l'éviter en exportant d'abord une sauvegarde ou en vous connectant.`,
@@ -462,7 +541,7 @@ const LEGAL_I18N = {
       html: `
         <div style="display: flex; flex-direction: row; align-items: center; gap: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--line-1);">
           <div class="square">
-            <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor">
               <path d="M 12 4.22 C 9.43 4.22 7.34 6.31 7.34 8.88 L 7.34 11.23 L 8.98 11.23 L 8.98 8.88 C 8.98 7.21 10.33 5.86 12 5.86 C 13.67 5.86 15.02 7.21 15.02 8.88 L 15.02 11.23 L 16.66 11.23 L 16.66 8.88 C 16.66 6.31 14.57 4.22 12 4.22 Z" />
               <path d="M 7.68 10.37 L 16.32 10.37 C 17.12 10.37 17.76 11.01 17.76 11.81 L 17.76 18.34 C 17.76 19.14 17.12 19.78 16.32 19.78 L 7.68 19.78 C 6.88 19.78 6.24 19.14 6.24 18.34 L 6.24 11.81 C 6.24 11.01 6.88 10.37 7.68 10.37 Z M 12 12.62 C 11.39 12.62 10.9 13.12 10.9 13.73 C 10.9 14.21 11.21 14.62 11.62 14.77 L 11.62 17.04 C 11.62 17.25 11.79 17.42 12 17.42 C 12.21 17.42 12.38 17.25 12.38 17.04 L 12.38 14.77 C 12.79 14.62 13.1 14.21 13.1 13.73 C 13.1 13.12 12.61 12.62 12 12.62 Z" />
             </svg>
@@ -476,7 +555,7 @@ const LEGAL_I18N = {
         <h2>1. What data is collected?</h2>
         <ul>
           <li><strong>Account:</strong> if you sign in with Google, we receive your email address and the basic profile data Google provides. We do not receive your password.</li>
-          <li><strong>Content you create:</strong> your lists, demons, statistics and profile. We also receive any images you upload and your preference settings (theme).</li>
+          <li><strong>Content you create:</strong> your lists, demons, statistics and profile. We also receive any images you upload and your preference settings (theme and blur).</li>
           <li><strong>Technical data:</strong> when you use level autocomplete, the server receives the search text and your IP address in order to provide a response and limit abuse.</li>
         </ul>
 
@@ -511,7 +590,7 @@ const LEGAL_I18N = {
       html: `
         <div style="display: flex; flex-direction: row; align-items: center; gap: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--line-1);">
           <div class="square">
-            <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="80%" height="80%" fill="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="80%" height="80%" fill="currentColor">
               <path d="M 19 6 L 14 1 L 5 1 C 3.9 1 3 1.9 3 3 L 3 21 C 3 22.1 3.9 23 5 23 L 19 23 C 20.1 23 21 22.1 21 21 L 21 8 L 19 6 Z M 13 3 L 18.5 8.5 L 13 8.5 L 13 3 Z M 19 21 L 5 21 L 5 3 L 11 3 L 11 10 L 19 10 L 19 21 Z" />
               <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
                 <line x1="8" y1="16" x2="16" y2="16" />
@@ -572,7 +651,7 @@ const LEGAL_I18N = {
         <h2>1. Quelles données sont collectées ?</h2>
         <ul>
           <li><strong>Compte :</strong> si vous vous connectez avec Google, nous recevons votre adresse e-mail et les données de profil de base fournies par Google. Nous ne recevons pas votre mot de passe.</li>
-          <li><strong>Contenu que vous créez :</strong> vos listes, demons, statistiques et profil. Nous recevons aussi les images que vous téléversez et vos paramètres de préférence (thème).</li>
+          <li><strong>Contenu que vous créez :</strong> vos listes, demons, statistiques et profil. Nous recevons aussi les images que vous téléversez et vos paramètres de préférence (thème et flou).</li>
           <li><strong>Données techniques :</strong> lorsque vous utilisez l'autocomplétion des niveaux, le serveur reçoit le texte recherché ainsi que votre adresse IP, afin de fournir une réponse et de limiter les abus.</li>
         </ul>
 
@@ -703,10 +782,10 @@ const svg = {
     <line x1="12" y1="8" x2="12.01" y2="8"></line>
   </svg>`,
   Options: `
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="12" cy="5" r="2" fill="currentColor"/>
-    <circle cx="12" cy="12" r="2" fill="currentColor"/>
-    <circle cx="12" cy="19" r="2" fill="currentColor"/>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="6" r="2" fill="currentColor"/>
+    <circle cx="12" cy="13" r="2" fill="currentColor"/>
+    <circle cx="12" cy="20" r="2" fill="currentColor"/>
   </svg>`,
   Pencil: `
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
@@ -801,7 +880,14 @@ const svg = {
     <rect x="14" y="14" width="7" height="7" rx="1"></rect>
   </svg>`,
   Image: `
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline>
-  </svg>`
+  </svg>`,
+  Trophy: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.93.63 1.5 1.98 2.63 3.61 2.95V19H7v2h10v-2h-4v-3.12c1.63-.32 2.98-1.45 3.61-2.95C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>`,
+  Import: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`,
+  Export: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>`,
+  Stats: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="20" x2="6" y2="11"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="18" y1="20" x2="18" y2="14"/></svg>`,
+  Reorder: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16"/><polyline points="3 8 7 4 11 8"/><path d="M17 20V4"/><polyline points="13 16 17 20 21 16"/></svg>`,
+  ArrowUp: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>`,
+  ArrowDown: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`,
 }

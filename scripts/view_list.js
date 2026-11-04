@@ -13,7 +13,7 @@ const DIFFICULTY = {
   'Medium Demon':  { icon: 'resources/medium_128.webp',  color: '#e241c2' },
   'Hard Demon':    { icon: 'resources/hard_128.webp',    color: '#68de54' },
   'Insane Demon':  { icon: 'resources/insane_128.webp',  color: '#d59c31' },
-  'Extreme Demon': { icon: 'resources/extreme_128.webp', color: '#952020' }
+  'Extreme Demon': { icon: 'resources/extreme_128.webp', color: '#c62f2f' }
 };
 const DIFFICULTIES = Object.keys(DIFFICULTY);
 const diffIcon = d => (DIFFICULTY[d] || DIFFICULTY['Easy Demon']).icon;
@@ -54,6 +54,13 @@ function syncSortUI() {
   if (!label) return;
   label.textContent = t('sort.' + listFilters.sort);
   $('sortMenu').querySelectorAll('.pop-item').forEach(b => b.classList.toggle('active', b.dataset.sort === listFilters.sort));
+}
+
+function syncFilterUI() {
+  $('filterDiffGrid').querySelectorAll('.filter-diff-pill').forEach(b => b.classList.toggle('active', b.dataset.diff === listFilters.difficulty));
+  const fav = $('btnPopupFav');
+  fav.classList.toggle('active', listFilters.favorite);
+  fav.querySelector('img').src = listFilters.favorite ? FAV_ICON.on : FAV_ICON.off;
 }
 
 // Botón alternante: miniatura / icon demon
@@ -216,6 +223,24 @@ async function copyText(text) {
     ta.remove();
     return ok;
   }
+}
+
+const exportListJSON = list =>
+  downloadJSON(`${list.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_export.json`, list);
+
+function readListFile(file) {
+  return new Promise(resolve => {
+    const r = new FileReader();
+    r.onload = () => {
+      try {
+        const data = JSON.parse(r.result);
+        if (!data || !data.title || !Array.isArray(data.demons)) return resolve({ error: 'listm.invalidFile' });
+        resolve({ data });
+      } catch (e) { resolve({ error: 'listm.importErr' }); }
+    };
+    r.onerror = () => resolve({ error: 'listm.importErr' });
+    r.readAsText(file);
+  });
 }
 
 // ---- Dado: demon aleatorio ----->
@@ -400,7 +425,7 @@ function openCompactListModal() {
     </li>`).join('');
 
   const ov = openModal({
-    title: `${currentList.title}<span class="compact-list-subtitle">${t('compact.title')}</span>`,
+    title: `${escapeHTML(currentList.title)}<span class="compact-list-subtitle">${t('compact.title')}</span>`,
     titleExtra: `<small class="compact-count">${demons.length}</small>`,
     cls: 'modal-compact',
     body: demons.length
@@ -423,10 +448,7 @@ const loadImg = src => new Promise(r => {
 const EXPORT_MAX = 75;
 
 function openExportImageModal() {
-  if (!cloudUser) {
-    return showConfirm(t('export.needLogin'), { okText: t('login.title') })
-      .then(ok => { if (ok) openSignInModal(); });
-  }
+  if (!requireLogin('export.needLogin')) return;
 
   const total = currentList.demons.length;
   if (!total) return showAlert(t('dice.empty'));
@@ -624,8 +646,8 @@ function openListView(listId) {
   isDragLocked = viewPrefs.dragLocked !== false;
   listFilters = {
     sort: SORT_MODES.includes(viewPrefs.sort) ? viewPrefs.sort : 'custom',
-    difficulty: 'all',
-    favorite: false,
+    difficulty: DIFFICULTIES.includes(viewPrefs.difficulty) ? viewPrefs.difficulty : 'all',
+    favorite: viewPrefs.favorite === true,
     search: ''
   };
 
@@ -637,6 +659,18 @@ function openListView(listId) {
           <span class="list-view-subtitle" id="listViewSubtitle">${escapeHTML(listSubtitleText())}</span>
         </div>
         <div class="list-view-actions">
+          <button type="button" id="btnImportList" class="btn-line btn-io btn-io-import" title="${t('listm.import')}">${svg.Import}<span class="btn-label">${t('io.import')}</span></button>
+          <button type="button" id="btnExportList" class="btn-line btn-io btn-io-export" title="${t('listm.export')}">${svg.Export}<span class="btn-label">${t('io.export')}</span></button>
+          <input type="file" id="fileImportList" accept=".json,application/json" hidden>
+
+          <div class="io-menu" data-pop-root>
+            <button type="button" id="btnIoMenu" class="btn-line" style="padding: 6px" title="${t('io.options')}" aria-haspopup="menu">${svg.Options}</button>
+            <div id="ioPop" class="pop pop-menu">
+              <button type="button" class="pop-item" data-io="import">${t('io.import')}</button>
+              <button type="button" class="pop-item" data-io="export">${t('io.export')}</button>
+            </div>
+          </div>
+
           <button type="button" id="btnExportImg" class="btn-line" title="${t('export.title')}">${svg.Image}<span class="btn-label">${t('export.btn')}</span></button>
         </div>
       </div>
@@ -691,14 +725,49 @@ function openListView(listId) {
       <div class="list-view-body">
         <div class="demons-container" id="demonsContainer"></div>
         <aside class="list-sidebar panel">
+          <button type="button" class="stats-close" id="btnStatsClose" aria-label="${t('common.close')}">✕</button>
           <div id="listStatsContainer"></div>
         </aside>
       </div>
-    </div>
-  `);
+
+      <div class="stats-backdrop" id="statsBackdrop"></div>
+      <button type="button" class="stats-fab" id="btnStatsFab" title="${t('view.stats')}" aria-label="${t('view.stats')}">${svg.Stats}</button>
+    </div>`);
   
+  // ---- export e import list ----->
+  $('btnExportList').addEventListener('click', () => exportListJSON(currentList));
+  $('btnImportList').addEventListener('click', () => $('fileImportList').click());
+  $('fileImportList').addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    e.target.value = '';
+    if (!file) return;
+    const { data, error } = await readListFile(file);
+    if (error) return showAlert(t(error));
+    if (!await showConfirm(t('listm.replaceConfirm'), { danger: true })) return;
+    currentList.demons = data.demons.map(normalizeDemon);
+    if (!saveData()) return;
+    renderDemons();
+    renderListStats();
+    showToast(t('listm.importOk'));
+  });
   // ---- img export ----->
   $('btnExportImg').addEventListener('click', openExportImageModal);
+
+  // ---- menú ⋮ (cel): reutiliza los botones de importar / exportar ----->
+  $('btnIoMenu').addEventListener('click', () => setPop($('ioPop'), !$('ioPop').classList.contains('open')));
+  $('ioPop').addEventListener('click', (e) => {
+    const item = e.target.closest('[data-io]');
+    if (!item) return;
+    setPop($('ioPop'), false);
+    $(item.dataset.io === 'import' ? 'btnImportList' : 'btnExportList').click();
+  });
+
+  // ---- cajón de stats (cel) ----->
+  const listViewEl = document.querySelector('.list-view');
+  const setStatsOpen = open => listViewEl.classList.toggle('stats-open', open);
+  $('btnStatsFab').addEventListener('click', () => setStatsOpen(true));
+  $('btnStatsClose').addEventListener('click', () => setStatsOpen(false));
+  $('statsBackdrop').addEventListener('click', () => setStatsOpen(false));
 
   // ---- random mode ----->
   $('btnRandomDemon').addEventListener('click', openRandomDemonModal);
@@ -709,16 +778,13 @@ function openListView(listId) {
   $('filterDiffGrid').addEventListener('click', (e) => {
     const pill = e.target.closest('[data-diff]');
     if (!pill) return;
-    listFilters.difficulty = pill.dataset.diff;
-    $('filterDiffGrid').querySelectorAll('.filter-diff-pill').forEach(b => b.classList.toggle('active', b === pill));
-    renderDemons();
+    listFilters.difficulty = viewPrefs.difficulty = pill.dataset.diff;
+    syncFilterUI(); saveData(); renderDemons();
   });
 
-  $('btnPopupFav').addEventListener('click', (e) => {
-    listFilters.favorite = !listFilters.favorite;
-    e.currentTarget.classList.toggle('active', listFilters.favorite);
-    e.currentTarget.querySelector('img').src = listFilters.favorite ? FAV_ICON.on : FAV_ICON.off;
-    renderDemons();
+  $('btnPopupFav').addEventListener('click', () => {
+    listFilters.favorite = viewPrefs.favorite = !listFilters.favorite;
+    syncFilterUI(); saveData(); renderDemons();
   });
 
   // ---- buscador local ----->
@@ -760,7 +826,6 @@ function openListView(listId) {
   });
   syncSortUI();
 
-
   $('demonsContainer').addEventListener('click', (e) => {
     const editBtn = e.target.closest('[data-edit-demon]');
     if (editBtn) return openEditDemonModal(currentList.id, editBtn.dataset.editDemon);
@@ -769,6 +834,7 @@ function openListView(listId) {
     if (addBtn) openAddDemonModal(currentList.id, addBtn.dataset.addDemonAfter);
   });
 
+  syncFilterUI();
   renderDemons();
   renderListStats();
 }

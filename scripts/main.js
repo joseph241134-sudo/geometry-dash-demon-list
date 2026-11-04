@@ -9,19 +9,21 @@
 let profileStats = { demons: 0, moons: 0, diamonds: 0, stars: 0, userCoins: 0, coins: 0 };
 let viewPrefs = { sort: 'custom', dragLocked: false };
 let userLists = [];
-let filterFavoritesOnly = false;
-let profileState = { username: 'Player 1', avatar: '', banner: '', bannerColor: '', country: '' };
+const DEFAULT_PROFILE = { username: 'Player 1', avatar: '', banner: '', bannerColor: '', country: '', playerType: '', gdId: '', gdName: '', gdRank: '', bio: '' };
+let profileState = { ...DEFAULT_PROFILE };
 
 const DEFAULT_AVATAR = 'resources/avatar.jpg';
 const FAV_ICON = { on: 'resources/fav_on.png', off: 'resources/fav_off.png' };
 const getAvatar = () => profileState.avatar || DEFAULT_AVATAR;
+
+// ID público (columna public_id de Supabase); '-' sin sesión
+const publicIdText = () => (cloudUser && cloudPublicId) ? `#${cloudPublicId}` : '-';
 
 // ------------------------------------------------------
 // Utilidades
 // ------------------------------------------------------
 
 const $ = id => document.getElementById(id);
-const fmtNum = n => (n === undefined || n === null || n === '') ? '-' : (Number(n) || 0).toLocaleString();
 
 // Minúsculas y sin tildes, compara textos
 const normalizeText = s => String(s ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
@@ -131,6 +133,10 @@ function mountView(html, animate = true) {
 
 // navigate('') = inicio · navigate('?list=3') · navigate('?settings=1')
 function navigate(search = '') {
+  if ((location.search || '') === search) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
   history.pushState(null, '', location.pathname + search);
   renderRoute();
   window.scrollTo({ top: 0, behavior: 'instant' });
@@ -156,72 +162,8 @@ function warmUpAPI() {
   fetch(`${API_BASE}/api/health`, { cache: 'no-store' }).catch(() => {});
 }
 
-// ======================================================
-// 2. Vista principal
-// ======================================================
-
-function renderMainPage(animate = true) {
-  if (!$('main')) return;
-  setPageTitle();
-
-  mountView(`
-    <div class="adverts"></div>
-
-    <div class="body">
-      <div class="body-panel">
-        <div class="main-panel-stats panel">
-          <div class="panel">
-            <div class="banner" ${bannerStyle() ? `style="${bannerStyle()}"` : ''}>
-              ${profileState.banner ? `<img src="${escapeHTML(profileState.banner)}" alt="" onerror="this.remove()">` : ''}
-            </div>
-            <div class="avatar-wrapper">
-              <div class="avatar">
-                <img id="mainProfileAvatar" src="${escapeHTML(getAvatar())}" alt="" onerror="this.onerror=null;this.src='${DEFAULT_AVATAR}'">
-              </div>
-              <button type="button" id="btnEditProfile" class="avatar-button" title="${t('profile.edit')}">${svg.Pencil}</button>
-            </div>
-            <div class="description">
-              <div class="profile-name-row">
-                <span class="text-a" id="mainProfileName">${escapeHTML(profileState.username)}</span>
-                ${profileState.country ? `<span class="profile-country">${svg.Pin}${escapeHTML(profileState.country)}</span>` : `<span class="profile-country">${svg.Pin}-</span>`}
-              </div>
-              <span class="text-b" id="mainProfileID"></span>
-            </div>
-          </div>
-          <div class="complement-panel" id="statsComplementPanel"></div>
-        </div>
-
-        <div class="lists-panel panel">
-          <div class="lists-panel-head">
-            <div class="lists-head-text">
-              <span class="text-s">${t('lists.title')}</span>
-              <span class="text-b" id="listsDescription"></span>
-            </div>
-            <div class="lists-head-actions">
-              <button type="button" id="btnAddList" class="btn-primary">${t('lists.add')}</button>
-              <button type="button" id="btnFilterList" class="button-square toggle"><img alt=""></button>
-            </div>
-          </div>
-          <div id="listsContainer"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="complement"></div>
-  `, animate);
-
-  $('btnEditProfile').addEventListener('click', openEditProfileModal);
-  $('btnAddList').addEventListener('click', openAddListModal);
-  $('btnFilterList').addEventListener('click', toggleFilterFavorites);
-  $('listsContainer').addEventListener('click', onListsContainerClick);
-
-  renderStatsPanel();
-  renderListsCards();
-  syncFavFilterBtn();
-}
-
 // -------------------------------------------------------------
-// 2.1. Panel de estadísticas del perfil
+// Stats del perfil (ya no se muestran; solo se normalizan los datos guardados)
 // -------------------------------------------------------------
 
 const STAT_ITEMS = [
@@ -244,106 +186,453 @@ function normalizeStats(src) {
   return out;
 }
 
-function renderStatsPanel() {
-  const container = $('statsComplementPanel');
-  const mainID = $('mainProfileID');
-  if (!container) return;
 
-  mainID.textContent = t('profile.id', { id: '-' });
-  container.innerHTML = `
-    <button type="button" id="btnStatsInfo" class="btn-info-icon stats-info-btn" title="${escapeHTML(t('login.title'))}" aria-label="${escapeHTML(t('login.title'))}">${svg.Info}</button>
-    <div class="grid-row">
-      ${STAT_ITEMS.map(([icon, field, label]) => `
-        <button type="button" class="stat" data-stat="${field}" title="${escapeHTML(t('stats.edit'))}">
-          <img class="stat-img" src="resources/${icon}.png" alt="">
-          <span class="stat-value">${fmtNum(profileStats[field])}</span>
-          <span class="stat-label">${t(label)}</span>
-        </button>
-      `).join('')}
+// ======================================================
+// 2. Vista principal
+// ======================================================
+
+const HOME_ICONS = {
+  pc: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+  mobile: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>`
+};
+
+const listThumb = l => l.image || getYouTubeThumbnail(l.demons?.[0]?.showcase);
+const getMainList = () => userLists.find(l => l.isMain) || null;
+
+function setMainList(listId) {
+  userLists.forEach(l => { l.isMain = l.id === listId; });
+}
+
+// -------------------------------------------------------------
+// 2.1. Hero del perfil (banner + avatar superpuesto)
+// -------------------------------------------------------------
+
+function profileBadges() {
+  const out = [];
+  if (profileState.playerType === 'pc') out.push(`<span class="hp-badge">${HOME_ICONS.pc}${t('profile.typePc')}</span>`);
+  if (profileState.playerType === 'mobile') out.push(`<span class="hp-badge">${HOME_ICONS.mobile}${t('profile.typeMobile')}</span>`);
+  if (profileState.country) out.push(`<span class="hp-badge">${svg.Pin}${escapeHTML(profileState.country)}</span>`);
+  return out.join('');
+}
+
+const RANK_TIERS = [
+  [1, '#ffd54a'], [2, '#cfd8dc'], [3, '#e0925a'],
+  [100, '#c084fc'], [1000, '#38bdf8'], [10000, '#4ade80'],
+  [100000, '#94a3b8'], [1000000, '#78716c']
+];
+
+const rankLabel = max =>
+  max <= 3 ? `#${max}` : 'Top ' + (max >= 1e6 ? max / 1e6 + 'M' : max >= 1e3 ? max / 1e3 + 'K' : max);
+
+// número exacto (datos viejos) -> tier donde cae; '' si no tiene o se pasa del último
+function normalizeGdRank(v) {
+  const n = parseInt(v, 10) || 0;
+  const tier = n ? RANK_TIERS.find(([max]) => n <= max) : null;
+  return tier ? String(tier[0]) : '';
+}
+
+function renderGdRank() {
+  const n = parseInt(profileState.gdRank, 10) || 0;
+  const tier = n ? RANK_TIERS.find(([max]) => n <= max) : null;
+  return `
+    <div class="hp-gd-rank ${tier && tier[0] <= 3 ? 'podium' : ''}" style="--rank:${tier ? tier[1] : 'var(--mute)'}" title="${t('home.gdRank')}">
+      <span class="hp-trophy">${svg.Trophy}</span>
+      <strong>${tier ? rankLabel(tier[0]) : '-'}</strong>
+    </div>`;
+}
+
+function renderHero() {
+  const badges = profileBadges();
+  const style = bannerStyle();
+
+  return `
+    <section class="hp-hero panel">
+      <div class="hp-banner" ${style ? `style="${style}"` : ''}>
+        ${profileState.banner ? `<img src="${escapeHTML(profileState.banner)}" alt="" onerror="this.remove()">` : ''}
+      </div>
+      <div class="hp-hero-body">
+        <div class="hp-top">
+          <div class="hp-avatar">
+            <img src="${escapeHTML(getAvatar())}" alt="" onerror="this.onerror=null;this.src='${DEFAULT_AVATAR}'">
+          </div>
+          <div class="hp-info">
+            <div class="hp-name-row">
+              <h1 class="hp-name">${escapeHTML(profileState.username)}</h1>
+              <span class="hp-id">${t('profile.id', { id: publicIdText() })}</span>
+            </div>
+            ${badges ? `<div class="hp-badges">${badges}</div>` : ''}
+          </div>
+          <button type="button" id="btnHomeEdit" class="btn-line hp-edit">${svg.Pencil}<span>${t('profile.edit')}</span></button>
+        </div>
+
+        <div class="hp-lower">
+          <div class="hp-bio-wrap">
+            <span class="hp-bio-label">${t('profile.bio')}</span>
+            <div class="hp-bio-box">
+              <p class="hp-bio ${profileState.bio ? '' : 'empty'}">${profileState.bio ? escapeHTML(profileState.bio) : t('profile.noBio')}</p>
+            </div>
+          </div>
+          <div class="hp-gd">
+            <div class="hp-gd-head">
+              <span class="hp-gd-label">${t('home.gdProfile')}</span>
+              <button type="button" id="btnGdEdit" class="button-square hp-gd-edit" title="${t('gd.editTitle')}">${svg.Pencil}</button>
+            </div>
+            <div class="hp-gd-row">
+              <div class="hp-gd-profile">
+                <strong class="hp-gd-name">${escapeHTML(profileState.gdName) || '-'}</strong>
+                <span class="hp-gd-id">${t('profile.id', { id: escapeHTML(profileState.gdId) || '-' })}</span>
+              </div>
+              ${renderGdRank()}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+// -------------------------------------------------------------
+// 2.2. Listas: principal + secundarias
+// -------------------------------------------------------------
+
+function listMenu(list, isMain = false) {
+  const id = list.id;
+  return `
+    <div class="hp-menu" data-pop-root>
+      <button type="button" class="hp-dots" data-menu-toggle title="${escapeHTML(t('list.edit'))}" aria-haspopup="menu">${svg.Options}</button>
+      <div class="pop pop-menu hp-menu-pop">
+        <button type="button" class="pop-item" data-edit-list="${id}">${t('list.edit')}</button>
+        ${isMain
+          ? `<button type="button" class="pop-item" data-unset-main>${t('list.unsetMain')}</button>`
+          : `<button type="button" class="pop-item" data-set-main="${id}">${t('list.setMain')}</button>`}
+        <button type="button" class="pop-item danger" data-delete-list="${id}">${t('common.delete')}</button>
+      </div>
     </div>
   `;
+}
 
-  $('btnStatsInfo').addEventListener('click', openLoginModal);
-  container.querySelector('.grid-row').addEventListener('click', (e) => {
-    const stat = e.target.closest('[data-stat]');
-    if (stat) openStatModal(stat.dataset.stat);
+function lastAddedDemon(demons) {
+  let best = null, bestTs = 0;
+  demons.forEach(d => {
+    const m = /^d_(\d{13})/.exec(String(d.id));
+    const ts = m ? Number(m[1]) : 0;
+    if (ts > bestTs) { bestTs = ts; best = d; }
   });
+  return best;
 }
 
-function refreshProfileViews() {
-  renderHeader();
-  if ($('statsComplementPanel')) renderStatsPanel();
-  if ($('listStatsContainer')) renderListStats();
+function formatWinDate(s) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || '');
+  if (!m) return '';
+  return new Date(+m[1], +m[2] - 1, +m[3])
+    .toLocaleDateString(currentLang(), { day: 'numeric', month: 'short', year: 'numeric' })
+    .replace(/\./g, '');
 }
 
-// -------------------------------------------------------------
-// 2.2. Panel de listas
-// -------------------------------------------------------------
+const diffBar = demons => {
+  if (!demons.length) return '';
+  const segs = DIFFICULTIES.map(diff => {
+    const n = demons.filter(d => d.difficulty === diff).length;
+    return n ? `<i style="flex:${n};background:${DIFFICULTY[diff].color}"></i>` : '';
+  }).join('');
+  return `<div class="hp-item-bar" aria-hidden="true">${segs}</div>`;
+};
 
+const diffCounts = demons => DIFFICULTIES.map(diff => {
+  const n = demons.filter(d => d.difficulty === diff).length;
+  return `<div class="hp-diff-chip ${n ? '' : 'zero'}" style="${diffColorStyle(diff)}" title="${diff}">
+    <img src="${DIFFICULTY[diff].icon}" alt="${diff}"><strong>${n}</strong>
+  </div>`;
+}).join('');
+
+function renderMainCard(list) {
+  const demons = list.demons || [];
+  const top = demons[0];
+  const hardest = top ? (top.name || '-') : '-';
+  const img = listThumb(list);
+  const last = lastAddedDemon(demons);
+
+  const lastSlide = last ? `
+    <div class="hp-rotor-slide">
+      <span class="hp-main-last-label">${t('home.lastAdded')}${last.winDate ? ` <span class="hp-main-last-date">· ${escapeHTML(formatWinDate(last.winDate))}</span>` : ''}</span>
+      <div class="hp-main-last-name">
+        <img src="${diffIcon(last.difficulty)}" alt="${escapeHTML(last.difficulty)}" title="${escapeHTML(last.difficulty)}">
+        <strong title="${escapeHTML(last.name)}">${escapeHTML(last.name)}</strong>
+      </div>
+    </div>` : '';
+  const diffsSlide = `<div class="hp-rotor-slide hp-rotor-diffs">${diffCounts(demons)}</div>`;
+
+  return `
+    <div class="hp-main-card ${img ? 'has-bg' : ''}" data-card-list="${list.id}">
+      ${listMenu(list, true)}
+      ${img ? `<div class="hp-main-bg" style="background-image:url('${escapeHTML(img)}')"></div>` : ''}
+      <div class="hp-main-top">
+        <div class="hp-main-thumb ${img ? '' : 'empty'}">
+          ${img
+            ? `<img src="${escapeHTML(img)}" alt="" loading="lazy">`
+            : (top ? `<img class="contain" src="${diffIcon(top.difficulty)}" alt="">` : '')}
+          ${top ? `<span class="hp-diff" style="${diffColorStyle(top.difficulty)}">#1 · ${escapeHTML(top.difficulty)}</span>` : ''}
+        </div>
+        <div class="hp-main-info">
+          <h3 class="hp-main-title">${escapeHTML(list.title)}</h3>
+          <p class="hp-main-by">${t('list.by', { name: escapeHTML(profileState.username || '') })}</p>
+          <div class="hp-main-stats">
+            <div class="hp-stat"><span>${t('home.demons')}</span><strong>${demons.length}</strong></div>
+            <div class="hp-stat"><span>${t('home.hardest')}</span><strong class="hp-hardest" ${top ? `style="${diffColorStyle(top.difficulty)}"` : ''} title="${escapeHTML(hardest)}">${escapeHTML(hardest)}</strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="hp-main-actions">
+        <div class="hp-main-last ${last ? 'rotating' : ''}">
+          <div class="hp-rotor-track">${last ? lastSlide + diffsSlide + lastSlide : diffsSlide}</div>
+        </div>
+        <button type="button" class="btn-primary hp-main-btn" data-view-list="${list.id}">${t('list.view')}</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderMainEmpty() {
+  return `
+    <div class="hp-empty">
+      <p class="hp-empty-title">${t('home.mainEmpty')}</p>
+      <p class="hp-empty-text">${t('home.mainEmptyText')}</p>
+      <button type="button" class="btn-primary" data-create-main>${t('home.createMain')}</button>
+    </div>
+  `;
+}
+
+function renderOtherItem(list, i, n) {
+  const demons = list.demons || [];
+  const top = demons[0];
+  const hardest = top ? (top.name || '-') : '-';
+  const img = listThumb(list);
+
+  const actions = reorderMode
+    ? `<div class="hp-item-actions hp-reorder">
+         <button type="button" class="hp-move" data-move-list="${list.id}" data-dir="-1" title="${t('list.moveUp')}" ${i === 0 ? 'disabled' : ''}>${svg.ArrowUp}</button>
+         <button type="button" class="hp-move" data-move-list="${list.id}" data-dir="1" title="${t('list.moveDown')}" ${i === n - 1 ? 'disabled' : ''}>${svg.ArrowDown}</button>
+       </div>`
+    : `<div class="hp-item-actions">
+         ${listMenu(list)}
+         <button type="button" class="hp-view" data-view-list="${list.id}">${t('list.view')}</button>
+       </div>`;
+
+  return `
+    <div class="hp-item ${img ? 'has-bg' : ''} ${reorderMode ? 'reordering' : ''}" data-card-list="${list.id}" ${top ? `style="${diffColorStyle(top.difficulty)}"` : ''}>
+      ${img ? `<div class="hp-item-bg" style="background-image:url('${escapeHTML(img)}')"></div>` : ''}
+      ${top
+        ? `<div class="hp-item-icon"><img src="${diffIcon(top.difficulty)}" alt="${escapeHTML(top.difficulty)}" title="${escapeHTML(top.difficulty)}"></div>`
+        : `<div class="hp-item-icon empty"></div>`}
+      <div class="hp-item-info">
+        <h4>${escapeHTML(list.title)}</h4>
+        <div class="hp-item-chips">
+          ${demons.length
+            ? `<span class="hp-chip">${t('home.demons')}: <b>${demons.length}</b></span>
+            <span class="hp-chip hp-chip-hardest" title="${escapeHTML(hardest)}">${t('home.hardest')}: <b>${escapeHTML(hardest)}</b></span>`
+            : `<span class="hp-chip">${t('home.listEmpty')}</span>`}
+        </div>
+      </div>
+      ${actions}
+      ${diffBar(demons)}
+    </div>
+  `;
+}
+
+let rotorTimer = null;
+let reorderMode = false;
+
+function initRotor() {
+  clearInterval(rotorTimer);
+  const box = document.querySelector('.hp-main-last.rotating');
+  if (!box) return;
+  const track = box.firstElementChild;
+  const card = box.closest('.hp-main-card');
+  let step = 0, paused = false;
+
+  card.addEventListener('mouseenter', () => { paused = true; });
+  card.addEventListener('mouseleave', () => { paused = false; });
+
+  track.addEventListener('transitionend', () => {
+    if (step !== 2) return;
+    track.style.transition = 'none';
+    track.style.transform = 'translateY(0)';
+    step = 0;
+    void track.offsetHeight;
+    track.style.transition = '';
+  });
+
+  rotorTimer = setInterval(() => {
+    if (!box.isConnected) return clearInterval(rotorTimer);
+    if (paused || document.hidden) return;
+    step++;
+    track.style.transform = `translateY(-${step * 100 / 3}%)`;
+  }, 8000);
+}
+
+// Repinta las dos secciones (principal y otras)
 function renderListsCards() {
-  const container = $('listsContainer');
-  if (!container) return;
+  const mainBox = $('homeMain');
+  const othersBox = $('homeOthers');
+  if (!mainBox || !othersBox) return;
 
-  const count = $('listsDescription');
-  if (count) count.textContent = t('lists.count', { n: userLists.length });
+  const main = getMainList();
+  const others = userLists.filter(l => l !== main);
+  if (others.length < 2) reorderMode = false;
 
-  const lists = filterFavoritesOnly ? userLists.filter(list => list.isFavorite) : userLists;
+  mainBox.innerHTML = main ? renderMainCard(main) : renderMainEmpty();
+  othersBox.innerHTML = others.length
+    ? others.map((l, i) => renderOtherItem(l, i, others.length)).join('')
+    : `<div class="no-lists-msg">${t('lists.empty')}</div>`;
 
-  if (lists.length === 0) {
-    container.innerHTML = `<div class="no-lists-msg">${filterFavoritesOnly ? t('lists.emptyFav') : t('lists.empty')}</div>`;
-    return;
+  const btn = $('btnReorder');
+  if (btn) {
+    btn.disabled = others.length < 2;
+    btn.classList.toggle('active', reorderMode);
   }
 
-  container.innerHTML = lists.map((list, i) => {
-    const demons = list.demons || [];
-    const hardest = demons.length ? (demons[0].name || '-') : '-';
-
-    return `
-      <div class="list-card" style="--i:${Math.min(i, 8)}">
-        <button type="button" class="card-btn-config" data-edit-list="${list.id}" title="${t('list.edit')}">
-          <img src="resources/edit.png" alt="">
-        </button>
-
-        <div class="card-content">
-          <div class="card-title-row">
-            <h2 class="card-title">${escapeHTML(list.title)}</h2>
-            ${list.isFavorite ? `<img class="card-fav-star" src="${FAV_ICON.on}" alt="">` : ''}
-          </div>
-          <p class="card-author">${t('list.by', { name: escapeHTML(profileState.username || '') })}</p>
-          <p class="card-description">${t('list.info', { n: demons.length, hardest: escapeHTML(hardest) })}</p>
-        </div>
-
-        <div class="card-over-side">
-          <div class="card-visual-side">
-            ${list.image ? `<img src="${escapeHTML(list.image)}" alt="" loading="lazy">` : ''}
-          </div>
-        </div>
-
-        <button type="button" class="card-btn-view" data-view-list="${list.id}">${t('list.view')}</button>
-      </div>
-    `;
-  }).join('');
+  initRotor();
 }
 
-function onListsContainerClick(e) {
+// -------------------------------------------------------------
+// 2.3. Eventos de la vista principal
+// -------------------------------------------------------------
+
+const closeHomeMenus = () => document.querySelectorAll('.hp-menu-pop.open').forEach(p => p.classList.remove('open'));
+
+// El menú es fixed para que no lo recorte el scroll interno de "Otras listas"
+function toggleHomeMenu(btn) {
+  const pop = btn.nextElementSibling;
+  const willOpen = !pop.classList.contains('open');
+  closeHomeMenus();
+  if (!willOpen) return;
+
+  const r = btn.getBoundingClientRect();
+  const h = pop.offsetHeight + 6;
+  const footerTop = $('footer').getBoundingClientRect().top;
+  if (r.bottom + h > footerTop && r.top - h > 0) {
+    pop.style.top = 'auto';
+    pop.style.bottom = `${window.innerHeight - r.top + 6}px`;
+    pop.style.transformOrigin = 'bottom right';
+  } else {
+    pop.style.bottom = 'auto';
+    pop.style.top = `${r.bottom + 6}px`;
+    pop.style.transformOrigin = 'top right';
+  }
+  pop.style.right = `${document.documentElement.clientWidth - r.right}px`;
+  setPop(pop, true);
+  window.addEventListener('scroll', closeHomeMenus, { capture: true, once: true });
+}
+
+async function deleteListFromHome(listId) {
+  const list = userLists.find(l => l.id === listId);
+  if (!list) return;
+  if (!await showConfirm(t('listm.deleteConfirm', { title: escapeHTML(list.title) }), { danger: true, okText: t('common.delete') })) return;
+
+  userLists = userLists.filter(l => l.id !== listId);
+  saveData();
+  renderListsCards();
+}
+
+function moveList(listId, dir) {
+  const main = getMainList();
+  const others = userLists.filter(l => l !== main);
+  const i = others.findIndex(l => l.id === listId);
+  const j = i + dir;
+  if (i < 0 || j < 0 || j >= others.length) return;
+
+  const a = userLists.indexOf(others[i]);
+  const b = userLists.indexOf(others[j]);
+  [userLists[a], userLists[b]] = [userLists[b], userLists[a]];
+  userLists.forEach((l, idx) => { l.order = idx; });
+  saveData();
+  renderListsCards();
+}
+
+function onHomeClick(e) {
+  const mv = e.target.closest('[data-move-list]');
+  if (mv) return moveList(Number(mv.dataset.moveList), Number(mv.dataset.dir));
+  if (reorderMode && e.target.closest('.hp-item')) return;
+
+  const toggle = e.target.closest('[data-menu-toggle]');
+  if (toggle) return toggleHomeMenu(toggle);
+
   const edit = e.target.closest('[data-edit-list]');
-  if (edit) return openEditListModal(Number(edit.dataset.editList));
+  if (edit) { closeHomeMenus(); return openEditListModal(Number(edit.dataset.editList)); }
+
+  if (e.target.closest('[data-unset-main]')) {
+    closeHomeMenus();
+    setMainList(null);
+    saveData();
+    return renderListsCards();
+  }
+
+  const setMain = e.target.closest('[data-set-main]');
+  if (setMain) {
+    closeHomeMenus();
+    setMainList(Number(setMain.dataset.setMain));
+    saveData();
+    return renderListsCards();
+  }
+
+  const del = e.target.closest('[data-delete-list]');
+  if (del) { closeHomeMenus(); return deleteListFromHome(Number(del.dataset.deleteList)); }
 
   const view = e.target.closest('[data-view-list]');
-  if (view) navigate(`?list=${view.dataset.viewList}`);
+  if (view) return navigate(`?list=${view.dataset.viewList}`);
+
+    // clic en cualquier parte de la carta
+  const card = e.target.closest('[data-card-list]');
+  if (card && !e.target.closest('.hp-menu')) {
+    if (document.querySelector('.hp-menu-pop.open')) return closeHomeMenus();  // un menú abierto: solo se cierra
+    if (String(window.getSelection())) return;                                  // no navegar si estaba seleccionando texto
+    return navigate(`?list=${card.dataset.cardList}`);
+  }
+
+  if (e.target.closest('[data-create-main]')) openListModal(null, true);
 }
 
-function syncFavFilterBtn() {
-  const btn = $('btnFilterList');
-  if (!btn) return;
-  btn.classList.toggle('active', filterFavoritesOnly);  
-  btn.title = t('lists.filterFav');
-  btn.querySelector('img').src = filterFavoritesOnly ? FAV_ICON.on : FAV_ICON.off;
-}
+// -------------------------------------------------------------
+// 2.4. Render de la vista
+// -------------------------------------------------------------
 
-function toggleFilterFavorites() {
-  filterFavoritesOnly = !filterFavoritesOnly;
-  saveData();
-  syncFavFilterBtn();
+function renderMainPage(animate = true) {
+  if (!$('main')) return;
+  setPageTitle();
+
+  reorderMode = false;
+
+  mountView(`
+    <div class="home" id="home">
+      ${renderHero()}
+
+      <div class="hp-grid">
+        <section class="hp-col">
+          <div class="hp-section-head">
+            <h2 class="hp-title">${t('home.main')}</h2>
+          </div>
+          <div id="homeMain"></div>
+        </section>
+
+        <section class="hp-col">
+          <div class="hp-section-head">
+            <h2 class="hp-title">${t('home.others')}</h2>
+            <div class="hp-head-actions">
+              <button type="button" id="btnReorder" class="button-square toggle" title="${t('lists.reorder')}">${svg.Reorder}</button>
+              <button type="button" id="btnAddList" class="btn-primary">${t('lists.add')}</button>
+            </div>
+          </div>
+          <div class="hp-others-box" id="homeOthers"></div>
+        </section>
+      </div>
+    </div>
+  `, animate);
+
+  $('btnHomeEdit').addEventListener('click', openEditProfileModal);
+  $('btnAddList').addEventListener('click', openAddListModal);
+  $('home').addEventListener('click', onHomeClick);
+  $('btnGdEdit').addEventListener('click', openEditGdModal);
+  $('btnReorder').addEventListener('click', () => { reorderMode = !reorderMode; renderListsCards(); });
+
   renderListsCards();
 }

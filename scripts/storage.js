@@ -31,17 +31,18 @@ function normalizeDemon(demon) {
     attempts: demon.attempts ?? '',
     winDate: demon.winDate || '',
     isFavorite: !!demon.isFavorite,
-    useDefaultIcon: !!demon.useDefaultIcon,
   };
 }
 
 function normalizeList(list) {
+  const { isFavorite, ...rest } = list;
   return {
-    ...list,
+    ...rest,
     id: Number(list.id) || Date.now(),
-    title: list.title || 'Sin título',
+    title: String(list.title || '').slice(0, 32),
     image: safeImg(list.image),
-    isFavorite: !!list.isFavorite,
+    isMain: list.isMain === true,
+    order: Number.isFinite(list.order) ? list.order : Date.now(),
     demons: Array.isArray(list.demons) ? list.demons.map(normalizeDemon) : []
   };
 }
@@ -61,7 +62,6 @@ function buildSnapshot() {
     profileStats,
     profileState,
     userLists,
-    filterFavoritesOnly,
     viewPrefs,
     appSettings
   };
@@ -70,8 +70,18 @@ function buildSnapshot() {
 function applySnapshot(data) {
   profileStats = normalizeStats({ ...(data.gdProfileData || {}), ...(data.profileStats || {}) });
   profileState = { ...profileState, ...(data.profileState || {}) };
-  if (Array.isArray(data.userLists)) userLists = data.userLists.map(normalizeList);
-  filterFavoritesOnly = !!data.filterFavoritesOnly;
+  profileState.playerType = ['pc', 'mobile'].includes(profileState.playerType) ? profileState.playerType : '';
+  profileState.gdId = String(profileState.gdId || '').replace(/\D/g, '').slice(0, 12);
+  profileState.gdRank = normalizeGdRank(profileState.gdRank);
+  profileState.gdName = String(profileState.gdName || '').slice(0, 20);
+  profileState.bio = String(profileState.bio || '').slice(0, 160);
+  if (Array.isArray(data.userLists)) {
+    const legacy = !data.userLists.some(l => typeof l.isMain === 'boolean');
+    userLists = data.userLists.map(l => normalizeList(legacy ? { ...l, isMain: !!l.isFavorite } : l));
+    let found = false;
+    userLists.forEach(l => { if (l.isMain) { if (found) l.isMain = false; found = true; } });
+    userLists.sort((a, b) => a.order - b.order);
+  }
   viewPrefs = { ...viewPrefs, ...(data.viewPrefs || {}) };
   appSettings = { ...DEFAULT_APP_SETTINGS, ...(data.appSettings || {}) };
   delete appSettings.bgColor;
@@ -94,7 +104,7 @@ function loadData() {
   }
 
   if (!parsed || typeof parsed !== 'object') {
-    userLists = [normalizeList({ id: Date.now(), title: DEFAULT_LIST_TITLE, author: profileState.username, demons: [] })];
+    userLists = [normalizeList({ id: Date.now(), title: DEFAULT_LIST_TITLE, author: profileState.username, isMain: true, demons: [] })];
     saveData();
     return;
   }
@@ -115,7 +125,7 @@ function saveData() {
 }
 
 function basicSnapshot() {
-  return { version: STORAGE_VERSION, filterFavoritesOnly, viewPrefs, appSettings};
+  return { version: STORAGE_VERSION, viewPrefs, appSettings};
 }
 
 function saveLocal() {
@@ -124,9 +134,8 @@ function saveLocal() {
 
 function resetData() {
   profileStats = normalizeStats({});
-  profileState = { username: 'Player 1', avatar: '', banner: '', bannerColor: '', country: '' };
+  profileState = { ...DEFAULT_PROFILE };
   userLists = [];
-  filterFavoritesOnly = false;
   viewPrefs = { sort: 'custom', dragLocked: false };
   appSettings = { ...DEFAULT_APP_SETTINGS };
 }
@@ -135,29 +144,22 @@ function resetData() {
 // Imágenes
 // ------------------------------------------------------
 
-async function readImageFile(file, opts) {
-  const data = await readImageFileRaw(file, opts);
-  if (!data || !cloudUser || !cloudReady) return data;     // sin sesión: base64 como antes
-  const url = await cloudStoreImage(data);
-  if (!url) { showAlert(t('acc.error')); return null; }
-  return url;
-}
+const blobToDataURL = blob => new Promise(resolve => {
+  const r = new FileReader();
+  r.onload = () => resolve(r.result);
+  r.onerror = () => resolve(null);
+  r.readAsDataURL(blob);
+});
 
-function readImageFileRaw(file, opts = 1280) {
+// Reduce la imagen y devuelve un Blob (o el mismo archivo si ya es liviano)
+function resizeImage(file, opts = 1280) {
   const { maxSize = 1280, quality = 0.86 } = typeof opts === 'number' ? { maxSize: opts } : opts;
 
   return new Promise((resolve) => {
     if (!file) return resolve(null);
 
-    const readPlain = () => {
-      const r = new FileReader();
-      r.onload = e => resolve(e.target.result);
-      r.onerror = () => resolve(null);
-      r.readAsDataURL(file);
-    };
-
-    // GIF, SVG y archivos que no son imagen
-    if (!/^image\//.test(file.type) || /gif|svg/.test(file.type)) return readPlain();
+    // GIF, SVG y archivos que no son imagen: sin tocar
+    if (!/^image\//.test(file.type) || /gif|svg/.test(file.type)) return resolve(file);
 
     const url = URL.createObjectURL(file);
     const img = new Image();
@@ -166,21 +168,25 @@ function readImageFileRaw(file, opts = 1280) {
       URL.revokeObjectURL(url);
       const w = img.naturalWidth, h = img.naturalHeight;
       const scale = Math.min(1, maxSize / Math.max(w, h));
-      if (scale >= 1 && file.size < 350 * 1024) return readPlain();
+      if (scale >= 1 && file.size < 350 * 1024) return resolve(file);
 
       const c = document.createElement('canvas');
       c.width = Math.max(1, Math.round(w * scale));
       c.height = Math.max(1, Math.round(h * scale));
       c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-
-      try {
-        resolve(c.toDataURL(file.type === 'image/png' ? 'image/webp' : 'image/jpeg', quality));
-      } catch (e) {
-        readPlain();
-      }
+      c.toBlob(b => resolve(b || file), file.type === 'image/png' ? 'image/webp' : 'image/jpeg', quality);
     };
 
-    img.onerror = () => { URL.revokeObjectURL(url); readPlain(); };
+    img.onerror = () => { URL.revokeObjectURL(url); resolve(file); };
     img.src = url;
   });
+}
+
+async function readImageFile(file, opts) {
+  const blob = await resizeImage(file, opts);
+  if (!blob) return null;
+  if (!cloudUser || !cloudReady) return blobToDataURL(blob);   // sin sesión: base64 como antes
+  const url = await cloudStoreImage(blob);
+  if (!url) { showAlert(t('acc.error')); return null; }
+  return url;
 }

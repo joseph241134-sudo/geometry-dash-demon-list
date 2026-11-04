@@ -4,6 +4,7 @@ const SUPABASE_KEY = 'sb_publishable_KCu1CyH-A5dIllXIB2SoDg_udx8YibQ';
 const cloud = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 let cloudUser = null;
+let cloudPublicId = null;
 let cloudReady = false;
 let cloudTimer = null;
 let cloudBusy = false;
@@ -15,6 +16,7 @@ function cloudSplit() {
   const { userLists: lists, ...profile } = buildSnapshot();
   const { lang, ...settings } = profile.appSettings;
   profile.appSettings = settings;
+  profile.viewPrefs = { showFaces: !!viewPrefs.showFaces };
   return { profile, lists };
 }
 
@@ -85,9 +87,12 @@ async function cloudPull() {
   if (!remote.profile && !remote.lists.length) return 'empty';
 
   const lang = appSettings.lang;
-  
+  const localPrefs = { ...viewPrefs };
+  delete localPrefs.showFaces;
+
   applySnapshot({ ...(remote.profile || {}), userLists: remote.lists });
   appSettings.lang = lang;
+  Object.assign(viewPrefs, localPrefs);
   cloudMarkSynced();
   return 'ok';
 }
@@ -106,7 +111,7 @@ function consumeLoginFlag() {
 }
 
 const isPristineList = l =>
-  l.title === DEFAULT_LIST_TITLE && !l.demons.length && !l.image && !l.isFavorite;
+  l.title === DEFAULT_LIST_TITLE && !l.demons.length && !l.image;
 
 function localHasData() {
   return userLists.some(l => !isPristineList(l))
@@ -134,6 +139,13 @@ function cloudConfirmOverwrite() {
   });
 }
 
+async function cloudLoadPublicId() {
+  try {
+    const { data } = await cloud.from('profiles').select('public_id').maybeSingle();
+    cloudPublicId = data?.public_id ?? null;
+  } catch (e) { cloudPublicId = null; }
+}
+
 async function cloudStart() {
   const { data } = await cloud.auth.getSession();
   cloudUser = data.session?.user ?? null;
@@ -153,6 +165,7 @@ async function cloudStart() {
   let synced = res === 'ok';
   if (res === 'empty') synced = await cloudPush();
   cloudReady = res !== 'error';
+  if (cloudReady) await cloudLoadPublicId();
   if (synced) saveLocal();
   if (cloudReady) cloudMigrateImages().then(() => cloudCleanImages()).catch(e => console.error(e));
   return cloudUser;
@@ -165,7 +178,6 @@ async function cloudSignOut(keepLocal = false) {
   if (keepLocal !== true) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(basicSnapshot()));
   }
-  try { sessionStorage.removeItem('mdl_welcome_seen'); } catch (e) {}
   location.replace(location.pathname);
 }
 
@@ -178,10 +190,11 @@ function cloudScheduleSync() {
 const IMG_BUCKET = 'images';
 
 // Sube una imagen (dataURL) y devuelve su URL pública, o null si falla
-async function cloudStoreImage(dataUrl) {
+// Sube una imagen (Blob o dataURL) y devuelve su URL pública, o null si falla
+async function cloudStoreImage(src) {
   try {
-    if (/^data:image\/svg/i.test(dataUrl)) return null;
-    const blob = await (await fetch(dataUrl)).blob();
+    const blob = typeof src === 'string' ? await (await fetch(src)).blob() : src;
+    if (/svg/i.test(blob.type)) return null;
     const ext = (blob.type.split('/')[1] || 'webp').replace('jpeg', 'jpg');
     const path = `${cloudUser.id}/${Date.now()}${Math.random().toString(36).slice(2, 6)}.${ext}`;
     const { error } = await cloud.storage.from(IMG_BUCKET).upload(path, blob, { contentType: blob.type, cacheControl: '31536000' });

@@ -37,6 +37,33 @@
 
 .list-view-actions { display: flex; flex-shrink: 0; gap: 8px; }
 
+.btn-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-button);
+  font-weight: 500;
+  font-size: 13px;
+}
+.btn-line:hover:not(:disabled) { background-color: var(--panel); }
+
+/* importar (contorno) / exportar (relleno) */
+.btn-line.btn-io-import { border-color: var(--line-2); }
+.btn-line.btn-io-import svg { color: var(--button); }
+.btn-line.btn-io-import:hover:not(:disabled) { background-color: color-mix(in srgb, var(--button) 16%, transparent); }
+
+.btn-line.btn-io-export { background-color: var(--button); border-color: var(--button); color: var(--text-pri); }
+.btn-line.btn-io-export:hover:not(:disabled) { background-color: var(--button-hover); }
+
+/* solo se muestran en cel */
+.io-menu, .stats-fab, .stats-backdrop, .stats-close { display: none; }
+.io-menu { position: relative;}
+.io-menu .pop-menu { left: auto; right: 0; transform-origin: top right; }
+.io-menu .pop-item { display: flex; align-items: center; gap: 8px; }
+.io-menu .pop-item svg { flex-shrink: 0; color: var(--mute); }
+
 /* -------------------------- 
   2. controles
   --------------------------- */
@@ -89,8 +116,6 @@
 .json-creator {padding-top: 4px; }
 
 .sort-wrap { position: relative; }
-#btnCompactList ~ .sort-wrap { margin-left: 0; }
-
 
 .select-btn {
   display: flex;
@@ -222,22 +247,39 @@
   border-radius: var(--radius-button);
 }
 .stat-card-label { margin-bottom: 4px; color: var(--mute); font-size: 12.5px; font-weight: 500; } 
-.stat-card-value { width: 100%; overflow: hidden; color: var(--mute); font-size: 14px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.stat-card-value { width: 100%; overflow: hidden; color: var(--text-1); font-size: 14px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+
+.stat-card-value.is-diff { color: var(--diff-color); }
 
 .diff-breakdown-row {
   display: flex;
   align-items: center;
   justify-content: space-around;
   width: 100%;
-  padding: 12px 0;
+  padding: 12px 0 8px;
   margin-bottom: 2px;
   border-top: 1px solid var(--line-1);
 }
-.diff-col { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-.diff-icon { width: 40px; height: 40px; object-fit: contain; }
+.diff-col { display: flex; flex-direction: column; align-items: center; }
+.diff-icon { width: 38px; height: 38px; object-fit: contain; }
 .diff-count { color: var(--mute); font-size: 13px; font-weight: 700; }
 
-.profile-footer { margin-top: 8px; color: var(--mute); font-size: 12px; text-align: center; word-break: break-word; }
+.profile-pid {
+  position: absolute; top: 10px; right: 10px; z-index: 4;
+  padding: 3px 9px; background: rgba(0, 0, 0, 0.65); border-radius: var(--radius-button);
+  color: #fff; font-family: ui-monospace, Consolas, monospace; font-size: 11px;
+}
+
+/* version 1.4 -----> */
+.profile-list-id {
+  margin: 2px 0 10px; color: var(--mute);
+  font-size: 11.5px;
+  font-family: monospace;
+  align-items: center;
+}
+.profile-extra { display: none; }
+
+.ps-label { color: var(--mute); font-size: 12.5px; font-weight: 600; }
 
 /* --------------------------
   Aviso: agregar otro demon
@@ -314,9 +356,105 @@
 
 @media (max-width: 640px) {
   .list-view-title { font-size: 24px; }
-  #btnAddDemon { margin-left: auto; }
   .filter-popup-dropdown { width: min(220px, 80vw); }
   .scroll-top-btn { right: 14px; bottom: 14px; }
+
+  /* importar / exportar dentro del menú ⋮ */
+  .btn-io { display: none; }
+  .io-menu { display: block; }
+
+  /* stats: cajón lateral */
+  body:has(.list-view.stats-open) { overflow: hidden; }
+  body:has(.list-view.stats-open) .scroll-top-btn { opacity: 0; visibility: hidden; pointer-events: none; }
+
+  .list-sidebar {
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    z-index: 150;
+    width: min(300px, 84vw);
+    min-width: 0;
+    max-width: none;
+    height: auto;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-left: none;
+    border-radius: 0 var(--radius-card) var(--radius-card) 0;
+    box-shadow: 8px 0 28px var(--shadow-3);
+    transform: translateX(-104%);
+    visibility: hidden;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.3, 1), visibility 0s linear 0.3s;
+  }
+  .list-view.stats-open .list-sidebar {
+    transform: none;
+    visibility: visible;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.3, 1), visibility 0s;
+  }
+
+  .stats-backdrop {
+    position: fixed;
+    inset: 50px 0 0 0;
+    z-index: 140;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+  }
+  .list-view.stats-open .stats-backdrop { opacity: 1; visibility: visible; transition: opacity 0.3s ease, visibility 0s; }
+
+  .stats-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 13px;
+  }
+  .stats-close:hover { background-color: rgba(0, 0, 0, 0.85); }
+
+  .stats-fab {
+    position: fixed;
+    right: 14px;
+    bottom: 14px;
+    z-index: 160;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background-color: var(--button);
+    border: 1px solid var(--line-2);
+    border-radius: 50%;
+    color: var(--text-pri);
+    box-shadow: 0 2px 12px var(--shadow-1);
+    transition: bottom 0.3s cubic-bezier(0.2, 0.8, 0.3, 1), opacity 0.25s ease, transform 0.25s ease, background-color 0.2s;
+  }
+  .stats-fab:hover { background-color: var(--button-hover); }
+  body:has(.scroll-top-btn.show) .stats-fab { bottom: 66px; }
+  .list-view.stats-open .stats-fab { opacity: 0; transform: scale(0.8); pointer-events: none; }
+
+  .profile-pid { right: auto; left: 10px; }
+
+  #listStatsContainer { display: flex; flex-direction: column; min-height: 100%; }
+  #listStatsContainer .profile-body { flex: 1; }
+
+  .profile-extra {
+    display: flex; flex-direction: column; gap: 14px; width: 100%;
+    margin-top: 4px; padding-top: 14px; text-align: left;
+    border-top: 1px solid var(--line-1);
+}
+  .ps-block { display: flex; flex-direction: column; gap: 6px; }
+  .profile-list-id { align-self: flex-start; margin: auto 0 0; padding-top: 14px; }
 }
 
 

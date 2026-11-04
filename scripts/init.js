@@ -64,6 +64,7 @@ function initGlobalListeners() {
       if (modal.dataset.dismissible) closeModal(modal);
     } else {
       document.querySelectorAll('.pop.open').forEach(pop => pop.classList.remove('open'));
+      document.querySelector('.list-view.stats-open')?.classList.remove('stats-open');
     }
   });
 }
@@ -109,6 +110,7 @@ function initLegal() {
   renderFooter();
 
   const paint = () => {
+    applyAppearance();
     applyLanguage();
     renderHeader();
   };

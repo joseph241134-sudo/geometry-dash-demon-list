@@ -1,117 +1,4 @@
 /* ==============================================
-  1. list card
-  =============================================== */
-
-.list-card {
-  position: relative;
-  display: flex;
-  flex-shrink: 0;
-  width: 100%;
-  max-width: 520px;
-  height: 144px;
-  overflow: hidden;
-  background-color: var(--panel-2);
-  border: 1px solid var(--line-1);
-  border-radius: var(--radius-card);
-  box-shadow: 0 0 12px 2px var(--shadow-1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s;
-}
-.list-card:hover { transform: translateY(-1px); border-color: var(--line-2); box-shadow: 0 6px 20px 2px var(--shadow-2); }
-
-.card-btn-config {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 30;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  background-color: rgba(0, 0, 0, 0.6);
-  border-radius: 50%;
-  transition: transform 0.3s ease
-}
-.card-btn-config:hover { background-color: rgba(0, 0, 0, 0.8); transform: rotate(22deg); }
-.card-btn-config img { height: 50%; object-fit: cover; }
-
-.card-content {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 4px;
-  min-width: 0;
-  height: 100%;
-  padding: 14px 0 20px 18px;
-}
-
-.card-title-row { display: flex; align-items: center; gap: 8px; min-width: 0; }
-
-.card-title {
-  margin: 0;
-  overflow: hidden;
-  color: var(--text-1);
-  font-size: 24px;
-  letter-spacing: 1px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.card-fav-star { flex-shrink: 0; width: 18px; height: 18px; object-fit: cover; }
-
-.card-author { margin: 0; padding-left: 2px; color: var(--text-2); font-size: 13.5px; font-weight: 700; }
-.card-description { margin: auto 0 0; color: var(--mute); font-size: 12.5px; font-weight: 500; }
-
-/* ------ card overside ------ */
-
-.card-over-side {
-  position: relative;
-  display: flex;
-  width: 48%;
-  padding-left: 24px;
-  background-color: var(--panel-3);
-  clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
-}
-
-.card-visual-side {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
-}
-
-.card-visual-side::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(to right, var(--shadow-1), rgba(0, 0, 0, 0));
-  pointer-events: none;
-}
-
-.card-visual-side img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-.list-card:hover .card-visual-side img { transform: scale(1.02); }
-
-.card-btn-view {
-  position: absolute;
-  right: 12%;
-  z-index: 20;
-  align-self: center;
-  padding: 8px 22px;
-  background-color: var(--button);
-  color: var(--text-pri);
-  border: 2px solid var(--panel);
-  border-radius: var(--radius-button);
-  font-size: 18px;
-  font-weight: 700;
-  box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.2);
-}
-.card-btn-view:hover { background-color: var(--button-hover); }
-
-/* ==============================================
   2. Demon card
   =============================================== */
 
@@ -124,7 +11,7 @@
   display: flex;
   align-items: stretch;
   height: 160px;
-  padding-left: 24px;
+  padding-left: 20px;
   overflow: hidden;
   background-color: var(--card);
   border: 1px solid var(--line-1);
@@ -145,15 +32,15 @@
   align-items: center;
   justify-content: center;
   align-self: center;
-  height: 117px;
+  height: 122px;
   overflow: hidden;
-  background-color: var(--panel-3);
+  background-color: color-mix(in srgb, var(--panel-3) 40%, transparent); 
   border-radius: var(--radius-button);
 }
-.demon-thumb.has-yt { width: 208px; }
-.demon-thumb.default-thumb { width: 108px; padding: 12px; }
+.demon-thumb.has-yt { width: 218px; }
+.demon-thumb.default-thumb { width: 108px; height: 108px; padding: 8px; }
 .demon-thumb a { display: block; width: 100%; height: 100%; }
-.demon-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.demon-thumb img { width: 100%; height: 100%; object-fit: cover;}
 
 .demon-details {
   display: flex;
@@ -164,7 +51,7 @@
   padding: 10px 56px 10px 16px;
 }
 
-.demon-header { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.demon-header { display: flex; align-items: center; gap: 0px; min-width: 0; }
 
 .demon-name {
   margin: 0;
@@ -203,9 +90,9 @@
 .btn-edit-demon:focus-visible,
 .btn-add-demon-below:focus-visible { opacity: 1; }
 
-.d-creator { margin-top: 10px; color: var(--mute); font-size: 13px; font-weight: 500; }
+.d-creator { margin-top: 2px; color: var(--mute); font-size: 13px; font-weight: 500; }
 
-.demon-stats-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-top: 8px; font-size: 12px; }
+.demon-stats-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 6px 8px; margin-top: 22px; font-size: 12px; }
 
 /* Badge de dificultad: js */
 .d-diff {
@@ -215,16 +102,20 @@
   border: 1px solid color-mix(in srgb, var(--line-1) 80%, transparent);
   border-radius: var(--radius-button);
   font-weight: 600;
+  display: inline-flex; align-items: center; gap: 6px;
 }
 
+.d-diff img { width: 18px; height: 18px; object-fit: contain; }
+.d-diff:has(> img) { padding-left: 6px; }
+
 /* Datos secundarios (Attempts, Date) */
-.d-stat { padding: 3px 8px; color: var(--text-1); background-color: var(--card); border-radius: var(--radius-button); font-weight: 600; align-items: center; }
+.d-stat { padding: 3px 8px; color: var(--text-1); border-radius: var(--radius-button); font-weight: 600; align-items: center; }
 .d-stat-label { margin-right: 5px; color: var(--mute); font-weight: 500; }
 
 .demon-extra { display: none; } /* modo movil */
 
 /* Estado vacío */
-.demons-empty { padding: 48px 20px; text-align: center; background-color: var(--panel); border: 1px dashed var(--line-2); border-radius: var(--radius-sm); }
+.demons-empty { padding: 48px 20px; text-align: center; background-color: color-mix(in srgb, var(--panel) 80%, transparent); border: 1px dashed var(--line-2); border-radius: var(--radius-sm); }
 .demons-empty-title { color: var(--text-1); font-size: 16px; font-weight: 700; }
 .demons-empty-text { margin-top: 6px; color: var(--mute); font-size: 13px; }
 
@@ -252,11 +143,15 @@
   }
   .demon-thumb { height: 72px; }
   .demon-thumb.has-yt { width: 128px; }
-  .demon-thumb.default-thumb { width: 72px; padding: 8px; }
+  .demon-thumb.default-thumb { width: 72px; height: 72px; padding: 8px; }
   .demon-details { padding: 4px 44px 4px 12px; }
   .demon-name { font-size: 16px; }
   .d-creator { margin-top: 4px; }
   .btn-edit-demon, .btn-add-demon-below { right: 8px; width: 28px; height: 28px; }
   .btn-edit-demon { top: 8px; }
+  .d-diff {margin-top: 0; }
   .btn-add-demon-below { top: 42px; }
 }
+
+[data-bg-list="off"] .hp-main-bg,
+[data-bg-list="off"] .hp-item-bg { display: none; }

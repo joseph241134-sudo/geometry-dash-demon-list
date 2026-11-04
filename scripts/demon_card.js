@@ -7,7 +7,7 @@
 // 1. Demon card
 // ======================================================
 
-function demonStatChip(label, value, cls = '', svg = '') {
+function demonStatChip(label, value, cls = '') {
   if (!value) return '';
   return `<span class="d-stat ${cls}"><span class="d-stat-label">${label}</span>${escapeHTML(value)}</span>`;
 }
@@ -36,7 +36,7 @@ function renderDemonCard(demon, position, index) {
         </div>
         ${demon.creator ? `<span class="d-creator">${t('card.publishedBy', { name: escapeHTML(demon.creator) })}</span>` : ''}
         <div class="demon-stats-row">
-          <span class="d-diff">${escapeHTML(demon.difficulty)}</span>
+          <span class="d-diff">${ytThumb ? `<img src="${diffIcon(demon.difficulty)}" alt="">` : ''}${escapeHTML(demon.difficulty)}</span>
           ${extraChips}
         </div>
       </div>
@@ -88,6 +88,7 @@ function renderListStats() {
 
   const demons = currentList.demons || [];
   const hardest = demons.length ? (demons[0].name || '-') : '-';
+  const top = demons[0];
 
   const breakdown = DIFFICULTIES.map(diff => `
     <div class="diff-col">
@@ -97,6 +98,25 @@ function renderListStats() {
   `).join('');
 
   const bannerImg = profileState.banner ? `background-image:url('${escapeHTML(profileState.banner)}');` : '';
+  const badges = profileBadges();
+  const extra = `
+    <div class="profile-extra">
+      ${badges ? `<div class="hp-badges">${badges}</div>` : ''}
+      <div class="ps-block">
+        <span class="ps-label">${t('profile.bio')}</span>
+        <div class="hp-bio-box"><p class="hp-bio ${profileState.bio ? '' : 'empty'}">${profileState.bio ? escapeHTML(profileState.bio) : t('profile.noBio')}</p></div>
+      </div>
+      <div class="ps-block">
+        <span class="ps-label">${t('home.gdProfile')}</span>
+        <div class="hp-gd-row">
+          <div class="hp-gd-profile">
+            <strong class="hp-gd-name">${escapeHTML(profileState.gdName) || '-'}</strong>
+            <span class="hp-gd-id">${t('profile.id', { id: escapeHTML(profileState.gdId) || '-' })}</span>
+          </div>
+          ${renderGdRank()}
+        </div>
+      </div>
+    </div>`;
 
   container.innerHTML = `
     <div class="profile-banner-container">
@@ -104,6 +124,7 @@ function renderListStats() {
       <div class="profile-avatar-wrapper">
         <img src="${escapeHTML(getAvatar())}" alt="" class="profile-avatar" onerror="this.onerror=null;this.src='${DEFAULT_AVATAR}'">
       </div>
+      ${publicIdText() !== '-' ? `<span class="profile-pid">${t('profile.id', { id: publicIdText() })}</span>` : ''}
     </div>
 
     <div class="profile-body">
@@ -117,18 +138,19 @@ function renderListStats() {
         </div>
         <div class="stat-card">
           <span class="stat-card-label">Hardest</span>
-          <strong class="stat-card-value" title="${escapeHTML(hardest)}">${escapeHTML(hardest)}</strong>
+          <strong class="stat-card-value ${top ? 'is-diff' : ''}" ${top ? `style="${diffColorStyle(top.difficulty)}"` : ''} title="${escapeHTML(hardest)}">${escapeHTML(hardest)}</strong>
         </div>
       </div>
 
       <div class="diff-breakdown-row">${breakdown}</div>
-    </div>
-  `;
+      ${extra}
+    </div>`;
 
   const subtitle = $('listViewSubtitle');
   if (subtitle) subtitle.textContent = listSubtitleText();
 }
 
+// <span class="profile-list-id">${t('view.listId', { id: currentList.id })}</span> // agregar abajo de ${extra} id publicas
 // ======================================================
 // 3. Autocompletado del buscador
 // ======================================================
