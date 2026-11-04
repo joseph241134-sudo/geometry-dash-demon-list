@@ -19,9 +19,7 @@ main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
 
 .hp-banner:not([style]) {
   background-image: linear-gradient(135deg,
-    color-mix(in srgb, var(--button) 30%, var(--panel-banner)) 0%,
-    var(--panel-banner) 55%,
-    color-mix(in srgb, var(--panel) 60%, var(--panel-banner)) 100%);
+    color-mix(in srgb, var(--panel) 200%, transparent) 100%);
 }
 
 .hp-hero-body { position: relative; z-index: 2; display: flex; flex-direction: column; min-height: 192px; padding: 0 16px 12px; }
@@ -106,7 +104,7 @@ main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
 
 .hp-gd-rank { display: flex; flex: 3; flex-shrink: 0; align-items: center; gap: 10px; padding-left: 14px; border-left: 1px dashed var(--line-1); }
 .hp-gd-rank strong { color: var(--rank); font-size: 16px; font-weight: 700; }
-.hp-gd-rank.podium .hp-trophy { box-shadow: 0 0 14px color-mix(in srgb, var(--rank) 55%, transparent); }
+.hp-gd-rank.podium .hp-trophy { box-shadow: 0 0 4px color-mix(in srgb, var(--rank) 55%, transparent); }
 .hp-trophy {
   display: grid; place-items: center; width: 40px; height: 40px;
   color: var(--rank);
