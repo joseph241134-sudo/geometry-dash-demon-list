@@ -34,7 +34,7 @@ function renderDemonCard(demon, position, index) {
           <h2 class="demon-name">#${position} - ${escapeHTML(demon.name)}</h2>
           ${demon.isFavorite ? `<img class="demon-fav-star" src="${FAV_ICON.on}" alt="">` : ''}
         </div>
-        ${demon.creator ? `<span class="d-creator">${t('card.publishedBy', { name: escapeHTML(demon.creator) })}</span>` : ''}
+        ${demon.creator ? `<span class="d-creator"><span class="by-full">${t('card.publishedBy', { name: escapeHTML(demon.creator) })}</span><span class="by-short">${t('card.by', { name: escapeHTML(demon.creator) })}</span></span>` : ''}
         <div class="demon-stats-row">
           <span class="d-diff">${ytThumb ? `<img src="${diffIcon(demon.difficulty)}" alt="">` : ''}${escapeHTML(demon.difficulty)}</span>
           ${extraChips}

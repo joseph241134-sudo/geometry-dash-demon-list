@@ -132,7 +132,7 @@ const I18N = {
     'view.empty': 'This list has no demons yet', 'view.emptyText': 'Press to add your first demon.',
   
   //card-demon ->
-    'card.publishedBy': 'published by {name}', 'card.attempts': 'Attempts:', 'card.date': 'Date:',
+    'card.publishedBy': 'published by {name}', 'card.by': 'by {name}', 'card.attempts': 'Attempts:', 'card.date': 'Date:',
     'card.edit': 'Edit demon', 'card.addBelow': 'Add demon below', 'card.showcase': 'Watch showcase',
 
     'common.name': 'Name', 'common.creator': 'Creator', 'common.difficulty': 'Difficulty',
@@ -295,7 +295,7 @@ const I18N = {
     'view.empty': 'Esta lista aún no tiene demons', 'view.emptyText': 'Pulsa para añadir tu primer demon.',
   
   //card-demon ->
-    'card.publishedBy': 'publicado por {name}', 'card.attempts': 'Intentos:', 'card.date': 'Fecha:',
+    'card.publishedBy': 'publicado por {name}', 'card.by': 'por {name}', 'card.attempts': 'Intentos:', 'card.date': 'Fecha:',
     'card.edit': 'Editar demon', 'card.addBelow': 'Agregar demon debajo', 'card.showcase': 'Ver showcase',
 
     'common.name': 'Nombre', 'common.creator': 'Creador', 'common.difficulty': 'Dificultad',
@@ -457,7 +457,7 @@ const I18N = {
     'view.empty': 'Cette liste ne contient pas encore de demons', 'view.emptyText': 'Appuyez pour ajouter votre premier demon.',
   
   //card-demon ->
-    'card.publishedBy': 'publié par {name}', 'card.attempts': 'Essais :', 'card.date': 'Date :',
+    'card.publishedBy': 'publié par {name}', 'card.by': 'par {name}', 'card.attempts': 'Essais :', 'card.date': 'Date :',
     'card.edit': 'Modifier le demon', 'card.addBelow': 'Ajouter un demon ci-dessous', 'card.showcase': 'Voir le showcase',
 
     'common.name': 'Nom', 'common.creator': 'Créateur', 'common.difficulty': 'Difficulté',
@@ -517,8 +517,6 @@ function applyLanguage() {
   setMeta('meta[property="og:title"]', t('meta.title'));
   setMeta('meta[property="og:description"]', t('meta.desc'));
   setMeta('meta[property="og:locale"]', lang === 'fr' ? 'fr_FR' : (lang === 'en' ? 'en_US' : 'es_ES'));
-  setMeta('meta[name="twitter:title"]', t('meta.title'));
-  setMeta('meta[name="twitter:description"]', t('meta.desc'));
 
   const topBtn = document.getElementById('btnScrollTop');
   if (topBtn) topBtn.title = t('view.top');
@@ -886,7 +884,7 @@ const svg = {
   Trophy: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.93.63 1.5 1.98 2.63 3.61 2.95V19H7v2h10v-2h-4v-3.12c1.63-.32 2.98-1.45 3.61-2.95C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>`,
   Import: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`,
   Export: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>`,
-  Stats: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="20" x2="6" y2="11"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="18" y1="20" x2="18" y2="14"/></svg>`,
+  Stats: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="20" x2="6" y2="11"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="18" y1="20" x2="18" y2="14"/></svg>`,
   Reorder: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16"/><polyline points="3 8 7 4 11 8"/><path d="M17 20V4"/><polyline points="13 16 17 20 21 16"/></svg>`,
   ArrowUp: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>`,
   ArrowDown: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`,

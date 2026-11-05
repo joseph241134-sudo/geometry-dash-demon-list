@@ -90,7 +90,13 @@
 .btn-edit-demon:focus-visible,
 .btn-add-demon-below:focus-visible { opacity: 1; }
 
-.d-creator { margin-top: 2px; color: var(--mute); font-size: 13px; font-weight: 500; }
+.d-creator { margin-top: 2px; color: var(--mute); font-size: 13px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; margin-right: 0;}
+.by-short { display: none; }
+
+@media (max-width: 520px) {
+  .by-full { display: none; }
+  .by-short { display: inline; }
+}
 
 .demon-stats-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 6px 8px; margin-top: 22px; font-size: 12px; }
 
@@ -124,17 +130,9 @@
   =============================================== */
 
 @media (max-width: 640px) {
-  .lists-panel-head { padding: 12px 14px; }
-  #listsContainer { padding: 12px; gap: 12px; }
   .no-lists-msg {font-size: 13px;}
 
-  .list-card { height: 128px; } 
-  .card-content { padding: 12px 0 14px 14px; }
-  .card-title { font-size: 20px; }
-  .card-over-side { width: 42%; padding-left: 16px; }
-  .card-btn-view { right: 8%; padding: 6px 16px; font-size: 15px; }
-
-  .demon-card { flex-wrap: wrap; align-items: center; height: auto; min-height: 112px; padding: 10px 12px; }
+  .demon-card { flex-wrap: wrap; align-items: center; height: auto; min-height: 92px; padding: 10px 12px; }
   .demon-stats-row .d-stat { display: none; }
   .demon-stats-row {margin-top: 4px; }
   .demon-extra {
@@ -146,11 +144,11 @@
   .demon-thumb.has-yt { width: 128px; }
   .demon-thumb.default-thumb { width: 72px; height: 72px; padding: 8px; }
   .demon-details { padding: 0 44px 0 12px; margin: 0; }
-  .demon-name { font-size: 16px; }
-  .d-creator { margin-top: 4px; }
+  .demon-name { font-size: 15.5px; }
+  .d-creator { margin-top: 4px; font-size: 12.5px; }
   .btn-edit-demon, .btn-add-demon-below { right: 8px; width: 28px; height: 28px; }
   .btn-edit-demon { top: 8px; }
-  .d-diff {margin-top: 4px; }
+  .d-diff {margin-top: 4px; font-size: 11.5px; }
   .btn-add-demon-below { top: 42px; }
 }
 

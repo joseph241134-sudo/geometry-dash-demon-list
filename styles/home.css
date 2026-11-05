@@ -151,13 +151,11 @@ main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
 .hp-main-card:hover { border-color: var(--line-2); box-shadow: 0 4px 22px var(--shadow-2); }
 
 .hp-main-card > .hp-menu { position: absolute; top: 14px; right: 14px; z-index: 5; }
-.hp-main-card .hp-dots { width: 24px; height: 24px; }
-.hp-main-card .hp-dots svg { width: 14px; height: 14px; }
 
 .hp-main-bg {
   position: absolute; inset: -20px; z-index: -1;
   background-size: cover; background-position: center;
-  filter: blur(1px) brightness(0.36);
+  filter: blur(2px) brightness(0.4);
   -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent 76%);
           mask-image: linear-gradient(180deg, #000 45%, transparent 76%);
   pointer-events: none;
@@ -236,7 +234,7 @@ main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
 
 .hp-rotor-track { transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); will-change: transform; }
 .hp-rotor-slide { display: flex; flex-direction: column; height: 46px; min-width: 0; line-height: 1.5; }
-.hp-rotor-diffs { flex-direction: row; align-items: center; gap: 6px; }
+.hp-rotor-diffs { flex-direction: row; align-items: center; gap: 6px; margin-right: 6px; }
 
 .hp-main-last-name { display: flex; align-items: center; gap: 8px; min-width: 0; }
 .hp-main-last-name img { flex-shrink: 0; width: 26px; height: 26px; object-fit: contain; }
@@ -247,7 +245,13 @@ main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
   background-color: rgba(0, 0, 0, 0.3);
   border: 1px solid var(--line-1);
   border-radius: 12px;
+  flex-shrink: 0;
 }
+.hp-rotor-diffs.clipped {
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 32px), rgba(0, 0, 0, .2));
+          mask-image: linear-gradient(90deg, #000 calc(100% - 32px), rgba(0, 0, 0, .2));
+}
+
 .hp-diff-chip img { flex-shrink: 0; width: 22px; height: 22px; object-fit: contain; }
 .hp-diff-chip strong { color: var(--text-1); font-size: 12.5px; font-weight: 700; }
 
@@ -344,8 +348,6 @@ main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
 .hp-chip.hp-chip-hardest b { color: var(--diff-color, var(--text-1)); }
 
 .hp-item-actions { display: flex; flex-shrink: 0; flex-direction: column; align-items: flex-end; justify-content: space-between; align-self: stretch; gap: 10px; }
-.hp-item .hp-dots { width: 24px; height: 24px; }
-.hp-item .hp-dots svg { width: 14px; height: 14px; }
 
 .hp-view { padding: 7px 16px; background-color: color-mix(in srgb, var(--panel) 90%, transparent); border-radius: var(--radius-button); border: 1px solid var(--line-1); color: var(--text-1); font-size: 12.5px; font-weight: 600; margin-bottom: 2px;}
 .hp-view:hover { background-color: var(--button-hover); }
@@ -365,6 +367,13 @@ main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
 }
 .hp-move:hover:not(:disabled) { background-color: var(--panel-1-hover); }
 
+/* -------------- resaltado correcion --------------- */
+.hp-main-card,
+.hp-item,
+.hp-menu button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* ==============================================
   6. Menú ⋮ (compartido por ambas tarjetas)
   =============================================== */
@@ -374,14 +383,16 @@ main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 25px;
+  height: 25px;
   background-color: var(--panel-2);
   border: 1px solid var(--line-1);
   border-radius: var(--radius-button);
   color: var(--mute);
 }
 .hp-dots:hover { background-color: var(--panel-1-hover); color: var(--text-1); }
+
+.hp-dots svg {height: 14px; height: 14px;}
 
 .pop.hp-menu-pop { position: fixed; left: auto; min-width: 100px; transform-origin: top right; }
 .hp-menu-pop .pop-item.danger { color: var(--text-danger); }
@@ -402,15 +413,6 @@ main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
 :is([data-bg-list="off"] .hp-main-card, .hp-main-card:not(.has-bg)) :is(.hp-stat, .hp-diff-chip) { background-color: var(--panel-2); }
 :is([data-bg-list="off"] .hp-item, .hp-item:not(.has-bg)) .hp-chip { background-color: var(--panel-3); }
 :is([data-bg-list="off"] .hp-item, .hp-item:not(.has-bg)) .hp-item-icon img { filter: none; }
-
-/* ==============================================
-  8. Modal editar perfil
-  =============================================== */
-
-.pe-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-.pe-types .filter-diff-pill { padding: 6px 6px 8px; font-size: 12.5px; }
-
-textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize: vertical; }
 
 /* ==============================================
   9. Responsive
@@ -436,7 +438,7 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
   .hp-lower { flex-direction: column; gap: 12px; }
   .hp-bio-wrap { margin-right: 0; }
   .hp-bio-box { min-height: 64px; }
-  .hp-gd { flex: none; width: 100%; margin-left: 0; padding: 14px 14px 4px; border-left: none; border-top: 1px solid var(--line-1); }
+  .hp-gd { flex: none; width: 100%; margin-left: 0; padding: 14px 8px 4px; border-left: none; border-top: 1px solid var(--line-1); }
 
   /* lista principal */
   .hp-main-card { padding: 16px 12px 6px; gap: 16px; }
@@ -446,7 +448,7 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
   .hp-main-info {padding-left: 8px; margin-top: 10px;}
   .hp-main-title { font-size: 21px; }
   .hp-main-stats {padding: 12px 8px 0; margin-top: 6px; }
-  .hp-main-actions {padding-left: 2px; padding-right: 4px; }
+  .hp-main-actions {padding-left: 2px; padding-right: 2px; }
   .hp-main-btn { padding: 8px 16px; }
   .hp-diff-chip { gap: 3px; padding: 5px 8px 5px 6px; }
   .hp-diff-chip img { width: 21px; height: 21px; }

@@ -473,7 +473,11 @@ function initRotor() {
   }, 8000);
 }
 
-// Repinta las dos secciones (principal y otras)
+function markClippedDiffs() {
+  document.querySelectorAll('.hp-rotor-diffs').forEach(el =>
+    el.classList.toggle('clipped', el.scrollWidth > el.clientWidth + 1));
+}
+
 function renderListsCards() {
   const mainBox = $('homeMain');
   const othersBox = $('homeOthers');
@@ -495,6 +499,7 @@ function renderListsCards() {
   }
 
   initRotor();
+  markClippedDiffs();
 }
 
 // -------------------------------------------------------------
@@ -639,3 +644,5 @@ function renderMainPage(animate = true) {
 
   renderListsCards();
 }
+
+window.addEventListener('resize', debounce(markClippedDiffs, 150));
