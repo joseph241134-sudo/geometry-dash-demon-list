@@ -1,18 +1,14 @@
 // ------------------------------------------------------
-// constante de idiomas (en / es / fr)
+// constante de idiomas (en / es / fr..)
 // ------------------------------------------------------
 
 const LANGS = [
   { id: 'en', name: 'English' },
   { id: 'es', name: 'Español' },
-  { id: 'fr', name: 'Français' }
 ];
 
 const I18N = {
   en: {
-    'meta.title': 'My Demon List | Geometry Dash',
-    'meta.desc': 'Create and organize your personal Geometry Dash demon lists: tier, attempts, win date, favorites and your stats.',
-  
   //generales ->
     'common.ok': 'OK', 'common.cancel': 'Cancel', 'common.save': 'Save', 'common.delete': 'Delete', 
     'common.noPhoto': 'No image',
@@ -42,7 +38,7 @@ const I18N = {
 
     'home.mainEmpty': 'No main list', 'home.mainEmptyText': 'Create your main list to see it here.', 'home.createMain': 'Create list',
 
-    'lists.reorder': 'Reorder lists', 'list.moveUp': 'Move up', 'list.moveDown': 'Move down',
+    'lists.reorder': 'Reorder lists', 'list.moveUp': 'Move up', 'list.moveDown': 'Move down', 'lists.needTwo': 'You need to have at least 2 secondary lists.',
     'lists.add': '+ Add', 'lists.empty': 'You have no secondary lists.', 'home.listEmpty': 'No demons',
 
     'io.import': 'Import', 'io.export': 'Export', 'view.stats': 'Stats', 'io.options': 'Options',
@@ -70,7 +66,7 @@ const I18N = {
     'profile.bio': 'Biography:', 'profile.noBio': 'No biography.',
 
     'profile.type': 'Platform:', 'profile.typeNone': 'Not specified', 'profile.typePc': 'PC', 'profile.typeMobile': 'Mobile',
-    'profile.bioPh': 'Describe yourself in one sentence ...',
+    'profile.bioPh': 'This video game is so easy...',
 
   //modal-iniciar sesion ->
     'login.title': 'Log in', 'auth.text': 'Sign in to save your lists in the cloud and use them on any device.',
@@ -154,8 +150,8 @@ const I18N = {
     'theme.blue': 'Blue', 'theme.white': 'White', 'theme.dark': 'Dark', 'theme.purple': 'Purple', 'theme.rosa-dark': 'Dark pink', 'theme.halloween': 'Halloween',
     'theme.atardecer': 'Sunset', 'theme.neon': 'Neon', 'theme.bosque': 'Forest', 'theme.pizarra': 'Slate', 'theme.gris': 'Gray',
 
-    'settings.blur': 'Blur', 'settings.blurHint': 'Shown on list cards: a dark, blurred background using the list thumbnail.',
-    'settings.blurList': 'Blur',
+    'settings.blur': 'List background', 'settings.blurHint': 'A dark background with a gradient appears on the list cards.',
+    'settings.blurList': 'Degraded',
     
     'settings.data': 'Your account data', 
     'settings.dataHint': `All data is stored only in this browser. Clearing the cache or site data may erase everything. You can avoid this by exporting a backup first or by signing in.`,
@@ -172,9 +168,6 @@ const I18N = {
   },
 
   es: {
-    'meta.title': 'My Demon List | Geometry Dash',
-    'meta.desc': 'Crea y organiza tus listas personales de demons de Geometry Dash: tier, intentos, fecha de victoria, favoritos y tus estadísticas.',
-  
   //generales ->
     'common.ok': 'Aceptar', 'common.cancel': 'Cancelar', 'common.save': 'Guardar', 'common.delete': 'Eliminar', 
     'common.noPhoto': 'Sin imagen',
@@ -204,7 +197,8 @@ const I18N = {
 
     'home.mainEmpty': 'Sin lista principal', 'home.mainEmptyText': 'Crea tu lista principal para verla aquí.', 'home.createMain': 'Crear lista',
 
-    'lists.reorder': 'Ordenar listas', 'list.moveUp': 'Subir', 'list.moveDown': 'Bajar',
+    'lists.reorder': 'Ordenar listas', 'list.moveUp': 'Subir', 'list.moveDown': 'Bajar', 'lists.needTwo': 'Tienes que tener al menos 2 listas secundarias.',
+
     'lists.add': '+ Añadir', 'lists.empty': 'No tienes listas secundarias.', 'home.listEmpty': 'Sin demons',
 
     'io.import': 'Importar', 'io.export': 'Exportar', 'view.stats': 'Estadísticas', 'io.options': 'Opciones',
@@ -232,7 +226,7 @@ const I18N = {
     'profile.bio': 'Biografía:', 'profile.noBio': 'Sin biografía.',
 
     'profile.type': 'Plataforma:', 'profile.typeNone': 'Sin especificar', 'profile.typePc': 'PC', 'profile.typeMobile': 'Celular',
-    'profile.bioPh': 'Descríbete en una frase ...',
+    'profile.bioPh': 'Que fácil este videojuego...',
 
   //modal-iniciar sesion ->
     'login.title': 'Iniciar sesión', 'auth.text': 'Inicia sesión para guardar tus listas en la nube y usarlas en cualquier dispositivo.',
@@ -317,8 +311,8 @@ const I18N = {
     'theme.blue': 'Azul', 'theme.white': 'Blanco', 'theme.dark': 'Oscuro', 'theme.purple': 'Púrpura', 'theme.rosa-dark': 'Rosa oscuro', 'theme.halloween': 'Halloween',
     'theme.atardecer': 'Atardecer', 'theme.neon': 'Neón', 'theme.bosque': 'Bosque', 'theme.pizarra': 'Pizarra', 'theme.gris': 'Gris',
 
-    'settings.blur': 'Difuminado', 'settings.blurHint': 'Aparece en las cartas de listas, un fondo oscuro y difuminado con la miniatura de la lista.',
-    'settings.blurList': 'Difuminado',
+    'settings.blur': 'Fondo de Listas', 'settings.blurHint': 'Aparece en las cartas de listas, un fondo oscuro con degradado.',
+    'settings.blurList': 'Degradado',
     
     'settings.data': 'Datos de tu cuenta', 
     'settings.dataHint': `Todos los datos se guardan únicamente en este navegador, al borrar el caché o datos del sistema es posible que toda la información se pierda. Puedes evitar esto exportando una copia de seguridad antes o iniciando sesión.`,
@@ -334,6 +328,7 @@ const I18N = {
     'storage.full': 'No se pudieron guardar los cambios: el almacenamiento del navegador está lleno. Prueba con imágenes más ligeras.'
   },
 
+// -- futuro
   fr: {
     'meta.title': 'My Demon List | Geometry Dash',
     'meta.desc': 'Créez et organisez vos listes personnelles de demons Geometry Dash : tier, essais, date de victoire, favoris et vos statistiques.',
@@ -513,9 +508,6 @@ function applyLanguage() {
     const el = document.querySelector(selector);
     if (el) el.setAttribute('content', value);
   };
-  setMeta('meta[name="description"]', t('meta.desc'));
-  setMeta('meta[property="og:title"]', t('meta.title'));
-  setMeta('meta[property="og:description"]', t('meta.desc'));
   setMeta('meta[property="og:locale"]', lang === 'fr' ? 'fr_FR' : (lang === 'en' ? 'en_US' : 'es_ES'));
 
   const topBtn = document.getElementById('btnScrollTop');
@@ -779,108 +771,29 @@ const svg = {
     <line x1="12" y1="16" x2="12" y2="12"></line>
     <line x1="12" y1="8" x2="12.01" y2="8"></line>
   </svg>`,
-  Options: `
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="12" cy="6" r="2" fill="currentColor"/>
-    <circle cx="12" cy="13" r="2" fill="currentColor"/>
-    <circle cx="12" cy="20" r="2" fill="currentColor"/>
-  </svg>`,
-  Pencil: `
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
-    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
-  </svg>`,
-  Pin: `
-  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/>
-  </svg>`,
-  Filter: `
-  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line>
-    <line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line>
-    <line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line>
-    <line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line>
-    <line x1="17" y1="16" x2="23" y2="16"></line>
-  </svg>`,
-  Search: `
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="10" cy="10" r="6"></circle><line x1="21" y1="21" x2="15" y2="15"></line>
-  </svg>`,
-  Yt: `
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M21.58 7.19C21.35 6.33 20.67 5.65 19.81 5.42C18.25 5 12 5 12 5C12 5 5.75 5 4.19 5.42C3.33 5.65 2.65 6.33 2.42 7.19C2 8.75 2 12 2 12C2 12 2 15.25 2.42 16.81C2.65 17.67 3.33 18.35 4.19 18.58C5.75 19 12 19 12 19C12 19 18.25 19 19.81 18.58C20.67 18.35 21.35 17.67 21.58 16.81C22 15.25 22 12 22 12C22 12 22 8.75 21.58 7.19ZM10 15V9L15.2 12L10 15Z"/>
-  </svg>`,
-  Configuration: `
-  <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
-    <circle cx="12" cy="12" r="2" />
-  </svg>`,
-  Home: `
-  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-  </svg>`,
-  Lang: `
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
-  </svg>`,
-  Globe: `
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M17.9 17.39c-.26-.8-1.01-1.39-1.9-1.39h-1v-3a1 1 0 0 0-1-1H8v-2h2a1 1 0 0 0 1-1V7h2a2 2 0 0 0 2-2v-.41a7.984 7.984 0 0 1 2.9 12.8M11 19.93c-3.95-.49-7-3.85-7-7.93c0-.62.08-1.22.21-1.79L9 15v1a2 2 0 0 0 2 2m1-16A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2"/>
-  </svg>`,
-  Perfil: `
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 2A5 5 0 1 0 12 12A5 5 0 0 0 12 2ZM4 19C4 15.686 7.582 13 12 13C16.418 13 20 15.686 20 19C20 20.105 19.105 21 18 21H6C4.895 21 4 20.105 4 19Z" />
-  </svg>`,
-  Wave: `
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" class="icon-chevron">
-    <path d="M 7.41 8.59 L 12 13.17 L 16.59 8.59 L 18 10 L 12 16 L 6 10 L 7.41 8.59 Z" fill="currentColor" />
-  </svg>`,
-  MiniWave: `
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" class="icon-chevron">
-    <path d="M 7.41 8.59 L 12 13.17 L 16.59 8.59 L 18 10 L 12 16 L 6 10 L 7.41 8.59 Z" fill="currentColor" />
-  </svg>`,
-  Drag: `
-  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-    <circle cx="9" cy="6" r="1.8"/><circle cx="15" cy="6" r="1.8"/><circle cx="9" cy="12" r="1.8"/>
-    <circle cx="15" cy="12" r="1.8"/><circle cx="9" cy="18" r="1.8"/><circle cx="15" cy="18" r="1.8"/>
-  </svg>`,
-  Palette: `
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c1.7 0 3-1.3 3-3 0-.8-.3-1.5-.8-2-.5-.6-.8-1.2-.8-2 0-1.7 1.3-3 3-3h2.5c1.9 0 3.5-1.6 3.5-3.5C22 5.5 17.5 2 12 2z"/>
-    <circle cx="7" cy="10" r="1.4" fill="currentColor" stroke="none"/>
-    <circle cx="11" cy="7" r="1.4" fill="currentColor" stroke="none"/>
-    <circle cx="16" cy="8" r="1.4" fill="currentColor" stroke="none"/>
-  </svg>`,
-  AREDL: `
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M4 4v16h16"/>
-    <polyline points="7 16 10 12 13 14 19 8"/>
-  </svg>`,
-  Dice: `
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="22" height="24">
-    <g>
-      <path fill-rule="evenodd" d="M 250,50 L 440,145 Q 460,155 460,175 L 460,355 Q 460,375 440,385 L 270,475 Q 250,485 230,475 L 60,385 Q 40,375 40,355 L 40,175 Q 40,155 60,145 Z 
-        M 250,95 a 28.5,19.5 0 1,0 0.1,0 Z 
-        M 175,132 a 28.5,19.5 0 1,0 0.1,0 Z 
-        M 325,132 a 28.5,19.5 0 1,0 0.1,0 Z 
-        M 250,168 a 28.5,19.5 0 1,0 0.1,0 Z 
-        M 150,280 a 18,22.5 0 1,0 0.1,0 Z 
-        M 330,270 a 21,27 0 1,0 0.1,0 Z 
-        M 385,320 a 19.5,25.5 0 1,0 0.1,0 Z" fill="white" />
-    </g>
-  </svg>
-  `,
-  Grid: `
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
-    <rect x="3" y="3" width="7" height="7" rx="1"></rect>
-    <rect x="14" y="3" width="7" height="7" rx="1"></rect>
-    <rect x="3" y="14" width="7" height="7" rx="1"></rect>
-    <rect x="14" y="14" width="7" height="7" rx="1"></rect>
-  </svg>`,
-  Image: `
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline>
-  </svg>`,
+  Options: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="6" r="2" fill="currentColor"/><circle cx="12" cy="13" r="2" fill="currentColor"/><circle cx="12" cy="20" r="2" fill="currentColor"/></svg>`,
+  pc: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+  mobile: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>`,
+  Pencil: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>`,
+  Pin: `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>`,
+  Filter: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>`,
+  Search: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg>`,
+  Yt: `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M21.58 7.19C21.35 6.33 20.67 5.65 19.81 5.42C18.25 5 12 5 12 5C12 5 5.75 5 4.19 5.42C3.33 5.65 2.65 6.33 2.42 7.19C2 8.75 2 12 2 12C2 12 2 15.25 2.42 16.81C2.65 17.67 3.33 18.35 4.19 18.58C5.75 19 12 19 12 19C12 19 18.25 19 19.81 18.58C20.67 18.35 21.35 17.67 21.58 16.81C22 15.25 22 12 22 12C22 12 22 8.75 21.58 7.19ZM10 15V9L15.2 12L10 15Z"/></svg>`,
+  Configuration: `<svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/><circle cx="12" cy="12" r="2" /></svg>`,
+  Home: `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>`,
+  Lang: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>`,
+  Globe: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.9 17.39c-.26-.8-1.01-1.39-1.9-1.39h-1v-3a1 1 0 0 0-1-1H8v-2h2a1 1 0 0 0 1-1V7h2a2 2 0 0 0 2-2v-.41a7.984 7.984 0 0 1 2.9 12.8M11 19.93c-3.95-.49-7-3.85-7-7.93c0-.62.08-1.22.21-1.79L9 15v1a2 2 0 0 0 2 2m1-16A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>`,
+  Flag_en: `<svg class="lang-flag" viewBox="0 0 30 21" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="21" fill="#b22234"/><g fill="#fff"><rect y="1.615" width="30" height="1.615"/><rect y="4.846" width="30" height="1.615"/><rect y="8.077" width="30" height="1.615"/><rect y="11.308" width="30" height="1.615"/><rect y="14.538" width="30" height="1.615"/><rect y="17.769" width="30" height="1.615"/></g><rect width="12" height="11.31" fill="#3c3b6e"/><g fill="#fff"><circle cx="2" cy="2" r=".6"/><circle cx="4.5" cy="2" r=".6"/><circle cx="7" cy="2" r=".6"/><circle cx="9.5" cy="2" r=".6"/><circle cx="2" cy="5.6" r=".6"/><circle cx="4.5" cy="5.6" r=".6"/><circle cx="7" cy="5.6" r=".6"/><circle cx="9.5" cy="5.6" r=".6"/><circle cx="2" cy="9.2" r=".6"/><circle cx="4.5" cy="9.2" r=".6"/><circle cx="7" cy="9.2" r=".6"/><circle cx="9.5" cy="9.2" r=".6"/></g></svg>`,
+  Flag_es: `<svg class="lang-flag" viewBox="0 0 30 21" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="21" fill="#d91023"/><rect x="10" width="10" height="21" fill="#fff"/><circle cx="15" cy="10.5" r="2.4" fill="#d9b44a" stroke="#8a6d1d" stroke-width=".6"/></svg>`,
+  Perfil: `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2A5 5 0 1 0 12 12A5 5 0 0 0 12 2ZM4 19C4 15.686 7.582 13 12 13C16.418 13 20 15.686 20 19C20 20.105 19.105 21 18 21H6C4.895 21 4 20.105 4 19Z" /></svg>`,
+  Wave: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" class="icon-chevron"><path d="M 7.41 8.59 L 12 13.17 L 16.59 8.59 L 18 10 L 12 16 L 6 10 L 7.41 8.59 Z" fill="currentColor" /></svg>`,
+  MiniWave: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" class="icon-chevron"><path d="M 7.41 8.59 L 12 13.17 L 16.59 8.59 L 18 10 L 12 16 L 6 10 L 7.41 8.59 Z" fill="currentColor" /></svg>`,
+  Drag: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="6" r="1.8"/><circle cx="15" cy="6" r="1.8"/><circle cx="9" cy="12" r="1.8"/><circle cx="15" cy="12" r="1.8"/><circle cx="9" cy="18" r="1.8"/><circle cx="15" cy="18" r="1.8"/></svg>`,
+  Palette: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c1.7 0 3-1.3 3-3 0-.8-.3-1.5-.8-2-.5-.6-.8-1.2-.8-2 0-1.7 1.3-3 3-3h2.5c1.9 0 3.5-1.6 3.5-3.5C22 5.5 17.5 2 12 2z"/><circle cx="7" cy="10" r="1.4" fill="currentColor" stroke="none"/><circle cx="11" cy="7" r="1.4" fill="currentColor" stroke="none"/><circle cx="16" cy="8" r="1.4" fill="currentColor" stroke="none"/></svg>`,
+  AREDL: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><polyline points="7 16 10 12 13 14 19 8"/></svg>`,
+  Dice: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="22" height="24"><g><path fill-rule="evenodd" d="M 250,50 L 440,145 Q 460,155 460,175 L 460,355 Q 460,375 440,385 L 270,475 Q 250,485 230,475 L 60,385 Q 40,375 40,355 L 40,175 Q 40,155 60,145 Z M 250,95 a 28.5,19.5 0 1,0 0.1,0 Z M 175,132 a 28.5,19.5 0 1,0 0.1,0 Z M 325,132 a 28.5,19.5 0 1,0 0.1,0 Z M 250,168 a 28.5,19.5 0 1,0 0.1,0 Z M 150,280 a 18,22.5 0 1,0 0.1,0 Z M 330,270 a 21,27 0 1,0 0.1,0 Z M 385,320 a 19.5,25.5 0 1,0 0.1,0 Z" fill="white" /></g></svg>`,
+  Grid: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg>`,
+  Image: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>`,
   Trophy: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.93.63 1.5 1.98 2.63 3.61 2.95V19H7v2h10v-2h-4v-3.12c1.63-.32 2.98-1.45 3.61-2.95C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>`,
   Import: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`,
   Export: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>`,

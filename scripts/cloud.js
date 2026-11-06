@@ -31,11 +31,15 @@ function cloudMarkSynced() {
 async function cloudFetch() {
   if (!cloudUser) return null;
   const [p, l] = await Promise.all([
-    cloud.from('profiles').select('data').maybeSingle(),
+    cloud.from('profiles').select('data, public_id').maybeSingle(),
     cloud.from('lists').select('data')
   ]);
   if (p.error || l.error) return null;
-  return { profile: p.data?.data ?? null, lists: l.data.map(r => r.data).sort((a, b) => a.id - b.id) };
+  return {
+    profile: p.data?.data ?? null,
+    publicId: p.data?.public_id ?? null,
+    lists: l.data.map(r => r.data).sort((a, b) => a.id - b.id)
+  };
 }
 
 // Sube lo que cambió
@@ -77,13 +81,15 @@ async function cloudPush() {
   try {
     do { cloudDirty = false; if (!await cloudSync()) return false; } while (cloudDirty);
     return true;
-  } finally { cloudBusy = false; }
+  } catch (e) { console.error('cloudPush', e); return false; }
+  finally { cloudBusy = false; }
 }
 
 // Baja de la nube: 'ok' | 'empty' | 'error'
 async function cloudPull() {
   const remote = await cloudFetch();
   if (!remote) return 'error';
+  cloudPublicId = remote.publicId;  
   if (!remote.profile && !remote.lists.length) return 'empty';
 
   const lang = appSettings.lang;
@@ -115,7 +121,6 @@ const isPristineList = l =>
 
 function localHasData() {
   return userLists.some(l => !isPristineList(l))
-    || Object.values(profileStats).some(v => v)
     || !!(profileState.avatar || profileState.banner || profileState.bannerColor || profileState.country)
     || (!!profileState.username && profileState.username !== 'Player 1');
 }
@@ -165,7 +170,7 @@ async function cloudStart() {
   let synced = res === 'ok';
   if (res === 'empty') synced = await cloudPush();
   cloudReady = res !== 'error';
-  if (cloudReady) await cloudLoadPublicId();
+  if (cloudReady && cloudPublicId == null) await cloudLoadPublicId();
   if (synced) saveLocal();
   if (cloudReady) cloudMigrateImages().then(() => cloudCleanImages()).catch(e => console.error(e));
   return cloudUser;
@@ -189,7 +194,6 @@ function cloudScheduleSync() {
 
 const IMG_BUCKET = 'images';
 
-// Sube una imagen (dataURL) y devuelve su URL pública, o null si falla
 // Sube una imagen (Blob o dataURL) y devuelve su URL pública, o null si falla
 async function cloudStoreImage(src) {
   try {

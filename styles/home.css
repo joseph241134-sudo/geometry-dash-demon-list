@@ -4,17 +4,13 @@
 
 .home { display: flex; flex-direction: column; gap: 28px; width: min(1000px, 100%); margin: 0 auto; }
 
-main.view-enter .hp-hero,
-main.view-enter .hp-col { animation: riseIn 0.4s cubic-bezier(0.2, 0.8, 0.3, 1) both; }
-main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
-
 /* ==============================================
   2. Hero (banner + avatar + perfil)
   =============================================== */
 
 .hp-hero { border: 1px solid var(--line-1); border-radius: var(--radius-box); box-shadow: 0 8px 28px var(--shadow-2); }
 
-.hp-banner { position: relative; height: 200px; background-color: var(--panel-banner); border-bottom: 1px solid var(--line-1); box-shadow: 0 0 24px 6px var(--shadow-2); }
+.hp-banner { position: relative; height: 200px; background-color: var(--panel-banner); box-shadow: 0 0 24px 2px var(--shadow-2); }
 .hp-banner img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 .hp-banner:not([style]) {
@@ -128,6 +124,8 @@ main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
 .hp-head-actions { display: flex; align-items: center; gap: 8px; }
 .hp-head-actions .button-square {height: 30px; width: 30px; opacity: 1; background-color: var(--panel);}
 
+.hp-head-actions .button-square.blocked { opacity: 0.45; cursor: not-allowed; }
+
 .hp-head-actions .button-square.active {color: var(--text-pri);}
 
 /* ==============================================
@@ -155,9 +153,9 @@ main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
 .hp-main-bg {
   position: absolute; inset: -20px; z-index: -1;
   background-size: cover; background-position: center;
-  filter: blur(2px) brightness(0.4);
-  -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent 76%);
-          mask-image: linear-gradient(180deg, #000 45%, transparent 76%);
+  filter: brightness(0.48) opacity(.9);
+  -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 96%);
+          mask-image: linear-gradient(180deg, #000 55%, transparent 96%);
   pointer-events: none;
 }
 
@@ -306,7 +304,7 @@ main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
   border-radius: var(--radius-sm);
   transition: border-color 0.2s;
 }
-.hp-item:hover { border-color: var(--line-2); border-left-color: var(--diff-color, var(--line-2)); }
+.hp-item:hover { border-color: var(--line-2); }
 
 .hp-item-icon.empty::before { content: ""; width: 70%; height: 70%; border: 1px dashed var(--line-2); border-radius: 50%; }
 
@@ -317,9 +315,9 @@ main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
   height: 120%;
   background-size: cover;
   background-position: center;
-  filter: brightness(0.4) blur(1px);
-  -webkit-mask-image: linear-gradient(90deg, #000 25%, rgba(0, 0, 0, 0.4) 100%);
-          mask-image: linear-gradient(90deg, #000 25%, rgba(0, 0, 0, 0.4) 100%);
+  filter: brightness(0.48) opacity(.9);
+  -webkit-mask-image: linear-gradient(180deg, #000 40%, rgba(0, 0, 0, .4) 100%);
+          mask-image: linear-gradient(180deg, #000 40%, rgba(0, 0, 0, .4) 100%);
   pointer-events: none;
 }
 
@@ -394,7 +392,7 @@ main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
 
 .hp-dots svg {height: 14px; height: 14px;}
 
-.pop.hp-menu-pop { position: fixed; left: auto; min-width: 100px; transform-origin: top right; }
+.pop.hp-menu-pop { position: fixed; left: auto; min-width: 120px; transform-origin: top right; }
 .hp-menu-pop .pop-item.danger { color: var(--text-danger); }
 .hp-menu-pop .pop-item.danger:hover { background-color: color-mix(in srgb, var(--danger) 16%, transparent); }
 
@@ -438,7 +436,7 @@ main.view-enter .hp-col:nth-child(2) { animation-delay: 70ms; }
   .hp-lower { flex-direction: column; gap: 12px; }
   .hp-bio-wrap { margin-right: 0; }
   .hp-bio-box { min-height: 64px; }
-  .hp-gd { flex: none; width: 100%; margin-left: 0; padding: 14px 8px 4px; border-left: none; border-top: 1px solid var(--line-1); }
+  .hp-gd { flex: none; width: 100%; margin-left: 0; padding: 14px 8px 4px; border-left: none; border-top: 1px solid var(--line-1); gap: 12px; }
 
   /* lista principal */
   .hp-main-card { padding: 16px 12px 6px; gap: 16px; }

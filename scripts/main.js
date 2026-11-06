@@ -1,12 +1,7 @@
 // ======================================================
-// Main: renderizado de vista principal - costantes y utilidades
-// ======================================================
-
-// ======================================================
 // 1. Estado global y utilidades
 // ======================================================
 
-let profileStats = { demons: 0, moons: 0, diamonds: 0, stars: 0, userCoins: 0, coins: 0 };
 let viewPrefs = { sort: 'custom', dragLocked: false };
 let userLists = [];
 const DEFAULT_PROFILE = { username: 'Player 1', avatar: '', banner: '', bannerColor: '', country: '', playerType: '', gdId: '', gdName: '', gdRank: '', bio: '' };
@@ -116,7 +111,6 @@ const setPop = (el, open) => { if (el) el.classList.toggle('open', open); };
 
 let viewEnterTimer;
 
-// Reemplaza el contenido de <main>. animate = false para repintar sin animación de entrada
 function mountView(html, animate = true) {
   const main = $('main');
   destroySortable();
@@ -125,7 +119,7 @@ function mountView(html, animate = true) {
   clearTimeout(viewEnterTimer);
   main.classList.remove('view-enter');
   if (animate) {
-    void main.offsetWidth; // reinicia la animación
+    void main.offsetWidth;
     main.classList.add('view-enter');
     viewEnterTimer = setTimeout(() => main.classList.remove('view-enter'), 900);
   }
@@ -143,7 +137,7 @@ function navigate(search = '') {
 }
 
 function setPageTitle(sub) {
-  document.title = sub ? `${sub} | My Demon List` : t('meta.title');
+  document.title = sub ? `${sub} | My Demon List` : 'My Demon List';
 }
 
 // Estilo de banner
@@ -162,41 +156,11 @@ function warmUpAPI() {
   fetch(`${API_BASE}/api/health`, { cache: 'no-store' }).catch(() => {});
 }
 
-// -------------------------------------------------------------
-// Stats del perfil (ya no se muestran; solo se normalizan los datos guardados)
-// -------------------------------------------------------------
-
-const STAT_ITEMS = [
-  ['demon', 'demons', 'stats.demons'],
-  ['moon', 'moons', 'stats.moons'],
-  ['diamond', 'diamonds', 'stats.diamonds'],
-  ['star', 'stars', 'stats.stars'],
-  ['silvercoin', 'userCoins', 'stats.userCoins'],
-  ['coin', 'coins', 'stats.secretCoins']
-];
-
-const STAT_MAX = 999999999;
-
-// Deja cada stat como entero (también migra los datos guardados por versiones anteriores)
-function normalizeStats(src) {
-  const out = {};
-  STAT_ITEMS.forEach(([, field]) => {
-    out[field] = Math.min(STAT_MAX, Math.max(0, Math.floor(Number(src && src[field]) || 0)));
-  });
-  return out;
-}
-
-
 // ======================================================
 // 2. Vista principal
 // ======================================================
 
-const HOME_ICONS = {
-  pc: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
-  mobile: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>`
-};
-
-const listThumb = l => l.image || getYouTubeThumbnail(l.demons?.[0]?.showcase);
+const listThumb = l => l.image || getYouTubeThumbnail(l.demons?.[0]?.showcase, 'hqdefault');
 const getMainList = () => userLists.find(l => l.isMain) || null;
 
 function setMainList(listId) {
@@ -209,8 +173,8 @@ function setMainList(listId) {
 
 function profileBadges() {
   const out = [];
-  if (profileState.playerType === 'pc') out.push(`<span class="hp-badge">${HOME_ICONS.pc}${t('profile.typePc')}</span>`);
-  if (profileState.playerType === 'mobile') out.push(`<span class="hp-badge">${HOME_ICONS.mobile}${t('profile.typeMobile')}</span>`);
+  if (profileState.playerType === 'pc') out.push(`<span class="hp-badge">${svg.pc}${t('profile.typePc')}</span>`);
+  if (profileState.playerType === 'mobile') out.push(`<span class="hp-badge">${svg.mobile}${t('profile.typeMobile')}</span>`);
   if (profileState.country) out.push(`<span class="hp-badge">${svg.Pin}${escapeHTML(profileState.country)}</span>`);
   return out.join('');
 }
@@ -218,13 +182,13 @@ function profileBadges() {
 const RANK_TIERS = [
   [1, '#ffd54a'], [10, '#ffd54a'], [100, '#aeacab'],
   [500, '#e0925a'], [1000, '#38bdf8'], [10000, '#4ade80'], [100000, '#d97fca'],
-  [1000000, '#7c7c7c'],
+  [1000000, '#898b8b'],
 ];
 
 const rankLabel = max =>
   max <= 3 ? `#${max}` : 'Top ' + (max >= 1e6 ? max / 1e6 + 'M' : max >= 1e3 ? max / 1e3 + 'K' : max);
 
-// número exacto (datos viejos) -> tier donde cae; '' si no tiene o se pasa del último
+// datos viejos
 function normalizeGdRank(v) {
   const n = parseInt(v, 10) || 0;
   const tier = n ? RANK_TIERS.find(([max]) => n <= max) : null;
@@ -366,7 +330,7 @@ function renderMainCard(list) {
   return `
     <div class="hp-main-card ${img ? 'has-bg' : ''}" data-card-list="${list.id}">
       ${listMenu(list, true)}
-      ${img ? `<div class="hp-main-bg" style="background-image:url('${escapeHTML(img)}')"></div>` : ''}
+      ${img ? `<div class="hp-main-bg" style="background-image:url('${escapeHTML(hdImg || img)}'),url('${escapeHTML(img)}')"></div>` : ''}
       <div class="hp-main-top">
         <div class="hp-main-thumb ${img ? '' : 'empty'}">
           ${img
@@ -494,7 +458,7 @@ function renderListsCards() {
 
   const btn = $('btnReorder');
   if (btn) {
-    btn.disabled = others.length < 2;
+    btn.classList.toggle('blocked', others.length < 2);
     btn.classList.toggle('active', reorderMode);
   }
 
@@ -508,7 +472,6 @@ function renderListsCards() {
 
 const closeHomeMenus = () => document.querySelectorAll('.hp-menu-pop.open').forEach(p => p.classList.remove('open'));
 
-// El menú es fixed para que no lo recorte el scroll interno de "Otras listas"
 function toggleHomeMenu(btn) {
   const pop = btn.nextElementSibling;
   const willOpen = !pop.classList.contains('open');
@@ -589,11 +552,10 @@ function onHomeClick(e) {
   const view = e.target.closest('[data-view-list]');
   if (view) return navigate(`?list=${view.dataset.viewList}`);
 
-    // clic en cualquier parte de la carta
   const card = e.target.closest('[data-card-list]');
   if (card && !e.target.closest('.hp-menu')) {
-    if (document.querySelector('.hp-menu-pop.open')) return closeHomeMenus();  // un menú abierto: solo se cierra
-    if (String(window.getSelection())) return;                                  // no navegar si estaba seleccionando texto
+    if (document.querySelector('.hp-menu-pop.open')) return closeHomeMenus();
+    if (String(window.getSelection())) return;
     return navigate(`?list=${card.dataset.cardList}`);
   }
 
@@ -640,7 +602,11 @@ function renderMainPage(animate = true) {
   $('btnAddList').addEventListener('click', openAddListModal);
   $('home').addEventListener('click', onHomeClick);
   $('btnGdEdit').addEventListener('click', openEditGdModal);
-  $('btnReorder').addEventListener('click', () => { reorderMode = !reorderMode; renderListsCards(); });
+  $('btnReorder').addEventListener('click', () => {
+    if (userLists.filter(l => l !== getMainList()).length < 2) return showToast(t('lists.needTwo'));
+    reorderMode = !reorderMode;
+    renderListsCards();
+  });
 
   renderListsCards();
 }

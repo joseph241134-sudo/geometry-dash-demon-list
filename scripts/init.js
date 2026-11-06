@@ -1,5 +1,5 @@
 // ======================================================
-// Inicialización y ciclo de vida de la app
+// Inicialización y ciclo de vida
 // ======================================================
 function renderRoute() {
   if (document.body.classList.contains('legal')) {

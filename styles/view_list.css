@@ -211,7 +211,7 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, var(--shadow-1) 0%, rgba(0, 0, 0, 0) 100%);
-  box-shadow: 0 0 24px 10px var(--shadow-2);
+  box-shadow: 0 0 24px 2px var(--shadow-2);
 }
 
 .profile-avatar-wrapper {

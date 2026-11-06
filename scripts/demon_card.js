@@ -1,9 +1,4 @@
 // ======================================================
-// Piezas de la vista de lista: demon card, barra lateral y autocompletado
-// (el estado y las constantes viven en view_list.js)
-// ======================================================
-
-// ======================================================
 // 1. Demon card
 // ======================================================
 
@@ -24,7 +19,7 @@ function renderDemonCard(demon, position, index) {
       <div class="demon-thumb ${ytThumb ? 'has-yt' : 'default-thumb'}">
         ${ytThumb
           ? `<a href="${escapeHTML(showcaseUrl(demon.showcase))}" target="_blank" rel="noopener" title="${t('card.showcase')}">
-               <img src="${ytThumb}" alt="" loading="lazy" decoding="async">
+               <img src="${ytThumb}" alt="" ${index < 6 ? '' : 'loading="lazy"'} decoding="async">
              </a>`
           : `<img src="${diffIcon(demon.difficulty)}" alt="${escapeHTML(demon.difficulty)}">`}
       </div>
@@ -150,7 +145,7 @@ function renderListStats() {
   if (subtitle) subtitle.textContent = listSubtitleText();
 }
 
-// <span class="profile-list-id">${t('view.listId', { id: currentList.id })}</span> // agregar abajo de ${extra} id publicas
+// <span class="profile-list-id">${t('view.listId', { id: currentList.id })}</span> // agregar abajo de ${extra} id publicas - version 1.4
 // ======================================================
 // 3. Autocompletado del buscador
 // ======================================================

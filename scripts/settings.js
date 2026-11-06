@@ -54,14 +54,14 @@ async function deleteAllData() {
 
   resetData();
   localStorage.removeItem(STORAGE_KEY);
-  if (cloudUser && !await cloudPush()) return showAlert(t('acc.error'));   // borra listas + resetea perfil
+  if (cloudUser && !await cloudPush()) return showAlert(t('acc.error'));
   location.href = location.pathname;
 }
 
 async function exportAllData() {
   let snap = buildSnapshot();
   if (cloudUser) {
-    const remote = await cloudFetch();                                      // exporta lo que hay en la nube
+    const remote = await cloudFetch();
     if (!remote) return showAlert(t('acc.error'));
     snap = { ...(remote.profile || {}), userLists: remote.lists };
   }
@@ -87,7 +87,7 @@ function importAllData(file) {
       if (!cloudReady) return showAlert(t('acc.error'));
       applySnapshot(parsed);
       await cloudMigrateImages();
-      if (!await cloudPush()) return showAlert(t('acc.error'));            // sube perfil/listas y borra las que no estén
+      if (!await cloudPush()) return showAlert(t('acc.error'));
       saveLocal();
     } else {
       try { localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed)); }

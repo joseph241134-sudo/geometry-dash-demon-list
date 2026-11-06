@@ -59,7 +59,6 @@ function migrateData(parsed) {
 function buildSnapshot() {
   return {
     version: STORAGE_VERSION,
-    profileStats,
     profileState,
     userLists,
     viewPrefs,
@@ -68,7 +67,6 @@ function buildSnapshot() {
 }
 
 function applySnapshot(data) {
-  profileStats = normalizeStats({ ...(data.gdProfileData || {}), ...(data.profileStats || {}) });
   profileState = { ...profileState, ...(data.profileState || {}) };
   profileState.playerType = ['pc', 'mobile'].includes(profileState.playerType) ? profileState.playerType : '';
   profileState.gdId = String(profileState.gdId || '').replace(/\D/g, '').slice(0, 12);
@@ -133,7 +131,6 @@ function saveLocal() {
 }
 
 function resetData() {
-  profileStats = normalizeStats({});
   profileState = { ...DEFAULT_PROFILE };
   userLists = [];
   viewPrefs = { sort: 'custom', dragLocked: false };
@@ -151,7 +148,7 @@ const blobToDataURL = blob => new Promise(resolve => {
   r.readAsDataURL(blob);
 });
 
-// Reduce la imagen y devuelve un Blob (o el mismo archivo si ya es liviano)
+// Reduce la imagen y devuelve un Blob
 function resizeImage(file, opts = 1280) {
   const { maxSize = 1280, quality = 0.86 } = typeof opts === 'number' ? { maxSize: opts } : opts;
 
@@ -173,7 +170,9 @@ function resizeImage(file, opts = 1280) {
       const c = document.createElement('canvas');
       c.width = Math.max(1, Math.round(w * scale));
       c.height = Math.max(1, Math.round(h * scale));
-      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      const ctx = c.getContext('2d');
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(img, 0, 0, c.width, c.height);
       c.toBlob(b => resolve(b || file), file.type === 'image/png' ? 'image/webp' : 'image/jpeg', quality);
     };
 

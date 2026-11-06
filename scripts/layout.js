@@ -33,7 +33,7 @@ function renderHeader() {
         </button>
         <div id="langPop" class="pop pop-menu">
           ${LANGS.map(l => `
-          <button type="button" class="pop-item ${l.id === currentLang() ? 'active' : ''}" data-lang="${l.id}">${l.name}</button>
+          <button type="button" class="pop-item ${l.id === currentLang() ? 'active' : ''}" data-lang="${l.id}">${svg['Flag_' + l.id] || ''}<span>${l.name}</span></button>
            `).join('')}
         </div>
       </div>
@@ -96,7 +96,7 @@ function renderFooter() {
 
       <div class="footer-bottom">
         <div class="footer-info-row">
-          <span class="footer-copy">© 2026 <a href="./" class="footer-site-link">My Demon List</a> <span data-i18n="footer.copy"></span> <span class="footer-devs">Gabriel</span></span>
+          <span class="footer-copy">© 2026 <a href="./" class="footer-site-link">My Demon List</a> <span data-i18n="footer.copy"></span> <span class="footer-devs">TheGamerlod</span></span>
         </div>
 
         <nav class="footer-links">

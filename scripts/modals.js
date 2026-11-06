@@ -1,5 +1,5 @@
 // ======================================================
-// 1. Sistema base de modales
+// 1. Base de modales
 // ======================================================
 
 function topModal() {
@@ -353,7 +353,7 @@ function openEditProfileModal() {
 
   // ---- archivos ----->
   bindFileInput('fileAvatar', 512, data => { avatar = data; sync(); });
-  bindFileInput('fileBanner', { maxSize: 1600, quality: 0.85 }, data => { banner = data; sync(); });
+  bindFileInput('fileBanner', { maxSize: 1600, quality: 0.86 }, data => { banner = data; sync(); });
 
   // ---- banner ----->
   $('btnBannerEdit').addEventListener('click', () => setPop($('bannerPop'), !$('bannerPop').classList.contains('open')));
@@ -373,7 +373,10 @@ function openEditProfileModal() {
   });
 
   // ---- avatar ----->
-  $('btnAvatarEdit').addEventListener('click', () => setPop($('avatarPop'), !$('avatarPop').classList.contains('open')));
+  $('btnAvatarEdit').addEventListener('click', (e) => {
+    if (e.target.closest('#avatarPop')) return;
+    setPop($('avatarPop'), !$('avatarPop').classList.contains('open'));
+  });
 
   $('avatarPop').addEventListener('click', (e) => {
     const item = e.target.closest('[data-act]');
@@ -512,7 +515,7 @@ function showInfoModal(title, text) {
   ov.querySelector('[data-ok]').addEventListener('click', () => closeModal(ov));
 }
 
-// Cuenta de sincronización: inicio de sesión con Google (Supabase)
+// Cuenta de sincronización: inicio de sesión con Google
 async function cloudSignInGoogle() {
   try { localStorage.setItem(LOGIN_FLAG, String(Date.now())); } catch (e) {}
   const { error } = await cloud.auth.signInWithOAuth({
@@ -600,10 +603,15 @@ function openListModal(listId = null, asMain = false) {
 
   // ---- imagen ----->
   const syncImage = () => {
-    const yt = !image && list ? getYouTubeThumbnail(list.demons?.[0]?.showcase) : '';
+    const yt = !image && list ? getYouTubeThumbnail(list.demons?.[0]?.showcase, 'maxresdefault') : '';
     const shown = image || yt;
     $('listImgBox').classList.toggle('has-img', !!shown);
-    if (shown) $('listImgPreview').src = shown; else $('listImgPreview').removeAttribute('src');
+    const img = $('listImgPreview');
+      img.onerror = null;
+      if (shown) {
+        if (yt) img.onerror = () => { img.onerror = null; img.src = yt.replace('maxresdefault', 'mqdefault'); };
+        img.src = shown;
+      } else img.removeAttribute('src');
     $('listImgBoxSrc').innerHTML = image ? svg.Image : (yt ? svg.Yt : '');
     $('listImgBoxRemove').disabled = !image;
   };
