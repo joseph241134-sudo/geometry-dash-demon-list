@@ -1,13 +1,13 @@
 const Form_URL = 'https://forms.gle/qRjqUCUfHmjcK4gx5';
 
-// navegacion - privacy.terms
+// navegacion: privacy - terms
 function goTo(search = '') {
   if (document.body.classList.contains('legal')) location.href = './' + search;
   else navigate(search);
 }
 
 // ======================================================
-// 1. Header
+// 1. Renderizado - header
 // ======================================================
 
 function renderHeader() {
@@ -65,7 +65,7 @@ function renderHeader() {
 }
 
 // ======================================================
-// 2. Footer
+// 2. Renderizado - footer
 // ======================================================
 
 function renderFooter() {

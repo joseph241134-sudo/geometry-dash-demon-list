@@ -54,13 +54,11 @@ function showToast(msg) {
   toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
 }
 
-// -------------------- color modal --------------------------------------
-// Devuelve el color si es un #hex válido, si no ''
+// -------------------- color modal -------------------------------------->
 function safeColor(value) {
   return /^#[0-9a-f]{6}$/i.test(value || '') ? value : '';
 }
 
-// Lee una variable CSS del tema actual como #rrggbb (para <input type="color">)
 function cssHex(varName, fallback = '#000000') {
   const v = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
   if (/^#[0-9a-f]{6}$/i.test(v)) return v;
@@ -80,7 +78,7 @@ function downloadJSON(filename, data) {
   URL.revokeObjectURL(url);
 }
 
-// Filtra y ordena por relevancia: 0 exacto · 1 empieza por · 2 empieza una palabra · 3 contiene
+// Filtra por relevancia: 0 exacto · 1 empieza por · 2 empieza una palabra · 3 contiene
 function rankMatches(items, query, getName, limit = 10) {
   const q = normalizeText(query);
   if (!q) return [];
@@ -125,13 +123,15 @@ function mountView(html, animate = true) {
   }
 }
 
-// navigate('') = inicio · navigate('?list=3') · navigate('?settings=1')
+let renderedSearch = null;
+
 function navigate(search = '') {
-  if ((location.search || '') === search) {
+  const sameUrl = (location.search || '') === search;
+  if (sameUrl && renderedSearch === search) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     return;
   }
-  history.pushState(null, '', location.pathname + search);
+  if (!sameUrl) history.pushState(null, '', location.pathname + search);
   renderRoute();
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
@@ -147,7 +147,7 @@ function bannerStyle() {
 }
 
 // -------------------------------------------------------------
-// API · Backend (Render): autocompletado de niveles (/api/levels) y warm-up
+// API · Backend (Render): autocompletado de niveles y warm-up
 // -------------------------------------------------------------
 
 const API_BASE = 'https://mdl-backend-tvpk.onrender.com';
@@ -180,9 +180,7 @@ function profileBadges() {
 }
 
 const RANK_TIERS = [
-  [1, '#ffd54a'], [10, '#ffd54a'], [100, '#aeacab'],
-  [500, '#e0925a'], [1000, '#38bdf8'], [10000, '#4ade80'], [100000, '#d97fca'],
-  [1000000, '#898b8b'],
+  [1, '#ffd54a'], [10, '#ffd54a'], [100, '#aeacab'], [500, '#e0925a'], [1000, '#38bdf8'], [10000, '#4ade80'], [100000, '#d97fca'], [1000000, '#898b8b'],
 ];
 
 const rankLabel = max =>
@@ -555,7 +553,8 @@ function onHomeClick(e) {
   const card = e.target.closest('[data-card-list]');
   if (card && !e.target.closest('.hp-menu')) {
     if (document.querySelector('.hp-menu-pop.open')) return closeHomeMenus();
-    if (String(window.getSelection())) return;
+    const sel = window.getSelection();
+    if (String(sel) && card.contains(sel.anchorNode)) return;
     return navigate(`?list=${card.dataset.cardList}`);
   }
 

@@ -10,9 +10,9 @@ function enterApp() {
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
-// ------------------------------------------------------
-// Renderizado de vista de bienvenida
-// ------------------------------------------------------
+// ======================================================
+// 1. Renderizado de vista
+// ======================================================
 
 function renderWelcome() {
   setPageTitle();

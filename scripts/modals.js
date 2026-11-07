@@ -8,13 +8,19 @@ function topModal() {
 }
 
 let skipPops = 0;
+const pendingModalPush = [];
+function flushModalPush() { while (pendingModalPush.length) pendingModalPush.shift()(); }
 function openModal({ title = '', titleExtra = '', body = '', actions = '', cls = '', dismissible = true, onClose = null }) {
   const overlay = document.createElement('div');
   overlay.className = 'modal-overlay';
   overlay.dataset.dismissible = dismissible ? '1' : '';
   overlay._onClose = onClose;
-  overlay._hasHistory = true;
-  history.pushState({ modal: true }, '');
+  overlay._hasHistory = false;
+  const push = () => { history.pushState({ modal: true }, ''); overlay._hasHistory = true; };
+  if (skipPops > 0) {
+    pendingModalPush.push(() => { if (!overlay.classList.contains('closing')) push(); });
+    setTimeout(flushModalPush, 500);
+  } else push();
   overlay.innerHTML = `
     <div class="modal-card ${cls}" role="dialog" aria-modal="true">
       ${title ? `<h2 class="modal-title"><span>${title}</span>${titleExtra}</h2>` : ''}

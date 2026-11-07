@@ -1,11 +1,13 @@
-// ======================================================
-// Inicialización y ciclo de vida
-// ======================================================
+// ------------------------------------------------------
+// Inicio y ciclo de vida
+// ------------------------------------------------------
+
 function renderRoute() {
   if (document.body.classList.contains('legal')) {
     if (typeof applyLegalLanguage === 'function') applyLegalLanguage();
     return;
   }
+  renderedSearch = location.search || '';
 
   const params = new URLSearchParams(location.search);
   const listId = params.get('list');
@@ -40,7 +42,7 @@ function initScrollTop() {
 
 function initGlobalListeners() {
   window.addEventListener('popstate', () => {
-    if (skipPops > 0) { skipPops--; return; }
+    if (skipPops > 0) { skipPops--; if (!skipPops) flushModalPush(); return; }
     const modal = topModal();
     if (modal) {
       if (modal.dataset.dismissible) closeModal(modal, true);

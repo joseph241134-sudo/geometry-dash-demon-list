@@ -12,9 +12,9 @@ const STORAGE_KEY = 'mdl_app_data';
 const STORAGE_VERSION = 2;
 const DEFAULT_LIST_TITLE = 'My Demon List';
 
-// ------------------------------------------------------
-// Normalización
-// ------------------------------------------------------
+// ======================================================
+// 1. Normalizacion
+// ======================================================
 
 const safeImg = u => /^(https:\/\/[^\s'"()\\]+|data:image\/(png|jpe?g|webp|gif|svg\+xml);base64,[A-Za-z0-9+\/=]+)$/i.test(u || '') ? u : '';
 
@@ -47,14 +47,14 @@ function normalizeList(list) {
   };
 }
 
-// Pasos de migracion
+// Pasos de migracion -- proceso min 15 u
 function migrateData(parsed) {
   return parsed;
 }
 
-// ------------------------------------------------------
-// Snapshot: guardado - restaurado
-// ------------------------------------------------------
+// ======================================================
+// 2. Snapshot - guardado y restaurado
+// ======================================================
 
 function buildSnapshot() {
   return {
@@ -89,10 +89,7 @@ function applySnapshot(data) {
   profileState.banner = safeImg(profileState.banner);
 }
 
-// ------------------------------------------------------
-// Cargar / Guardar
-// ------------------------------------------------------
-
+// -------------- cargar - guardar --------------->
 function loadData() {
   let parsed = null;
   try {
@@ -137,9 +134,9 @@ function resetData() {
   appSettings = { ...DEFAULT_APP_SETTINGS };
 }
 
-// ------------------------------------------------------
-// Imágenes
-// ------------------------------------------------------
+// ======================================================
+// 3. Imagenes
+// ======================================================
 
 const blobToDataURL = blob => new Promise(resolve => {
   const r = new FileReader();
@@ -184,7 +181,7 @@ function resizeImage(file, opts = 1280) {
 async function readImageFile(file, opts) {
   const blob = await resizeImage(file, opts);
   if (!blob) return null;
-  if (!cloudUser || !cloudReady) return blobToDataURL(blob);   // sin sesión: base64 como antes
+  if (!cloudUser || !cloudReady) return blobToDataURL(blob); // sin sesión (base64)
   const url = await cloudStoreImage(blob);
   if (!url) { showAlert(t('acc.error')); return null; }
   return url;

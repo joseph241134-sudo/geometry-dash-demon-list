@@ -1,8 +1,4 @@
-// ======================================================
-// Ajustes: temas, fondo, idioma y datos locales -- es basico
-// ======================================================
-
-const THEMES = ['blue', 'pizarra', 'gris', 'purple', 'dark', 'atardecer', 'neon', 'rosa-dark', 'bosque','halloween'];
+const THEMES = ['blue', 'pizarra', 'gris', 'purple', 'dark', 'atardecer', 'neon', 'rosa-dark', 'bosque', 'halloween'];
 
 const DEFAULT_APP_SETTINGS = {
   theme: 'blue',
@@ -12,15 +8,14 @@ const DEFAULT_APP_SETTINGS = {
 
 let appSettings = { ...DEFAULT_APP_SETTINGS };
 
-// ------------------------------------------------------
-// Apariencia: tema, color e imagen de fondo
-// ------------------------------------------------------
+// ======================================================
+// 1. Configuraciones y preferencias
+// ======================================================
 
 function applyAppearance(fade = false) {
   const root = document.documentElement;
   const theme = THEMES.includes(appSettings.theme) ? appSettings.theme : DEFAULT_APP_SETTINGS.theme;
 
-  // transición suave de colores solo al cambiar de tema
   if (fade) {
     root.classList.add('theme-fade');
     setTimeout(() => root.classList.remove('theme-fade'), 450);
@@ -29,10 +24,7 @@ function applyAppearance(fade = false) {
   root.setAttribute('data-theme', theme);
 }
 
-// ------------------------------------------------------
-// Idioma
-// ------------------------------------------------------
-
+// ------------- Idioma ------------->
 function setLanguage(lang) {
   if (!I18N[lang] || lang === appSettings.lang) return;
   appSettings.lang = lang;
@@ -42,9 +34,9 @@ function setLanguage(lang) {
   renderRoute();
 }
 
-// ------------------------------------------------------
-// Datos locales: todo vive en localStorage
-// ------------------------------------------------------
+// ======================================================
+// 2. Datos locales
+// ======================================================
 
 async function deleteAllData() {
   if (cloudUser && !cloudReady) return showAlert(t('acc.error'));
@@ -98,9 +90,9 @@ function importAllData(file) {
   reader.readAsText(file);
 }
 
-// ------------------------------------------------------
-// Vista de ajustes
-// ------------------------------------------------------
+// ======================================================
+// 3. Renderizado de vista
+// ======================================================
 
 function openSettingsView() {
   setPageTitle(t('settings.title'));
@@ -166,7 +158,7 @@ function openSettingsView() {
     refreshThemeCards();
   });
 
-  // ---- Difuminado ----->
+  // ---- Degradado ----->
   [['optBgList', 'bgList']].forEach(([id, key]) => {
     const el = $(id);
     el.checked = appSettings[key] !== false;

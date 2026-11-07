@@ -49,6 +49,7 @@ function renderDemons() {
 
   updateLockButton();
   const demons = getVisibleDemons();
+  updateFilterBar(demons.length);
 
   if (demons.length === 0) {
     const hasAny = currentList.demons.length > 0;
@@ -147,14 +148,22 @@ function renderListStats() {
 
 // <span class="profile-list-id">${t('view.listId', { id: currentList.id })}</span> // agregar abajo de ${extra} id publicas - version 1.4
 // ======================================================
-// 3. Autocompletado del buscador
+// 3. Autocompletado local
 // ======================================================
+
+function searchMatches(query, limit = 8) {
+  if (!query) return [];
+  const pos = /^#?(\d+)$/.exec(query);
+  const byPos = pos ? currentList.demons[Number(pos[1]) - 1] : null;
+  const byName = rankMatches(currentList.demons, query, d => d.name, limit);
+  return byPos ? [byPos, ...byName.filter(d => d !== byPos)].slice(0, limit) : byName;
+}
 
 function renderLocalAutocomplete(query) {
   const dropdown = $('searchAutocomplete');
   if (!dropdown) return;
 
-  const matches = query ? rankMatches(currentList.demons, query, d => d.name, 5) : [];
+  const matches = searchMatches(query);
   if (matches.length === 0) return setPop(dropdown, false);
 
   dropdown.innerHTML = matches.map((m, i) => `
@@ -170,11 +179,8 @@ function renderLocalAutocomplete(query) {
 
   dropdown.querySelectorAll('.autocomplete-item').forEach(el => {
     el.addEventListener('click', () => {
-      const input = $('searchDemon');
-      input.value = matches[Number(el.dataset.index)].name;
-      listFilters.search = input.value.trim();
       setPop(dropdown, false);
-      renderDemons();
+      jumpToDemon(matches[Number(el.dataset.index)].id);
     });
   });
 }

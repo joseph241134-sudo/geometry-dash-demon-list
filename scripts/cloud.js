@@ -162,7 +162,7 @@ async function cloudStart() {
       cloudAwaitingUser = true;
       const replace = await cloudConfirmOverwrite();
       cloudAwaitingUser = false;
-      if (!replace) { await cloudSignOut(true); return null; }   // conserva los datos locales
+      if (!replace) { await cloudSignOut(true); return null; } // conserva los datos locales
     }
   }
 

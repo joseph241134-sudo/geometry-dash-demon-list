@@ -6,7 +6,7 @@ let currentList = null;
 let isDragLocked = false;
 let sortableInstance = null;
 
-let listFilters = { sort: 'custom', difficulty: 'all', favorite: false, search: '' };
+let listFilters = { sort: 'custom', difficulty: 'all', favorite: false };
 
 const DIFFICULTY = {
   'Easy Demon':    { icon: 'resources/easy_128.webp',    color: '#9651cb' },
@@ -19,12 +19,6 @@ const DIFFICULTIES = Object.keys(DIFFICULTY);
 const diffIcon = d => (DIFFICULTY[d] || DIFFICULTY['Easy Demon']).icon;
 const diffColorStyle = d => `--diff-color:${DIFFICULTY[d] ? DIFFICULTY[d].color : 'var(--mute)'}`;
 
-// falta colocar imagenes -->
-const THUMB_ICON = {
-  yt:   'resources/demon.png',
-  face: 'resources/demon.png'
-};
-
 const SORT_MODES = ['custom', 'custom_rev', 'recent', 'oldest', 'attempts_desc', 'attempts_asc'];
 
 // ======================================================
@@ -34,7 +28,7 @@ const SORT_MODES = ['custom', 'custom_rev', 'recent', 'oldest', 'attempts_desc',
 // 2.1. Utilidades
 // ------------------------------------------------------
 
-const hasActiveFilters = () => !!(listFilters.search || listFilters.difficulty !== 'all' || listFilters.favorite);
+const hasActiveFilters = () => listFilters.difficulty !== 'all' || listFilters.favorite;
 
 const youTubeId = s => {
   s = String(s || '').trim();
@@ -63,13 +57,67 @@ function syncFilterUI() {
   fav.querySelector('img').src = listFilters.favorite ? FAV_ICON.on : FAV_ICON.off;
 }
 
-// Botón alternante: miniatura / icon demon
+// Botón alternante: iconos demon
 function updateThumbButton() {
-  const btn = $('btnToggleThumb');
-  if (!btn) return;
-  const faces = !!viewPrefs.showFaces;
-  btn.classList.toggle('active', faces);
-  btn.querySelector('img').src = faces ? THUMB_ICON.face : THUMB_ICON.yt;
+  $('btnToggleThumb')?.classList.toggle('active', !!viewPrefs.showFaces);
+}
+
+// Vista compacta:
+function updateCompactButton() {
+  $('btnToggleCompact')?.classList.toggle('active', !!viewPrefs.compact);
+  $('demonsContainer')?.classList.toggle('compact', !!viewPrefs.compact);
+}
+
+function clearFilters() {
+  listFilters.difficulty = viewPrefs.difficulty = 'all';
+  listFilters.favorite = viewPrefs.favorite = false;
+  syncFilterUI();
+  saveData();
+  renderDemons();
+}
+
+// Indicador de filtrado
+function updateFilterBar(shown) {
+  const active = hasActiveFilters();
+  $('btnOpenFilter')?.classList.toggle('has-active', active);
+  const bar = $('filterBar');
+  if (!bar) return;
+  bar.classList.toggle('show', active);
+  if (active) $('filterCount').textContent = t('view.count', { shown, total: currentList.demons.length });
+}
+
+// Ejecuta cb cuando el scroll se detiene (con tope de 3 s)
+function afterScroll(cb) {
+  const t0 = performance.now();
+  let last = -1, still = 0;
+  const check = () => {
+    const y = window.scrollY;
+    still = y === last ? still + 1 : 0;
+    last = y;
+    if (still >= 6 || performance.now() - t0 > 3000) return cb();
+    requestAnimationFrame(check);
+  };
+  requestAnimationFrame(check);
+}
+
+// Salto a carta
+function jumpToDemon(id) {
+  const find = () => document.querySelector(`.demon-card[data-id="${CSS.escape(String(id))}"]`);
+  let card = find();
+  if (!card && hasActiveFilters()) { clearFilters(); card = find(); }
+  if (!card) return;
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  clearTimeout(card._flashTimer);
+  card.classList.add('flashing');
+  void card.offsetWidth;
+  card.classList.add('on');
+  afterScroll(() => {
+    card._flashTimer = setTimeout(() => {
+      card.classList.remove('on');
+      card._flashTimer = setTimeout(() => card.classList.remove('flashing'), 800);
+    }, 500);
+  });
 }
 
 function setSortMode(mode) {
@@ -80,7 +128,7 @@ function setSortMode(mode) {
   saveData();
 }
 
-// Candado de arrastre: activo (cerrado)
+// Candado de arrastre: activo - cerrado
 function updateLockButton() {
   const btn = $('btnToggleLockDrag');
   if (!btn) return;
@@ -146,10 +194,6 @@ function getVisibleDemons() {
     originalPosition: index + 1
   }));
 
-  if (listFilters.search) {
-    const q = normalizeText(listFilters.search);
-    demons = demons.filter(d => normalizeText(d.name).includes(q));
-  }
   if (listFilters.difficulty !== 'all') demons = demons.filter(d => d.difficulty === listFilters.difficulty);
   if (listFilters.favorite) demons = demons.filter(d => d.isFavorite);
 
@@ -344,7 +388,7 @@ function openRandomDemonModal() {
       last = (pool.length ? pool : others)[Math.floor(Math.random() * (pool.length || others.length))];
       seq.push(last);
     }
-    seq.push(final);                    // índice n
+    seq.push(final); // índice n
     seq.push(others[Math.floor(Math.random() * others.length)]); // fila de relleno debajo
 
     nameEl.innerHTML = `<div class="dice-strip">${seq.map(d => `<span class="dice-row">${escapeHTML(d.name)}</span>`).join('')}</div>`;
@@ -404,37 +448,6 @@ function playSfx(layers) {
   } catch (e) {}
 }
 const tickSound = () => playSfx(SFX.tick);
-
-// ---- lista compacta ----->
-function openCompactListModal() {
-  const demons = currentList.demons;
-
-  const header = `<li class="compact-header">
-    <span class="compact-pos" style="visibility: hidden;"></span>
-    <span class="compact-header-name">${t('common.name')}</span>
-    <span class="compact-header-creator">${t('common.creator')}</span>
-    <span class="compact-header-diff">${t('common.difficulty')}</span>
-  </li>`;
-
-  const rows = demons.map((d, i) => `
-    <li class="compact-row" style="${diffColorStyle(d.difficulty)}">
-      <span class="compact-pos">${i + 1})</span>
-      <span class="compact-name">${escapeHTML(d.name)}</span>
-      <span class="compact-creator">${escapeHTML(d.creator || '-')}</span>
-      <span class="compact-diff">${escapeHTML(String(d.difficulty).replace(' Demon', ''))}</span>
-    </li>`).join('');
-
-  const ov = openModal({
-    title: `${escapeHTML(currentList.title)}<span class="compact-list-subtitle">${t('compact.title')}</span>`,
-    titleExtra: `<small class="compact-count">${demons.length}</small>`,
-    cls: 'modal-compact',
-    body: demons.length
-      ? `${header}<ul class="compact-list">${rows}</ul>`
-      : `<p class="dialog-text">${t('view.empty')}</p>`,
-    actions: `<button type="button" class="btn-secondary" data-close>${t('common.close')}</button>`
-  });
-  ov.querySelector('[data-close]').addEventListener('click', () => closeModal(ov));
-}
 
 // ---- exportar lista como imagen ----->
 const loadImg = src => new Promise(r => {
@@ -631,8 +644,9 @@ async function exportListImage(from, to, withProfile = true) {
     URL.revokeObjectURL(url);
   });
 }
+
 // ======================================================
-// 3. Renderizaado de vista (lista)
+// 3. Renderizado de vista
 // ======================================================
 
 function openListView(listId) {
@@ -647,8 +661,7 @@ function openListView(listId) {
   listFilters = {
     sort: SORT_MODES.includes(viewPrefs.sort) ? viewPrefs.sort : 'custom',
     difficulty: DIFFICULTIES.includes(viewPrefs.difficulty) ? viewPrefs.difficulty : 'all',
-    favorite: viewPrefs.favorite === true,
-    search: ''
+    favorite: viewPrefs.favorite === true
   };
 
   mountView(`
@@ -675,8 +688,9 @@ function openListView(listId) {
         </div>
       </div>
 
-      <div class="list-view-controls panel">
+            <div class="list-view-controls panel">
         <button type="button" id="btnRandomDemon" class="button-square" style="padding-bottom: 1px" title="${t('dice.title')}">${svg.Dice}</button>
+
         <div class="filter-popup-wrapper" data-pop-root>
           <button type="button" id="btnOpenFilter" class="btn-filter-toggle button-square" title="${t('view.filters')}">${svg.Filter}</button>
 
@@ -707,10 +721,6 @@ function openListView(listId) {
           <div id="searchAutocomplete" class="pop autocomplete-dropdown"></div>
         </div>
 
-        <button type="button" id="btnToggleLockDrag" class="button-square toggle" title="${t('view.lock')}"><img alt=""></button>
-        
-        <button type="button" id="btnToggleThumb" class="button-square toggle" style="margin-left: auto" title="${t('view.thumbYt')}"><img alt=""></button>
-
         <div class="sort-wrap" data-pop-root>
           <button type="button" id="btnSort" class="form-input select-btn" title="${t('view.sort')}" aria-haspopup="listbox"><span id="sortLabel"></span>${svg.MiniWave}</button>
           <div id="sortMenu" class="pop pop-menu">
@@ -718,8 +728,17 @@ function openListView(listId) {
           </div>
         </div>
 
-        <button type="button" id="btnCompactList" class="button-square" title="${t('compact.title')}">${svg.Grid}</button>
+        <button type="button" id="btnToggleLockDrag" class="button-square toggle" title="${t('view.lock')}"><img alt=""></button>
 
+        <div class="view-toggle">
+          <button type="button" id="btnToggleCompact" title="${t('view.compact')}">${svg.Compact}</button>
+          <button type="button" id="btnToggleThumb" title="${t('view.thumbYt')}"><img src="resources/demon.png" alt=""></button>
+        </div>
+      </div>
+
+      <div class="filter-bar" id="filterBar">
+        <span class="filter-bar-count" id="filterCount"></span>
+        <button type="button" id="btnClearFilters" class="filter-bar-clear">${svg.Close}<span>${t('view.clearFilters')}</span></button>
       </div>
 
       <div class="list-view-body">
@@ -788,11 +807,16 @@ function openListView(listId) {
   });
 
   // ---- buscador local ----->
-  const refreshSearch = debounce(renderDemons, 90);
-  $('searchDemon').addEventListener('input', (e) => {
-    listFilters.search = e.target.value.trim();
-    refreshSearch();
-    renderLocalAutocomplete(listFilters.search);
+  const searchInput = $('searchDemon');
+  const showSearch = () => renderLocalAutocomplete(searchInput.value.trim());
+  searchInput.addEventListener('input', showSearch);
+  searchInput.addEventListener('focus', showSearch);
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+    const first = searchMatches(searchInput.value.trim())[0];
+    if (!first) return;
+    setPop($('searchAutocomplete'), false);
+    jumpToDemon(first.id);
   });
 
   // ---- candado de arrastre ----->
@@ -812,9 +836,17 @@ function openListView(listId) {
     updateThumbButton();
     renderDemons();
   });
+
   updateThumbButton();
 
-  $('btnCompactList').addEventListener('click', openCompactListModal);
+  $('btnToggleCompact').addEventListener('click', () => {
+    viewPrefs.compact = !viewPrefs.compact;
+    saveData();
+    updateCompactButton();
+  });
+  updateCompactButton();
+  $('btnClearFilters').addEventListener('click', clearFilters);
+
   // ---- orden ----->
   $('btnSort').addEventListener('click', () => setPop($('sortMenu'), !$('sortMenu').classList.contains('open')));
   $('sortMenu').addEventListener('click', (e) => {

@@ -1,5 +1,5 @@
 // ------------------------------------------------------
-// constante de idiomas (en / es / fr..)
+// constante de idiomas (en / es / fr.. proceso)
 // ------------------------------------------------------
 
 const LANGS = [
@@ -9,7 +9,6 @@ const LANGS = [
 
 const I18N = {
   en: {
-  //generales ->
     'common.ok': 'OK', 'common.cancel': 'Cancel', 'common.save': 'Save', 'common.delete': 'Delete', 
     'common.noPhoto': 'No image',
     'dlg.alert': 'Notice', 'dlg.confirm': 'Confirm', 'o': 'or',
@@ -121,12 +120,13 @@ const I18N = {
 
     'view.search': 'Search level...', 'view.lock': 'Lock/unlock dragging', 'view.thumbYt': 'Show demon icons', 'view.sort': 'Sort by',
 
-    'sort.custom_rev': 'Reversed order', 'sort.custom': 'Custom order', 'sort.attempts_desc': 'Most attempts', 
+    'view.search': 'Level or #position...', 'sort.custom': 'Custom order', 'sort.custom_rev': 'Reversed order', 'sort.attempts_desc': 'Most attempts', 
     'sort.attempts_asc': 'Fewest attempts', 'sort.recent': 'Newest date', 'sort.oldest': 'Oldest date',
 
     'view.addDemon': '+ Demon', 'view.noMatch': 'No demon matches the filters', 'view.noMatchText': 'Change the search or the filters to see more results.',
     'view.empty': 'This list has no demons yet', 'view.emptyText': 'Press to add your first demon.',
-  
+    
+    'view.compact': 'Compact view', 'view.count': 'Showing {shown} of {total} demons', 'view.clearFilters': 'Clear filters',
   //card-demon ->
     'card.publishedBy': 'published by {name}', 'card.by': 'by {name}', 'card.attempts': 'Attempts:', 'card.date': 'Date:',
     'card.edit': 'Edit demon', 'card.addBelow': 'Add demon below', 'card.showcase': 'Watch showcase',
@@ -168,7 +168,6 @@ const I18N = {
   },
 
   es: {
-  //generales ->
     'common.ok': 'Aceptar', 'common.cancel': 'Cancelar', 'common.save': 'Guardar', 'common.delete': 'Eliminar', 
     'common.noPhoto': 'Sin imagen',
     'dlg.alert': 'Aviso', 'dlg.confirm': 'Confirmar', 'o': 'o',
@@ -282,22 +281,20 @@ const I18N = {
 
     'view.search': 'Buscar nivel...', 'view.lock': 'Bloquear/desbloquear arrastre', 'view.thumbYt': 'Mostrar iconos Demon', 'view.sort': 'Ordenar por',
 
-    'sort.custom_rev': 'Orden invertido', 'sort.custom': 'Orden personalizado', 'sort.attempts_desc': 'Más intentos', 
+    'view.search': 'Nivel o #posición...', 'sort.custom': 'Orden personalizado', 'sort.custom_rev': 'Orden invertido', 'sort.attempts_desc': 'Más intentos', 
     'sort.attempts_asc': 'Menos intentos', 'sort.recent': 'Fecha más reciente', 'sort.oldest': 'Fecha más antigua',
 
     'view.addDemon': '+ Demon', 'view.noMatch': 'Ningún demon coincide con los filtros', 'view.noMatchText': 'Cambia la búsqueda o filtros para ver más resultados.',
     'view.empty': 'Esta lista aún no tiene demons', 'view.emptyText': 'Pulsa para añadir tu primer demon.',
-  
+    
+    'view.compact': 'Vista compacta', 'view.count': 'Mostrando {shown} de {total} demons', 'view.clearFilters': 'Limpiar filtros',
   //card-demon ->
     'card.publishedBy': 'publicado por {name}', 'card.by': 'por {name}', 'card.attempts': 'Intentos:', 'card.date': 'Fecha:',
     'card.edit': 'Editar demon', 'card.addBelow': 'Agregar demon debajo', 'card.showcase': 'Ver showcase',
-
-    'common.name': 'Nombre', 'common.creator': 'Creador', 'common.difficulty': 'Dificultad',
   
   //demon-aleatorio ->
     'dice.title': 'Demon aleatorio',
     'dice.again': 'Volver a tirar', 'dice.empty': 'Primero agrega demons a tu lista.', 'dice.copy': 'copiar ID', 'dice.copied': '¡Copiado!',
-    'compact.title': 'Resumen',
     
     'common.close': 'Cerrar', 'hint.addDemon': 'Para agregar un nivel pasa el mouse sobre una carta demon y pulsa (+).',
     'view.lockBlocked': 'Quita los filtros o el modo de orden para desbloquear el arrastre.',
@@ -328,7 +325,7 @@ const I18N = {
     'storage.full': 'No se pudieron guardar los cambios: el almacenamiento del navegador está lleno. Prueba con imágenes más ligeras.'
   },
 
-// -- futuro
+// -- proceso
   fr: {
     'meta.title': 'My Demon List | Geometry Dash',
     'meta.desc': 'Créez et organisez vos listes personnelles de demons Geometry Dash : tier, essais, date de victoire, favoris et vos statistiques.',
@@ -512,17 +509,17 @@ function applyLanguage() {
 
   const topBtn = document.getElementById('btnScrollTop');
   if (topBtn) topBtn.title = t('view.top');
-  
+
   document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
   document.querySelectorAll('[data-i18n-title]').forEach(el => { el.title = t(el.dataset.i18nTitle); });
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder); });
 
-  applyLegalLanguage();   // no-op fuera de privacy.html / terms.html
+  applyLegalLanguage(); // no-op fuera de privacy.html / terms.html
 }
 
-// ======================================================
-// Traducción de privacy.html y terms.html
-// ======================================================
+// ------------------------------------------------------
+// Traduccion de paginas legales
+// ------------------------------------------------------
  
 const LEGAL_I18N = {
   en: {
@@ -538,7 +535,7 @@ const LEGAL_I18N = {
           </div>
           <h1>Privacy Policy</h1>
         </div>
-                <p class="updated" style="padding-top: 4px;">Last updated: October 24, 2026</p>
+        <p class="updated" style="padding-top: 4px;">Last updated: October 24, 2026</p>
 
         <p>My Demon List is an independent project created to organize your own lists of demon levels and keep track of your progress in <strong>Geometry Dash</strong>.</p>
 
@@ -589,7 +586,7 @@ const LEGAL_I18N = {
           </div>
           <h1>Terms of Use</h1>
         </div>
-                <p class="updated" style="padding-top: 4px;">Last updated: October 24, 2026</p>
+        <p class="updated" style="padding-top: 4px;">Last updated: October 24, 2026</p>
 
         <p>By using or registering on My Demon List, you agree to comply with these terms. If you do not agree with them, please do not use the application.</p>
 
@@ -621,6 +618,7 @@ const LEGAL_I18N = {
     }
   },
  
+// -- proceso
   fr: {
     privacy: {
       title: 'Politique de confidentialité | My Demon List',
@@ -634,7 +632,7 @@ const LEGAL_I18N = {
           </div>
           <h1>Politique de confidentialité</h1>
         </div>
-                <p class="updated" style="padding-top: 4px;">Dernière mise à jour : 24 octobre 2026</p>
+        <p class="updated" style="padding-top: 4px;">Dernière mise à jour : 24 octobre 2026</p>
 
         <p>My Demon List est un projet indépendant créé pour organiser vos propres listes de niveaux demon et suivre votre progression dans <strong>Geometry Dash</strong>.</p>
 
@@ -685,7 +683,7 @@ const LEGAL_I18N = {
           </div>
           <h1>Conditions d'utilisation</h1>
         </div>
-                <p class="updated" style="padding-top: 4px;">Dernière mise à jour : 24 octobre 2026</p>
+        <p class="updated" style="padding-top: 4px;">Dernière mise à jour : 24 octobre 2026</p>
 
         <p>En utilisant My Demon List ou en vous y inscrivant, vous acceptez de respecter ces conditions. Si vous n'êtes pas d'accord, veuillez ne pas utiliser l'application.</p>
 
@@ -733,9 +731,8 @@ function applyLegalLanguage() {
   document.title = tr ? tr.title : card.dataset.esTitle;
 }
 
-
 // ------------------------------------------------------
-// constantes extra (cache)
+// constantes extras
 // ------------------------------------------------------
 
 const COUNTRIES = [
@@ -765,12 +762,7 @@ const COUNTRIES = [
 ];
 
 const svg = {
-  Info: `
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="12" cy="12" r="10"></circle>
-    <line x1="12" y1="16" x2="12" y2="12"></line>
-    <line x1="12" y1="8" x2="12.01" y2="8"></line>
-  </svg>`,
+  Info: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>`,
   Options: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="6" r="2" fill="currentColor"/><circle cx="12" cy="13" r="2" fill="currentColor"/><circle cx="12" cy="20" r="2" fill="currentColor"/></svg>`,
   pc: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
   mobile: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>`,
@@ -801,4 +793,6 @@ const svg = {
   Reorder: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16"/><polyline points="3 8 7 4 11 8"/><path d="M17 20V4"/><polyline points="13 16 17 20 21 16"/></svg>`,
   ArrowUp: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>`,
   ArrowDown: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`,
+  Compact: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><line x1="4" y1="6" x2="4.01" y2="6"/><line x1="4" y1="12" x2="4.01" y2="12"/><line x1="4" y1="18" x2="4.01" y2="18"/></svg>`,
+  Close: `<svg xmlns="http://w3.org" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`,
 }
