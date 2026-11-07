@@ -137,7 +137,7 @@ function navigate(search = '') {
 }
 
 function setPageTitle(sub) {
-  document.title = sub ? `${sub} | My Demon List` : 'My Demon List';
+  document.title = sub ? `${sub} | My Demon List` : 'My Demon List | Geometry Dash';
 }
 
 // Estilo de banner

@@ -10,22 +10,6 @@ function enterApp() {
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
-function countUp(el, to, duration = 1400, delay = 250) {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    el.textContent = to.toLocaleString();
-    return;
-  }
-  const start = performance.now() + delay;
-  const tick = (now) => {
-    if (!el.isConnected) return;
-    const p = Math.min(1, Math.max(0, (now - start) / duration));
-    el.textContent = Math.max(1, Math.round(to * (1 - Math.pow(1 - p, 3)))).toLocaleString();
-    if (p < 1) requestAnimationFrame(tick);
-  };
-  el.textContent = '1';
-  requestAnimationFrame(tick);
-}
-
 // ------------------------------------------------------
 // Renderizado de vista de bienvenida
 // ------------------------------------------------------
@@ -43,9 +27,9 @@ function renderWelcome() {
       <div class="welcome-top-pill">
         <div class="welcome-pill" style="--d:0">
           <span class="welcome-pill-dot"></span>
-          <span><strong>+<span class="welcome-pill-num" id="welcomeCount">1</span></strong> ${t('welcome.levels')}</span>
+          <span><strong>+<span class="welcome-pill-num" >10.000</span></strong> ${t('welcome.levels')}</span>
         </div>
-        <img src="resources/extreme_128.webp" onError="this.style.display='none'">
+        <img src="resources/extreme_128.webp" alt="Extreme Demon" onError="this.style.display='none'">
       </div>
 
       <h1 class="welcome-title" style="--d:1">
@@ -76,7 +60,6 @@ function renderWelcome() {
     </section>
   `, false);
 
-  countUp($('welcomeCount'), LEVELS_TOTAL);
   $('btnWelcomeGuest').addEventListener('click', enterApp);
   $('btnWelcomeAccount').addEventListener('click', openSignInModal);
 }
