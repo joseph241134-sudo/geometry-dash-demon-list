@@ -27,10 +27,13 @@
 .btn-edit-demon,
 .btn-add-demon-below {
   position: absolute; right: 12px; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--panel); 
-  border-radius: 50%; color: var(--mute); font-size: 16px; opacity: 0;
+  border-radius: 50%; color: var(--mute); opacity: 0;
 }
 .btn-edit-demon { top: 12px; }
-.btn-add-demon-below { top: 52px; padding-bottom: 4px; font-size: 20px; font-weight: 700; }
+.btn-add-demon-below { top: 52px; }
+
+.btn-edit-demon svg, .btn-add-demon-below svg { display: block; width: 50%; height: 50%; }
+.btn-add-demon-below svg { width: 56%; height: 56%; }
 
 .btn-edit-demon:hover, .btn-add-demon-below:hover { background: var(--panel-1); color: var(--text-1); }
 
@@ -113,12 +116,12 @@
   .demons-container.compact .demon-thumb { height: 40px; }
   .demons-container.compact .demon-thumb.has-yt { width: 71px; }
   .demons-container.compact .demon-thumb.default-thumb { width: 40px; height: 40px; }
-  .demons-container.compact .demon-details { padding: 0 32  px 0 10px; column-gap: 8px; }
+  .demons-container.compact .demon-details { padding: 0 32px 0 10px; column-gap: 8px; }
   .demons-container.compact .demon-name { font-size: 14.5px; }
   .demons-container.compact .btn-edit-demon,
-  .demons-container.compact .btn-add-demon-below { right: 8px; width: 22px; height: 22px; font-size: 12.5px; }
+  .demons-container.compact .btn-add-demon-below { right: 8px; width: 23px; height: 23px; }
   .demons-container.compact .btn-edit-demon { top: 7px; }
-  .demons-container.compact .btn-add-demon-below { top: 33px; }
+  .demons-container.compact .btn-add-demon-below { top: 35px; }
 } 
 
 @media (max-width: 520px) {

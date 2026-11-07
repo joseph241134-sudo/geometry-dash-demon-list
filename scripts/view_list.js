@@ -100,6 +100,14 @@ function afterScroll(cb) {
   requestAnimationFrame(check);
 }
 
+function pickSearchResult(id) {
+  const input = $('searchDemon');
+  input.value = '';
+  input.blur();
+  setPop($('searchAutocomplete'), false);
+  jumpToDemon(id);
+}
+
 // Salto a carta
 function jumpToDemon(id) {
   const find = () => document.querySelector(`.demon-card[data-id="${CSS.escape(String(id))}"]`);
@@ -815,8 +823,7 @@ function openListView(listId) {
     if (e.key !== 'Enter') return;
     const first = searchMatches(searchInput.value.trim())[0];
     if (!first) return;
-    setPop($('searchAutocomplete'), false);
-    jumpToDemon(first.id);
+    pickSearchResult(first.id);
   });
 
   // ---- candado de arrastre ----->

@@ -37,8 +37,8 @@ function renderDemonCard(demon, position, index) {
       </div>
       ${extraChips ? `<div class="demon-extra">${extraChips}</div>` : ''}
 
-      <button type="button" class="btn-edit-demon" data-edit-demon="${id}" title="${t('card.edit')}">✎</button>
-      <button type="button" class="btn-add-demon-below" data-add-demon-after="${id}" title="${t('card.addBelow')}">+</button>
+      <button type="button" class="btn-edit-demon" data-edit-demon="${id}" title="${t('card.edit')}">${svg.Pencil}</button>
+      <button type="button" class="btn-add-demon-below" data-add-demon-after="${id}" title="${t('card.addBelow')}">${svg.Plus}</button>
     </article>
   `;
 }
@@ -178,9 +178,6 @@ function renderLocalAutocomplete(query) {
   setPop(dropdown, true);
 
   dropdown.querySelectorAll('.autocomplete-item').forEach(el => {
-    el.addEventListener('click', () => {
-      setPop(dropdown, false);
-      jumpToDemon(matches[Number(el.dataset.index)].id);
-    });
+    el.addEventListener('click', () => pickSearchResult(matches[Number(el.dataset.index)].id));
   });
 }
