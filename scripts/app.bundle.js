@@ -287,13 +287,15 @@ const I18N = {
     'io.import': 'Import', 'io.export': 'Export', 'view.stats': 'Stats', 'io.options': 'Options',
 
 //vista de bienvenida --->
-    'welcome.text': 'Manage your progress, create your own Demon List of your hardest levels in Geometry Dash', 'welcome.h1': 'Create and organize your own',
+    'welcome.h1': 'Create and organize your own',
     'welcome.account': 'Log in', 'welcome.guest': 'Enter as guest', 'welcome.levels': 'Registered levels',
 
-    'welcome.f1t': 'Autocomplete', 'welcome.f1d': 'Automatic level completion.',
-    'welcome.f2t': 'List editor', 'welcome.f2d': 'Easily edit your demon list.',
-    'welcome.f3t': 'Registry', 'welcome.f3d': 'Record the date and number of attempts for each level.',
-    'welcome.f4t': 'Themes', 'welcome.f4d': 'Choose from multiple custom themes.',
+    'welcome.text': 'Create your Geometry Dash demons list: rank your hardest levels and record the number of attempts and the date of completion for each one.',
+
+    'welcome.f1t': 'Autocomplete', 'welcome.f1d': 'More than 10,000 levels with automatic completion.',
+    'welcome.f2t': 'Demon list', 'welcome.f2d': 'Reorder, filter, and search through your list of demons.',
+    'welcome.f3t': 'Records', 'welcome.f3d': 'Stores the number of attempts and the date of completion for each level.',
+    'welcome.f4t': 'Themes', 'welcome.f4d': 'Choose from 10 different themes and customize your profile.',
 
 //modales y pops de modal --->
 
@@ -447,13 +449,15 @@ const I18N = {
     'io.import': 'Importar', 'io.export': 'Exportar', 'view.stats': 'Estadísticas', 'io.options': 'Opciones',
 
 //vista de bienvenida --->
-    'welcome.text': 'Gestiona tu progreso, crea tu propia Demon list de tus niveles más difíciles en Geometry Dash', 'welcome.h1': 'Crea y organiza tu propia',
+    'welcome.h1': 'Crea y organiza tu propia',
     'welcome.account': 'Iniciar sesión', 'welcome.guest': 'Entrar sin cuenta', 'welcome.levels': 'Niveles registrados',
 
-    'welcome.f1t': 'Autocompletado', 'welcome.f1d': 'Autocompletado de niveles automático.',
-    'welcome.f2t': 'Editor de lista', 'welcome.f2d': 'Edita fácilmente tu lista de demons.',
-    'welcome.f3t': 'Registro', 'welcome.f3d': 'Registra la fecha y el número de intentos de cada nivel.',
-    'welcome.f4t': 'Temas', 'welcome.f4d': 'Elige entre varios temas personalizados.',
+    'welcome.text': 'Crea tu lista de demons de Geometry Dash: ordena tus niveles más difíciles y registra los intentos y la fecha de victoria de cada uno.',
+
+    'welcome.f1t': 'Autocompletado', 'welcome.f1d': 'Más de 10.000 niveles con autocompletado automático.',
+    'welcome.f2t': 'Lista de demons', 'welcome.f2d': 'Reordena, filtra y busca en tu lista de demons.',
+    'welcome.f3t': 'Registro', 'welcome.f3d': 'Guarda los intentos y la fecha de victoria de cada nivel.',
+    'welcome.f4t': 'Temas', 'welcome.f4d': 'Elige entre 10 temas distintos y personaliza tu perfil.',
 
 //modales y pops de modal --->
 
@@ -1239,7 +1243,7 @@ const THEMES = ['blue', 'pizarra', 'gris', 'purple', 'dark', 'atardecer', 'neon'
 const DEFAULT_APP_SETTINGS = {
   theme: 'blue',
   bgList: true,
-  lang: (l => I18N[l] ? l : 'en')((navigator.language || 'en').slice(0, 2).toLowerCase())
+  lang: 'es'
 };
 
 let appSettings = { ...DEFAULT_APP_SETTINGS };
@@ -3754,7 +3758,7 @@ function navigate(search = '') {
 }
 
 function setPageTitle(sub) {
-  document.title = sub ? `${sub} | My Demon List` : 'My Demon List | Geometry Dash';
+  document.title = sub ? `${sub} | My Demon List` : 'My Demon List | Tu lista de demons de Geometry Dash';
 }
 
 // Estilo de banner
