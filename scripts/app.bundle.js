@@ -363,9 +363,9 @@ const I18N = {
 
     'export.needLogin': 'Log in to download your list as a PNG.',
 
-    'view.search': 'Search level...', 'view.lock': 'Lock/unlock dragging', 'view.thumbYt': 'Show demon icons', 'view.sort': 'Sort by',
+    'view.lock': 'Lock/unlock dragging', 'view.thumbYt': 'Show demon icons', 'view.sort': 'Sort by',
 
-    'view.search': 'Filter level by name or position...', 'sort.custom': 'Custom order', 'sort.custom_rev': 'Reversed order', 'sort.attempts_desc': 'Most attempts', 
+    'view.search': 'Filter by name or position...', 'sort.custom': 'Custom order', 'sort.custom_rev': 'Reversed order', 'sort.attempts_desc': 'Most attempts', 
     'sort.attempts_asc': 'Fewest attempts', 'sort.recent': 'Newest date', 'sort.oldest': 'Oldest date',
 
     'view.addDemon': '+ Demon', 'view.noMatch': 'No demon matches the filters', 'view.noMatchText': 'Change the search or the filters to see more results.',
@@ -532,9 +532,9 @@ const I18N = {
 
     'export.needLogin': 'Inicia sesión para descargar tu lista como PNG.',
 
-    'view.search': 'Buscar nivel...', 'view.lock': 'Bloquear/desbloquear arrastre', 'view.thumbYt': 'Mostrar iconos Demon', 'view.sort': 'Ordenar por',
+    'view.lock': 'Bloquear/desbloquear arrastre', 'view.thumbYt': 'Mostrar iconos Demon', 'view.sort': 'Ordenar por',
 
-    'view.search': 'Filtrar nivel por nombre o posición...', 'sort.custom': 'Orden personalizado', 'sort.custom_rev': 'Orden invertido', 'sort.attempts_desc': 'Más intentos', 
+    'view.search': 'Filtrar por nombre o posición...', 'sort.custom': 'Orden personalizado', 'sort.custom_rev': 'Orden invertido', 'sort.attempts_desc': 'Más intentos', 
     'sort.attempts_asc': 'Menos intentos', 'sort.recent': 'Fecha más reciente', 'sort.oldest': 'Fecha más antigua',
 
     'view.addDemon': '+ Demon', 'view.noMatch': 'Ningún demon coincide con los filtros', 'view.noMatchText': 'Cambia la búsqueda o filtros para ver más resultados.',
@@ -1593,14 +1593,15 @@ function renderListStats() {
 let statsMode = 'profile'; // 'profile' | 'stats'
 let statsSeries = { demons: true, diff: true };
 
-const DIFF_RAW_MAX = 4.4;   // el promedio ponderado [1 - 4.4] se expande a [1 - 5]
+const DIFF_RAW_MAX = 4.4;   // promedio ponderado [1 - 4.4] expandido a [1 - 5]
+const DIFF_POW = 3;
 const STATS_MONTHS = 5;
 const diffNum = d => DIFFICULTIES.indexOf(d) + 1 || 1;
 
 // Promedio ponderado (p = 5)
 function realDifficulty(demons) {
   if (!demons.length) return 0;
-  const raw = Math.pow(demons.reduce((s, d) => s + Math.pow(diffNum(d.difficulty), 5), 0) / demons.length, 1 / 5);
+  const raw = Math.pow(demons.reduce((s, d) => s + Math.pow(diffNum(d.difficulty), DIFF_POW), 0) / demons.length, 1 / DIFF_POW);
   return 1 + Math.min(1, Math.max(0, (raw - 1) / (DIFF_RAW_MAX - 1))) * 4;
 }
 
