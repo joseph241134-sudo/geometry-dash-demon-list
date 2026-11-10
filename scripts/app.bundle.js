@@ -240,7 +240,7 @@ async function cloudCleanImages() {
 document.addEventListener('visibilitychange', () => {
   if (document.hidden && cloudUser && cloudReady) { clearTimeout(cloudTimer); cloudPush(); }
 });
-;
+
 /* ==== i18n.js ==== */
 // ------------------------------------------------------
 // constante de idiomas (en / es / fr.. proceso)
@@ -254,8 +254,7 @@ const LANGS = [
 const I18N = {
   en: {
     'common.ok': 'OK', 'common.cancel': 'Cancel', 'common.save': 'Save', 'common.delete': 'Delete', 
-    'common.noPhoto': 'No image',
-    'dlg.alert': 'Notice', 'dlg.confirm': 'Confirm', 'o': 'or',
+    'common.noPhoto': 'No image', 'dlg.alert': 'Notice', 'dlg.confirm': 'Confirm', 'o': 'or',
 
   //header ->
     'header.home': 'Home', 'header.settings': 'Settings', 'header.language': 'Language', 'header.login': 'Log in',
@@ -288,7 +287,7 @@ const I18N = {
 
 //vista de bienvenida --->
     'welcome.h1': 'Create and organize your own',
-    'welcome.account': 'Log in', 'welcome.guest': 'Enter as guest', 'welcome.levels': 'Registered levels',
+    'welcome.account': 'Log in', 'welcome.guest': 'Enter as guest', 'welcome.levels': 'Levels',
 
     'welcome.text': 'Create your Geometry Dash demons list: rank your hardest levels and record the number of attempts and the date of completion for each one.',
 
@@ -366,13 +365,20 @@ const I18N = {
 
     'view.search': 'Search level...', 'view.lock': 'Lock/unlock dragging', 'view.thumbYt': 'Show demon icons', 'view.sort': 'Sort by',
 
-    'view.search': 'Search level or position...', 'sort.custom': 'Custom order', 'sort.custom_rev': 'Reversed order', 'sort.attempts_desc': 'Most attempts', 
+    'view.search': 'Filter level by name or position...', 'sort.custom': 'Custom order', 'sort.custom_rev': 'Reversed order', 'sort.attempts_desc': 'Most attempts', 
     'sort.attempts_asc': 'Fewest attempts', 'sort.recent': 'Newest date', 'sort.oldest': 'Oldest date',
 
     'view.addDemon': '+ Demon', 'view.noMatch': 'No demon matches the filters', 'view.noMatchText': 'Change the search or the filters to see more results.',
     'view.empty': 'This list has no demons yet', 'view.emptyText': 'Press to add your first demon.',
     
     'view.compact': 'Compact view', 'view.count': 'Showing {shown} of {total} demons', 'view.clearFilters': 'Clear filters',
+
+    'stats.show': 'Show statistics', 'stats.profile': 'View profile', 'stats.info': 'Information',
+    'stats.attempts': 'Attempts', 'stats.total': 'Total', 'stats.avg': 'Average', 
+    'stats.calendar': 'Chart', 'stats.demons': 'Demons', 'stats.realDiff': 'Difficulty',
+    'stats.attHint': 'Only demons with recorded attempts are taken into account for this data.',
+    'stats.calHint': 'Statistics for the last 5 months.\nFirst bar: Total demons completed each month.\nSecond bar: Average difficulty per month on a scale from 1 (Easy) to 5 (Extreme).',
+
   //card-demon ->
     'card.publishedBy': 'published by {name}', 'card.by': 'by {name}', 'card.attempts': 'Attempts:', 'card.date': 'Date:',
     'card.edit': 'Edit demon', 'card.addBelow': 'Add demon below', 'card.showcase': 'Watch showcase',
@@ -415,8 +421,7 @@ const I18N = {
 
   es: {
     'common.ok': 'Aceptar', 'common.cancel': 'Cancelar', 'common.save': 'Guardar', 'common.delete': 'Eliminar', 
-    'common.noPhoto': 'Sin imagen',
-    'dlg.alert': 'Aviso', 'dlg.confirm': 'Confirmar', 'o': 'o',
+    'common.noPhoto': 'Sin imagen', 'dlg.alert': 'Aviso', 'dlg.confirm': 'Confirmar', 'o': 'o',
 
   //header ->
     'header.home': 'Inicio', 'header.settings': 'Ajustes', 'header.language': 'Idioma', 'header.login': 'Iniciar sesión',
@@ -450,7 +455,7 @@ const I18N = {
 
 //vista de bienvenida --->
     'welcome.h1': 'Crea y organiza tu propia',
-    'welcome.account': 'Iniciar sesión', 'welcome.guest': 'Entrar sin cuenta', 'welcome.levels': 'Niveles registrados',
+    'welcome.account': 'Iniciar sesión', 'welcome.guest': 'Entrar sin cuenta', 'welcome.levels': 'Niveles',
 
     'welcome.text': 'Crea tu lista de demons de Geometry Dash: ordena tus niveles más difíciles y registra los intentos y la fecha de victoria de cada uno.',
 
@@ -529,13 +534,20 @@ const I18N = {
 
     'view.search': 'Buscar nivel...', 'view.lock': 'Bloquear/desbloquear arrastre', 'view.thumbYt': 'Mostrar iconos Demon', 'view.sort': 'Ordenar por',
 
-    'view.search': 'Buscar nivel o posición...', 'sort.custom': 'Orden personalizado', 'sort.custom_rev': 'Orden invertido', 'sort.attempts_desc': 'Más intentos', 
+    'view.search': 'Filtrar nivel por nombre o posición...', 'sort.custom': 'Orden personalizado', 'sort.custom_rev': 'Orden invertido', 'sort.attempts_desc': 'Más intentos', 
     'sort.attempts_asc': 'Menos intentos', 'sort.recent': 'Fecha más reciente', 'sort.oldest': 'Fecha más antigua',
 
     'view.addDemon': '+ Demon', 'view.noMatch': 'Ningún demon coincide con los filtros', 'view.noMatchText': 'Cambia la búsqueda o filtros para ver más resultados.',
     'view.empty': 'Esta lista aún no tiene demons', 'view.emptyText': 'Pulsa para añadir tu primer demon.',
     
     'view.compact': 'Vista compacta', 'view.count': 'Mostrando {shown} de {total} demons', 'view.clearFilters': 'Limpiar filtros',
+
+    'stats.show': 'Ver estadísticas', 'stats.profile': 'Ver perfil', 'stats.info': 'Información',
+    'stats.attempts': 'Intentos', 'stats.total': 'Total', 'stats.avg': 'Promedio', 
+    'stats.calendar': 'Gráfica', 'stats.demons': 'Demons', 'stats.realDiff': 'Dificultad',
+    'stats.attHint': 'Para estos datos solo se toman en cuenta los demons que tienen intentos registrados.',
+    'stats.calHint': 'Estadísticas de los últimos 5 meses.\nPrimera barra: Total de demons completados en cada mes.\nSegunda Barra: Promedio de dificultad por mes. Se toma una escala de 1 (Easy) hasta 5 (Extreme).',
+
   //card-demon ->
     'card.publishedBy': 'publicado por {name}', 'card.by': 'por {name}', 'card.attempts': 'Intentos:', 'card.date': 'Fecha:',
     'card.edit': 'Editar demon', 'card.addBelow': 'Agregar demon debajo', 'card.showcase': 'Ver showcase',
@@ -1044,9 +1056,9 @@ const svg = {
   Compact: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><line x1="4" y1="6" x2="4.01" y2="6"/><line x1="4" y1="12" x2="4.01" y2="12"/><line x1="4" y1="18" x2="4.01" y2="18"/></svg>`,
   Plus: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>`,
   Close: `<svg xmlns="http://w3.org" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`,
-}
+  Analytics: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="3" /><line x1="7" y1="18" x2="7" y2="12" /><line x1="12" y1="18" x2="12" y2="8" /><line x1="17" y1="18" x2="17" y2="14" /></svg>`,
+};
 
-;
 /* ==== storage.js ==== */
 // ======================================================
 // 1. Manejo de Local Storage
@@ -1202,7 +1214,6 @@ function resizeImage(file, opts = 1280) {
   return new Promise((resolve) => {
     if (!file) return resolve(null);
 
-    // GIF, SVG y archivos que no son imagen: sin tocar
     if (!/^image\//.test(file.type) || /gif|svg/.test(file.type)) return resolve(file);
 
     const url = URL.createObjectURL(file);
@@ -1236,7 +1247,7 @@ async function readImageFile(file, opts) {
   if (!url) { showAlert(t('acc.error')); return null; }
   return url;
 }
-;
+
 /* ==== settings.js ==== */
 const THEMES = ['blue', 'pizarra', 'gris', 'purple', 'dark', 'atardecer', 'neon', 'rosa-dark', 'bosque', 'halloween'];
 
@@ -1381,7 +1392,6 @@ function openSettingsView() {
     </div>
   `);
 
-
   const refreshThemeCards = () => {
     document.querySelectorAll('#themeGrid .theme-card').forEach(card => {
       card.classList.toggle('active', card.dataset.themeId === appSettings.theme);
@@ -1422,7 +1432,6 @@ function openSettingsView() {
   refreshThemeCards();
 }
 
-;
 /* ==== demon_card.js ==== */
 // ======================================================
 // 1. Demon card
@@ -1508,6 +1517,11 @@ function renderListStats() {
   const container = $('listStatsContainer');
   if (!container) return;
 
+  const subtitle = $('listViewSubtitle');
+  if (subtitle) subtitle.textContent = listSubtitleText();
+  container.onclick = onStatsPanelClick;
+  if (statsMode === 'stats') return renderAdvancedStats(container, currentList.demons || []);
+
   const demons = currentList.demons || [];
   const hardest = demons.length ? (demons[0].name || '-') : '-';
   const top = demons[0];
@@ -1546,6 +1560,7 @@ function renderListStats() {
       <div class="profile-avatar-wrapper">
         <img src="${escapeHTML(getAvatar())}" alt="" class="profile-avatar" onerror="this.onerror=null;this.src='${DEFAULT_AVATAR}'">
       </div>
+      <button type="button" class="sc-toggle sc-toggle-float" data-sc-mode="stats" title="${t('stats.show')}">${svg.Analytics}</button>
       ${publicIdText() !== '-' ? `<span class="profile-pid">${t('profile.id', { id: publicIdText() })}</span>` : ''}
     </div>
 
@@ -1567,12 +1582,152 @@ function renderListStats() {
       <div class="diff-breakdown-row">${breakdown}</div>
       ${extra}
     </div>`;
-
-  const subtitle = $('listViewSubtitle');
-  if (subtitle) subtitle.textContent = listSubtitleText();
 }
 
 // <span class="profile-list-id">${t('view.listId', { id: currentList.id })}</span> // agregar abajo de ${extra} id publicas - version 1.4
+
+// ======================================================
+// 2.1. Panel de estadísticas avanzadas
+// ======================================================
+
+let statsMode = 'profile'; // 'profile' | 'stats'
+let statsSeries = { demons: true, diff: true };
+
+const DIFF_RAW_MAX = 4.4;   // el promedio ponderado [1 - 4.4] se expande a [1 - 5]
+const STATS_MONTHS = 5;
+const diffNum = d => DIFFICULTIES.indexOf(d) + 1 || 1;
+
+// Promedio ponderado (p = 5)
+function realDifficulty(demons) {
+  if (!demons.length) return 0;
+  const raw = Math.pow(demons.reduce((s, d) => s + Math.pow(diffNum(d.difficulty), 5), 0) / demons.length, 1 / 5);
+  return 1 + Math.min(1, Math.max(0, (raw - 1) / (DIFF_RAW_MAX - 1))) * 4;
+}
+
+function compactNum(n) {
+  if (n < 1000) return String(n);
+  const [div, suf] = n >= 1e9 ? [1e9, 'B'] : n >= 1e6 ? [1e6, 'M'] : [1e3, 'K'];
+  const v = n / div;
+  const dec = v < 10 ? 2 : v < 100 ? 1 : 0;
+  return String(+(Math.floor(v * 10 ** dec) / 10 ** dec)) + suf;
+}
+
+function attemptsRows(demons) {
+  return DIFFICULTIES.map(diff => {
+    const ds = demons.filter(d => d.difficulty === diff && Number(d.attempts) > 0);
+    const total = ds.reduce((s, d) => s + Number(d.attempts), 0);
+    return { diff, total, avg: ds.length ? Math.round(total / ds.length) : 0 };
+  });
+}
+
+function monthlyBuckets(demons) {
+  const now = new Date();
+  const out = [];
+  for (let i = STATS_MONTHS - 1; i >= 0; i--) {
+    const dt = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    let label = dt.toLocaleDateString(currentLang(), { month: 'short' }).replace('.', '');
+    label = label.charAt(0).toUpperCase() + label.slice(1);
+    out.push({ y: dt.getFullYear(), m: dt.getMonth(), label, ds: [] });
+  }
+  demons.forEach(d => {
+    const m = /^(\d{4})-(\d{2})/.exec(d.winDate || '');
+    if (!m) return;
+    const b = out.find(o => o.y === +m[1] && o.m === +m[2] - 1);
+    if (b) b.ds.push(d);
+  });
+  return out;
+}
+
+function niceTop(max) {
+  for (const v of [15, 30, 75, 150, 300]) if (max <= v) return v;
+  return Math.ceil(max / 300) * 300;
+}
+
+function renderAdvancedStats(container, demons) {
+  const rd = realDifficulty(demons);
+  const icon = rd ? DIFFICULTY[DIFFICULTIES[Math.round(rd) - 1]].icon : '';
+
+  const cell = n => n ? `<span title="${Number(n).toLocaleString()}">${compactNum(n)}</span>` : '<span>-</span>';
+
+  const rows = attemptsRows(demons).map(r => `
+    <div class="sc-row" style="${diffColorStyle(r.diff)}">
+      <span class="sc-name">${r.diff.replace(' Demon', '')}</span>
+      ${cell(r.total)}
+      ${cell(r.avg)}
+    </div>`).join('');
+
+  const months = monthlyBuckets(demons);
+  const top = niceTop(Math.max(0, ...months.map(b => b.ds.length)));
+  const axisL = [1, 2, 3].map(k => `<span style="bottom:${k * 100 / 3}%">${top * k / 3}</span>`).join('');
+  const axisR = [[5, 100], [3, 50], [1, 0]].map(([v, p]) => `<span style="bottom:${p}%">${v}</span>`).join('');
+
+  const cols = months.map(b => {
+    const n = b.ds.length;
+    const d = realDifficulty(b.ds);
+    const hN = n ? `max(3px, ${n / top * 100}%)` : '0';
+    const hD = n ? `max(3px, ${(d - 1) / 4 * 100}%)` : '0';
+    return `
+      <div class="sc-col" title="${b.label}: ${n} demons${n ? ` · ${d.toFixed(1)}` : ''}">
+        <span class="sc-bar sc-bar-n" style="height:${hN}"></span>
+        <span class="sc-bar sc-bar-d" style="height:${hD}"></span>
+      </div>`;
+  }).join('');
+
+  const leg = (key, label, color) =>
+    `<button type="button" class="sc-leg ${statsSeries[key] ? 'on' : ''}" data-sc-series="${key}"><i class="sc-dot" style="--c:${color}"></i>${label}</button>`;
+  const infoBtn = k => `<button type="button" class="sc-info" data-sc-info="${k}" title="${t('stats.info')}">${svg.Info}</button>`;
+
+  container.innerHTML = `
+    <div class="sc-panel">
+      <div class="sc-head">
+        <button type="button" class="sc-toggle" data-sc-mode="profile" title="${t('stats.profile')}">${svg.Perfil}</button>
+        <h3 class="sc-title" title="${escapeHTML(currentList.title)}">${escapeHTML(currentList.title)}</h3>
+        ${icon ? `<span class="sc-diff" style="${diffColorStyle(DIFFICULTIES[Math.round(rd) - 1])}"><b>${rd.toFixed(1)}</b><img class="sc-diff-icon" src="${icon}" alt=""></span>` : ''}
+      </div>
+
+      <div class="sc-table">
+        <div class="sc-table-title">${t('stats.attempts')}${infoBtn('table')}</div>
+        <div class="sc-row sc-row-head">
+          <span></span><span>${t('stats.total')}</span><span>${t('stats.avg')}</span>
+        </div>
+        ${rows}
+      </div>
+
+      <div class="sc-cal-head">
+        <span class="sc-cal-title">${t('stats.calendar')}</span>
+        ${infoBtn('chart')}
+        ${leg('demons', t('stats.demons'), 'var(--button)')}
+        ${leg('diff', t('stats.realDiff'), 'var(--stat-alt)')}
+      </div>
+
+      <div class="sc-chart ${statsSeries.demons ? '' : 'hide-n'} ${statsSeries.diff ? '' : 'hide-d'}">
+        <div class="sc-axis sc-axis-l">${axisL}</div>
+        <div class="sc-plot">
+          <i class="sc-grid" style="bottom:33.33%"></i><i class="sc-grid" style="bottom:66.66%"></i><i class="sc-grid" style="bottom:100%"></i>
+          <div class="sc-cols">${cols}</div>
+        </div>
+        <div class="sc-axis sc-axis-r">${axisR}</div>
+        <div class="sc-months">${months.map(b => `<span>${b.label}</span>`).join('')}</div>
+      </div>
+    </div>`;
+}
+
+function onStatsPanelClick(e) {
+  const mode = e.target.closest('[data-sc-mode]');
+  if (mode) { statsMode = mode.dataset.scMode; return renderListStats(); }
+
+  const ser = e.target.closest('[data-sc-series]');
+  if (ser) {
+    const k = ser.dataset.scSeries, other = k === 'demons' ? 'diff' : 'demons';
+    if (statsSeries[k] && !statsSeries[other]) return; // siempre queda una activa
+    statsSeries[k] = !statsSeries[k];
+    return renderListStats();
+  }
+
+  const inf = e.target.closest('[data-sc-info]');
+  if (inf) showInfoModal(t('stats.info'), t(inf.dataset.scInfo === 'table' ? 'stats.attHint' : 'stats.calHint'));
+}
+
 // ======================================================
 // 3. Autocompletado local
 // ======================================================
@@ -1607,7 +1762,7 @@ function renderLocalAutocomplete(query) {
     el.addEventListener('click', () => pickSearchResult(matches[Number(el.dataset.index)].id));
   });
 }
-;
+
 /* ==== view_list.js ==== */
 // ======================================================
 // 1. Estados y constantes
@@ -1906,7 +2061,7 @@ function readListFile(file) {
   });
 }
 
-// ---- Dado: demon aleatorio ----->
+// ---- Dado: demon aleatorio (prueba) ----->
 function openRandomDemonModal() {
   const demons = currentList.demons;
   if (!demons.length) return showAlert(t('dice.empty'));
@@ -1972,7 +2127,7 @@ function openRandomDemonModal() {
     nameEl.textContent = `#${demons.indexOf(d) + 1} - ${d.name}`;
     fillInfo(d);
 
-    // posición final (izquierda y chico) -> animar de una a otra
+    // posición final
     const s = fs0 / parseFloat(getComputedStyle(nameEl).fontSize);
     const w = nameEl.offsetWidth;
     nameEl.animate(
@@ -2391,7 +2546,7 @@ function openListView(listId) {
   // ---- img export ----->
   $('btnExportImg').addEventListener('click', openExportImageModal);
 
-  // ---- menú ⋮ (cel): reutiliza los botones de importar / exportar ----->
+  // ---- menú export-import (cel) ----->
   $('btnIoMenu').addEventListener('click', () => setPop($('ioPop'), !$('ioPop').classList.contains('open')));
   $('ioPop').addEventListener('click', (e) => {
     const item = e.target.closest('[data-io]');
@@ -2488,7 +2643,7 @@ function openListView(listId) {
   renderDemons();
   renderListStats();
 }
-;
+
 /* ==== modals.js ==== */
 // ======================================================
 // 1. Base de modales
@@ -2553,7 +2708,6 @@ function closeModal(overlay, fromPop = false) {
 }
 
 // ---- Avisos y confirmaciones ----->
-
 function showAlert(message, { title = t('dlg.alert') } = {}) {
   return new Promise(resolve => {
     const ov = openModal({
@@ -2614,8 +2768,6 @@ function requireLogin(msgKey) {
 }
 
 // ---- Piezas reutilizables de formularios ----->
-
-// Conecta un <input type=file> oculto: al elegir una imagen la reduce y llama onChange(dataURL)
 function bindFileInput(file, opts, onChange) {
   const input = $(file);
   const ov = input.closest('.modal-overlay');
@@ -2668,9 +2820,6 @@ function markInvalid(input) {
 
 // ======================================================
 // 2. Modal - Selector de color
-// ------------------------------------------------------
-// Cuadro de saturación/brillo + barra de tono + muestra con el hex y botón restablecer.
-// openColorModal({ value, fallback, onApply })  →  onApply('#rrggbb') o onApply('') al restablecer
 // ======================================================
 
 function hsvToHex(h, s, v) {
@@ -2828,7 +2977,7 @@ function openEditProfileModal() {
 
         <div class="form-group">
           <label>${t('profile.bio')}</label>
-          <textarea id="editBio" class="form-input" maxlength="160" rows="3" spellcheck="false" placeholder="${t('profile.bioPh')}">${escapeHTML(profileState.bio || '')}</textarea>
+          <textarea id="editBio" class="form-input" maxlength="140" rows="3" spellcheck="false" placeholder="${t('profile.bioPh')}">${escapeHTML(profileState.bio || '')}</textarea>
         </div>
       </div>`,
     actions: `
@@ -3007,7 +3156,7 @@ function showInfoModal(title, text) {
   const ov = openModal({
     title,
     cls: 'modal-sm',
-    body: `<p class="dialog-text" style="white-space: normal; word-break: break-word">${escapeHTML(text)}</p>`,
+    body: `<p class="dialog-text" style="word-break: break-word">${escapeHTML(text)}</p>`,
     actions: `<button type="button" class="btn-primary" data-ok>${t('common.ok')}</button>`
   });
   ov.querySelector('[data-ok]').addEventListener('click', () => closeModal(ov));
@@ -3439,7 +3588,7 @@ function renderDemonModal(listId, demonData, afterId = null) {
   syncFav();
   setDifficultyUI(selectedDifficulty);
 }
-;
+
 /* ==== welcome.js ==== */
 const WELCOME_KEY = 'mdl_welcome_seen';
 const LEVELS_TOTAL = 10000;
@@ -3506,7 +3655,7 @@ function renderWelcome() {
   $('btnWelcomeGuest').addEventListener('click', enterApp);
   $('btnWelcomeAccount').addEventListener('click', openSignInModal);
 }
-;
+
 /* ==== layout.js ==== */
 const Form_URL = 'https://forms.gle/qRjqUCUfHmjcK4gx5';
 
@@ -3617,7 +3766,7 @@ function renderFooter() {
     </div>
   `;
 }
-;
+
 /* ==== main.js ==== */
 // ======================================================
 // 1. Estado global y utilidades
@@ -3632,7 +3781,7 @@ const DEFAULT_AVATAR = 'resources/avatar.jpg';
 const FAV_ICON = { on: 'resources/fav_on.png', off: 'resources/fav_off.png' };
 const getAvatar = () => profileState.avatar || DEFAULT_AVATAR;
 
-// ID público (columna public_id de Supabase); '-' sin sesión
+// ID público
 const publicIdText = () => (cloudUser && cloudPublicId) ? `#${cloudPublicId}` : '-';
 
 // ------------------------------------------------------
@@ -3675,7 +3824,7 @@ function showToast(msg) {
   toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
 }
 
-// -------------------- color modal -------------------------------------->
+// -------------------- color modal (prueba) -------------------------------------->
 function safeColor(value) {
   return /^#[0-9a-f]{6}$/i.test(value || '') ? value : '';
 }
@@ -3686,6 +3835,7 @@ function cssHex(varName, fallback = '#000000') {
   if (/^#[0-9a-f]{3}$/i.test(v)) return '#' + [...v.slice(1)].map(c => c + c).join('');
   return fallback;
 }
+// ---------------------------------------------------------->
 
 function downloadJSON(filename, data) {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -4232,7 +4382,7 @@ function renderMainPage(animate = true) {
 }
 
 window.addEventListener('resize', debounce(markClippedDiffs, 150));
-;
+
 /* ==== init.js ==== */
 // ------------------------------------------------------
 // Inicio y ciclo de vida

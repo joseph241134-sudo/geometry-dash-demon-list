@@ -8,7 +8,7 @@
   --bg: #0b1118; --panel: #121a24; --panel-banner: #1d3a52; 
   --panel-1: #2f4256; --panel-1-hover: #28384a; --panel-2: #1a2633; --panel-3: #16202b;
   --line-1: rgba(150, 200, 255, 0.12); --line-2: rgba(140, 180, 220, 0.4); --outline: var(--panel-1);
-  --button: #2f7fb5; --button-hover: #286e9d; --accent: var(--button); --card: #16202b;
+  --button: #2f7fb5; --button-hover: #286e9d; --accent: var(--button); --card: #16202b; --stat-alt: #f5b942;
   --danger: #cd4e49; --danger-hover: #b03e3a;
   --text-1: #e3e8ec; --text-2: var(--text-1); --text-pri: #ffffff; --mute: #9fb4c8; --text-danger: #d9534f;
   --shadow-1: rgba(0, 0, 0, 0.1); --shadow-2: rgba(0, 0, 0, 0.2); --shadow-3: rgba(0, 0, 0, 0.2);
@@ -577,6 +577,7 @@ body.legal { min-height: 100vh; background: var(--bg); color: var(--text-1); lin
 
 /* panels */
 .panel { position: relative; width: 100%; overflow: hidden; background-color: var(--panel); }
+
 /* ==== cards.css ==== */
 /* ==============================================
   1. Demon card
@@ -625,7 +626,7 @@ body.legal { min-height: 100vh; background: var(--bg); color: var(--text-1); lin
 .d-creator { margin-top: 2px; color: var(--mute); font-size: 13px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; margin-right: 0;}
 .by-short { display: none; }
 
-.demon-stats-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 6px 8px; margin-top: 22px; font-size: 12px; }
+.demon-stats-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 6px; margin-top: 22px; font-size: 12px; }
 
 /* Badge de dificultad */
 .d-diff {
@@ -688,7 +689,7 @@ body.legal { min-height: 100vh; background: var(--bg); color: var(--text-1); lin
   .demon-details { padding: 0 44px 0 12px; margin: 0; }
   .demon-name { font-size: 15.5px; }
   .d-creator { margin-top: 4px; font-size: 12.5px; }
-  .btn-edit-demon, .btn-add-demon-below { right: 8px; width: 26px; height: 26px; font-size: 14px; }
+  .btn-edit-demon, .btn-add-demon-below { right: 8px; width: 27px; height: 27px; font-size: 14px; }
   .btn-edit-demon { top: 8px; }
   .d-diff {margin-top: 4px; font-size: 11.5px; }
   .btn-add-demon-below { top: 40px; font-size: 18px; }
@@ -714,6 +715,7 @@ body.legal { min-height: 100vh; background: var(--bg); color: var(--text-1); lin
   .demons-container.compact .demon-stats-row { transition: opacity 0.15s; }
   .demons-container.compact .demon-card:hover .demon-stats-row { opacity: 0; }
 }
+
 /* ==== modals.css ==== */
 /* ==============================================
   1. Modal base
@@ -1052,12 +1054,13 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
 .modal-overlay.uploading .modal-card { cursor: progress; }
 .modal-overlay.uploading .list-preview-container,
 .modal-overlay.uploading .pe-header { opacity: 0.55; transition: opacity 0.2s; }
+
 /* ==== view_list.css ==== */
 /* ==============================================
   1. Cabezera de lista
   =============================================== */
 
-.list-view { --diff-color: var(--mute); display: flex; flex-direction: column; gap: 16px; width: min(1060px, 100%); margin: 0 auto; }
+.list-view { --diff-color: var(--mute); display: flex; flex-direction: column; gap: 16px; width: min(1050px, 100%); margin: 0 auto; }
 
 .list-view-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; padding-bottom: 16px; border-bottom: 1px solid var(--line-1); }
 
@@ -1128,7 +1131,7 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
 /* filtros activos */
 .filter-bar {
   display: none; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 12px; font-size: 13px;
-  background-color: color-mix(in srgb, var(--button) 8%, transparent); border: 1px solid color-mix(in srgb, var(--button) 30%, transparent); border-radius: var(--radius-sm);
+  background-color: color-mix(in srgb, var(--button) 12%, transparent); border: 1px solid color-mix(in srgb, var(--button) 30%, transparent); border-radius: var(--radius-sm);
 }
 .filter-bar.show { display: flex; animation: riseIn 0.25s ease both; }
 .filter-bar-count { color: var(--text-1); font-weight: 500; }
@@ -1243,6 +1246,62 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
 /* id de lista - version 1.4 -----> */
 .profile-list-id { margin: 2px 0 10px; color: var(--mute); font-size: 11.5px; font-family: monospace; align-items: center; }
 
+/* ---- Panel de stats avanzadas ---- */
+.sc-toggle {
+  display: flex; flex-shrink: 0; align-items: center; justify-content: center; width: 30px; height: 30px;
+  background: var(--panel-2); border: 1px solid var(--line-1); border-radius: 6px; color: var(--mute);
+}
+.sc-toggle:hover { background: var(--panel-1-hover); color: var(--text-1); }
+.sc-toggle svg { width: 16px; height: 16px; }
+.sc-toggle-float { position: absolute; top: 10px; left: 10px; z-index: 4; background: rgba(0, 0, 0, 0.65); border: none; color: #fff; }
+.sc-toggle-float:hover { background: rgba(0, 0, 0, 0.8); color: #fff; }
+
+.sc-panel { display: flex; flex-direction: column; gap: 12px; padding: 6px 10px 16px; }
+.sc-head { display: flex; align-items: center; gap: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--line-1); }
+.sc-title { flex: 1; min-width: 0; overflow: hidden; color: var(--text-1); font-size: 16.5px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.sc-diff { display: flex; flex-shrink: 0; align-items: center; gap: 4px; }
+.sc-diff b { color: var(--diff-color); font-size: 15px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.sc-diff-icon { flex-shrink: 0; width: 38px; height: 38px; object-fit: contain; }
+
+.sc-info { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; color: var(--mute); opacity: 0.8; }
+.sc-info:hover { opacity: 1; color: var(--text-1); }
+.sc-info svg { width: 14px; height: 14px; }
+
+.sc-table { display: flex; flex-direction: column; margin: 0 6px 12px;}
+.sc-table-title { display: flex; align-items: center; gap: 6px; padding: 0 4px; color: var(--text-1); font-size: 15.5px; font-weight: 600; }
+.sc-row { 
+  display: grid; gap: 8px; grid-template-columns: 1fr 76px 76px; align-items: center; padding: 6px 4px; border-bottom: 1px solid var(--line-1); 
+  color: var(--text-1); font-size: 13px; font-weight: 600; 
+}
+.sc-row > :nth-child(n+2) { text-align: right; }
+.sc-row .sc-name { color: var(--diff-color); }
+.sc-row-head { border-bottom-color: var(--line-2); color: var(--mute); font-size: 12px; }
+
+.sc-cal-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 4px 12px; }
+.sc-cal-title { margin-right: -6px; color: var(--text-1); font-size: 14px; font-weight: 600; }
+.sc-leg {
+  display: inline-flex; align-items: center; gap: 5px; padding: 3px 7px; background: var(--panel-3); border: 1px solid var(--line-1);
+  border-radius: var(--radius-button); color: var(--mute); font-size: 10.5px; font-weight: 400; opacity: 0.55;
+}
+.sc-leg.on { border-color: var(--line-2); color: var(--text-1); opacity: 1; }
+.sc-dot { width: 8px; height: 8px; background: var(--c); border-radius: 2px; }
+
+.sc-chart { display: grid; grid-template-columns: 26px 1fr 18px; grid-template-rows: 120px auto; column-gap: 4px; }
+.sc-axis { position: relative; color: var(--mute); font-size: 10px; font-weight: 600; }
+.sc-axis span { position: absolute; right: 2px; transform: translateY(50%); }
+.sc-axis-r span { left: 2px; right: auto; }
+.sc-plot { position: relative; border-bottom: 1px solid var(--line-2); border-left: 1px solid var(--line-2); border-right: 1px solid var(--line-2); }
+.sc-grid { position: absolute; left: 0; right: 0; height: 0; border-top: 1px dashed var(--line-1); }
+.sc-cols { position: absolute; inset: 0; display: flex; }
+.sc-col { display: flex; flex: 1; align-items: flex-end; justify-content: center; gap: 2px; min-width: 0; padding: 0 4px; }
+.sc-bar { flex: 1; max-width: 14px; border-radius: 3px 3px 0 0; }
+.sc-bar-n { background: var(--button); }
+.sc-bar-d { background: var(--stat-alt); }
+.sc-months { grid-column: 2; display: flex; }
+.sc-months span { flex: 1; padding-top: 4px; color: var(--mute); font-size: 10.5px; font-weight: 600; text-align: center; }
+.sc-chart.hide-n .sc-bar-n, .sc-chart.hide-n .sc-axis-l,
+.sc-chart.hide-d .sc-bar-d, .sc-chart.hide-d .sc-axis-r { visibility: hidden; }
+
 /* ==============================================
   4. Responsive
   =============================================== */
@@ -1308,7 +1367,8 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
   body:has(.scroll-top-btn.show) .stats-fab { bottom: 66px; }
   .list-view.stats-open .stats-fab { opacity: 0; transform: scale(0.8); pointer-events: none; }
 
-  .profile-pid { right: auto; left: 10px; }
+  .profile-pid { right: 48px; left: auto; }
+  .sc-head { padding-right: 40px; }
 
   #listStatsContainer { display: flex; flex-direction: column; min-height: 100%; }
   #listStatsContainer .profile-body { flex: 1; }
@@ -1316,6 +1376,7 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
   .profile-extra { display: flex; flex-direction: column; gap: 14px; width: 100%; margin-top: 4px; padding-top: 14px; text-align: left; border-top: 1px solid var(--line-1); }
   .ps-block { display: flex; flex-direction: column; gap: 6px; }
   .profile-list-id { align-self: flex-start; margin: auto 0 0; padding-top: 14px; }
+  .profile-pid {display: none; }
 }
 
 
@@ -1353,6 +1414,7 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
 @keyframes hintBar { to   { transform: scaleX(0); } }
 
 @media (hover: none), (max-width: 640px) { .demon-hint { display: none; } }
+
 /* ==== home.css ==== */
 .home { display: flex; flex-direction: column; gap: 28px; width: min(1000px, 100%); margin: 0 auto; }
 
