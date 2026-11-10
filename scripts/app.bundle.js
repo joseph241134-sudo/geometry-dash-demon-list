@@ -1593,8 +1593,8 @@ function renderListStats() {
 let statsMode = 'profile'; // 'profile' | 'stats'
 let statsSeries = { demons: true, diff: true };
 
-const DIFF_RAW_MAX = 4.4;   // promedio ponderado [1 - 4.4] expandido a [1 - 5]
-const DIFF_POW = 3;
+const DIFF_EXTREME_AT = 4.4;
+const DIFF_POW = 5;
 const STATS_MONTHS = 5;
 const diffNum = d => DIFFICULTIES.indexOf(d) + 1 || 1;
 
@@ -1602,7 +1602,7 @@ const diffNum = d => DIFFICULTIES.indexOf(d) + 1 || 1;
 function realDifficulty(demons) {
   if (!demons.length) return 0;
   const raw = Math.pow(demons.reduce((s, d) => s + Math.pow(diffNum(d.difficulty), DIFF_POW), 0) / demons.length, 1 / DIFF_POW);
-  return 1 + Math.min(1, Math.max(0, (raw - 1) / (DIFF_RAW_MAX - 1))) * 4;
+  return raw >= DIFF_EXTREME_AT ? 5 : raw;
 }
 
 function compactNum(n) {
