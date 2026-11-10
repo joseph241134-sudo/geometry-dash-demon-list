@@ -88,7 +88,7 @@
   --bg: #140c10; --panel: #1d1216; --panel-banner: #6a3a3a;
   --panel-1: #4a2a33; --panel-1-hover: #3e232b; --panel-2: #2a1a20; --panel-3: #22141a;
   --line-1: rgba(255, 190, 170, 0.12); --line-2: rgba(230, 160, 140, 0.4);
-  --button: #e0552d; --button-hover: #c74a26; --card: #22141a;
+  --button: #e0552d; --button-hover: #c74a26; --card: #22141a; --stat-alt: #38bdf8;
   --text-1: #fbeee9; --mute: #c4a5ab;
   --header-bg: #0b0608;  --header-img-filter: sepia(1) hue-rotate(300deg) saturate(0.6) contrast(1.5);
   --bg-img-filter: sepia(0.5) hue-rotate(340deg) saturate(2) brightness(0.75);
@@ -155,7 +155,7 @@
   --bg: #0b0612; --panel: #130a1e; --panel-banner: #3b1254;
   --panel-1: #32164d; --panel-1-hover: #3d1b5e; --panel-2: #1b0e2b; --panel-3: #12081d;
   --line-1: rgba(132, 204, 22, 0.18); --line-2: rgba(132, 204, 22, 0.42); --outline: #334155;
-  --button: #84cc16; --button-hover: #65a30d; --accent: #cbd5e1; --card: #12081d;
+  --button: #84cc16; --button-hover: #65a30d; --accent: #cbd5e1; --card: #12081d; --stat-alt: #f97316;
   --text-1: #f3e8ff; --text-2: #e9d5ff; --mute: #a3e635; --danger: #ef4444; --danger-hover: #dc2626;
   --shadow-1: rgba(40, 150, 69, 0.1); --shadow-2: rgba(75, 17, 89, 0.2); --shadow-3: rgba(56, 11, 65, 0.3);
   --header-bg: #06030b; --header-img-filter: sepia(1) hue-rotate(60deg) saturate(0.6) contrast(1.4);
@@ -1278,7 +1278,7 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
 .sc-row-head { border-bottom-color: var(--line-2); color: var(--mute); font-size: 12px; }
 
 .sc-cal-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 4px 12px; }
-.sc-cal-title { margin-right: -6px; color: var(--text-1); font-size: 14px; font-weight: 600; }
+.sc-cal-title { margin-right: -4px; color: var(--text-1); font-size: 14px; font-weight: 600; }
 .sc-leg {
   display: inline-flex; align-items: center; gap: 5px; padding: 3px 7px; background: var(--panel-3); border: 1px solid var(--line-1);
   border-radius: var(--radius-button); color: var(--mute); font-size: 10.5px; font-weight: 400; opacity: 0.55;
