@@ -275,13 +275,14 @@ const I18N = {
 
     'list.edit': 'Edit list', 'list.setMain': 'Set as main', 'list.unsetMain': 'Remove from main',
 
-    'list.by': 'By {name}', 'home.demons': 'Demons', 'home.hardest': 'Hardest',
+    'list.by': 'By {name}', 'home.demons': 'Demons', 'home.hardest': 'Hardest', 'home.pts': 'Pts',
     'home.lastAdded': 'Last demon added', 'list.view': 'View',
 
     'home.mainEmpty': 'No main list', 'home.mainEmptyText': 'Create your main list to see it here.', 'home.createMain': 'Create list',
 
     'lists.reorder': 'Reorder lists', 'list.moveUp': 'Move up', 'list.moveDown': 'Move down', 'lists.needTwo': 'You need to have at least 2 secondary lists.',
-    'lists.add': '+ Add', 'lists.empty': 'You have no secondary lists.', 'home.listEmpty': 'No demons',
+
+    'lists.add': '+ Add', 'lists.empty': 'You have no secondary lists.', 'home.listEmpty': 'No demons', 'stats.ptsShort': '{n} <small>pts</small>',
 
     'io.import': 'Import', 'io.export': 'Export', 'view.stats': 'Stats', 'io.options': 'Options',
 
@@ -339,6 +340,7 @@ const I18N = {
     'listm.upload': 'Upload banner', 'listm.remove': 'Remove banner', 'listm.png': 'Download image', 
     
     'listm.banner': 'List banner or image:', 'listm.name': 'List name:',
+    'listm.desc': 'Description:', 'listm.descPh': 'Describe your list...',
 
     'listm.blurOff': 'Card blur is turned off in Settings.',
 
@@ -355,6 +357,10 @@ const I18N = {
     'demon.yt': 'YouTube URL:',
 
     'demon.deleteConfirm': 'Delete "{name}" from this list? This cannot be undone.',
+
+  //modal-ranking ->
+    'rank.title': 'List ranking', 'rank.text': `The difficulty of a list is measured with points. Each beaten demon awards points based on its difficulty: {list}.\nThese points classify the rank of a list, from easy to extreme.`,
+    'rank.min': '{n} pts',
 
 //vista (SPA): Lista ----->
 
@@ -373,11 +379,11 @@ const I18N = {
     
     'view.compact': 'Compact view', 'view.count': 'Showing {shown} of {total} demons', 'view.clearFilters': 'Clear filters',
 
-    'stats.show': 'Show statistics', 'stats.profile': 'View profile', 'stats.info': 'Information',
+    'stats.show': 'View statistics', 'stats.profile': 'View profile', 'stats.info': 'Information',
     'stats.attempts': 'Attempts', 'stats.total': 'Total', 'stats.avg': 'Average', 
-    'stats.calendar': 'Chart', 'stats.demons': 'Demons', 'stats.realDiff': 'Difficulty',
-    'stats.attHint': 'Only demons with recorded attempts are taken into account for this data.',
-    'stats.calHint': 'Statistics for the last 5 months.\nFirst bar: Total demons completed each month.\nSecond bar: Average difficulty per month on a scale from 1 (Easy) to 5 (Extreme).',
+    'stats.calendar': 'Chart', 'stats.demons': 'Demons', 'stats.realDiff': 'Average difficulty',
+
+    'stats.points': '{n} pts', 'stats.pts': '{n} pts', 'stats.avgDiff': 'Average difficulty:',
 
   //card-demon ->
     'card.publishedBy': 'published by {name}', 'card.by': 'by {name}', 'card.attempts': 'Attempts:', 'card.date': 'Date:',
@@ -442,14 +448,14 @@ const I18N = {
 
     'list.edit': 'Editar lista', 'list.setMain': 'Establecer como principal', 'list.unsetMain': 'Quitar de principal',
 
-    'list.by': 'Por {name}', 'home.demons': 'Demons', 'home.hardest': 'Hardest',
+    'list.by': 'Por {name}', 'home.demons': 'Demons', 'home.hardest': 'Hardest', 'home.pts': 'Ptos',
     'home.lastAdded': 'Último Demon agregado', 'list.view': 'Ver',
 
     'home.mainEmpty': 'Sin lista principal', 'home.mainEmptyText': 'Crea tu lista principal para verla aquí.', 'home.createMain': 'Crear lista',
 
     'lists.reorder': 'Ordenar listas', 'list.moveUp': 'Subir', 'list.moveDown': 'Bajar', 'lists.needTwo': 'Tienes que tener al menos 2 listas secundarias.',
 
-    'lists.add': '+ Añadir', 'lists.empty': 'No tienes listas secundarias.', 'home.listEmpty': 'Sin demons',
+    'lists.add': '+ Añadir', 'lists.empty': 'No tienes listas secundarias.', 'home.listEmpty': 'Sin demons', 'stats.ptsShort': '{n} <small>ptos</small>',
 
     'io.import': 'Importar', 'io.export': 'Exportar', 'view.stats': 'Estadísticas', 'io.options': 'Opciones',
 
@@ -508,6 +514,7 @@ const I18N = {
     'listm.upload': 'Subir banner', 'listm.remove': 'Eliminar banner', 'listm.png': 'Descargar imagen',
     
     'listm.banner': 'Banner o imagen de lista:', 'listm.name': 'Nombre de lista:',
+    'listm.desc': 'Descripción:', 'listm.descPh': 'Describe tu lista...',
 
     'listm.blurOff': 'El difuminado de cartas está desactivado en Ajustes.',
 
@@ -524,6 +531,11 @@ const I18N = {
     'demon.yt': 'URL de YouTube:',
 
     'demon.deleteConfirm': '¿Eliminar "{name}" de esta lista? No se podrá recuperar.',
+
+  //modal-ranking ->
+    'rank.title': 'Ranking de lista', 'rank.text': `La dificultad de una lista se mide con puntos, cada demon superado suma puntos según su dificultad: {list}. 
+  \nEstos puntos clasifícan el rango de una lista, desde easy hasta extreme.`, 
+    'rank.min': '{n} ptos',
 
 //vista (SPA): Lista ----->
 
@@ -544,9 +556,9 @@ const I18N = {
 
     'stats.show': 'Ver estadísticas', 'stats.profile': 'Ver perfil', 'stats.info': 'Información',
     'stats.attempts': 'Intentos', 'stats.total': 'Total', 'stats.avg': 'Promedio', 
-    'stats.calendar': 'Gráfica', 'stats.demons': 'Demons', 'stats.realDiff': 'Dificultad',
-    'stats.attHint': 'Para estos datos solo se toman en cuenta los demons que tienen intentos registrados.',
-    'stats.calHint': 'Estadísticas de los últimos 5 meses.\nPrimera barra: Total de demons completados en cada mes.\nSegunda Barra: Promedio de dificultad por mes. Se toma una escala de 1 (Easy) hasta 5 (Extreme).',
+    'stats.calendar': 'Gráfica', 'stats.demons': 'Demons', 'stats.realDiff': 'Dificultad media',
+ 
+    'stats.points': '{n} ptos', 'stats.pts': '{n} ptos', 'stats.avgDiff': 'Dificultad media:',
 
   //card-demon ->
     'card.publishedBy': 'publicado por {name}', 'card.by': 'por {name}', 'card.attempts': 'Intentos:', 'card.date': 'Fecha:',
@@ -1102,6 +1114,7 @@ function normalizeList(list) {
     ...rest,
     id: Number(list.id) || Date.now(),
     title: String(list.title || '').slice(0, 32),
+    description: String(list.description || '').slice(0, 120),
     image: safeImg(list.image),
     isMain: list.isMain === true,
     order: Number.isFinite(list.order) ? list.order : Date.now(),
@@ -1525,6 +1538,8 @@ function renderListStats() {
   const demons = currentList.demons || [];
   const hardest = demons.length ? (demons[0].name || '-') : '-';
   const top = demons[0];
+  const pts = listPoints(demons);
+  const rank = pointsRank(pts);
 
   const breakdown = DIFFICULTIES.map(diff => `
     <div class="diff-col">
@@ -1566,7 +1581,7 @@ function renderListStats() {
 
     <div class="profile-body">
       <h3 class="profile-title">${escapeHTML(profileState.username) || '-'}</h3>  
-      <span class="profile-handle">${escapeHTML(currentList.title || '-')}</span>
+      <span class="profile-handle profile-pts">${t('stats.pts', { n: compactNum(pts) })}</span>
 
       <div class="stats-grid">
         <div class="stat-card">
@@ -1593,16 +1608,19 @@ function renderListStats() {
 let statsMode = 'profile'; // 'profile' | 'stats'
 let statsSeries = { demons: true, diff: true };
 
-const DIFF_EXTREME_AT = 4.4;
-const DIFF_POW = 5;
 const STATS_MONTHS = 5;
 const diffNum = d => DIFFICULTIES.indexOf(d) + 1 || 1;
 
-// Promedio ponderado (p = 5)
+// Puntos por dificultad y puntos mínimos de cada rango
+const DIFF_POINTS = { 'Easy Demon': 2, 'Medium Demon': 5, 'Hard Demon': 12, 'Insane Demon': 30, 'Extreme Demon': 100 };
+const RANK_POINTS = [2, 50, 200, 750, 2000];
+
+const listPoints = demons => demons.reduce((s, d) => s + (DIFF_POINTS[d.difficulty] || 0), 0);
+const pointsRank = pts => DIFFICULTIES[RANK_POINTS.reduce((r, min, i) => pts >= min ? i : r, 0)];
+
+// Promedio lineal (1 = Easy ... 5 = Extreme)
 function realDifficulty(demons) {
-  if (!demons.length) return 0;
-  const raw = Math.pow(demons.reduce((s, d) => s + Math.pow(diffNum(d.difficulty), DIFF_POW), 0) / demons.length, 1 / DIFF_POW);
-  return raw >= DIFF_EXTREME_AT ? 5 : raw;
+  return demons.length ? demons.reduce((s, d) => s + diffNum(d.difficulty), 0) / demons.length : 0;
 }
 
 function compactNum(n) {
@@ -1646,7 +1664,11 @@ function niceTop(max) {
 
 function renderAdvancedStats(container, demons) {
   const rd = realDifficulty(demons);
-  const icon = rd ? DIFFICULTY[DIFFICULTIES[Math.round(rd) - 1]].icon : '';
+  const hardest = demons[0];
+  const avgDiff = rd ? DIFFICULTIES[Math.round(rd) - 1] : '';
+  const pts = listPoints(demons);
+  const rank = pointsRank(pts);
+  const hasRank = pts >= RANK_POINTS[0];
 
   const cell = n => n ? `<span title="${Number(n).toLocaleString()}">${compactNum(n)}</span>` : '<span>-</span>';
 
@@ -1676,18 +1698,26 @@ function renderAdvancedStats(container, demons) {
 
   const leg = (key, label, color) =>
     `<button type="button" class="sc-leg ${statsSeries[key] ? 'on' : ''}" data-sc-series="${key}"><i class="sc-dot" style="--c:${color}"></i>${label}</button>`;
-  const infoBtn = k => `<button type="button" class="sc-info" data-sc-info="${k}" title="${t('stats.info')}">${svg.Info}</button>`;
 
   container.innerHTML = `
     <div class="sc-panel">
-      <div class="sc-head">
+      <div class="sc-head" style="${diffColorStyle(rank)}">
         <button type="button" class="sc-toggle" data-sc-mode="profile" title="${t('stats.profile')}">${svg.Perfil}</button>
-        <h3 class="sc-title" title="${escapeHTML(currentList.title)}">${escapeHTML(currentList.title)}</h3>
-        ${icon ? `<span class="sc-diff" style="${diffColorStyle(DIFFICULTIES[Math.round(rd) - 1])}"><b>${rd.toFixed(1)}</b><img class="sc-diff-icon" src="${icon}" alt=""></span>` : ''}
+        ${hasRank ? `<img class="sc-diff-icon" src="${diffIcon(rank)}" alt="">` : `<span class="sc-diff-icon empty"></span>`}
+        <span class="sc-pts-text">${t('stats.points', { n: `<b title="${pts.toLocaleString()}">${compactNum(pts)}</b>` })}</span>
+        <button type="button" class="sc-info" data-sc-info title="${t('stats.info')}">${svg.Info}</button>
+      </div>
+
+      <div class="sc-avg">
+        <span>${t('stats.avgDiff')}</span>
+        <span class="sc-avg-val" style="${avgDiff ? diffColorStyle(avgDiff) : ''}">${avgDiff ? rd.toFixed(1) : '-'}</span>
+        <span class="sc-avg-sep">·</span>
+        <span>${t('home.hardest')}:</span>
+        <span class="sc-avg-val sc-avg-hard" style="${hardest ? diffColorStyle(hardest.difficulty) : ''}" title="${escapeHTML(hardest ? hardest.name : '')}">${hardest ? escapeHTML(hardest.name || '-') : '-'}</span>
       </div>
 
       <div class="sc-table">
-        <div class="sc-table-title">${t('stats.attempts')}${infoBtn('table')}</div>
+        <div class="sc-table-title">${t('stats.attempts')}</div>
         <div class="sc-row sc-row-head">
           <span></span><span>${t('stats.total')}</span><span>${t('stats.avg')}</span>
         </div>
@@ -1696,7 +1726,6 @@ function renderAdvancedStats(container, demons) {
 
       <div class="sc-cal-head">
         <span class="sc-cal-title">${t('stats.calendar')}</span>
-        ${infoBtn('chart')}
         ${leg('demons', t('stats.demons'), 'var(--button)')}
         ${leg('diff', t('stats.realDiff'), 'var(--stat-alt)')}
       </div>
@@ -1725,8 +1754,28 @@ function onStatsPanelClick(e) {
     return renderListStats();
   }
 
-  const inf = e.target.closest('[data-sc-info]');
-  if (inf) showInfoModal(t('stats.info'), t(inf.dataset.scInfo === 'table' ? 'stats.attHint' : 'stats.calHint'));
+  if (e.target.closest('[data-sc-info]')) openRankInfoModal();
+}
+
+function openRankInfoModal() {
+  const pts = DIFFICULTIES.map(d =>
+    `<b class="rk-pt" style="${diffColorStyle(d)}">${d.replace(' Demon', '')} +${DIFF_POINTS[d]}</b>`).join(', ');
+
+  const ov = openModal({
+    title: t('rank.title'),
+    cls: 'modal-sm modal-rank',
+    titleExtra: `<button type="button" class="btn-info-icon" data-close aria-label="${t('common.close')}">${svg.Close}</button>`,
+    body: `
+      <p class="dialog-text">${t('rank.text', { list: pts })}</p>
+      <div class="rk-row">
+        ${DIFFICULTIES.map((d, i) => `
+          <div class="rk-col" style="${diffColorStyle(d)}" title="${d}">
+            <img src="${diffIcon(d)}" alt="${d}">
+            <span>${t('rank.min', { n: RANK_POINTS[i] })}</span>
+          </div>`).join('')}
+      </div>`
+  });
+  ov.querySelector('[data-close]').addEventListener('click', () => closeModal(ov));
 }
 
 // ======================================================
@@ -2444,7 +2493,7 @@ function openListView(listId) {
       <div class="list-view-header">
         <div class="list-view-heading">
           <h1 class="list-view-title">${escapeHTML(currentList.title)}</h1>
-          <span class="list-view-subtitle" id="listViewSubtitle">${escapeHTML(listSubtitleText())}</span>
+          ${currentList.description ? `<p class="list-view-desc">${escapeHTML(currentList.description)}</p>` : ''}
         </div>
         <div class="list-view-actions">
           <button type="button" id="btnImportList" class="btn-line btn-io btn-io-import" title="${t('listm.import')}">${svg.Import}<span class="btn-label">${t('io.import')}</span></button>
@@ -3243,6 +3292,11 @@ function openListModal(listId = null, asMain = false) {
       <div class="form-group">
         <label>${t('listm.name')}</label>
         <input type="text" id="editListTitle" maxlength="32" spellcheck="false" class="form-input" placeholder="My Demon List" value="${list ? escapeHTML(list.title) : ''}">
+      </div>
+      
+      <div class="form-group">
+        <label>${t('listm.desc')}</label>
+        <textarea id="editListDesc" class="form-input" maxlength="120" rows="3" spellcheck="false" placeholder="${t('listm.descPh')}">${list ? escapeHTML(list.description || '') : ''}</textarea>
       </div>`,
     actions: `
       <button type="button" id="btnCancelListModal" class="btn-secondary">${t('common.cancel')}</button>
@@ -3330,10 +3384,12 @@ function openListModal(listId = null, asMain = false) {
     const title = $('editListTitle').value.trim();
     if (!title) return markInvalid($('editListTitle'));
 
+    const description = $('editListDesc').value.trim().slice(0, 120);
+
     if (isEditing) {
-      Object.assign(list, { title, image });
+      Object.assign(list, { title, image, description });
     } else {
-      const created = normalizeList({ id: Date.now(), title, image, author: profileState.username, demons: [] });
+      const created = normalizeList({ id: Date.now(), title, image, description, author: profileState.username, demons: [] });
       userLists.push(created);
       if (asMain) setMainList(created.id);
     }
@@ -4086,6 +4142,8 @@ function renderMainCard(list) {
   const img = listThumb(list);
   const hdImg = list.image ? '' : getYouTubeThumbnail(demons[0]?.showcase, 'maxresdefault');
   const last = lastAddedDemon(demons);
+  const pts = listPoints(demons);
+  const ptsStyle = diffColorStyle(pointsRank(pts));
 
   const lastSlide = last ? `
     <div class="hp-rotor-slide">
@@ -4107,12 +4165,14 @@ function renderMainCard(list) {
             ? `<img src="${escapeHTML(hdImg || img)}" alt="" loading="lazy" ${hdImg ? `onerror="this.onerror=null;this.src='${escapeHTML(img)}'"` : ''}>`
             : (top ? `<img class="contain" src="${diffIcon(top.difficulty)}" alt="">` : '')}
           ${top
-            ? `<span class="hp-diff" style="${diffColorStyle(top.difficulty)}">#1 · ${escapeHTML(top.difficulty)}</span>`
+            ? `<span class="hp-diff" style="${diffColorStyle(pointsRank(pts))}"><img src="${diffIcon(pointsRank(pts))}" alt="">${t('stats.points', { n: `<b title="${pts.toLocaleString()}">${compactNum(pts)}</b>` })}</span>`
             : `<span class="hp-diff-empty">${t('home.listEmpty')}</span>`}
         </div>
         <div class="hp-main-info">
           <h3 class="hp-main-title">${escapeHTML(list.title)}</h3>
-          <p class="hp-main-by">${t('list.by', { name: escapeHTML(profileState.username || '') })}</p>
+          ${list.description
+            ? `<p class="hp-main-desc">${escapeHTML(list.description)}</p>`
+            : `<p class="hp-main-by">${t('list.by', { name: escapeHTML(profileState.username || '') })}</p>`}
           <div class="hp-main-stats">
             <div class="hp-stat"><span>${t('home.demons')}</span><strong>${demons.length}</strong></div>
             <div class="hp-stat"><span>${t('home.hardest')}</span><strong class="hp-hardest" ${top ? `style="${diffColorStyle(top.difficulty)}"` : ''} title="${escapeHTML(hardest)}">${escapeHTML(hardest)}</strong></div>
@@ -4144,6 +4204,8 @@ function renderOtherItem(list, i, n) {
   const top = demons[0];
   const hardest = top ? (top.name || '-') : '-';
   const img = listThumb(list);
+  const pts = listPoints(demons);
+  const rank = pointsRank(pts);
 
   const actions = reorderMode
     ? `<div class="hp-item-actions hp-reorder">
@@ -4159,7 +4221,10 @@ function renderOtherItem(list, i, n) {
     <div class="hp-item ${img ? 'has-bg' : ''} ${reorderMode ? 'reordering' : ''}" data-card-list="${list.id}" ${top ? `style="${diffColorStyle(top.difficulty)}"` : ''}>
       ${img ? `<div class="hp-item-bg" style="background-image:url('${escapeHTML(img)}')"></div>` : ''}
       ${top
-        ? `<div class="hp-item-icon"><img src="${diffIcon(top.difficulty)}" alt="${escapeHTML(top.difficulty)}" title="${escapeHTML(top.difficulty)}"></div>`
+        ? `<div class="hp-item-rank" style="${diffColorStyle(rank)}" title="${escapeHTML(rank)}">
+             <img src="${diffIcon(rank)}" alt="${escapeHTML(rank)}">
+             <span title="${pts.toLocaleString()}">${t('stats.ptsShort', { n: compactNum(pts) })}</span>
+           </div>`
         : `<div class="hp-item-icon empty"></div>`}
       <div class="hp-item-info">
         <h4>${escapeHTML(list.title)}</h4>
