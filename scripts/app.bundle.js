@@ -4218,11 +4218,11 @@ function renderOtherItem(list, i, n) {
   return `
     <div class="hp-item ${img ? 'has-bg' : ''} ${reorderMode ? 'reordering' : ''}" data-card-list="${list.id}" ${top ? `style="${diffColorStyle(top.difficulty)}"` : ''}>
       ${img ? `<div class="hp-item-bg" style="background-image:url('${escapeHTML(img)}')"></div>` : ''}
-      ${top
-        ? `<div class="hp-item-rank" style="${diffColorStyle(rank)}" title="${escapeHTML(rank)}">
+            ${top
+        ? `<div class="hp-item-rank" title="${escapeHTML(rank)}">
              <img src="${diffIcon(rank)}" alt="${escapeHTML(rank)}">
-             <span title="${pts.toLocaleString()}">${t('stats.ptsShort', { n: compactNum(pts) })}</span>
-           </div>`
+           </div>
+           <span class="hp-item-pts" style="${diffColorStyle(rank)}" title="${pts.toLocaleString()}">${t('stats.ptsShort', { n: compactNum(pts) })}</span>`
         : `<div class="hp-item-icon empty"></div>`}
       <div class="hp-item-info">
         <h4>${escapeHTML(list.title)}</h4>

@@ -1663,18 +1663,20 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
 .hp-item-icon { position: relative; flex-shrink: 0; display: grid; place-items: center; width: 50px; height: 50px; }
 .hp-item-icon.empty::before { content: ""; width: 64%; height: 64%; border: 1px dashed var(--line-2); border-radius: 50%; }
 
-.hp-item-rank { position: relative; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 50px; margin-top: -6px; }
+.hp-item-rank { position: relative; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 2px; }
 .hp-item-rank img { width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5)); }
-.hp-item-rank span { 
-  color: var(--diff-color); font-size: 10.5px; font-weight: 600; font-variant-numeric: tabular-nums; margin-top: -2px; white-space: nowrap;
-  background-color: rgba(0, 0, 0, .6); padding: 2px 5px 2px 6px; align-items: center; text-align: center; border-radius: 4px; border: 1px solid var(--line-2); }
-.hp-item-rank span small { color: var(--mute); font-size: 9.5px; font-weight: 500; }
+
+.hp-item-pts {
+  position: absolute; top: -1px; left: -1px; z-index: 1; color: var(--diff-color); font-size: 10.5px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap;
+  background-color: rgba(0, 0, 0, .6); padding: 3px 8px 5px; text-align: center; border-bottom-right-radius: 6px; border: 1px solid var(--line-2); pointer-events: none;
+}
+.hp-item-pts small { color: var(--mute); font-size: 9.5px; font-weight: 500; }
 
 .hp-item-info, .hp-item-actions { position: relative; }
 .hp-item-info { flex: 1; min-width: 0; }
 .hp-item-info h4 { overflow: hidden; color: var(--text-1); font-size: 21px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
 
-.hp-item-chips { display: flex; gap: 6px; margin-top: 6px; min-width: 0; margin-left: 4px; }
+.hp-item-chips { display: flex; gap: 6px; margin-top: 6px; min-width: 0; }
 .hp-chip {
   flex-shrink: 0; padding: 4px 8px; background-color: rgba(0, 0, 0, 0.6); border: 1px solid var(--line-1); border-radius: 8px;
   color: var(--mute); font-size: 11.5px; font-weight: 500; white-space: nowrap;
@@ -1778,7 +1780,6 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
   .hp-item { min-height: 98px; padding: 10px 8px 10px 10px; }
   .hp-item-icon { width: 42px; height: 42px; }
   .hp-item-info h4 { font-size: 18px; }
-  .hp-item-rank span {padding: 3px 5px 3px 6px; }
   .hp-item .hp-view { display: none; }
   .hp-item-actions:not(.hp-reorder) { position: absolute; top: 8px; right: 8px; }
   .hp-item-info h4 { padding-right: 28px; }
