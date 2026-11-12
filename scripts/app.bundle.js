@@ -339,8 +339,9 @@ const I18N = {
 
     'listm.upload': 'Upload banner', 'listm.remove': 'Remove banner', 'listm.png': 'Download image', 
     
-    'listm.banner': 'List banner or image:', 'listm.name': 'List name:',
-    'listm.desc': 'Description:', 'listm.descPh': 'Describe your list...',
+    'listm.banner': 'Background and thumbnail:', 'listm.name': 'Name:',
+    'listm.desc': 'Description:',  'listm.descPh': 'My Hardest...',
+
 
     'listm.blurOff': 'Card blur is turned off in Settings.',
 
@@ -381,7 +382,7 @@ const I18N = {
 
     'stats.show': 'View statistics', 'stats.profile': 'View profile', 'stats.info': 'Information',
     'stats.attempts': 'Attempts', 'stats.total': 'Total', 'stats.avg': 'Average', 
-    'stats.calendar': 'Chart', 'stats.demons': 'Demons', 'stats.realDiff': 'Average difficulty',
+    'stats.calendar': 'Trayectory', 'stats.demons': 'Demons', 'stats.realDiff': 'Average difficulty',
 
     'stats.points': '{n} pts', 'stats.pts': '{n} pts', 'stats.avgDiff': 'Average difficulty:',
 
@@ -513,8 +514,8 @@ const I18N = {
 
     'listm.upload': 'Subir banner', 'listm.remove': 'Eliminar banner', 'listm.png': 'Descargar imagen',
     
-    'listm.banner': 'Banner o imagen de lista:', 'listm.name': 'Nombre de lista:',
-    'listm.desc': 'Descripción:', 'listm.descPh': 'Describe tu lista...',
+    'listm.banner': 'Fondo y miniatura:', 'listm.name': 'Nombre:',
+    'listm.desc': 'Descripción:', 'listm.descPh': 'Mis Hardest...',
 
     'listm.blurOff': 'El difuminado de cartas está desactivado en Ajustes.',
 
@@ -556,7 +557,7 @@ const I18N = {
 
     'stats.show': 'Ver estadísticas', 'stats.profile': 'Ver perfil', 'stats.info': 'Información',
     'stats.attempts': 'Intentos', 'stats.total': 'Total', 'stats.avg': 'Promedio', 
-    'stats.calendar': 'Gráfica', 'stats.demons': 'Demons', 'stats.realDiff': 'Dificultad media',
+    'stats.calendar': 'Trayectoria', 'stats.demons': 'Demons', 'stats.realDiff': 'Dificultad media',
  
     'stats.points': '{n} ptos', 'stats.pts': '{n} ptos', 'stats.avgDiff': 'Dificultad media:',
 
