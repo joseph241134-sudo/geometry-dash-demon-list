@@ -376,7 +376,7 @@ main > * { position: relative; z-index: 3; }
 main::before { content: ""; position: fixed; inset: var(--bg-fx-inset); z-index: 0; pointer-events: none; background: var(--bg-fx); background-size: var(--bg-fx-size); animation: var(--bg-fx-anim); }
 main::after {
   content: ""; position: fixed; top: 60px; height: calc(100vh - 60px); left: 0; right: 0; bottom: auto; z-index: -1;
-  pointer-events: none; background: url("../resources/bg.png") left center / cover no-repeat; filter: var(--bg-img-filter);
+  pointer-events: none; background: url("../resources/bg.webp") left center / cover no-repeat; filter: var(--bg-img-filter);
 }
 
 /* ---- main - animacion de vista (SPA) ---- */
@@ -428,7 +428,7 @@ body.booting::after {
   main { padding: 12px ; gap: 0; }
 }
 
-@media (max-width: 768px) { main::after { background-image: url("../resources/bg_mobile.png"); top: 50px; height: calc(100vh - 50px); } }
+@media (max-width: 768px) { main::after { background-image: url("../resources/bg_mobile.webp"); top: 50px; height: calc(100vh - 50px); } }
 
 @media (max-width: 640px) {
     header { padding: 6px 12px; gap: 8px; height: 50px;}
@@ -1770,7 +1770,6 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
   .hp-main-actions {padding-left: 2px; padding-right: 2px; }
   .hp-main-btn { padding: 8px 16px; }
   .hp-diff-chip { gap: 3px; padding: 5px 10px 5px 8px; }
-  .hp-diff-chip img { width: 21px; height: 21px; }
   .hp-diff-chip strong { font-size: 9.5px; }
   .hp-main-btn { display: none; position: absolute; }
 
@@ -1779,6 +1778,7 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
   .hp-item { min-height: 98px; padding: 10px 8px 10px 10px; }
   .hp-item-icon { width: 42px; height: 42px; }
   .hp-item-info h4 { font-size: 18px; }
+  .hp-item-rank span {padding: 3px 5px 3px 6px; }
   .hp-item .hp-view { display: none; }
   .hp-item-actions:not(.hp-reorder) { position: absolute; top: 8px; right: 8px; }
   .hp-item-info h4 { padding-right: 28px; }

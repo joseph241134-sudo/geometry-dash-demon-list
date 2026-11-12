@@ -276,7 +276,7 @@ const I18N = {
     'list.edit': 'Edit list', 'list.setMain': 'Set as main', 'list.unsetMain': 'Remove from main',
 
     'list.by': 'By {name}', 'home.demons': 'Demons', 'home.hardest': 'Hardest', 'home.pts': 'Pts',
-    'home.lastAdded': 'Last demon added', 'list.view': 'View',
+    'home.lastAdded': 'Last demon added', 'list.view': 'View', 'list.defaultDesc': 'My Demon List · 2026.',
 
     'home.mainEmpty': 'No main list', 'home.mainEmptyText': 'Create your main list to see it here.', 'home.createMain': 'Create list',
 
@@ -284,7 +284,7 @@ const I18N = {
 
     'lists.add': '+ Add', 'lists.empty': 'You have no secondary lists.', 'home.listEmpty': 'No demons', 'stats.ptsShort': '{n} <small>pts</small>',
 
-    'io.import': 'Import', 'io.export': 'Export', 'view.stats': 'Stats', 'io.options': 'Options',
+    'io.import': 'Import', 'io.export': 'Export', 'view.stats': 'Stats', 'io.options': 'Options', 
 
 //vista de bienvenida --->
     'welcome.h1': 'Create and organize your own',
@@ -449,7 +449,7 @@ const I18N = {
     'list.edit': 'Editar lista', 'list.setMain': 'Establecer como principal', 'list.unsetMain': 'Quitar de principal',
 
     'list.by': 'Por {name}', 'home.demons': 'Demons', 'home.hardest': 'Hardest', 'home.pts': 'Ptos',
-    'home.lastAdded': 'Último Demon agregado', 'list.view': 'Ver',
+    'home.lastAdded': 'Último Demon agregado', 'list.view': 'Ver', 'list.defaultDesc': 'Mi lista Demon · 2026',
 
     'home.mainEmpty': 'Sin lista principal', 'home.mainEmptyText': 'Crea tu lista principal para verla aquí.', 'home.createMain': 'Crear lista',
 
@@ -1048,7 +1048,7 @@ const svg = {
   Lang: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>`,
   Globe: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.9 17.39c-.26-.8-1.01-1.39-1.9-1.39h-1v-3a1 1 0 0 0-1-1H8v-2h2a1 1 0 0 0 1-1V7h2a2 2 0 0 0 2-2v-.41a7.984 7.984 0 0 1 2.9 12.8M11 19.93c-3.95-.49-7-3.85-7-7.93c0-.62.08-1.22.21-1.79L9 15v1a2 2 0 0 0 2 2m1-16A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>`,
   Flag_en: `<svg class="lang-flag" viewBox="0 0 30 21" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="21" fill="#b22234"/><g fill="#fff"><rect y="1.615" width="30" height="1.615"/><rect y="4.846" width="30" height="1.615"/><rect y="8.077" width="30" height="1.615"/><rect y="11.308" width="30" height="1.615"/><rect y="14.538" width="30" height="1.615"/><rect y="17.769" width="30" height="1.615"/></g><rect width="12" height="11.31" fill="#3c3b6e"/><g fill="#fff"><circle cx="2" cy="2" r=".6"/><circle cx="4.5" cy="2" r=".6"/><circle cx="7" cy="2" r=".6"/><circle cx="9.5" cy="2" r=".6"/><circle cx="2" cy="5.6" r=".6"/><circle cx="4.5" cy="5.6" r=".6"/><circle cx="7" cy="5.6" r=".6"/><circle cx="9.5" cy="5.6" r=".6"/><circle cx="2" cy="9.2" r=".6"/><circle cx="4.5" cy="9.2" r=".6"/><circle cx="7" cy="9.2" r=".6"/><circle cx="9.5" cy="9.2" r=".6"/></g></svg>`,
-  Flag_es: `<svg class="lang-flag" viewBox="0 0 30 21" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="21" fill="#d91023"/><rect x="10" width="10" height="21" fill="#fff"/><circle cx="15" cy="10.5" r="2.4" fill="#d9b44a" stroke="#8a6d1d" stroke-width=".6"/></svg>`,
+  Flag_es: `<svg class="lang-flag" viewBox="0 0 30 21" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="21" fill="#aa151b"/><rect y="5.25" width="30" height="10.5" fill="#f1bf00"/></svg>`,
   Perfil: `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2A5 5 0 1 0 12 12A5 5 0 0 0 12 2ZM4 19C4 15.686 7.582 13 12 13C16.418 13 20 15.686 20 19C20 20.105 19.105 21 18 21H6C4.895 21 4 20.105 4 19Z" /></svg>`,
   Wave: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" class="icon-chevron"><path d="M 7.41 8.59 L 12 13.17 L 16.59 8.59 L 18 10 L 12 16 L 6 10 L 7.41 8.59 Z" fill="currentColor" /></svg>`,
   MiniWave: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" class="icon-chevron"><path d="M 7.41 8.59 L 12 13.17 L 16.59 8.59 L 18 10 L 12 16 L 6 10 L 7.41 8.59 Z" fill="currentColor" /></svg>`,
@@ -1174,7 +1174,7 @@ function loadData() {
   }
 
   if (!parsed || typeof parsed !== 'object') {
-    userLists = [normalizeList({ id: Date.now(), title: DEFAULT_LIST_TITLE, author: profileState.username, isMain: true, demons: [] })];
+    userLists = [normalizeList({ id: Date.now(), title: DEFAULT_LIST_TITLE, description: t('list.defaultDesc'), author: profileState.username, isMain: true, demons: [] })];
     saveData();
     return;
   }
@@ -1962,7 +1962,7 @@ function updateLockButton() {
   
   btn.classList.toggle('blocked', filtered);
   btn.classList.toggle('active', locked);
-  btn.querySelector('img').src = locked ? 'resources/padlock_close.png' : 'resources/padlock_open.png';
+  btn.querySelector('img').src = locked ? 'resources/padlock_close.webp' : 'resources/padlock_open.webp';
 }
 
 // ------------------------------------------------------
@@ -2556,7 +2556,7 @@ function openListView(listId) {
 
         <div class="view-toggle">
           <button type="button" id="btnToggleCompact" title="${t('view.compact')}">${svg.Compact}</button>
-          <button type="button" id="btnToggleThumb" title="${t('view.thumbYt')}"><img src="resources/demon.png" alt=""></button>
+          <button type="button" id="btnToggleThumb" title="${t('view.thumbYt')}"><img src="resources/demon.webp" alt=""></button>
         </div>
       </div>
 
@@ -3834,8 +3834,8 @@ let userLists = [];
 const DEFAULT_PROFILE = { username: 'Player 1', avatar: '', banner: '', bannerColor: '', country: '', playerType: '', gdId: '', gdName: '', gdRank: '', bio: '' };
 let profileState = { ...DEFAULT_PROFILE };
 
-const DEFAULT_AVATAR = 'resources/avatar.jpg';
-const FAV_ICON = { on: 'resources/fav_on.png', off: 'resources/fav_off.png' };
+const DEFAULT_AVATAR = 'resources/avatar.webp';
+const FAV_ICON = { on: 'resources/fav_on.webp', off: 'resources/fav_off.webp' };
 const getAvatar = () => profileState.avatar || DEFAULT_AVATAR;
 
 // ID público
@@ -4170,9 +4170,7 @@ function renderMainCard(list) {
         </div>
         <div class="hp-main-info">
           <h3 class="hp-main-title">${escapeHTML(list.title)}</h3>
-          ${list.description
-            ? `<p class="hp-main-desc">${escapeHTML(list.description)}</p>`
-            : `<p class="hp-main-by">${t('list.by', { name: escapeHTML(profileState.username || '') })}</p>`}
+          ${list.description ? `<p class="hp-main-desc">${escapeHTML(list.description)}</p>` : ''}
           <div class="hp-main-stats">
             <div class="hp-stat"><span>${t('home.demons')}</span><strong>${demons.length}</strong></div>
             <div class="hp-stat"><span>${t('home.hardest')}</span><strong class="hp-hardest" ${top ? `style="${diffColorStyle(top.difficulty)}"` : ''} title="${escapeHTML(hardest)}">${escapeHTML(hardest)}</strong></div>
