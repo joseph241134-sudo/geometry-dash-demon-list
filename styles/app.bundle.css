@@ -23,7 +23,7 @@
 /* ---------------------------------------------------------------------------------------------- */
   --font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --radius-button: 6px;
-  --radius-box: 20px;
+  --radius-box: 12px;
   --radius-sm: 10px;
   --radius-sn: 16px;
   --radius-card: 12px;
@@ -790,8 +790,10 @@ body.legal { min-height: 100vh; background: var(--bg); color: var(--text-1); lin
 .pe-banner-edit { position: absolute; top: 10px; right: 10px; z-index: 3; }
 .pe-banner-edit .pop-menu { left: auto; right: 0; min-width: 130px; transform-origin: top right; }
 
-.pe-edit-btn { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: rgba(0, 0, 0, 0.6); border-radius: 50%; color: #fff; }
+.pe-edit-btn { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: rgba(0, 0, 0, 0.6); border-radius: 6px; color: #fff; }
 .pe-edit-btn:hover { background: rgba(0, 0, 0, 0.85); }
+
+.pe-edit-btn svg {width: 14px; height: 14px; }
 
 .pe-avatar-wrap { position: absolute; left: 24px; bottom: -48px; z-index: 2; width: 110px; height: 110px; }
 .pe-avatar-wrap .pop-menu {min-width: 120px;}
@@ -880,7 +882,7 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
 
 .edit-btn {
   display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6);
-  border-radius: 50%; color: #fff; top: 2px; right: 0; position: absolute; border: 1px solid var(--line-1);
+  border-radius: 50%; color: #fff; top: 2px; right: 0; position: absolute;
 }
 .edit-btn:hover { background: rgba(0, 0, 0, 0.85); }
 
@@ -1544,7 +1546,7 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
   =============================================== */
 
 .hp-main-card {
-  position: relative; display: flex; flex-direction: column; gap: 20px; padding: 22px 18px 6px; overflow: hidden; isolation: isolate;
+  position: relative; display: flex; flex-direction: column; gap: 16px; padding: 18px 12px 6px; overflow: hidden; isolation: isolate;
   cursor: pointer; background-color: var(--panel); border: 1px solid var(--line-1); border-radius: var(--radius-box); transition: border-color 0.2s, box-shadow 0.2s;
 }
 .hp-main-card:hover { border-color: var(--line-2); box-shadow: 0 4px 22px var(--shadow-2); }
@@ -1557,12 +1559,12 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
           mask-image: linear-gradient(180deg, #000 55%, transparent 96%);
 }
 
-.hp-main-top { display: flex; align-items: stretch; gap: 20px; }
+.hp-main-top { display: flex; align-items: stretch; gap: 16px; }
 
-.hp-main-card .hp-menu {margin-top: -2px; margin-right: -4px; }
+.hp-main-card .hp-menu {margin-top: -6px; margin-right: -6px; }
 
 .hp-main-thumb {
-  position: relative; flex-shrink: 0; width: 232px; height: 144px; overflow: hidden; background-color: var(--panel-3); 
+  position: relative; flex-shrink: 0; width: 244px; height: 142px; overflow: hidden; background-color: var(--panel-3); 
   border: 1px solid var(--line-1); border-radius: var(--radius-card);
 }
 .hp-main-thumb.empty { border: 1px dashed var(--line-2); }
@@ -1570,7 +1572,7 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
 .hp-main-thumb img.contain { padding: 28px; object-fit: contain; }
 
 .hp-diff {
-  position: absolute; left: 8px; bottom: 8px; display: flex; align-items: center; gap: 2px; padding: 3px 9px 3px 5px; background-color: rgba(0, 0, 0, 0.8);
+  position: absolute; left: 8px; bottom: 6px; display: flex; align-items: center; gap: 2px; padding: 3px 9px 3px 5px; background-color: rgba(0, 0, 0, 0.8);
   border: 1px solid var(--diff-color); border-radius: var(--radius-button); color: var(--diff-color); font-size: 11px; font-weight: 700;
 }
 .hp-diff img { width: 20px; height: 20px; object-fit: contain; margin-right: 3px; }
@@ -1588,7 +1590,7 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
 
 .hp-main-desc {
   display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-  color: var(--mute); font-size: 13px; font-weight: 500; line-height: 1.4; overflow-wrap: anywhere; white-space: pre-line;
+  color: var(--mute); font-size: 13.5px; font-weight: 500; line-height: 1.4; overflow-wrap: anywhere; white-space: pre-line;
 }
 
 .hp-main-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: auto; padding-top: 8px; }
@@ -1642,14 +1644,14 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
   =============================================== */
 
 .hp-others-box {
-  display: flex; flex-direction: column; gap: 12px; max-height: 380px; padding: 12px; overflow-y: auto; background-color: var(--panel);
+  display: flex; flex-direction: column; gap: 12px; max-height: 380px; padding: 12px 8px; overflow-y: auto; background-color: var(--panel);
   border: 1px solid var(--line-1); border-radius: var(--radius-box);
 }
 
 .no-lists-msg {font-size: 13px; text-align: center; color: var(--mute); font-weight: 400; }
 
 .hp-item {
-  position: relative; display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; gap: 10px; min-height: 106px; padding: 8px;
+  position: relative; display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; gap: 10px; min-height: 106px; padding: 6px 6px 8px 8px;
   overflow: hidden; cursor: pointer; background-color: var(--panel-2); border: 1px solid var(--line-1); border-radius: var(--radius-sm); transition: border-color 0.2s;
 }
 .hp-item:hover { border-color: var(--line-2); }
@@ -1763,6 +1765,7 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
 
   /* lista principal */
   .hp-main-card { padding: 16px 12px 6px; gap: 16px; }
+  .hp-main-card .hp-menu {margin-top: -4px; margin-right: -8px; }
   .hp-main-card > .hp-menu { top: 26px; right: 26px; }
   .hp-main-top { flex-direction: column; gap: 0; }
   .hp-main-thumb { width: 100%; height: 170px; }
@@ -1777,11 +1780,11 @@ textarea.form-input { min-height: 76px; line-height: 1.45; outline: none; resize
 
   /* otras listas */
   .hp-others-box { max-height: 340px; }
-  .hp-item { min-height: 98px; padding: 10px 8px 10px 10px; }
+  .hp-item { min-height: 98px; padding: 6px 6px 8px 10px; }
   .hp-item-icon { width: 42px; height: 42px; }
   .hp-item-info h4 { font-size: 18px; }
   .hp-item .hp-view { display: none; }
-  .hp-item-actions:not(.hp-reorder) { position: absolute; top: 8px; right: 8px; }
+  .hp-item-actions:not(.hp-reorder) { position: absolute; top: 6px; right: 6px; }
   .hp-item-info h4 { padding-right: 28px; }
   .hp-chip { padding: 4px 6px; font-size: 11px; }
 }
